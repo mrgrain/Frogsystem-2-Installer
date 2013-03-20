@@ -6,7 +6,7 @@ function add_fs ( $ARRAY )
 {
     unset($folder_arr);
     foreach ($ARRAY as $value) {
-        $folder_arr[] = "[FS2]/".$value;
+        $folder_arr[] = '[FS2]/'.$value;
     }
     return $folder_arr;
 }
@@ -18,7 +18,7 @@ function add_dotdotslash ( $ARRAY )
 {
     unset($folder_arr);
     foreach ($ARRAY as $value) {
-        $folder_arr[] = "../".$value;
+        $folder_arr[] = '../'.$value;
     }
     return $folder_arr;
 }
@@ -31,9 +31,9 @@ function add_dotdotslash ( $ARRAY )
 function systext ( $MESSAGE, $TITLE , $RED = FALSE, $SPACE = TRUE )
 {
     if ( $RED == TRUE ) {
-        $class = "line_red";
+        $class = 'line_red';
     } else {
-        $class = "line";
+        $class = 'line';
     }
     
     if ( $SPACE == TRUE ) {
@@ -114,9 +114,9 @@ function easy_mysql_server_version ()
     $version = $match[0];
     $version = substr ( $version, 0, 1 );
     if ( $native <= 100 ) {
-        return "4";
+        return '4';
     }
-    settype ( $version, "integer" );
+    settype ( $version, 'integer' );
     return $version;
 }
 
@@ -138,10 +138,10 @@ if (!function_exists('ftp_chmod')) {
 if (!function_exists('file_put_contents')) {
     function file_put_contents($filename, $data) {
         if (is_array($data)) {
-            $data = implode("", $data);
+            $data = implode('', $data);
         }
         if (is_writable($filename)) {
-            if (!$handle = fopen($filename, "w")) {
+            if (!$handle = fopen($filename, 'w')) {
                 return false;
             }
             if (!fwrite($handle, $data)) {
@@ -165,14 +165,14 @@ function file_write_contents($filename, $data, $FTP = FALSE )
     if ( file_put_contents($filename, $data) ) { // Ohne FTP
         return true;
     } elseif ( !$FTP ) {
-        include("inc/ftp_login.php");
-        if ( @ftp_chmod($conn, 0777, $root."install/".$filename) ) {  // Mit FTP
+        include('inc/ftp_login.php');
+        if ( @ftp_chmod($conn, 0777, $root.'install/'.$filename) ) {  // Mit FTP
             if ( file_put_contents($filename, $data) ) {
-                @ftp_chmod($conn, 0644, $root."install/".$filename);
+                @ftp_chmod($conn, 0644, $root.'install/'.$filename);
                 ftp_close($conn);
                 return true;
             }
-            @ftp_chmod($conn, 0644, $root."install/".$filename);
+            @ftp_chmod($conn, 0644, $root.'install/'.$filename);
         }
         ftp_close($conn);
     }
@@ -224,8 +224,8 @@ function killhtml ( $TEXT )
 
 function generate_spamcode($length = 10)
 {
-    $charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
-    $code = "";
+    $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789';
+    $code = '';
     $real_strlen = strlen($charset) - 1;
     mt_srand ((double)microtime()*1001000);
     
@@ -244,10 +244,10 @@ function check_mysqlerror($error)
 {
     global $_LANG;
 
-    if ($error != "") {
-        return "".$_LANG[main][error_img]."<br><i>".$error."</i>";
+    if ($error != '') {
+        return ''.$_LANG['main']['error_img'].'<br><i>'.$error.'</i>';
     }
-    return $_LANG[main][ok_img];
+    return $_LANG['main']['ok_img'];
 }
 
 
@@ -257,10 +257,10 @@ function check_mysqlerror($error)
 
 function check_pref()
 {
-    include("inc/install_login.php");
+    include('inc/install_login.php');
     mysql_close();
     
-    if ($pref != "") {
+    if ($pref != '') {
         return $pref;
     }
     return false;
@@ -273,7 +273,7 @@ function check_pref()
 
 function check_dbcon()
 {
-    include("inc/install_login.php");
+    include('inc/install_login.php');
     if ($db !== FALSE)
     {
         if (mysql_select_db($data, $db))
@@ -294,7 +294,7 @@ function check_dbcon()
 
 function check_ftpcon ()
 {
-    include ("inc/ftp_data.php");
+    include ('inc/ftp_data.php');
 
     $conn = @ftp_connect( $host, $port, 7 );
     if ( $conn != FALSE ) {
@@ -316,7 +316,7 @@ function check_ftpcon ()
 
 function getdbname()
 {
-    include("inc/install_login.php");
+    include('inc/install_login.php');
     return $data;
 }
 
@@ -329,7 +329,7 @@ function list_db()
 {
     global $_LANG;
     
-    include("inc/install_login.php");
+    include('inc/install_login.php');
 
     //verfügbare Datenbanken
     unset($db_arr);
@@ -345,7 +345,7 @@ function list_db()
 
     if ( count ( $db_arr ) == 0 ) {
         unset($db_arr);
-        $db_arr[] = $_LANG[steps][database][step][1][error2][4];
+        $db_arr[] = $_LANG['steps']['database']['step'][1]['error2'][4];
     }
 
     return $db_arr;
@@ -358,7 +358,7 @@ function list_db()
 
 function check_dbtables($prefix)
 {
-    include("inc/install_login.php");
+    include('inc/install_login.php');
 
     //doppelte Tabellen
     unset($double_arr);
@@ -392,58 +392,58 @@ function check_dbtables($prefix)
 function fill_table_arr($prefix)
 {
     unset($table_arr);
-    $table_arr[] = $prefix."admin_cp";
-    $table_arr[] = $prefix."admin_groups";
-    $table_arr[] = $prefix."aliases";
-    $table_arr[] = $prefix."announcement";
-    $table_arr[] = $prefix."articles";
-    $table_arr[] = $prefix."articles_cat";
-    $table_arr[] = $prefix."articles_config";
-    $table_arr[] = $prefix."counter";
-    $table_arr[] = $prefix."counter_ref";
-    $table_arr[] = $prefix."counter_stat";
-    $table_arr[] = $prefix."dl";
-    $table_arr[] = $prefix."dl_cat";
-    $table_arr[] = $prefix."dl_config";
-    $table_arr[] = $prefix."dl_files";
-    $table_arr[] = $prefix."editor_config";
-    $table_arr[] = $prefix."email";
-    $table_arr[] = $prefix."global_config";
-    $table_arr[] = $prefix."includes";
-    $table_arr[] = $prefix."iplist";
-    $table_arr[] = $prefix."news";
-    $table_arr[] = $prefix."news_cat";
-    $table_arr[] = $prefix."news_comments";
-    $table_arr[] = $prefix."news_config";
-    $table_arr[] = $prefix."news_links";
-    $table_arr[] = $prefix."partner";
-    $table_arr[] = $prefix."partner_config";
-    $table_arr[] = $prefix."player";
-    $table_arr[] = $prefix."player_config";
-    $table_arr[] = $prefix."poll";
-    $table_arr[] = $prefix."poll_answers";
-    $table_arr[] = $prefix."poll_config";
-    $table_arr[] = $prefix."poll_voters";
-    $table_arr[] = $prefix."press";
-    $table_arr[] = $prefix."press_admin";
-    $table_arr[] = $prefix."press_config";
-    $table_arr[] = $prefix."resources";
-    $table_arr[] = $prefix."screen";
-    $table_arr[] = $prefix."screen_cat";
-    $table_arr[] = $prefix."screen_config";
-    $table_arr[] = $prefix."screen_random";
-    $table_arr[] = $prefix."screen_random_config";
-    $table_arr[] = $prefix."shop";
-    $table_arr[] = $prefix."smilies";
-    $table_arr[] = $prefix."template";
-    $table_arr[] = $prefix."user";
-    $table_arr[] = $prefix."useronline";
-    $table_arr[] = $prefix."user_config";
-    $table_arr[] = $prefix."user_groups";
-    $table_arr[] = $prefix."user_permissions";
-    $table_arr[] = $prefix."wallpaper";
-    $table_arr[] = $prefix."wallpaper_sizes";
-    $table_arr[] = $prefix."zones";
+    $table_arr[] = $prefix.'admin_cp';
+    $table_arr[] = $prefix.'admin_groups';
+    $table_arr[] = $prefix.'aliases';
+    $table_arr[] = $prefix.'announcement';
+    $table_arr[] = $prefix.'articles';
+    $table_arr[] = $prefix.'articles_cat';
+    $table_arr[] = $prefix.'articles_config';
+    $table_arr[] = $prefix.'counter';
+    $table_arr[] = $prefix.'counter_ref';
+    $table_arr[] = $prefix.'counter_stat';
+    $table_arr[] = $prefix.'dl';
+    $table_arr[] = $prefix.'dl_cat';
+    $table_arr[] = $prefix.'dl_config';
+    $table_arr[] = $prefix.'dl_files';
+    $table_arr[] = $prefix.'editor_config';
+    $table_arr[] = $prefix.'email';
+    $table_arr[] = $prefix.'global_config';
+    $table_arr[] = $prefix.'includes';
+    $table_arr[] = $prefix.'iplist';
+    $table_arr[] = $prefix.'news';
+    $table_arr[] = $prefix.'news_cat';
+    $table_arr[] = $prefix.'news_comments';
+    $table_arr[] = $prefix.'news_config';
+    $table_arr[] = $prefix.'news_links';
+    $table_arr[] = $prefix.'partner';
+    $table_arr[] = $prefix.'partner_config';
+    $table_arr[] = $prefix.'player';
+    $table_arr[] = $prefix.'player_config';
+    $table_arr[] = $prefix.'poll';
+    $table_arr[] = $prefix.'poll_answers';
+    $table_arr[] = $prefix.'poll_config';
+    $table_arr[] = $prefix.'poll_voters';
+    $table_arr[] = $prefix.'press';
+    $table_arr[] = $prefix.'press_admin';
+    $table_arr[] = $prefix.'press_config';
+    $table_arr[] = $prefix.'resources';
+    $table_arr[] = $prefix.'screen';
+    $table_arr[] = $prefix.'screen_cat';
+    $table_arr[] = $prefix.'screen_config';
+    $table_arr[] = $prefix.'screen_random';
+    $table_arr[] = $prefix.'screen_random_config';
+    $table_arr[] = $prefix.'shop';
+    $table_arr[] = $prefix.'smilies';
+    $table_arr[] = $prefix.'template';
+    $table_arr[] = $prefix.'user';
+    $table_arr[] = $prefix.'useronline';
+    $table_arr[] = $prefix.'user_config';
+    $table_arr[] = $prefix.'user_groups';
+    $table_arr[] = $prefix.'user_permissions';
+    $table_arr[] = $prefix.'wallpaper';
+    $table_arr[] = $prefix.'wallpaper_sizes';
+    $table_arr[] = $prefix.'zones';
 
     return $table_arr;
 }
@@ -494,15 +494,15 @@ function createmenu($menu_arr)
 
     foreach ($menu_arr as $key => $value)
     {
-        if ($value[show] == true)
+        if ($value['show'] == true)
         {
-            $menu_class = "menu_step";
-            if ($go==$value[id]) {
-                $menu_class = "menu_step_selected";
+            $menu_class = 'menu_step';
+            if ($go==$value['id']) {
+                $menu_class = 'menu_step_selected';
             }
-            $template .= '<span class="'.$menu_class.'">'.$value[title].'</span>';
+            $template .= '<span class="'.$menu_class.'">'.$value['title'].'</span>';
             if ($key != $end) {
-                $template .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+                $template .= '&nbsp;&nbsp;&nbsp;&nbsp;';
             }
         }
     }
@@ -521,23 +521,23 @@ function createnavi($navi_arr, $first)
     
     unset($template);
 
-    if ($navi_arr[menu_id] == $go) {
-        foreach ($navi_arr[link] as $value)
+    if ($navi_arr['menu_id'] == $go) {
+        foreach ($navi_arr['link'] as $value)
         {
             $template .= createlink($value);
         }
 
         if ($first == true) {
-            $headline_img = "navi_top";
+            $headline_img = 'navi_top';
         } else {
-            $headline_img = "navi_headline";
+            $headline_img = 'navi_headline';
         }
     }
 
-    if ($template != "") {
+    if ($template != '') {
         $template = '
             <div id="'.$headline_img.'">
-                <img src="img/pointer.png" alt="" style="vertical-align:text-bottom">&nbsp;<b>'.$navi_arr[title].'</b>
+                <img src="img/pointer.png" alt="" style="vertical-align:text-bottom">&nbsp;<b>'.$navi_arr['title'].'</b>
                 <div id="navi_link">
                     '.$template.'
                 </div>
@@ -559,20 +559,17 @@ function createlink($arr)
   global $step;
   global $lang;
 
-  $link_class = "navi";
-  if ($step == $arr[url]) {
-    $link_class = "navi_selected";
+  $link_class = 'navi';
+  if ($step == $arr['url']) {
+    $link_class = 'navi_selected';
   }
 
-  if ($arr[link] == true) {
-    return'- <a href="'.$PHP_SELF.'?go='.$go.'&step='.$arr[url].'&lang='.$lang.'" class="'.$link_class.'">
-          '.$arr[title].'</a><br />';
+  if ($arr['link'] == true) {
+    return'- <a href="'.$_SERVER['PHP_SELF'].'?go='.$go.'&step='.$arr['url'].'&lang='.$lang.'" class="'.$link_class.'">
+          '.$arr['title'].'</a><br />';
   } else {
-    return $arr[url].'. <span class="'.$link_class.'">'.$arr[title].'</span><br />';
+    return $arr['url'].'. <span class="'.$link_class.'">'.$arr['title'].'</span><br />';
   }
-
-
-
 }
 
 ////////////////////////////////
@@ -581,11 +578,7 @@ function createlink($arr)
 
 function createnavi_first($template)
 {
-    if (strlen($template) == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    return (strlen($template) == 0);
 }
 
 
@@ -597,9 +590,9 @@ function link2navi($title, $url, $link)
 {
     unset($tmp);
     
-    $tmp[title] = $title;
-    $tmp[url] = $url;
-    $tmp[link] = $link;
+    $tmp['title'] = $title;
+    $tmp['url'] = $url;
+    $tmp['link'] = $link;
 
     return $tmp;
 }

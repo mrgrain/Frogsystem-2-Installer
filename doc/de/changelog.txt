@@ -1,10 +1,10 @@
 <b>Features:</b><ul><li>Neues Style- und Template-System, das auf Dateien basiert
 </li><li>Neuer Default-Style „Light Frog“
 </li><li>Neuer HTML-Template-Editor mit Syntaxhervorhebung
-</li><li>Neues CSS-Datei System, das beliebig viele CSS-Dateien pro Style erlaubt und das bisherige System ersetzt
-</li><li>Neues Javascript-Datei System, das beliebig viele Javascript-Dateien pro Style erlaubt und das bisherige System ersetzt
+</li><li>Neues CSS-Dateisystem, das beliebig viele CSS-Dateien pro Style erlaubt und das bisherige System ersetzt
+</li><li>Neues JavaScript-Dateisystem, das beliebig viele JavaScript-Dateien pro Style erlaubt und das bisherige System ersetzt
 </li><li>Neues <a href="http://wiki.frogsystem.de/nav-templates" target="_blank">Navigations-Template</a>-System, das beliebig viele Navigations-Templates pro Style erlaubt und das bisher verwendete Template "main_menu" ersetzt
-</li><li>Änderung der Syntax für <a href="http://wiki.frogsystem.de/template-tags" target="_blank">Template-Definitionen</a> (Template-Tags) von {*} zu {..*..} um bessere Kompatibilität mit Javascript zu gewährleisten
+</li><li>Änderung der Syntax für <a href="http://wiki.frogsystem.de/template-tags" target="_blank">Template-Definitionen</a> (Template-Tags) von {*} zu {..*..}, um bessere Kompatibilität mit JavaScript zu gewährleisten
 </li><li>Die erweiterten Kontaktinformationen im User-Profil (Messenger, Homepage) sind nun vollständig implementiert
 </li><li>Weitere zusätzliche Informationen im User-Profil (Teamstatus, Gruppenmitgliedschaft, Benutzer-Rang)
 </li><li>Automatische Weiterleitung (sog. "Refresh") nach Formulareingaben
@@ -17,7 +17,7 @@
 </li><li><a href="http://wiki.frogsystem.de/globalvars" target="_blank">Globale Variablen</a> werden eingeführt
 </li><li><a href="http://wiki.frogsystem.de/snippets" target="_blank">Schnipsel</a> werden eingeführt, dafür entfallen die Seitenvariablen
 </li><li>Neues flexibleres Text-System, dass v.a. beim Erstellen von AddOns das Arbeiten erleichtert (nicht vollständig implementiert, beide System laufen erstmal parallel)
-</li><li>Das Captcha kann jetzt vollständig individualisiert werden
+</li><li>Das Captcha kann jetzt vollständig individualisiert werden.
 </li><li>Verwaltung für das Alias-System wurde hinzugefügt
 </li><li>Erweiterung der Rechte-Verwaltung um Sub-Rechte
 </li><li>Seitensuche für News, Artikel und Downloads mit einem Suchindex

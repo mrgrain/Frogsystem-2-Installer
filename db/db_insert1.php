@@ -1,12 +1,12 @@
 <?php
 
-include("inc/install_login.php");
+include('inc/install_login.php');
 unset($template);
 
 
 // fs_admin_cp
-mysql_query("DROP TABLE IF EXISTS `".$pref."admin_cp`", $db);
-mysql_query("CREATE TABLE `".$pref."admin_cp` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'admin_cp`', $db);
+mysql_query('CREATE TABLE `'.$pref.'admin_cp` (
   `page_id` varchar(255) NOT NULL,
   `group_id` mediumint(8) NOT NULL,
   `page_title` varchar(255) NOT NULL,
@@ -15,10 +15,10 @@ mysql_query("CREATE TABLE `".$pref."admin_cp` (
   `page_pos` tinyint(3) NOT NULL DEFAULT '0',
   `page_int_sub_perm` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`page_id`)
-) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."admin_cp</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."admin_cp` (`page_id`, `group_id`, `page_title`, `page_link`, `page_file`, `page_pos`, `page_int_sub_perm`) VALUES
+) TYPE=MyISAM', $db);
+$template .= '<li><b>'.$pref.'admin_cp</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."admin_cp` (`page_id`, `group_id`, `page_title`, `page_link`, `page_file`, `page_pos`, `page_int_sub_perm`) VALUES
 ('start_general', -1, 'Allgemein', 'general', 'start_general.php', 1, 0),
 ('start_content', -1, 'Inhalt', 'content', 'start_content.php', 2, 0),
 ('start_media', -1, 'Media', 'media', 'start_media.php', 3, 0),
@@ -124,21 +124,21 @@ INSERT INTO `".$pref."admin_cp` (`page_id`, `group_id`, `page_title`, `page_link
 ('search_config', 27, 'Konfiguration', 'Konfiguration', 'admin_search_config.php', 1, 0),
 ('search_index', 27, 'Suchindex', 'Suchindex', 'admin_search_index.php', 2, 0)
 ", $db);
-$template .= "<li><b>".$pref."admin_cp</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'admin_cp</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_admin_groups
-mysql_query("DROP TABLE IF EXISTS `".$pref."admin_groups`", $db);
-mysql_query("CREATE TABLE `".$pref."admin_groups` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'admin_groups`', $db);
+mysql_query('CREATE TABLE `'.$pref.'admin_groups` (
   `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `group_title` text NOT NULL,
   `menu_id` varchar(20) NOT NULL,
   `group_pos` tinyint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`group_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=29", $db);
-$template .= "<li><b>".$pref."admin_groups</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."admin_groups` (`group_id`, `group_title`, `menu_id`, `group_pos`) VALUES
+) TYPE=MyISAM  AUTO_INCREMENT=29', $db);
+$template .= '<li><b>'.$pref.'admin_groups</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."admin_groups` (`group_id`, `group_title`, `menu_id`, `group_pos`) VALUES
 (5, 'News', 'content', 1),
 (6, 'Artikel', 'content', 2),
 (7, 'Presseberichte', 'content', 3),
@@ -168,25 +168,25 @@ INSERT INTO `".$pref."admin_groups` (`group_id`, `group_title`, `menu_id`, `grou
 (20, 'Benutzer', 'user', 1),
 (23, 'Gruppen', 'user', 2)
 ", $db);
-$template .= "<li><b>".$pref."admin_groups</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'admin_groups</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_aliases
-mysql_query("DROP TABLE IF EXISTS `".$pref."aliases`", $db);
-mysql_query("CREATE TABLE `".$pref."aliases` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'aliases`', $db);
+mysql_query('CREATE TABLE `'.$pref.'aliases` (
   `alias_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `alias_go` varchar(100) NOT NULL,
   `alias_forward_to` varchar(100) NOT NULL,
-  `alias_active` tinyint(1) NOT NULL DEFAULT '1',
+  `alias_active` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY  (`alias_id`),
   KEY `alias_go` (`alias_go`)
-) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."aliases</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+) TYPE=MyISAM AUTO_INCREMENT=1', $db);
+$template .= '<li><b>'.$pref.'aliases</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_announcement
-mysql_query("DROP TABLE IF EXISTS `".$pref."announcement`", $db);
-mysql_query("CREATE TABLE `".$pref."announcement` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'announcement`', $db);
+mysql_query('CREATE TABLE `'.$pref."announcement` (
   `id` smallint(4) NOT NULL,
   `announcement_text` text,
   `show_announcement` tinyint(1) NOT NULL default '0',
@@ -196,16 +196,16 @@ mysql_query("CREATE TABLE `".$pref."announcement` (
   `ann_para` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."announcement</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."announcement` (`id`, `announcement_text`, `show_announcement`, `activate_announcement`, `ann_html`, `ann_fscode`, `ann_para`) VALUES
+$template .= '<li><b>'.$pref.'announcement</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."announcement` (`id`, `announcement_text`, `show_announcement`, `activate_announcement`, `ann_html`, `ann_fscode`, `ann_para`) VALUES
 (1, '', 2, 0, 1, 1, 1)", $db);
-$template .= "<li><b>".$pref."announcement</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'announcement</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_applets
-mysql_query("DROP TABLE IF EXISTS `".$pref."applets`", $db);
-mysql_query("CREATE TABLE `".$pref."applets` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'applets`', $db);
+mysql_query('CREATE TABLE `'.$pref."applets` (
   `applet_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `applet_file` varchar(100) NOT NULL,
   `applet_active` tinyint(1) NOT NULL DEFAULT '1',
@@ -213,9 +213,9 @@ mysql_query("CREATE TABLE `".$pref."applets` (
   PRIMARY KEY (`applet_id`),
   UNIQUE KEY `applet_file` (`applet_file`)
 ) TYPE=MyISAM AUTO_INCREMENT=10", $db);
-$template .= "<li><b>".$pref."applets</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."applets` (`applet_id`, `applet_file`, `applet_active`, `applet_output`) VALUES
+$template .= '<li><b>'.$pref.'applets</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."applets` (`applet_id`, `applet_file`, `applet_active`, `applet_output`) VALUES
 (1, 'affiliates', 1, 1),
 (2, 'user-menu', 1, 1),
 (3, 'announcement', 1, 1),
@@ -226,12 +226,12 @@ INSERT INTO `".$pref."applets` (`applet_id`, `applet_file`, `applet_active`, `ap
 (8, 'dl-forwarding', 1, 0),
 (9, 'mini-search', 1, 1)
 ", $db);
-$template .= "<li><b>".$pref."applets</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'applets</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_articles
-mysql_query("DROP TABLE IF EXISTS `".$pref."articles`", $db);
-mysql_query("CREATE TABLE `".$pref."articles` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'articles`', $db);
+mysql_query('CREATE TABLE `'.$pref."articles` (
   `article_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `article_url` varchar(100) DEFAULT NULL,
   `article_title` varchar(255) NOT NULL,
@@ -247,16 +247,16 @@ mysql_query("CREATE TABLE `".$pref."articles` (
   KEY `article_url` (`article_url`),
   FULLTEXT KEY `article_text` (`article_title`,`article_text`)
 ) TYPE=MyISAM  AUTO_INCREMENT=2", $db);
-$template .= "<li><b>".$pref."articles</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."articles` (`article_id`, `article_url`, `article_title`, `article_date`, `article_user`, `article_text`, `article_html`, `article_fscode`, `article_para`, `article_cat_id`, `article_search_update`) VALUES
+$template .= '<li><b>'.$pref.'articles</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."articles` (`article_id`, `article_url`, `article_title`, `article_date`, `article_user`, `article_text`, `article_html`, `article_fscode`, `article_para`, `article_cat_id`, `article_search_update`) VALUES
 (1, 'fscode', 'FSCode Liste', ".$THE_TIME.", 1, '".addslashes("Das System dieser Webseite bietet dir die Möglichkeit einfache Codes zur besseren Darstellung deiner Beiträge zu verwenden. Diese sogenannten [b]FSCodes[/b] erlauben dir daher HTML-Formatierungen zu verwenden, ohne dass du dich mit HTML auskennen musst. Mit ihnen hast du die Möglichkeit verschiedene Elemente in deine Beiträge einzubauen bzw. ihren Text zu formatieren.\r\n\r\nHier findest du eine [b]Übersicht über alle verfügbaren FSCodes[/b] und ihre Verwendung. Allerdings ist es möglich, dass nicht alle Codes zur Verwendung freigeschaltet sind.\r\n\r\n<table width=\\\"100%\\\" cellpadding=\\\"0\\\" cellspacing=\\\"10\\\" border=\\\"0\\\"><tr><td width=\\\"50%\\\">[b][u][size=3]FS-Code:[/size][/u][/b]</td><td width=\\\"50%\\\">[b][u][size=3]Beispiel:[/size][/u][/b]</td></tr><tr><td>[noparse][b]fetter Text[/b][/noparse]</td><td>[b]fetter Text[/b]</td></tr><tr><td>[noparse][i]kursiver Text[/i][/noparse]</td><td>[i]kursiver Text[/i]</td></tr><tr><td>[noparse][u]unterstrichener Text[u][/noparse]</td><td>[u]unterstrichener Text[/u]</td></tr><tr><td>[noparse][s]durchgestrichener Text[/s][/noparse]</td><td>[s]durchgestrichener Text[/s]</td></tr><tr><td>[noparse][center]zentrierter Text[/center][/noparse]</td><td>[center]zentrierter Text[/center]</td></tr><tr><td>[noparse][font=Schriftart]Text in Schriftart[/font][/noparse]</td><td>[font=Arial]Text in Arial[/font]</td></tr><tr><td>[noparse][color=Farbcode]Text in Farbe[/color][/noparse]</td><td>[color=#FF0000]Text in Rot (Farbcode: #FF0000)[/color]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 0[/size][/noparse]</td><td>[size=0]Text in Größe 0[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 1[/size][/noparse]</td><td>[size=1]Text in Größe 1[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 2[/size][/noparse]</td><td>[size=2]Text in Größe 2[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 3[/size][/noparse]</td><td>[size=3]Text in Größe 3[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 4[/size][/noparse]</td><td>[size=4]Text in Größe 4[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 5[/size][/noparse]</td><td>[size=5]Text in Größe 5[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 6[/size][/noparse]</td><td>[size=6]Text in Größe 6[/size]</td></tr><tr><td>[noparse][size=Größe]Text in Größe 7[/size][/noparse]</td><td>[size=7]Text&nbsp;in&nbsp;Größe&nbsp;7[/size]</td></tr><tr><td>[noparse][noparse]Text mit [b]FS[/b]Code[/noparse][/noparse]</td><td>[noparse]kein [b]fetter[/b] Text[/noparse]</td></tr> <tr><td colspan=\\\"2\\\"><hr></td></tr> <tr><td>[noparse][url]Linkadresse[/url][/noparse]</td><td>[url]http://www.example.com[/url]</td></tr> <tr><td>[noparse][url=Linkadresse]Linktext[/url][/noparse]</td><td>[url=http://www.example.com]Linktext[/url]</td></tr> <tr><td>[noparse][home]Seitenlink[/home][/noparse]</td><td>[home]news[/home]</td></tr> <tr><td>[noparse][home=Seitenlink]Linktext[/home][/noparse]</td><td>[home=news]Linktext[/home]</td></tr> <tr><td>[noparse][email]Email-Adresse[/email][/noparse]</td><td>[email]max.mustermann@example.com[/email]</td></tr> <tr><td>[noparse][email=Email-Adresse]Beispieltext[/email][/noparse]</td><td>[email=max.mustermann@example.com]Beispieltext[/email]</td></tr> <tr><td colspan=\\\"2\\\"><hr></td></tr> <tr><td>[noparse][list]<br>[*]Listenelement<br>[*]Listenelement<br>[/list][/noparse]</td><td>[list]<br>[*]Listenelement<br>[*]Listenelement<br>[/list]</td></tr> <tr><td>[noparse][numlist]<br>[*]Listenelement<br>[*]Listenelement<br>[/numlist][/noparse]</td><td>[numlist]<br>[*]Listenelement<br>[*]Listenelement<br>[/numlist]</td></tr> <tr><td>[noparse][quote]Ein Zitat[/quote][/noparse]</td><td>[quote]Ein Zitat[/quote]</td></tr><tr><td>[noparse][quote=Quelle]Ein Zitat[/quote][/noparse]</td><td>[quote=Quelle]Ein Zitat[/quote]</td></tr><tr><td>[noparse][code]Schrift mit fester Breite[/code][/noparse]</td><td>[code]Schrift mit fester Breite[/code]</td></tr><tr><td colspan=\\\"2\\\"><hr></td></tr><tr><td>[noparse][img]Bildadresse[/img][/noparse]</td><td>[img]\$VAR(url)images/icons/logo.gif[/img]</td></tr><tr><td>[noparse][img=right]Bildadresse[/img][/noparse]</td><td>[img=right]\$VAR(url)images/icons/logo.gif[/img] Das hier ist ein Beispieltext. Die Grafik ist rechts platziert und der Text fließt links um sie herum.</td></tr><tr><td>[noparse][img=left]Bildadresse[/img][/noparse]</td><td>[img=left]\$VAR(url)images/icons/logo.gif[/img] Das hier ist ein Beispieltext. Die Grafik ist links platziert und der Text fließt rechts um sie herum.</td></tr></table>")."', 1, 1, 1, 1, 0)
 ", $db);
-$template .= "<li><b>".$pref."articles</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'articles</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_articles_cat
-mysql_query("DROP TABLE IF EXISTS `".$pref."articles_cat`", $db);
-mysql_query("CREATE TABLE `".$pref."articles_cat` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'articles_cat`', $db);
+mysql_query('CREATE TABLE `'.$pref."articles_cat` (
   `cat_id` smallint(6) NOT NULL auto_increment,
   `cat_name` varchar(100) default NULL,
   `cat_description` text NOT NULL,
@@ -264,15 +264,15 @@ mysql_query("CREATE TABLE `".$pref."articles_cat` (
   `cat_user` mediumint(8) NOT NULL default '1',
   PRIMARY KEY  (`cat_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=2", $db);
-$template .= "<li><b>".$pref."articles_cat</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."articles_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
-(1, 'Artikel', '', ".$THE_TIME.", 1)", $db);
-$template .= "<li><b>".$pref."articles_cat</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'articles_cat</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."articles_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
+(1, 'Artikel', '', ".$THE_TIME.', 1)', $db);
+$template .= '<li><b>'.$pref.'articles_cat</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_articles_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."articles_config`", $db);
-mysql_query("CREATE TABLE `".$pref."articles_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'articles_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."articles_config` (
   `id` tinyint(1) NOT NULL,
   `html_code` tinyint(4) NOT NULL default '1',
   `fs_code` tinyint(4) NOT NULL default '1',
@@ -287,15 +287,15 @@ mysql_query("CREATE TABLE `".$pref."articles_config` (
   `acp_view` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."articles_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."articles_config` (`id`, `html_code`, `fs_code`, `para_handling`, `cat_pic_x`, `cat_pic_y`, `cat_pic_size`, `com_rights`, `com_antispam`, `com_sort`, `acp_per_page`, `acp_view`) VALUES
+$template .= '<li><b>'.$pref.'articles_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."articles_config` (`id`, `html_code`, `fs_code`, `para_handling`, `cat_pic_x`, `cat_pic_y`, `cat_pic_size`, `com_rights`, `com_antispam`, `com_sort`, `acp_per_page`, `acp_view`) VALUES
 (1, 2, 4, 4, 150, 150, 1024, 2, 1, 'DESC', 15, 2)", $db);
-$template .= "<li><b>".$pref."articles_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'articles_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_captcha_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."captcha_config`", $db);
-mysql_query("CREATE TABLE `".$pref."captcha_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'captcha_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."captcha_config` (
   `id` tinyint(1) NOT NULL,
   `captcha_bg_color` varchar(6) NOT NULL DEFAULT 'FFFFFF',
   `captcha_bg_transparent` tinyint(1) NOT NULL DEFAULT '0',
@@ -319,15 +319,15 @@ mysql_query("CREATE TABLE `".$pref."captcha_config` (
   `captcha_font_file` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."captcha_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."captcha_config` (`id`, `captcha_bg_color`, `captcha_bg_transparent`, `captcha_text_color`, `captcha_first_lower`, `captcha_first_upper`, `captcha_second_lower`, `captcha_second_upper`, `captcha_use_addition`, `captcha_use_subtraction`, `captcha_use_multiplication`, `captcha_create_easy_arithmetics`, `captcha_x`, `captcha_y`, `captcha_show_questionmark`, `captcha_use_spaces`, `captcha_show_multiplication_as_x`, `captcha_start_text_x`, `captcha_start_text_y`, `captcha_font_size`, `captcha_font_file`) VALUES
+$template .= '<li><b>'.$pref.'captcha_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."captcha_config` (`id`, `captcha_bg_color`, `captcha_bg_transparent`, `captcha_text_color`, `captcha_first_lower`, `captcha_first_upper`, `captcha_second_lower`, `captcha_second_upper`, `captcha_use_addition`, `captcha_use_subtraction`, `captcha_use_multiplication`, `captcha_create_easy_arithmetics`, `captcha_x`, `captcha_y`, `captcha_show_questionmark`, `captcha_use_spaces`, `captcha_show_multiplication_as_x`, `captcha_start_text_x`, `captcha_start_text_y`, `captcha_font_size`, `captcha_font_file`) VALUES
 (1, 'FFFFFF', 1, '000000', 1, 5, 1, 5, 1, 1, 0, 1, 58, 18, 0, 1, 1, 0, 0, 3, '')", $db);
-$template .= "<li><b>".$pref."captcha_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'captcha_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_counter
-mysql_query("DROP TABLE IF EXISTS `".$pref."counter`", $db);
-mysql_query("CREATE TABLE `".$pref."counter` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'counter`', $db);
+mysql_query('CREATE TABLE `'.$pref."counter` (
   `id` tinyint(1) NOT NULL,
   `visits` int(11) unsigned NOT NULL DEFAULT '0',
   `hits` int(11) unsigned NOT NULL DEFAULT '0',
@@ -337,27 +337,27 @@ mysql_query("CREATE TABLE `".$pref."counter` (
   `comments` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."counter</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."counter` (`id`, `visits`, `hits`, `user`, `artikel`, `news`, `comments`) VALUES
-(1, 0, 0, 1, 1, 1, 0)", $db);
-$template .= "<li><b>".$pref."counter</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'counter</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref.'counter` (`id`, `visits`, `hits`, `user`, `artikel`, `news`, `comments`) VALUES
+(1, 0, 0, 1, 1, 1, 0)', $db);
+$template .= '<li><b>'.$pref.'counter</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_counter_ref
-mysql_query("DROP TABLE IF EXISTS `".$pref."counter_ref`", $db);
-mysql_query("CREATE TABLE `".$pref."counter_ref` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'counter_ref`', $db);
+mysql_query('CREATE TABLE `'.$pref.'counter_ref` (
   `ref_url` varchar(255) default NULL,
   `ref_count` int(11) default NULL,
   `ref_first` int(11) default NULL,
   `ref_last` int(11) default NULL,
   KEY `ref_url` (`ref_url`)
-) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."counter_ref</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+) TYPE=MyISAM', $db);
+$template .= '<li><b>'.$pref.'counter_ref</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_counter_stat
-mysql_query("DROP TABLE IF EXISTS `".$pref."counter_stat`", $db);
-mysql_query("CREATE TABLE `".$pref."counter_stat` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'counter_stat`', $db);
+mysql_query('CREATE TABLE `'.$pref."counter_stat` (
   `s_year` int(4) NOT NULL default '0',
   `s_month` int(2) NOT NULL default '0',
   `s_day` int(2) NOT NULL default '0',
@@ -365,12 +365,12 @@ mysql_query("CREATE TABLE `".$pref."counter_stat` (
   `s_hits` int(11) default NULL,
   PRIMARY KEY  (`s_year`,`s_month`,`s_day`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."counter_stat</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'counter_stat</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_dl
-mysql_query("DROP TABLE IF EXISTS `".$pref."dl`", $db);
-mysql_query("CREATE TABLE `".$pref."dl` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'dl`', $db);
+mysql_query('CREATE TABLE `'.$pref."dl` (
   `dl_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `cat_id` mediumint(8) DEFAULT NULL,
   `user_id` mediumint(8) DEFAULT NULL,
@@ -384,26 +384,26 @@ mysql_query("CREATE TABLE `".$pref."dl` (
   PRIMARY KEY  (`dl_id`),
   FULLTEXT KEY `dl_name_text` (`dl_name`,`dl_text`)
 ) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."dl</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'dl</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_dl_cat
-mysql_query("DROP TABLE IF EXISTS `".$pref."dl_cat`", $db);
-mysql_query("CREATE TABLE `".$pref."dl_cat` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'dl_cat`', $db);
+mysql_query('CREATE TABLE `'.$pref."dl_cat` (
   `cat_id` mediumint(8) NOT NULL auto_increment,
   `subcat_id` mediumint(8) NOT NULL default '0',
   `cat_name` varchar(100) default NULL,
   PRIMARY KEY  (`cat_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=2", $db);
-$template .= "<li><b>".$pref."dl_cat</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."dl_cat` (`cat_id`, `subcat_id`, `cat_name`) VALUES
+$template .= '<li><b>'.$pref.'dl_cat</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."dl_cat` (`cat_id`, `subcat_id`, `cat_name`) VALUES
 (1, 0, 'Downloads')", $db);
-$template .= "<li><b>".$pref."dl_cat</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'dl_cat</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_dl_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."dl_config`", $db);
-mysql_query("CREATE TABLE `".$pref."dl_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'dl_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."dl_config` (
   `id` tinyint(1) NOT NULL,
   `screen_x` int(11) DEFAULT NULL,
   `screen_y` int(11) DEFAULT NULL,
@@ -414,15 +414,15 @@ mysql_query("CREATE TABLE `".$pref."dl_config` (
   `dl_show_sub_cats` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."dl_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."dl_config` (`id`, `screen_x`, `screen_y`, `thumb_x`, `thumb_y`, `quickinsert`, `dl_rights`, `dl_show_sub_cats`) VALUES
+$template .= '<li><b>'.$pref.'dl_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."dl_config` (`id`, `screen_x`, `screen_y`, `thumb_x`, `thumb_y`, `quickinsert`, `dl_rights`, `dl_show_sub_cats`) VALUES
 (1, 1024, 768, 120, 90, '', 2, 0)", $db);
-$template .= "<li><b>".$pref."dl_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'dl_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_dl_files
-mysql_query("DROP TABLE IF EXISTS `".$pref."dl_files`", $db);
-mysql_query("CREATE TABLE `".$pref."dl_files` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'dl_files`', $db);
+mysql_query('CREATE TABLE `'.$pref."dl_files` (
   `dl_id` mediumint(8) default NULL,
   `file_id` mediumint(8) NOT NULL auto_increment,
   `file_count` mediumint(8) NOT NULL default '0',
@@ -433,12 +433,12 @@ mysql_query("CREATE TABLE `".$pref."dl_files` (
   PRIMARY KEY  (`file_id`),
   KEY `dl_id` (`dl_id`)
 ) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."dl_files</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'dl_files</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_editor_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."editor_config`", $db);
-mysql_query("CREATE TABLE `".$pref."editor_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'editor_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."editor_config` (
   `id` tinyint(1) NOT NULL default '1',
   `smilies_rows` int(2) NOT NULL,
   `smilies_cols` int(2) NOT NULL,
@@ -484,15 +484,15 @@ mysql_query("CREATE TABLE `".$pref."editor_config` (
   `do_smilies` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."editor_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."editor_config` (`id`, `smilies_rows`, `smilies_cols`, `textarea_width`, `textarea_height`, `bold`, `italic`, `underline`, `strike`, `center`, `font`, `color`, `size`, `list`, `numlist`, `img`, `cimg`, `url`, `home`, `email`, `code`, `quote`, `noparse`, `smilies`, `do_bold`, `do_italic`, `do_underline`, `do_strike`, `do_center`, `do_font`, `do_color`, `do_size`, `do_list`, `do_numlist`, `do_img`, `do_cimg`, `do_url`, `do_home`, `do_email`, `do_code`, `do_quote`, `do_noparse`, `do_smilies`) VALUES
-(1, 5, 2, 355, 120, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1)", $db);
-$template .= "<li><b>".$pref."editor_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'editor_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref.'editor_config` (`id`, `smilies_rows`, `smilies_cols`, `textarea_width`, `textarea_height`, `bold`, `italic`, `underline`, `strike`, `center`, `font`, `color`, `size`, `list`, `numlist`, `img`, `cimg`, `url`, `home`, `email`, `code`, `quote`, `noparse`, `smilies`, `do_bold`, `do_italic`, `do_underline`, `do_strike`, `do_center`, `do_font`, `do_color`, `do_size`, `do_list`, `do_numlist`, `do_img`, `do_cimg`, `do_url`, `do_home`, `do_email`, `do_code`, `do_quote`, `do_noparse`, `do_smilies`) VALUES
+(1, 5, 2, 355, 120, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1)', $db);
+$template .= '<li><b>'.$pref.'editor_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_email
-mysql_query("DROP TABLE IF EXISTS `".$pref."email`", $db);
-mysql_query("CREATE TABLE `".$pref."email` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'email`', $db);
+mysql_query('CREATE TABLE `'.$pref."email` (
   `id` tinyint(1) NOT NULL default '1',
   `signup` text NOT NULL,
   `change_password` text NOT NULL,
@@ -502,17 +502,17 @@ mysql_query("CREATE TABLE `".$pref."email` (
   `html` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."email</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."email` (`id`, `signup`, `change_password`, `delete_account`, `use_admin_mail`, `email`, `html`) VALUES
+$template .= '<li><b>'.$pref.'email</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."email` (`id`, `signup`, `change_password`, `delete_account`, `use_admin_mail`, `email`, `html`) VALUES
 (1, 'Hallo  {..user_name..},\r\n\r\nDu hast dich bei \$VAR(page_title) registriert. Deine Zugangsdaten sind:\r\n\r\nBenutzername: {..user_name..}\r\nPasswort: {..new_password..}\r\n\r\nFalls du deine Daten ändern möchtest, kannst du das gerne auf deiner [url=\$VAR(url)?go=editprofil]Profilseite[/url] tun.\r\n\r\nDein Team von \$VAR(page_title)!', 'Hallo {..user_name..},\r\n\r\nDein Passwort bei \$VAR(page_title) wurde geändert. Deine neuen Zugangsdaten sind:\r\n\r\nBenutzername: {..user_name..}\r\nPasswort: {..new_password..}\r\n\r\nFalls du deine Daten ändern möchtest, kannst du das gerne auf deiner [url=\$VAR(url)?go=editprofil]Profilseite[/url] tun.\r\n\r\nDein Team von \$VAR(page_title)!', 'Hallo {username},\r\n\r\nSchade, dass du dich von unserer Seite abgemeldet hast. Falls du es dir doch noch anders überlegen willst, [url={virtualhost}]kannst du ja nochmal rein schauen[/url].\r\n\r\nDein Webseiten-Team!', 1, '', 1)
 ", $db);
-$template .= "<li><b>".$pref."email</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'email</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_global_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."global_config`", $db);
-mysql_query("CREATE TABLE `".$pref."global_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'global_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."global_config` (
   `id` tinyint(1) NOT NULL DEFAULT '1',
   `version` varchar(10) NOT NULL DEFAULT '0.9',
   `virtualhost` varchar(255) NOT NULL,
@@ -544,26 +544,26 @@ mysql_query("CREATE TABLE `".$pref."global_config` (
   `search_index_time` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."global_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("
-INSERT INTO `".$pref."global_config` (`id`, `dyn_title`, `dyn_title_ext`, `description`, `keywords`, `publisher`, `copyright`, `show_favicon`, `style_id`, `style_tag`, `allow_other_designs`, `date`, `time`, `datetime`, `page`, `page_next`, `page_prev`, `random_timed_deltime`, `feed`, `language_text`, `home`, `home_text`, `auto_forward`, `search_index_update`, `search_index_time`) VALUES
+$template .= '<li><b>'.$pref.'global_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('
+INSERT INTO `'.$pref."global_config` (`id`, `dyn_title`, `dyn_title_ext`, `description`, `keywords`, `publisher`, `copyright`, `show_favicon`, `style_id`, `style_tag`, `allow_other_designs`, `date`, `time`, `datetime`, `page`, `page_next`, `page_prev`, `random_timed_deltime`, `feed`, `language_text`, `home`, `home_text`, `auto_forward`, `search_index_update`, `search_index_time`) VALUES
 (1, 1, '{title} - {ext}', '', '', '', '', 0, 1, 'lightfrog', 0, 'd.m.Y', '".addslashes("H:i \\\\U\\\\h\\\\r")."', '".addslashes("d.m.Y, H:i \\\\U\\\\h\\\\r")."', '".addslashes("<div align=\\\"center\\\" style=\\\"width:270px;\\\"><div style=\\\"width:70px; float:left;\\\">{..prev..}&nbsp;</div>Seite <b>{..page_number..}</b> von <b>{..total_pages..}</b><div style=\\\"width:70px; float:right;\\\">&nbsp;{..next..}</div></div>")."', '".addslashes("|&nbsp;<a href=\\\"{..url..}\\\">weiter&nbsp;»</a>")."', '".addslashes("<a href=\\\"{..url..}\\\">«&nbsp;zurück</a>&nbsp;|")."', 604800, 'rss20', 'de_DE', 0, '', 4, 2, 0)
 ", $db);
-$template .= "<li><b>".$pref."global_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'global_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_iplist
-mysql_query("DROP TABLE IF EXISTS `".$pref."iplist`", $db);
-mysql_query("CREATE TABLE `".$pref."iplist` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'iplist`', $db);
+mysql_query('CREATE TABLE `'.$pref.'iplist` (
   `ip` varchar(18) NOT NULL,
   PRIMARY KEY  (`ip`)
-) TYPE=MEMORY", $db);
-$template .= "<li><b>".$pref."iplist</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+) TYPE=MEMORY', $db);
+$template .= '<li><b>'.$pref.'iplist</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_news
-mysql_query("DROP TABLE IF EXISTS `".$pref."news`", $db);
-mysql_query("CREATE TABLE `".$pref."news` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'news`', $db);
+mysql_query('CREATE TABLE `'.$pref."news` (
   `news_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `cat_id` smallint(6) DEFAULT NULL,
   `user_id` mediumint(8) DEFAULT NULL,
@@ -576,16 +576,16 @@ mysql_query("CREATE TABLE `".$pref."news` (
   PRIMARY KEY  (`news_id`),
   FULLTEXT KEY `news_title_text` (`news_title`,`news_text`)
 ) TYPE=MyISAM  AUTO_INCREMENT=2", $db);
-$template .= "<li><b>".$pref."news</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."news` (`news_id`, `cat_id`, `user_id`, `news_date`, `news_title`, `news_text`, `news_active`, `news_comments_allowed`, `news_search_update`) VALUES
+$template .= '<li><b>'.$pref.'news</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."news` (`news_id`, `cat_id`, `user_id`, `news_date`, `news_title`, `news_text`, `news_active`, `news_comments_allowed`, `news_search_update`) VALUES
 (1, 1, 1, ".$THE_TIME.", 'Frogsystem 2.alix5 - Installation erfolgreich', 'Herzlich Willkommen in deinem frisch installierten Frogsystem 2!\r\nDas Frogsystem 2-Team wünscht viel Spaß und Erfolg mit der Seite.\r\n\r\nWeitere Informationen und Hilfe bei Problemen gibt es auf der offiziellen Homepage des Frogsystem 2, in den zugehörigen Supportforen und dem neuen Dokumentations-Wiki. Die wichtigsten Links haben wir unten zusammengefasst. Einfach mal vorbei schauen!\r\n\r\nDein Frogsystem 2-Team', 1, 1, 0)
 ", $db);
-$template .= "<li><b>".$pref."news</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'news</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_news_cat
-mysql_query("DROP TABLE IF EXISTS `".$pref."news_cat`", $db);
-mysql_query("CREATE TABLE `".$pref."news_cat` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'news_cat`', $db);
+mysql_query('CREATE TABLE `'.$pref."news_cat` (
   `cat_id` smallint(6) NOT NULL auto_increment,
   `cat_name` varchar(100) default NULL,
   `cat_description` text NOT NULL,
@@ -593,15 +593,15 @@ mysql_query("CREATE TABLE `".$pref."news_cat` (
   `cat_user` mediumint(8) NOT NULL default '1',
   PRIMARY KEY  (`cat_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=2", $db);
-$template .= "<li><b>".$pref."news_cat</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."news_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
-(1, 'News', '', ".$THE_TIME.", 1)", $db);
-$template .= "<li><b>".$pref."news_cat</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'news_cat</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."news_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
+(1, 'News', '', ".$THE_TIME.', 1)', $db);
+$template .= '<li><b>'.$pref.'news_cat</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_news_comments
-mysql_query("DROP TABLE IF EXISTS `".$pref."news_comments`", $db);
-mysql_query("CREATE TABLE `".$pref."news_comments` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'news_comments`', $db);
+mysql_query('CREATE TABLE `'.$pref."news_comments` (
   `comment_id` mediumint(8) NOT NULL auto_increment,
   `news_id` mediumint(8) default NULL,
   `comment_poster` varchar(32) default NULL,
@@ -613,12 +613,12 @@ mysql_query("CREATE TABLE `".$pref."news_comments` (
   PRIMARY KEY  (`comment_id`),
   FULLTEXT KEY `comment_title_text` (`comment_text`,`comment_title`)
 ) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."news_comments</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'news_comments</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_news_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."news_config`", $db);
-mysql_query("CREATE TABLE `".$pref."news_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'news_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."news_config` (
   `id` tinyint(1) NOT NULL,
   `num_news` int(11) default NULL,
   `num_head` int(11) default NULL,
@@ -637,16 +637,16 @@ mysql_query("CREATE TABLE `".$pref."news_config` (
   `acp_view` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."news_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."news_config` (`id`, `num_news`, `num_head`, `html_code`, `fs_code`, `para_handling`, `cat_pic_x`, `cat_pic_y`, `cat_pic_size`, `com_rights`, `com_antispam`, `com_sort`, `news_headline_lenght`, `news_headline_ext`, `acp_per_page`, `acp_view`) VALUES
+$template .= '<li><b>'.$pref.'news_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."news_config` (`id`, `num_news`, `num_head`, `html_code`, `fs_code`, `para_handling`, `cat_pic_x`, `cat_pic_y`, `cat_pic_size`, `com_rights`, `com_antispam`, `com_sort`, `news_headline_lenght`, `news_headline_ext`, `acp_per_page`, `acp_view`) VALUES
 (1, 10, 5, 2, 4, 4, 150, 150, 1024, 2, 1, 'DESC', 25, ' ...', 15, 2)
 ", $db);
-$template .= "<li><b>".$pref."news_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'news_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_news_links
-mysql_query("DROP TABLE IF EXISTS `".$pref."news_links`", $db);
-mysql_query("CREATE TABLE `".$pref."news_links` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'news_links`', $db);
+mysql_query('CREATE TABLE `'.$pref."news_links` (
   `news_id` mediumint(8) default NULL,
   `link_id` mediumint(8) NOT NULL auto_increment,
   `link_name` varchar(100) default NULL,
@@ -654,18 +654,18 @@ mysql_query("CREATE TABLE `".$pref."news_links` (
   `link_target` tinyint(4) default NULL,
   PRIMARY KEY  (`link_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=4", $db);
-$template .= "<li><b>".$pref."news_links</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."news_links` (`news_id`, `link_id`, `link_name`, `link_url`, `link_target`) VALUES
+$template .= '<li><b>'.$pref.'news_links</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."news_links` (`news_id`, `link_id`, `link_name`, `link_url`, `link_target`) VALUES
 (1, 1, 'Offizielle Frogsystem 2 Homepage', 'http://www.frogsystem.de', 1),
 (1, 2, 'Frogsystem 2 Supportforum', 'http://forum.sweil.de/viewforum.php?f=7', 1),
 (1, 3, 'Frogsystem 2 Dokumentations-Wiki', 'http://wiki.frogsystem.de/', 1)
 ", $db);
-$template .= "<li><b>".$pref."news_links</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'news_links</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_partner
-mysql_query("DROP TABLE IF EXISTS `".$pref."partner`", $db);
-mysql_query("CREATE TABLE `".$pref."partner` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'partner`', $db);
+mysql_query('CREATE TABLE `'.$pref."partner` (
   `partner_id` smallint(3) unsigned NOT NULL auto_increment,
   `partner_name` varchar(150) NOT NULL,
   `partner_link` varchar(250) NOT NULL,
@@ -673,12 +673,12 @@ mysql_query("CREATE TABLE `".$pref."partner` (
   `partner_permanent` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`partner_id`)
 ) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."partner</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'partner</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_partner_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."partner_config`", $db);
-mysql_query("CREATE TABLE `".$pref."partner_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'partner_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."partner_config` (
   `id` tinyint(1) NOT NULL default '1',
   `partner_anzahl` tinyint(2) NOT NULL default '0',
   `small_x` int(4) NOT NULL default '0',
@@ -690,15 +690,15 @@ mysql_query("CREATE TABLE `".$pref."partner_config` (
   `file_size` int(4) NOT NULL default '1024',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."partner_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."partner_config` (`id`, `partner_anzahl`, `small_x`, `small_y`, `small_allow`, `big_x`, `big_y`, `big_allow`, `file_size`) VALUES
-(1, 5, 88, 31, 0, 468, 60, 1, 1024)", $db);
-$template .= "<li><b>".$pref."partner_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'partner_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref.'partner_config` (`id`, `partner_anzahl`, `small_x`, `small_y`, `small_allow`, `big_x`, `big_y`, `big_allow`, `file_size`) VALUES
+(1, 5, 88, 31, 0, 468, 60, 1, 1024)', $db);
+$template .= '<li><b>'.$pref.'partner_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_player
-mysql_query("DROP TABLE IF EXISTS `".$pref."player`", $db);
-mysql_query("CREATE TABLE `".$pref."player` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'player`', $db);
+mysql_query('CREATE TABLE `'.$pref."player` (
   `video_id` mediumint(8) NOT NULL auto_increment,
   `video_type` tinyint(1) NOT NULL default '1',
   `video_x` text NOT NULL,
@@ -708,12 +708,12 @@ mysql_query("CREATE TABLE `".$pref."player` (
   `dl_id` mediumint(8) NOT NULL,
   PRIMARY KEY  (`video_id`)
 ) TYPE=MyISAM AUTO_INCREMENT=1", $db);
-$template .= "<li><b>".$pref."player</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'player</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 
 // fs_player_config
-mysql_query("DROP TABLE IF EXISTS `".$pref."player_config`", $db);
-mysql_query("CREATE TABLE `".$pref."player_config` (
+mysql_query('DROP TABLE IF EXISTS `'.$pref.'player_config`', $db);
+mysql_query('CREATE TABLE `'.$pref."player_config` (
   `id` tinyint(1) NOT NULL default '1',
   `cfg_autoplay` tinyint(1) NOT NULL default '1',
   `cfg_autoload` tinyint(1) NOT NULL default '1',
@@ -761,11 +761,11 @@ mysql_query("CREATE TABLE `".$pref."player_config` (
   `cfg_showtitleandstartimage` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM", $db);
-$template .= "<li><b>".$pref."player_config</b> ".$_LANG[db_insert][create]." ".check_mysqlerror(mysql_error())."</li>";
-mysql_query("INSERT INTO `".$pref."player_config` (`id`, `cfg_autoplay`, `cfg_autoload`, `cfg_buffer`, `cfg_buffermessage`, `cfg_buffercolor`, `cfg_bufferbgcolor`, `cfg_buffershowbg`, `cfg_titlesize`, `cfg_titlecolor`, `cfg_margin`, `cfg_showstop`, `cfg_showvolume`, `cfg_showtime`, `cfg_showplayer`, `cfg_showloading`, `cfg_showfullscreen`, `cfg_showmouse`, `cfg_loop`, `cfg_playercolor`, `cfg_loadingcolor`, `cfg_bgcolor`, `cfg_bgcolor1`, `cfg_bgcolor2`, `cfg_buttoncolor`, `cfg_buttonovercolor`, `cfg_slidercolor1`, `cfg_slidercolor2`, `cfg_sliderovercolor`, `cfg_loadonstop`, `cfg_onclick`, `cfg_ondoubleclick`, `cfg_playertimeout`, `cfg_videobgcolor`, `cfg_volume`, `cfg_shortcut`, `cfg_playeralpha`, `cfg_top1_url`, `cfg_top1_x`, `cfg_top1_y`, `cfg_showiconplay`, `cfg_iconplaycolor`, `cfg_iconplaybgcolor`, `cfg_iconplaybgalpha`, `cfg_showtitleandstartimage`) VALUES
+$template .= '<li><b>'.$pref.'player_config</b> '.$_LANG['db_insert']['create'].' '.check_mysqlerror(mysql_error()).'</li>';
+mysql_query('INSERT INTO `'.$pref."player_config` (`id`, `cfg_autoplay`, `cfg_autoload`, `cfg_buffer`, `cfg_buffermessage`, `cfg_buffercolor`, `cfg_bufferbgcolor`, `cfg_buffershowbg`, `cfg_titlesize`, `cfg_titlecolor`, `cfg_margin`, `cfg_showstop`, `cfg_showvolume`, `cfg_showtime`, `cfg_showplayer`, `cfg_showloading`, `cfg_showfullscreen`, `cfg_showmouse`, `cfg_loop`, `cfg_playercolor`, `cfg_loadingcolor`, `cfg_bgcolor`, `cfg_bgcolor1`, `cfg_bgcolor2`, `cfg_buttoncolor`, `cfg_buttonovercolor`, `cfg_slidercolor1`, `cfg_slidercolor2`, `cfg_sliderovercolor`, `cfg_loadonstop`, `cfg_onclick`, `cfg_ondoubleclick`, `cfg_playertimeout`, `cfg_videobgcolor`, `cfg_volume`, `cfg_shortcut`, `cfg_playeralpha`, `cfg_top1_url`, `cfg_top1_x`, `cfg_top1_y`, `cfg_showiconplay`, `cfg_iconplaycolor`, `cfg_iconplaybgcolor`, `cfg_iconplaybgalpha`, `cfg_showtitleandstartimage`) VALUES
 (1, 0, 1, 5, 'Buffering _n_', 'FFFFFF', '000000', 0, 20, 'FFFFFF', 5, 1, 1, 1, 'autohide', 'always', 1, 'autohide', 0, 'a6a6a6', '000000', 'FAFCF1', 'E7E7E7', 'cccccc', '000000', 'E7E7E7', 'cccccc', 'bbbbbb', 'E7E7E7', 1, 'playpause', 'fullscreen', 1500, '000000', 100, 1, 100, '', 0, 0, 1, 'FFFFFF', '000000', 75, 0)
 ", $db);
-$template .= "<li><b>".$pref."player_config</b> ".$_LANG[db_insert][fill]." ".check_mysqlerror(mysql_error())."</li>";
+$template .= '<li><b>'.$pref.'player_config</b> '.$_LANG['db_insert']['fill'].' '.check_mysqlerror(mysql_error()).'</li>';
 
 mysql_close();
 ?>

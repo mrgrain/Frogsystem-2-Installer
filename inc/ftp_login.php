@@ -1,5 +1,5 @@
 <?php
-include ( "inc/ftp_data.php" );
+include ( 'inc/ftp_data.php' );
 
 $conn = ftp_connect ( $host, $port, 10 );
 $login = FALSE;

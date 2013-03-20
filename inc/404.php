@@ -1,5 +1,5 @@
 <?php
 
-$template = $_LANG[error][404];
+$template = $_LANG['error'][404];
 
 ?>

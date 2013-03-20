@@ -8,7 +8,7 @@ $pass = "";                //Password
 $root = "";                //Rootdirectory
 $port = "";                //Port
 
-if ( $port == "" ) {
+if ( $port == '' ) {
     $port = 21;
 }
 ?>

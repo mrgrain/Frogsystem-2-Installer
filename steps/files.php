@@ -54,10 +54,10 @@ if ($_POST['sended'] == 1 && $lfs == 0
    )
 {
     //Anti-Spam Code setzen
-    $datei = file("copy/login.inc.php");
+    $datei = file('copy/login.inc.php');
     $datei[14] = '$spam = "'.generate_spamcode(10).'"; //Anti-Spam Encryption-Code'."\n";
 
-    if ( file_write_contents("copy/login.inc.php", $datei) && file_write_contents("../login.inc.php", $datei) ) {
+    if ( file_write_contents('copy/login.inc.php', $datei) && file_write_contents('../login.inc.php', $datei) ) {
         $lfs = 1;
         $step = 2;
     } else { // Error 1
@@ -75,7 +75,7 @@ elseif ($_POST['sended'] == 2 && $lfs == 1
         $lfs = 2;
         $step = 2;
     } else{
-        include("inc/ftp_login.php");
+        include('inc/ftp_login.php');
         unset($folder_arr);
         $folder_arr = $folders;
         foreach ($folder_arr as $value) {
@@ -92,26 +92,26 @@ elseif ($_POST['sended'] == 2 && $lfs == 1
         }
         ftp_close($conn);
     }
-    
+
     if ( $step == 2 && $lfs == 2 && !isset($error) ) {
-        $datei = file("inc/ftp_data.php");
+        $datei = file('inc/ftp_data.php');
         $HOST = trim(str_replace('";                //Hostname', '',
             str_replace('$host = "', '', $datei[4])));
         $USER = trim(str_replace('";                //FTP-User', '',
             str_replace('$user = "', '', $datei[5])));
         unset($datei);
-        if ( $HOST != "" && $USER != "" ) {
-            include("inc/ftp_login.php");
+        if ( $HOST != '' && $USER != '' ) {
+            include('inc/ftp_login.php');
             //FTP-Login löschen
-            $datei = file("inc/ftp_data.php");
+            $datei = file('inc/ftp_data.php');
             $datei[4] = '$host = "";                //Hostname'."\n";
             $datei[5] = '$user = "";                //FTP-User'."\n";
             $datei[6] = '$pass = "";                //Password'."\n";
             $datei[7] = '$root = "";                //Rootdirectory'."\n";
 
-            if ( file_put_contents("inc/ftp_data.php", $datei) ) {
+            if ( file_put_contents('inc/ftp_data.php', $datei) ) {
             } elseif ( @ftp_chmod($conn, 0777, $_POST['ftp_root'].'install/inc/ftp_data.php') ) {
-                file_put_contents("inc/ftp_data.php", $datei);
+                file_put_contents('inc/ftp_data.php', $datei);
                 @ftp_chmod($conn, 0644, $_POST['ftp_root'].'install/inc/ftp_data.php');
             }
             ftp_close($conn);
@@ -139,14 +139,14 @@ elseif ($_POST['sended'] == 3 && $lfs == 2
 ///////////////////////////////
 switch ($step) {
   case 2:
-    $contenttitle = $_LANG[steps][files][step][2][long_title];
+    $contenttitle = $_LANG['steps']['files']['step'][2]['long_title'];
     break;
   case 3:
-    $contenttitle = $_LANG[steps][files][step][3][long_title];
+    $contenttitle = $_LANG['steps']['files']['step'][3]['long_title'];
     break;
   default:
     $step = 1;
-    $contenttitle = $_LANG[steps][files][step][1][long_title];
+    $contenttitle = $_LANG['steps']['files']['step'][1]['long_title'];
     break;
 }
 
@@ -154,13 +154,13 @@ switch ($step) {
 ///////////////////////////
 //// Step 1 - Kopieren ////
 ///////////////////////////
-if ($step == 1 && $lfs == 0 && $go == "files")
+if ($step == 1 && $lfs == 0 && $go == 'files')
 {
     if ($_POST['sended'] == 1 && $error == 1) {
-        $notice = $_LANG[steps][files][step][1][error1];
+        $notice = $_LANG['steps']['files']['step'][1]['error1'];
     }
     else {
-        $notice = $_LANG[steps][files][step][1][info_text];
+        $notice = $_LANG['steps']['files']['step'][1]['info_text'];
     }
 
     $template = '
@@ -170,7 +170,7 @@ if ($step == 1 && $lfs == 0 && $go == "files")
         <input type="hidden" name="sended" value="1" />
         <input type="hidden" name="lfs" value="'.$lfs.'" />
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][step][1][button].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['step'][1]['button'].'
         </button>
     </form>
 
@@ -182,27 +182,27 @@ if ($step == 1 && $lfs == 0 && $go == "files")
 ///////////////////////////////////
 //// Step 2.1 - Zugriffsrechte ////
 ///////////////////////////////////
-elseif ($step == 2 && $lfs == 1 && $go == "files")
+elseif ($step == 2 && $lfs == 1 && $go == 'files')
 {
     unset($addition);
     if ($_POST['sended'] == 2 && $error == 1) {
-    
-        $error = $_LANG[steps][files][step][2][error] . insert_tt($_LANG[help][permissions][title],$_LANG[help][permissions][text], 437, 150, 168 );
-        $notice = systext ( $error, $_LANG[main][error_long], TRUE, FALSE );
+
+        $error = $_LANG['steps']['files']['step'][2]['error'] . insert_tt($_LANG['help']['permissions']['title'],$_LANG['help']['permissions']['text'], 437, 150, 168 );
+        $notice = systext ( $error, $_LANG['main']['error_long'], TRUE, FALSE );
     }
     else {
-        $notice = $_LANG[steps][files][step][2][info_text];
+        $notice = $_LANG['steps']['files']['step'][2]['info_text'];
     }
 
     $template = '
 
     '.$notice.'
-    <ul><li>'.implode("</li><li>", add_fs ( $folders_show ) ).'</li></ul><br>
+    <ul><li>'.implode('</li><li>', add_fs ( $folders_show ) ).'</li></ul><br>
     <form action="?go=files&step=2&lang='.$lang.'" method="post">
         <input type="hidden" name="sended" value="2">
         <input type="hidden" name="lfs" value="'.$lfs.'">
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][step][2][button].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['step'][2]['button'].'
         </button>
     </form>
 
@@ -215,10 +215,10 @@ elseif ($step == 2 && $lfs == 1 && $go == "files")
 /////////////////////////////////////////////
 //// Step 2.2 - Zugriffsrechte Abschluss ////
 /////////////////////////////////////////////
-elseif ($step == 2 && $lfs == 2 && $go == "files")
+elseif ($step == 2 && $lfs == 2 && $go == 'files')
 {
-    $contenttitle = $_LANG[steps][files][step][2][end_title];
-    $notice = $_LANG[steps][files][step][2][end_info];
+    $contenttitle = $_LANG['steps']['files']['step'][2]['end_title'];
+    $notice = $_LANG['steps']['files']['step'][2]['end_info'];
 
     $template = '
 
@@ -227,7 +227,7 @@ elseif ($step == 2 && $lfs == 2 && $go == "files")
     '<form action="?go=end&lang='.$lang.'" method="post">
         <input type="hidden" name="lfs" value="2">
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][step][2][end_button].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['step'][2]['end_button'].'
         </button>
     </form>
 
@@ -239,35 +239,35 @@ elseif ($step == 2 && $lfs == 2 && $go == "files")
 //////////////////////////////
 //// Step 3.1 - .htaccess ////
 //////////////////////////////
-elseif ($step == 3 && $lfs == 2 && $go == "files")
+elseif ($step == 3 && $lfs == 2 && $go == 'files')
 {
     if ($_POST['sended'] == 3 && $error == 1) {
-        $notice = $_LANG[steps][files][step][3][error1];
+        $notice = $_LANG['steps']['files']['step'][3]['error1'];
     }
     else {
-        $notice = $_LANG[steps][files][step][3][info_text]."<br><br>".
-        $_LANG[steps][files][step][3][further_info].
-        ' <a href="'.$_LANG[steps][files][step][3][further_url].'" target="_blank"><i>'.
-        $_LANG[steps][files][step][3][further_url]."</i></a>"."<br><br>".
-        "<b>".$_LANG[main][warning]."</b> ".$_LANG[steps][files][step][3][info_text2];
+        $notice = $_LANG['steps']['files']['step'][3]['info_text'].'<br><br>'.
+        $_LANG['steps']['files']['step'][3]['further_info'].
+        ' <a href="'.$_LANG['steps']['files']['step'][3]['further_url'].'" target="_blank"><i>'.
+        $_LANG['steps']['files']['step'][3]['further_url'].'</i></a>'.'<br><br>'.
+        "<b>".$_LANG['main']['warning'].'</b> '.$_LANG['steps']['files']['step'][3]['info_text2'];
     }
 
     $template = '
 
-    <b>'.$_LANG[main][htaccess].'</b><br><br><br>'.$notice.'<br><br>
+    <b>'.$_LANG['main']['htaccess'].'</b><br><br><br>'.$notice.'<br><br>
     <form action="?go=files&step=3&lang='.$lang.'" method="post">
         <input type="hidden" name="sended" value="3">
         <input type="hidden" name="lfs" value="'.$lfs.'">
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][step][3][button].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['step'][3]['button'].'
         </button>
     </form>
-    <br>'.$_LANG[steps][files][step][3][info_text3].'<br><br>
+    <br>'.$_LANG['steps']['files']['step'][3]['info_text3'].'<br><br>
     <form action="?go=files&step=3&lang='.$lang.'" method="post">
         <input type="hidden" name="sended" value="3">
         <input type="hidden" name="lfs" value="'.$lfs.'">
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][step][3][button2].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['step'][3]['button2'].'
         </button>
     </form>
 
@@ -280,10 +280,10 @@ elseif ($step == 3 && $lfs == 2 && $go == "files")
 //////////////////////////////
 //// Step 3.2 - Abschluss ////
 //////////////////////////////
-elseif ($step == 3 && $lfs == 3 && $go == "files")
+elseif ($step == 3 && $lfs == 3 && $go == 'files')
 {
-    $contenttitle = $_LANG[steps][files][end_title];
-    $notice = $_LANG[steps][files][end_info];
+    $contenttitle = $_LANG['steps']['files']['end_title'];
+    $notice = $_LANG['steps']['files']['end_info'];
 
     $template = '
 
@@ -291,7 +291,7 @@ elseif ($step == 3 && $lfs == 3 && $go == "files")
     <form action="?go=end&lang='.$lang.'" method="post">
         <input type="hidden" name="lfs" value="0" />
         <button type="submit" value="" class="button">
-            '.$_LANG[main][arrow].' '.$_LANG[steps][files][end_button].'
+            '.$_LANG['main']['arrow'].' '.$_LANG['steps']['files']['end_button'].'
         </button>
     </form>
 

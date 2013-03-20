@@ -14,7 +14,7 @@ Passwort: {..password..}
 
 ----------------------------
 
-Weitere Informationen zum Frogsystem 2, sowie Supportforen und Aktualisierungenn
+Weitere Informationen zum Frogsystem 2 sowie Supportforen und Aktualisierungen
 finden Sie unter http://www.frogsystem.de !
 
 

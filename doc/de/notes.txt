@@ -1,4 +1,4 @@
-Um die Sicherheit Ihrer <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es unbedingt erforderlich nach Abschluss der Installation das Installationsverzeichnis <b>/install</b> umgehend von Ihrem Server zu löschen.
+Um die Sicherheit Ihrer <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es unbedingt erforderlich, nach Abschluss der Installation das Installationsverzeichnis <b>/install</b> umgehend von Ihrem Server zu löschen.
 
 <b>Anderenfalls ist es Angreifern möglich, die Installation zu manipulieren, zu zerstören oder eingebenen Zugangsdaten auszulesen.</b>
 
