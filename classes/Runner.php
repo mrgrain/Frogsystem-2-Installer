@@ -2,12 +2,12 @@
 /**
  * @file     Runner.php
  * @folder   /classes
- * @version  0.1
+ * @version  0.2
  * @author   Sweil
  *
- * provides an interface for any runner
+ * provides an abstract implementation for any runner
  * a runner implements the chronologically execution of instructions 
- * from a file
+ * from a set of instructions (e.g. a file or an array)
  */
 abstract class Runner implements Iterator {
     
@@ -15,11 +15,9 @@ abstract class Runner implements Iterator {
     private $position;
     private $lastInstruction;
     private $lastResult;
-    private $file;
     
-    public function __construct($file) {
+    public function __construct() {
         $this->instructions = array();
-        $this->file = $file;
         $this->position = 0;
     }   
     
@@ -87,9 +85,6 @@ abstract class Runner implements Iterator {
         }
         return $result;  
     }
-    
-
-    
 }
 
 ?>

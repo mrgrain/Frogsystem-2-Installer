@@ -7,18 +7,27 @@
  *
  * run a list of SQL instructions
  */
-class SQLRunner extends Runner implements Iterator {
+class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
     
     private $sql;
+    private $dir;
     
-    public function __construct($file) {
-        parent::__construct($file);
-        
+    public function __construct($dir, $start, $end) {
         // create sql connection
         $this->sql = new sql('localhost', 'fs2_installer', 'frogsystem', 'frogsystem', 'fs2_');
         
+        // create filelist
+        $this->dir = $dir;
+        $list = scandir($dir);
+        $list = array_diff($list, array('.', '..'));
+        
+        // call parent __construct
+        parent::__construct($list, $start, $end);
+    }
+    
+    public function load($file) {
         //TODO Generic Fileaccess FTP/NOT_FTP
-        $lines = file($file);
+        $lines = file($this->dir.$file);
         $last_instruction = "";
         foreach ($lines as $line) {
             $last_instruction .= $line;
@@ -27,7 +36,7 @@ class SQLRunner extends Runner implements Iterator {
                 $last_instruction = '';
             }
         }
-    }
+    }    
 
 
     protected function runInstruction($instruction) {

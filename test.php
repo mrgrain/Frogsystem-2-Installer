@@ -1,7 +1,7 @@
 <?php
-require('./classes/Runner.php');
-require('./classes/SQLRunner.php');
-require('./libs/class_sql.php');
+define('FS2_ROOT_PATH', './', true);
+require('./phpinit.php');
+
 
 function calc_my_max_runtime() {
     $max_time = ini_get('max_execution_time');
@@ -13,9 +13,9 @@ function calc_my_max_runtime() {
 
 $time_start = microtime(true);
 $max_time = calc_my_max_runtime();
-session_start();
 
-$sqlr = new SQLRunner('jobs/sql/from-2.alix5-to-2.alix6.sql');
+$sqlr = new SQLRunner('jobs/sql/', '2.alix4', '2.alix6');
+
 $done = true;
 
 foreach($sqlr as $pos => $ins) {
@@ -39,7 +39,7 @@ foreach($sqlr as $pos => $ins) {
     print('<p>');
     print(($pos+1).'. '.$sqlr->getCurrentInfo().': ');
     try {
-        $sqlr->runCurrentInstruction();
+        var_dump($sqlr->runCurrentInstruction());
         print("okay");
     } catch (Exception $e) {
        print("error (".$e->getMessage().")"); 
