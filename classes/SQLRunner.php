@@ -51,7 +51,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
             'CREATE DATABASE', 'DROP DATABASE',
             'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE',
             'CREATE INDEX', 'CREATE UNIQUE INDEX', 'DROP INDEX',
-            'INSERT INTO', 'UPDATE', 'DELETE DROM', 'TRUNCATE', 
+            'INSERT INTO', 'UPDATE', 'DELETE FROM', 'TRUNCATE',
             'SELECT', 'SELECT DISTINCT'
         );
         foreach ($db_instructions as $dbi) {
