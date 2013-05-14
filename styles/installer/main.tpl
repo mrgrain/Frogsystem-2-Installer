@@ -24,6 +24,8 @@
   </div>
 </body><!--section-end::MAIN-->
 
+<!--section-start::COPYRIGHT-->&copy; 2013 Frogsystem 2-Team | <a href="http://www.frogsystem.de" target="_blank">www.frogsystem.de</a><!--section-end::COPYRIGHT-->
+
 
 
 

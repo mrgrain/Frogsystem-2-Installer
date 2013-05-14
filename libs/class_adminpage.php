@@ -12,15 +12,15 @@
 
 class adminpage {
 
-    private $name;
-    private $tpl    = array();
-    private $cond   = array();
-    private $text   = array();
-    private $lang   = null;
-    private $common = null;
+    protected $name;
+    protected $tpl    = array();
+    protected $cond   = array();
+    protected $text   = array();
+    protected $lang   = null;
+    protected $common = null;
 
 
-    function __construct ($pagefile) {
+    public function __construct ($pagefile) {
         global $FD;
         $this->name = substr($pagefile, 0, -4);
 
@@ -133,7 +133,7 @@ class adminpage {
         return preg_replace_callback('/<!\-\-IF::([0-9]+?)\-\->(.*?)(?:<!\-\-ELSE::\1\-\->(.*?))?<!\-\-ENDIF::\1\-\->/s', $callback, $string);
     }
 
-    private function lambdavars($tpl, &$name) {
+    protected function lambdavars($tpl, &$name) {
         $num = 0;
         $push = array();
         
@@ -157,11 +157,11 @@ class adminpage {
         return $tpl;
     }
 
-    private function condValue ($name) {
+    protected function condValue ($name) {
         return $this->cond[$name];
     }
 
-    private function langValue ($name) {
+    protected function langValue ($name) {
         // get from local lang
         if (!is_null($this->lang)) {
             return $this->lang->get($name);
@@ -173,7 +173,7 @@ class adminpage {
         }
     }
 
-    private function commonValue ($name) {
+    protected function commonValue ($name) {
         // get from local lang
         if (!is_null($this->common)) {
             return $this->common->get($name);
