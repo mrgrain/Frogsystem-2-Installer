@@ -5,16 +5,24 @@
  * @version  0.1
  * @author   Sweil
  *
- * run a list of SQL instructions
+ * run a set of File instructions
  */
-class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
+class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     
     private $sql;
     private $dir;
+    private $options;
     
     public function __construct($dir, $start, $end) {
+        // init options
+        $this->options = array(
+            'copy' => true,
+            'delete' => false,
+            'chmod' => false,            
+        );
+        
         // create sql connection
-        $this->sql = new sql('localhost', 'fs2_installer', 'frogsystem', 'frogsystem', 'fs2_');
+        //~ $this->sql = new sql('localhost', 'fs2_installer', 'frogsystem', 'frogsystem', 'fs2_');
         
         // create filelist
         $this->dir = $dir;
@@ -23,6 +31,10 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
         
         // call parent __construct
         parent::__construct($list, $start, $end);
+    }
+    
+    public function setOptions(array $opt) {
+        $this->options = $opt;
     }
     
     public function load($file) {
@@ -40,26 +52,15 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
 
 
     protected function runInstruction($instruction) {
-        $this->lastInstruction = $instruction;
-        return $this->sql->doQuery($instruction);
+        //TODO
+        return $instruction;
     }
     
 
     
     protected  function getInfo($instruction) {
-        $db_instructions = array(
-            'CREATE DATABASE', 'DROP DATABASE',
-            'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE',
-            'CREATE INDEX', 'CREATE UNIQUE INDEX', 'DROP INDEX',
-            'INSERT INTO', 'UPDATE', 'DELETE DROM', 'TRUNCATE', 
-            'SELECT', 'SELECT DISTINCT'
-        );
-        foreach ($db_instructions as $dbi) {
-            if (false !== stripos($instruction, $dbi))
-                return $dbi;
-        }
-        
-        return 'GENERIC DATABASE OPERATION';
+        //TODO
+        return $instruction;
     }    
     
 

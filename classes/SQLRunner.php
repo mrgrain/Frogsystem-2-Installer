@@ -40,7 +40,6 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
 
 
     protected function runInstruction($instruction) {
-        $this->lastInstruction = $instruction;
         return $this->sql->doQuery($instruction);
     }
     

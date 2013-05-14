@@ -13,8 +13,6 @@ abstract class Runner implements Iterator {
     
     private $instructions;
     private $position;
-    private $lastInstruction;
-    private $lastResult;
     
     public function __construct() {
         $this->instructions = array();
