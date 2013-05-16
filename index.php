@@ -10,12 +10,12 @@ if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {
 } else {
     $go = $_REQUEST['step'];
 }
-$step_file = FS2_ROOT_PATH.'steps/'.$go.'.php';
+$stepClass = 'InstallerPage'.ucfirst(strtolower($go));
 
 // error fallback
-if (!file_exists($step_file)) {
+if (!class_exists($stepClass)) {
   $go = '404';
-  $step_file = FS2_ROOT_PATH.'steps/404.php';
+  $stepClass = 'InstallerPage404';
 }
 
 // fill Session with important data
@@ -24,14 +24,6 @@ $_SESSION['update_from'] = '2.alix5';
 $_SESSION['update_to'] = file_get_contents(FS2_ROOT_PATH.'inc/version');
 
 // create page object
-$page = new InstallerPage(detect_language(), 'default_title');
-
-// load content
-ob_start();
-require($step_file);
-$content = ob_get_clean();
-
-// print page
-$page->setContent($content);
+$page = new $stepClass();
 print $page;
 ?>

@@ -39,6 +39,8 @@ function phpinit ($session = true, $header = false, $libloader = null) {
             if (false !== (@include_once(FS2_ROOT_PATH . \'libs/class_\'.$classname.\'.php\')))
                 return;
             if (false !== (@include_once(FS2_ROOT_PATH . \'classes/\'.$classname.\'.php\')))
+                return;
+            if (false !== (@include_once(FS2_ROOT_PATH . \'steps/\'.$classname.\'.php\')))
                 return;');
     }
 
@@ -47,6 +49,9 @@ function phpinit ($session = true, $header = false, $libloader = null) {
         spl_autoload_register();
     else
         spl_autoload_register($libloader);
+        
+    // load exceptions
+    require(FS2_ROOT_PATH.'classes/Exceptions.php');        
 }
 phpinit();
 ?>

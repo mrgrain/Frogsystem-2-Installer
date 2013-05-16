@@ -13,5 +13,6 @@
  * This Exception is used for errors in forms filled by a user.
  */
 class InstructionNotFoundException extends Exception { };
+class CheckerTestFailedException extends Exception { };
 
 ?>
