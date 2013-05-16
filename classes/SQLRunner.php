@@ -12,9 +12,9 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
     private $sql;
     private $dir;
     
-    public function __construct($dir, $start, $end) {
+    public function __construct($dir, $start, $end, $sql) {
         // create sql connection
-        $this->sql = new sql('localhost', 'fs2_installer', 'frogsystem', 'frogsystem', 'fs2_');
+        $this->sql = $sql;
         
         // create filelist
         $this->dir = $dir;

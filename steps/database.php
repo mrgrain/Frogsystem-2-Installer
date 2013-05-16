@@ -7,7 +7,7 @@
 *
 * database operations
 */
-
+unset($_SESSION['dbc']);
 // load content object
 $ic = $page->getIC('database.tpl');
 
@@ -15,12 +15,12 @@ $ic = $page->getIC('database.tpl');
 if (isset($_POST['db_host']) && isset($_POST['db_data']) && isset($_POST['db_user']) && isset($_POST['db_pass']) && isset($_POST['db_pref'])
     && !empty($_POST['db_host']) && !empty($_POST['db_user'])&& !empty($_POST['db_data'])) {
         try {
-            $sql = new sql($_POST['db_host'], $dat_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
+            $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
             unset($sql);
-            InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $dat_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
+            InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
             require(FS2_ROOT_PATH.'copy/db_connection.php');
-            
-            $_SESSION['dbc']
+            $_SESSION['dbc'] = $dbc;
+            unset($dbc);
         } catch (Exception $e) {
             // error case
         }
@@ -42,19 +42,27 @@ if (!isset($_SESSION['dbc'])) {
     // show form
     else {
         print $ic->get('sqlconnection');
+        exit;
     }
+}    
+
+//check connection from session
+try {
+    $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
+    $runner = new SQLRunner('jobs/sql/', $_SESSION['update_from'], $_SESSION['update_to'], $sql);
     
-// database operations 
-} else {
-    
-    $sqlr = new SQLRunner('jobs/sql/', $_SESSION['update_from'], $_SESSION['update_to']);
-    $instructions = array();
-    foreach($sqlr as $ins) {
-        $ic->addText('instruction', $ins->getInfo());
-        $instructions[] = $ic->get('sqlinstructions_info_element');
+    $inst_list = array();
+    foreach($runner as $inst) {
+        $ic->addText('instruction', $runner->getCurrentInfo());
+        $inst_list[] = $ic->get('sqlinstructions_info_element');
     }
-    $ic->addText('instruction_list', implode(PHP_EOL, $instructions));
+    $ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
     print $ic->get('sqlinstructions_info');
+    
+    
+} catch (Exception $e) {
+    print $ic->get('sqlconnection');
+    exit;
 }
 
 ?>
