@@ -21,7 +21,7 @@ if (!class_exists($stepClass)) {
 // fill Session with important data
 // TODO: generate once on need
 $_SESSION['update_from'] = '2.alix5';
-$_SESSION['update_to'] = trim(file_get_contents(FS2_ROOT_PATH.'inc/version'));
+$_SESSION['update_to'] = trim(file_get_contents(FS2_ROOT_PATH.'copy/version'));
 
 // create page object
 $page = new $stepClass();

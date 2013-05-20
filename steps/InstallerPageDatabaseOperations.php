@@ -10,14 +10,13 @@
 class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
     
     private $ic;
+    protected $result = array();
     
     public function __construct() {
         parent::__construct();
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
-        $this->result = array();
         
-        unset($_SESSION['dbc']); // testing
     }
     
     protected function show() {
@@ -34,13 +33,12 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
         try {
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
             $runner = new SQLRunner('jobs/sql/', $_SESSION['update_from'], $_SESSION['update_to'], $sql);
-            var_dump($this->getResult());
+
             $inst_list = array();
             foreach($runner as $pos => $inst) {
 				// break out
 				if ($this->isDone()) { break; }	
-							
-				print_r($pos.'<br>');
+
 				// set next step
 				if (!$this->isFirstRun()) {print_r($this->getNext().'--------');
 					$runner->setCurrent($this->getNext()-1);
