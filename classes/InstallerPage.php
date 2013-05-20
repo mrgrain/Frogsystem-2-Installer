@@ -68,8 +68,7 @@ class InstallerPage {
     
     
     /* create ouptut */
-    public function __toString() {
-        
+    public function __toString() {      
         // open main template file
         $this->tpl->setFile('main.tpl');  
         
@@ -82,9 +81,6 @@ class InstallerPage {
         $this->tpl->load('DOCTYPE');
         $this->tpl->clearTags();
         $doctype = (string) $this->tpl;        
-        
-
-        
         
         // get MAIN body
         $this->tpl->load('MAIN');

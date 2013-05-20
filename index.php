@@ -10,7 +10,7 @@ if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {
 } else {
     $go = $_REQUEST['step'];
 }
-$stepClass = 'InstallerPage'.ucfirst(strtolower($go));
+$stepClass = 'InstallerPage'.ucfirst($go);
 
 // error fallback
 if (!class_exists($stepClass)) {
@@ -21,7 +21,7 @@ if (!class_exists($stepClass)) {
 // fill Session with important data
 // TODO: generate once on need
 $_SESSION['update_from'] = '2.alix5';
-$_SESSION['update_to'] = file_get_contents(FS2_ROOT_PATH.'inc/version');
+$_SESSION['update_to'] = trim(file_get_contents(FS2_ROOT_PATH.'inc/version'));
 
 // create page object
 $page = new $stepClass();

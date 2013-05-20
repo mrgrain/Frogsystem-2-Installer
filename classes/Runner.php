@@ -20,6 +20,13 @@ abstract class Runner implements Iterator {
     }   
     
     /*
+     * Informative functions
+     */
+    public function getLastKey() {
+		return count($this->instructions)-1;
+	}
+   
+    /*
      * Functions with direct access
      */
     abstract protected function runInstruction($instruction);
@@ -39,6 +46,8 @@ abstract class Runner implements Iterator {
         }     
         return $this->instructions[$index];
     } 
+    
+   
     
     
     /*

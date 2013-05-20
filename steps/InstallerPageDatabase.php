@@ -7,7 +7,7 @@
 *
 * page for database operations
 */
-class InstallerPageDatabase extends SelfReloadingInstallerPage {
+class InstallerPageDatabase extends InstallerPage {
     
     private $ic;
     
@@ -35,6 +35,7 @@ class InstallerPageDatabase extends SelfReloadingInstallerPage {
                 $inst_list[] = $this->ic->get('sqlinstructions_info_element');
             }
             $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
+            $this->ic->addText('url', '?step=databaseOperations');
             print $this->ic->get('sqlinstructions_info');
             
             

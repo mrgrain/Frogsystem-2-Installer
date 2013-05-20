@@ -17,7 +17,7 @@
 <ul>
 <!--TEXT::instruction_list-->
 </ul>
-<p><button><!--LANG::sql_start_instructions_button--></button></p>
+<p><a href="<!--TEXT::url-->"><!--LANG::sql_start_instructions_button--></a></p>
 <!--section-end::sqlinstructions_info-->
 
 <!--section-start::sqlinstructions_info_element-->

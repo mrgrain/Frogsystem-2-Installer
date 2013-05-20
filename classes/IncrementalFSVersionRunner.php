@@ -67,7 +67,7 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
                 }
             }
         }
-        
+
         //load elements
         foreach($loadList as $element) {
             $this->load($element->matches[0]);
