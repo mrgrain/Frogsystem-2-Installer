@@ -87,7 +87,7 @@ class SQLConnectionChecker extends Checker {
     
     public function solutionFromFSInstallation() {
         // check old fs installations
-        if (isset($_SESSION['update_from']) && false !== $dbc = CompatibilityLayer::getOldDBConnection($_SESSION['update_from'])) {
+        if (isset($_SESSION['update_from']) && false !== $dbc = UpgradeFunctions::getOldDBConnection($_SESSION['update_from'])) {
             $_SESSION['dbc'] = $dbc;
             return true;
         }

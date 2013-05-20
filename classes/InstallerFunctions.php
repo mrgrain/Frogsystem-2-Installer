@@ -1,7 +1,7 @@
 <?php
 /**
- * @file     class_InstallerFunctions.php
- * @folder   /libs
+ * @file     InstallerFunctions.php
+ * @folder   /classes
  * @version  0.1
  * @author   Sweil
  *

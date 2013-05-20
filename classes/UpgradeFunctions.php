@@ -1,13 +1,13 @@
 <?php
 /**
- * @file     class_CompatibilityLayer.php
- * @folder   /libs
+ * @file     UpgradeFunctions.php
+ * @folder   /classes
  * @version  0.1
  * @author   Sweil
  *
- * provides some static compatibilty functions for the updater
+ * provides some static upgrade functions for the updater
  */
-class CompatibilityLayer {
+class UpgradeFunctions {
     
     public static function getOldDBConnection($version) {
         
