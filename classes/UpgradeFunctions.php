@@ -22,6 +22,10 @@ class UpgradeFunctions {
         
     }
     
+    public static function getInstalledFS2Version() {
+        return 'none';        
+    }    
+    
 }
 
 ?>

@@ -2,7 +2,7 @@
 /**
  * @file     Checker.php
  * @folder   /classes
- * @version  0.1
+ * @version  0.2
  * @author   Sweil
  *
  * provides the interface for any checkers
@@ -32,46 +32,13 @@ abstract class Checker {
         return true;
     }
     
-    public function solve($solutions = true, $tests = true) {
-        // load all solutions
-        if ($solutions === true) {
-            $solutions = $this->getDefaultSolutions();
-        }
-        
-        try {     
-            // run first check
-            try {
-                if ($this->check($tests)) { return true; }
-            } catch (CheckerTestFailedException $e) {}
-            
-            // run solutions
-            foreach ($solutions as $solution) {
-                // try next solution & check on success
-                if ($this->$solution()) {
-                    try {
-                        if ($this->check($tests)) { return true; }
-                    } catch (CheckerTestFailedException $e) {}
-                }
-            } 
-        }
-        // rethrow others
-        catch (Exception $e) { throw $e; }        
-    
-        return false;
-    }
     
     public function getTests() {
         $methods = get_class_methods($this);
         return array_filter($methods, create_function('$m', 'return "test" === substr($m, 0, 4);'));
     }
     
-    public function getSolutions() {
-        $methods = get_class_methods($this);
-        return array_filter($methods, create_function('$m', 'return "solution" === substr($m, 0, 8);'));
-    }
-    
     abstract public function getDefaultTests();
-    abstract public function getDefaultSolutions();
 }
 
 ?>

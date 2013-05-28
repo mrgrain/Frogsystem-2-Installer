@@ -21,10 +21,10 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
     
     protected function show() {
         // check SQL Connection
-        $checker = new SQLConnectionChecker($this->ic);
-        $solutions = $checker->getSolutions();
+        $solver = new SQLConnectionSolver($this->ic);
+        $solutions = $solver->getSolutions();
         array_pop($solutions);
-        if (!$checker->solve($solutions)) { 
+        if (!$solver->solve($solutions)) { 
 			header("location: {$_SERVER['PHP_SELF']}?step=database");
 			exit;
 		}
@@ -32,7 +32,7 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
         //check connection from session
         try {
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
-            $runner = new SQLRunner('jobs/sql/', $_SESSION['update_from'], $_SESSION['update_to'], $sql);
+            $runner = new SQLRunner('jobs/sql/', $_SESSION['upgrade_from'], $_SESSION['upgrade_to'], $sql);
 
             $inst_list = array();
             foreach($runner as $pos => $inst) {

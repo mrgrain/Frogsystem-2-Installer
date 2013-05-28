@@ -14,7 +14,7 @@ class InstallerLang extends lang
    
     // constructor
     public function  __construct ($local, $type = false) {
-        //~ require_once(FS2_ROOT_PATH.'includes/indexfunctions.php');
+        //~ require_once(INSTALLER_PATH.'includes/indexfunctions.php');
 
         $this->local = $local;
 

@@ -18,7 +18,7 @@ class InstallerContent extends adminpage
         $this->setLang($lang);
         
         // load tpl file
-        $path = FS2_ROOT_PATH.$file;
+        $path = INSTALLER_PATH.$file;
 
         if (is_readable($path)) {
             $this->loadTpl(file_get_contents($path));

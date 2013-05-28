@@ -25,7 +25,7 @@ class adminpage {
         $this->name = substr($pagefile, 0, -4);
 
         // load tpl file
-        $path = FS2_ROOT_PATH.'admin/templates/'.$this->name.'.tpl';
+        $path = INSTALLER_PATH.'admin/templates/'.$this->name.'.tpl';
 
         if (is_readable($path)) {
             $this->loadTpl(file_get_contents($path));
@@ -152,7 +152,7 @@ class adminpage {
             return \$match[0];       
         ");
 
-        $tpl = preg_replace('/(?|<!\-\-(IF)::(.+?)\-\->|<!\-\-(ELSE)\-\->|<!\-\-(ENDIF)\-\->)/e', '$tokenizer(array(\'$0\',\'$1\',\'$2\'),$num,$name,$push)', $tpl);
+        $tpl = preg_replace('/(?|<!\-\-(IF)::([-_a-zA-Z0-9]+?)\-\->|<!\-\-(ELSE)\-\->|<!\-\-(ENDIF)\-\->)/e', '$tokenizer(array(\'$0\',\'$1\',\'$2\'),$num,$name,$push)', $tpl);
 
         return $tpl;
     }

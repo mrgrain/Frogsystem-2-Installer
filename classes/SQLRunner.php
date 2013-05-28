@@ -20,7 +20,8 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
         $this->dir = $dir;
         $list = scandir($dir);
         $list = array_diff($list, array('.', '..'));
-        
+        InstallerFunctions::orderByIncrementalFilenames($list);
+
         // call parent __construct
         parent::__construct($list, $start, $end);
     }

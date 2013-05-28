@@ -10,7 +10,7 @@
 class InstallerFunctions {
     
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
-        $file_path = FS2_ROOT_PATH.'copy/db_connection.php';
+        $file_path = INSTALLER_PATH.'copy/db_connection.php';
         
         $file = file($file_path);
         $file[4] = '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL;
@@ -23,6 +23,69 @@ class InstallerFunctions {
         return file_put_contents($file_path, $file);
     }
     
+    public static function getRequiredPHPVersion() {
+        return '5.1.0';
+    }
+    
+    public static function getRequiredPHPExtensions() {
+        return array('pdo', 'pdo_mysql');
+    }
+    
+    public static function getFS2Versions() {
+        return array(
+            'none',
+            '2.alix3','2.alix4','2.alix5','2.alix6','2.alix7','2.alix8','2.alix9',
+            '2.beta1','2.beta2','2.beta3','2.beta4','2.beta5','2.beta6','2.beta7','2.beta8','2.beta9',
+            '2.rc1','2.rc2','2.rc3','2.rc4','2.rc5'
+        );
+    }
+
+    public static function getRequiredFS2Version() {
+        return 'none';
+    }
+    
+    /*
+     * Accually compares to FS2 versions
+     */    
+    public static function compareFS2Versions($one, $two) {
+        // equal
+        if ($one == $two) {
+            return 0;
+        }
+        
+        // return what ever element is found first in the versions array
+        $versions = InstallerFunctions::getFS2Versions();
+        foreach ($versions as $v) {
+            if ($v == $one) { // $one < $two
+                return -1;
+            } else if ($v == $two) { // $one > $two
+                return 1;
+            }
+        }
+        
+        // not found in list
+        return false;
+    }
+    
+    public static function orderByIncrementalFilenames(&$list) {
+        usort($list, create_function('$a, $b', '
+            $regex = \'~^from-(none|2\.[0-9a-zA-Z\.]+)-to-(none|2\.[0-9a-zA-Z\.]+)(\.[^.]+){1}$~\';
+            $one = array();
+            preg_match($regex, $a, $one);
+            $two = array();
+            preg_match($regex, $b, $two);
+
+            if (empty($one) && empty($two)) {
+                return false;
+            }
+
+            $first = InstallerFunctions::compareFS2Versions($one[1], $two[1]);
+            if ($first == 0) {
+                return InstallerFunctions::compareFS2Versions($one[2], $two[2]);
+            }
+            return $first;
+        '));
+    }    
 }
 
 ?>

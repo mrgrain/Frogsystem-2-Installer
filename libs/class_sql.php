@@ -34,9 +34,8 @@ class sql {
         }
         catch (Exception $e)
         {
-            $this->sql = false;
-            $this->error = $e->getMessage();
-            Throw new ErrorException('No Connection to Database: '.$e->getMessage());
+            $this->error = array('message' => $e->getMessage(), 'code' => $e->getCode());
+            Throw new ErrorException('No Connection to Database: '.$e->getMessage(), $e->getCode());
         }
     }
 

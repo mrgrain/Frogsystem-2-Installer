@@ -1,5 +1,5 @@
 <?php
-define('FS2_ROOT_PATH', './', true);
+define('INSTALLER_PATH', './', true);
 require('./phpinit.php');
 
 

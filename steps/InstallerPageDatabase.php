@@ -21,13 +21,13 @@ class InstallerPageDatabase extends InstallerPage {
     
     protected function show() {
         // check SQL Connection
-        $checker = new SQLConnectionChecker($this->ic);
-        if (!$checker->solve()) { exit; }
+        $solver = new SQLConnectionSolver($this->ic);
+        if (!$solver->solve()) { exit; }
                 
         //check connection from session
         try {
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
-            $runner = new SQLRunner('jobs/sql/', $_SESSION['update_from'], $_SESSION['update_to'], $sql);
+            $runner = new SQLRunner('jobs/sql/', UPGRADE_FROM, UPGRADE_TO, $sql);
             
             $inst_list = array();
             foreach($runner as $inst) {
@@ -40,7 +40,7 @@ class InstallerPageDatabase extends InstallerPage {
             
             
         } catch (Exception $e) {
-            print $this->ic->get('sqlconnection');
+            $solver->solutionShowForm();
             exit;
         }        
     }

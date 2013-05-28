@@ -36,11 +36,11 @@ function phpinit ($session = true, $header = false, $libloader = null) {
     // Default libloader
     if (is_null($libloader)) {
         $libloader = create_function ('$classname', '
-            if (false !== (@include_once(FS2_ROOT_PATH . \'libs/class_\'.$classname.\'.php\')))
+            if (false !== (@include_once(INSTALLER_PATH . \'libs/class_\'.$classname.\'.php\')))
                 return;
-            if (false !== (@include_once(FS2_ROOT_PATH . \'classes/\'.$classname.\'.php\')))
+            if (false !== (@include_once(INSTALLER_PATH . \'classes/\'.$classname.\'.php\')))
                 return;
-            if (false !== (@include_once(FS2_ROOT_PATH . \'steps/\'.$classname.\'.php\')))
+            if (false !== (@include_once(INSTALLER_PATH . \'steps/\'.$classname.\'.php\')))
                 return;');
     }
 
@@ -51,7 +51,7 @@ function phpinit ($session = true, $header = false, $libloader = null) {
         spl_autoload_register($libloader);
         
     // load exceptions
-    require(FS2_ROOT_PATH.'classes/Exceptions.php');        
+    require(INSTALLER_PATH.'classes/Exceptions.php');        
 }
 phpinit();
 ?>

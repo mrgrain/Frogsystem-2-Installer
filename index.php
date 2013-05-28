@@ -1,7 +1,17 @@
 <?php
 // init php
-define('FS2_ROOT_PATH', './', true);
+define('INSTALLER_PATH', './', true);
 require('./phpinit.php');
+
+// Installer constants
+if (!isset($_SESSION['upgrade_from'])) {
+  $_SESSION['upgrade_from'] = UpgradeFunctions::getInstalledFS2Version();
+}
+if (!isset($_SESSION['upgrade_to'])) {
+  $_SESSION['upgrade_to'] = trim(file_get_contents(INSTALLER_PATH.'copy/version'));
+}
+define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
+define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
 
 
 // detect page
@@ -17,11 +27,6 @@ if (!class_exists($stepClass)) {
   $go = '404';
   $stepClass = 'InstallerPage404';
 }
-
-// fill Session with important data
-// TODO: generate once on need
-$_SESSION['update_from'] = '2.alix5';
-$_SESSION['update_to'] = trim(file_get_contents(FS2_ROOT_PATH.'copy/version'));
 
 // create page object
 $page = new $stepClass();
