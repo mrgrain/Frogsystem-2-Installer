@@ -4,6 +4,9 @@
 <html lang="{..language..}">
   <head>
     {..title_tag..}
+    <link rel="stylesheet" type="text/css" href="styles/installer/installer.css">
+    <link rel="stylesheet" type="text/css" href="styles/installer/simple_web_buttons.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <!--{..base_tag..}
     {..meta_tags..}
     {..css_links..}

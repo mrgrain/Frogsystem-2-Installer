@@ -25,8 +25,10 @@ class Requirements extends Checker {
         return version_compare(PHP_VERSION, InstallerFunctions::getRequiredPHPVersion()) >= 0;
     }
 
-    public function testPHPExtensions() {
-        $extensions = InstallerFunctions::getRequiredPHPExtensions();
+    public function testPHPExtensions($extensions = false) {
+        if (false == $extensions) {
+            $extensions = InstallerFunctions::getRequiredPHPExtensions();
+        }
         $passed = true;
         $this->failedExtensions = array();
         foreach ($extensions as $extension) {

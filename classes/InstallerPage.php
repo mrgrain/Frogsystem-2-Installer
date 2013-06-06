@@ -93,6 +93,7 @@ class InstallerPage {
         $this->tpl->tag('doctype', $doctype);
         $this->tpl->tag('language', "DE");
         $this->tpl->tag('title_tag', $this->getTitleTag());
+        $this->tpl->tag('title', $this->getTitle());
         $this->tpl->tag('body', $body);
 
         return (string) $this->tpl; 

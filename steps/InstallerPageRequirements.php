@@ -37,6 +37,7 @@ class InstallerPageRequirements extends InstallerPage {
         
         // php extensions
         $extensions = !$checker->testPHPExtensions();
+         $extensions = true;
         $this->ic->addText('missing_extensions', implode(', ', $checker->getFailedExtensions()));     
         $this->ic->addCond('php_extensions_error', $extensions);   
         $extensions_error = $this->ic->get('php_extensions');
@@ -45,6 +46,7 @@ class InstallerPageRequirements extends InstallerPage {
         $this->ic->addText('fs_version', $fs2_version_error);
         $this->ic->addText('php_version', $php_version_error);
         $this->ic->addText('php_extensions', $extensions_error);           
+        $this->ic->addCond('any_error', ($extensions || $phpversion || $fs2version)); 
         print $this->ic->get('requirements');
     }
 }

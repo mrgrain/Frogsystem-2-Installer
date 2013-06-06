@@ -26,5 +26,10 @@ class InstallerLang extends lang
     protected function add($tag, $text) {
         $this->phrases[$tag] = $text;
     }
+    
+    // function to extend a phrase
+    protected function extend($tag, $text) {
+        $this->phrases[$tag] = $this->phrases[$tag].$text;
+    }        
 }
 ?>

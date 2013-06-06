@@ -1,1 +1,24 @@
-introduction: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea reb.
+#common
+required_version: Benötigte Version
+your_version: Deine Version
+continue_with: Weiter mit
+continue_anyway: Trotzdem fortfahren
+database_operations: Datenbank-Operationen
+
+# start.tpl
+welcome: Herzlich Willkommen!
+introduction: Mit dem <b>Frogsystem&nbsp;2.alix6</b> #wurden einige weitreichende Änderungen im Hintergrund durchgeführt, die das System besser für die Zukunft rüsten.<br>
+#/Die sichtbarsten Änderungen sind sicherlich die <b>neue Kommentarliste mit Spam-Erkennung</b>, die <b>Unterstützung für SEO-URLs</b>, ein <b>neuer Style im AdminCP</b> und natürlich dieses <b>neue Installations-Tool</b>. Eine detaillierte Auflistung aller Änderungen findest du weiter unten im <a href="#changelog">Change Log</a>.<br>
+#/<br>
+#/Dieser <b>Assistent</b> wird dich durch die Installation und Erstkonfiguration führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch.<br>
+
+#requirements.tpl
+requirements_title: Anforderungen überprüfen
+requirements_info: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+
+fs_version_ok: Frogsystem 2-Version ist okay
+fs_version_error: Frogsystem 2-Version ist nicht okay
+php_version_ok: PHP-Version ist okay
+php_version_error: PHP-Version ist nicht okay
+php_extensions_error: PHP-Erweiterungen sind nicht okay
+missing_extensions: Fehlende Erweiterungen

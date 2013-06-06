@@ -43,11 +43,16 @@ class lang
     protected function add($tag, $text) {
         $this->phrases[$tag] = tpl_functions($text, 1, array('DATE', 'VAR', 'URL'));
     }
+    
+    // function to extend a phrase
+    protected function extend($tag, $text) {
+        $this->phrases[$tag] = $this->phrases[$tag].tpl_functions($text, 1, array('DATE', 'VAR', 'URL'));
+    }    
 
     // load text data
     protected function import(&$data) {
         $imports = array();
-        preg_match_all('/#@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
+        preg_match_all('/#^@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
         foreach ($imports as $import) {
             $importPath = INSTALLER_PATH . 'lang/' . $this->local . '/' . $import[1] . '.txt';
             $importData = @file_get_contents($importPath);
@@ -80,16 +85,31 @@ class lang
             $this->import($langData);
 
             // get lines
-            $langData = preg_replace("/#.*?\n/is", '', $langData);
+            $langData = preg_replace("/^#.*?\n/is", '', $langData);
             $langData = explode("\n", $langData);
 
             // Run through lines
+            $last = false;
             foreach ($langData as $line) {
+                $match = array();
+                
+                // match line extender
+                if (false !== $last) {
+                    preg_match("~^#\/(.*)~i", $line, $match);
+                    if (count($match) == 2) {
+                        $this->extend($last, $match[1]);
+                        continue;
+                    }                    
+                }
+                
+                // match content
                 preg_match ("#([a-z0-9_-]+?)\s*?:\s*(.*)#is", $line, $match);
                 if (count($match) >= 2) {
+                    $last = $match[1];
 					$this->add($match[1], $match[2]);
-				}
-                unset($match);
+				} else {
+                    $last = false;
+                }
             }
         } else {
             Throw new Exception('Language File not found: '.$langDataPath);

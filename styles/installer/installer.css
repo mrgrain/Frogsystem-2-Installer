@@ -1,0 +1,162 @@
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p,
+blockquote, pre,a, abbr, acronym, address, big, cite, code, del, dfn, em,
+img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, 
+i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend, table, 
+caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, 
+embed, figure, figcaption, footer, header, hgroup, menu, nav, output, 
+ruby, section, summary,time, mark, audio, video {
+    margin: 0;	
+    padding: 0;	
+    border: 0;	
+    font-size: 100%;	
+    font: inherit;	
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, 
+menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.2;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/*
+ * 
+/**************************************************/
+/* installer normalization */
+/**************************************************/
+html, body, form, fieldset, table, tr, td, img, label {
+    font-family:"Palatino Linotype","Palatino","Times New Roman",Times,serif;
+    font-size:12pt;
+}
+
+h1, h2, h3, h4, h5, h6, legend, thead {
+    font-family: "Century Gothic","Futura",Arial,Helvetica,sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p {
+  margin: 12px auto;
+}
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, p:first-child {
+  margin-top: 0;
+}
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, p:last-child {
+  margin-bottom: 0;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.17em; }
+h5 { font-size: .83em; }
+h6 { font-size: .75em; }
+h1, h2, h3 { font-weight: bold; }
+
+b { font-weight: bold; }
+i { font-style: italic; }
+
+/**************************************************/
+/* standard classes */
+/**************************************************/
+.hidden {
+    display: none;
+}
+
+.small {
+    font-size:10pt;
+}
+.big {
+    font-size:14pt;
+}
+
+.pointer {
+    cursor:pointer;
+}
+
+.top {
+  vertical-align:top;
+}
+.middle, .textmiddle {
+  vertical-align:middle;
+}
+.bottom {
+  vertical-align:bottom;
+}
+
+.left {
+  text-align:left;
+}
+.center {
+  text-align:center;
+}
+.right {
+  text-align:right;
+}
+.justify{
+  text-align:justify;
+}
+
+
+.atleft {
+  float:left;
+}
+.atright {
+  float:right;
+}
+
+
+p.error, p.success {
+    border-left: 3px solid transparent;
+    margin-left:10px;
+    padding-left:5px;
+}
+p.error { border-left-color: #FF0000; }
+p.success { border-left-color: #008800; }
+
+b.error, i.error, span.error { color: #FF0000; }
+b.success, i.success, span.success { color: #008800; }
+
+p.list label { float:left; }
+p.list br { clear:both; }
+p.list.l150 label, p.list label.l150 { width:150px; }
+p.list.l300 label, p.list label.l300 { width:300px; }
+
+/**************************************************/
+/* styling elements */
+/**************************************************/
+body {
+    background:#6C6C6C url('images/bg_pattern.gif') repeat;
+    color:#ffffff;
+}
+
+div#main {
+    background: #F9F9F9;
+    border: 5px solid #999999;
+    color:#000000;
+    padding:15px;
+    width: 700px;
+    margin: 20px auto;
+}
+
+div#footer {
+    margin-top:30px;
+    text-align:center;
+    font-size:10pt;
+}
+
+
