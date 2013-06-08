@@ -24,7 +24,7 @@ class sql {
     // connects the database, saves SQL-Connection, database-name and prefix
     public function __construct($host, $data, $user, $pass, $pref) {
         try {
-            $this->sql = new PDO("mysql:host=$host;dbname=$data", $user, $pass);
+            $this->sql = @new PDO("mysql:host=$host;dbname=$data", $user, $pass);
             /* TODO: change error mode back to ERRMODE_SILENT
                      The exception error mode is just used for easier debugging
                      while migrating to PDO. */

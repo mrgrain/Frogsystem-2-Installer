@@ -84,6 +84,8 @@ class InstallerPage {
         
         // get MAIN body
         $this->tpl->load('MAIN');
+        $this->tpl->tag('info_badge', $this->lang->get('info_badge'));
+        $this->tpl->tag('version', UPGRADE_TO);
         $this->tpl->tag('copyright', $copyright);
         $this->tpl->tag('content', $this->getContent());
         $body = (string) $this->tpl;   

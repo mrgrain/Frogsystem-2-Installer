@@ -41,7 +41,7 @@ class InstallerFunctions {
     }
 
     public static function getRequiredFS2Version() {
-        return 'none';
+        return '2.alix5';
     }
     
     /*
@@ -85,6 +85,87 @@ class InstallerFunctions {
             }
             return $first;
         '));
+    }   
+    
+    public static function getTableList ($prefix = "") {
+        $tables = array (
+            'admin_cp',
+            'admin_groups',
+            'admin_inherited',
+            'aliases',
+            'announcement',
+            'applets',
+            'articles',
+            'articles_cat',
+            'cimg',
+            'cimg_cats',
+            'counter',
+            'counter_ref',
+            'counter_stat',
+            'dl',
+            'dl_cat',
+            'dl_files',
+            'editor_config',
+            'email',
+            'ftp',
+            'hashes',
+            'news',
+            'news_cat',
+            'news_links',
+            'partner',
+            'player',
+            'poll',
+            'poll_answers',
+            'poll_voters',
+            'press',
+            'press_admin',
+            'screen',
+            'screen_cat',
+            'screen_random',
+            'search_index',
+            'search_time',
+            'search_words',
+            'shop',
+            'smilies',
+            'snippets',
+            'styles',
+            'user',
+            'useronline',
+            'user_groups',
+            'user_permissions',
+            'wallpaper',
+            'wallpaper_sizes',
+        );
+        
+        if (!empty($prefix)) {
+            foreach ($tables as $k => $v) {
+                $tables[$k] = $prefix.$v;
+            }
+        }
+        
+        return $tables;
+    } 
+    
+    public static function killhtml ($VAL, $ARR = true) {
+        // save data
+        if (is_array($VAL)) {
+            if ($ARR)
+                $VAL = array_map(array('InstallerFunctions', 'killhtml'), $VAL);
+        } 
+        elseif (is_numeric($VAL)) {
+            if (floatval($VAL) == intval($VAL)) {
+                $VAL = intval($VAL);
+                settype($VAL, 'integer');
+            } else {
+                $VAL = floatval($VAL);
+                settype($VAL, 'float');
+            }
+        } else {
+            $VAL = htmlspecialchars(strval($VAL), ENT_QUOTES, 'ISO-8859-1', false);
+            settype($VAL, 'string');
+        }
+
+        return $VAL;
     }    
 }
 

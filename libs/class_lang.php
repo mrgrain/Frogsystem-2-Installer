@@ -97,7 +97,7 @@ class lang
                 if (false !== $last) {
                     preg_match("~^#\/(.*)~i", $line, $match);
                     if (count($match) == 2) {
-                        $this->extend($last, $match[1]);
+                        $this->extend($last, PHP_EOL.$match[1]);
                         continue;
                     }                    
                 }

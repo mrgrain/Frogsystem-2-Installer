@@ -87,7 +87,7 @@ class adminpage {
                 $GLOBALS["AP_lambdas"] = $lambdas;
 
                 $GLOBALS["getcond"] = create_function ('$match', ' 
-                    if ($GLOBALS["AP_cond"][$GLOBALS["AP_lambdas"][$match[1]]]) { // IF-branch
+                    if (isset($GLOBALS["AP_cond"][$GLOBALS["AP_lambdas"][$match[1]]]) && $GLOBALS["AP_cond"][$GLOBALS["AP_lambdas"][$match[1]]]) { // IF-branch
                         return adminpage::replacer($match[2], $GLOBALS["getcond"]); // call replacer recursiv
                     } elseif (isset($match[3])) { // ELSE-branch
                         return adminpage::replacer($match[3], $GLOBALS["getcond"]);

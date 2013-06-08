@@ -4,7 +4,7 @@
 <!--TEXT::fs_version-->
 <!--TEXT::php_version-->
 <!--TEXT::php_extensions-->
-<p>
+<p class="space attop">
     <!--IF::any_error-->
         <a class="button orange" href="?step=database">&raquo; <!--LANG::continue_anyway--> (<!--LANG::database_operations-->)</a>
     <!--ELSE-->
@@ -14,7 +14,7 @@
 <!--section-end::requirements-->
 
 <!--section-start::fs_version-->
-<p class="list l150 <!--IF::fs_version_error-->>error<!--ELSE-->success<!--ENDIF-->">
+<p class="list l150 <!--IF::fs_version_error-->error<!--ELSE-->success<!--ENDIF-->">
     <b><!--IF::fs_version_error--><!--LANG::fs_version_error--><!--ELSE--><!--LANG::fs_version_ok--><!--ENDIF--></b><br>
     <label><!--LANG::required_version-->:</label> <b><!--TEXT::required_version--></b><br>
     <label><!--LANG::your_version-->:</label> <b class="<!--IF::fs_version_error-->>error<!--ELSE-->success<!--ENDIF-->"><!--TEXT::your_version--></b>

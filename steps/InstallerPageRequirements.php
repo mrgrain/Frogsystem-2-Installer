@@ -22,9 +22,9 @@ class InstallerPageRequirements extends InstallerPage {
         $checker = new Requirements();
 
         // fs2 version
-        $fs2version = !$checker->testFS2Version();
+        $fs2version = !$checker->testFS2VersionWithNone();
         $this->ic->addText('your_version', UPGRADE_FROM);
-        $this->ic->addText('required_version', InstallerFunctions::getRequiredFS2Version());        
+        $this->ic->addText('required_version', InstallerFunctions::getRequiredFS2Version().' | none');
         $this->ic->addCond('fs_version_error', $fs2version);  
         $fs2_version_error = $this->ic->get('fs_version');
         
@@ -37,7 +37,6 @@ class InstallerPageRequirements extends InstallerPage {
         
         // php extensions
         $extensions = !$checker->testPHPExtensions();
-         $extensions = true;
         $this->ic->addText('missing_extensions', implode(', ', $checker->getFailedExtensions()));     
         $this->ic->addCond('php_extensions_error', $extensions);   
         $extensions_error = $this->ic->get('php_extensions');

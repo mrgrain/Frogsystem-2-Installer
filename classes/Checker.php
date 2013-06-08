@@ -39,6 +39,14 @@ abstract class Checker {
     }
     
     abstract public function getDefaultTests();
+    
+    // pseudo tests to ensure failing / passing
+    protected function fail() {
+        return false;
+    }
+    protected function pass() {
+        return true;
+    }
 }
 
 ?>

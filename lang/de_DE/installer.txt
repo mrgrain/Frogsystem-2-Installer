@@ -1,24 +1,132 @@
 #common
 required_version: Benötigte Version
 your_version: Deine Version
-continue_with: Weiter mit
-continue_anyway: Trotzdem fortfahren
+continue_with: Okay, weiter mit
+continue_anyway: No Risk, no Fun! Trotzdem fortfahren
 database_operations: Datenbank-Operationen
+info_badge: Frogsystem 2: Installations- &amp; Update-Tool
+
 
 # start.tpl
-welcome: Herzlich Willkommen!
-introduction: Mit dem <b>Frogsystem&nbsp;2.alix6</b> #wurden einige weitreichende Änderungen im Hintergrund durchgeführt, die das System besser für die Zukunft rüsten.<br>
-#/Die sichtbarsten Änderungen sind sicherlich die <b>neue Kommentarliste mit Spam-Erkennung</b>, die <b>Unterstützung für SEO-URLs</b>, ein <b>neuer Style im AdminCP</b> und natürlich dieses <b>neue Installations-Tool</b>. Eine detaillierte Auflistung aller Änderungen findest du weiter unten im <a href="#changelog">Change Log</a>.<br>
-#/<br>
-#/Dieser <b>Assistent</b> wird dich durch die Installation und Erstkonfiguration führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch.<br>
+welcome: Herzlich Willkommen zum Frogsystem 2!
+introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreichende <b>Änderungen im Hintergrund</b> durchgeführt, die das System für die Zukunft besser aufstellen.</p>
+#/
+#/<p>Die sichtbarsten Änderungen sind jedoch die <b>neue Kommentarliste mit Spam-Erkennung</b>, die <b>Unterstützung für SEO-URLs</b>, ein <b>neuer Style im AdminCP</b> und natürlich dieses <b>neue Installations-Tool</b>. Eine detaillierte Auflistung aller Änderungen gibt es im <a href="#changelog">Change Log</a>.</p>
+#/
+#/<p>Dieser <b>Assistent</b> wird dich durch die <b>Installation und Erstkonfiguration</b> führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch. Sobald du die Installtion startest, erklärst du dich damit einverstanden.</p>
+start_installation: Hurra, lass uns loslegen!
+
+changelog: Change Log
+notes: Installationshinweise
+copyright: Copyright
+
+changelog_text:
+
+notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/installer</b> von deinem Webspace zu löschen.
+#/
+#/<b>Sonst ist es Angreifern leicht möglich, die Installation zu manipulieren, zu zerstören oder eingegebene Zugangsdaten auszulesen.</b>
+#/
+#/-----------------------------------------------------------
+#/
+#/<b>DIE SOFTWARE WIRD "SO WIE SIE IST" BEREIT GESTELLT. ES BESTEHT KEINERLEI GARANTIE ODER GEWÄHR JEGLICHER ART ZUR BENUTZUNG DER SOFTWARE FÜR EINEN BETIMMTEN ZWECK.</b>
+#/
+#/<b>IN KEINEM FALL SIND DIE AUTOREN UND/ODER COPYRIGHTINHABER DER SOFTWARE FÜR SCHÄDEN UND/ODER RECHTSVERLETZUNGEN JEGLICHER ART VERANTWORTLICH, DIE DURCH DIE NUTZUNG DER SOFTWARE ENTSTEHEN.</b>
+
+copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
+#/
+#/-----------------------------------------------------------
+#/
+#/Die Software <b>Frogsystem&nbsp;2.alix6</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
+#/
+#/<b>Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland</b>
+#/Eine <b>Zusammenfassung</b> des Lizenzvertrags <b>in allgemeinverständlicher Sprache</b> kann unter dieser Internet-Adresse abgerufen werden:
+#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">»ttp://creativecommons.org/licenses/by-sa/3.0/de/</a>
+#/
+#/Der <b>vollständige Lizenzvertrag</b> ist unter dieser Adresse zu finden:
+#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">»http://creativecommons.org/licenses/by-sa/3.0/de/legalcode</a>
+#/
+#/-----------------------------------------------------------
+#/
+#/Die Software <b>Frogsystem&nbsp;2.alix6</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
+#/
+#/<b>BBCode-Parserklasse für PHP</b>
+#/Version 0.3.3 | Copyright (c) 2004-2009 Christian Seiler
+#/Homepage: <a href="http://www.christian-seiler.de/projekte/php/bbcode/" target="_blank">http://www.christian-seiler.de/projekte/php/bbcode/</a>
+#/Dateien: /libs/class_stringparser.php, /libs/class_stringparser_bbcode.php
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>FLV Player Maxi</b>
+#/Version 1.6.0
+#/Homepage: <a href="http://flv-player.net/players/maxi/" target="_blank">http://flv-player.net/players/maxi/</a>
+#/Dateien: /resources/player/player_flv_maxi.swf
+#/Lizenz: Creative Commons Attribution-Share Alike 3.0 Unported
+#/Lizenztext: <a href="http://creativecommons.org/licenses/by-sa/3.0/deed" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/deed</a>
+#/
+#/<b>jQuery</b>
+#/Version 1.4.2 | Copyright (c) 2010 John Resig
+#/Homepage: <a href="http://jquery.com" target="_blank">http://jquery.com</a>
+#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>Sizzle.js</b> (als Teil von jQuery)
+#/Copyright 2010, The Dojo Foundation
+#/Homepage: <a href="http://sizzlejs.com" target="_blank">http://sizzlejs.com</a>
+#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>codemirror</b>
+#/Copyright (c) 2007-2009 Marijn Haverbeke
+#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/" target="_blank">http://marijn.haverbeke.nl/codemirror/</a>
+#/Dateien: /resources/codemirror/* (ausgenommen /resources/codemirror/contrib/*)
+#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/LICENSE</a>
+#/
+#/<b>codemirror PHP Parser</b> (als Teil von codemirror)
+#/Copyright (c) 2008-2009, Yahoo! Inc.
+#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/index.html" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/index.html</a>
+#/Dateien: /resources/codemirror/contrib/php/*
+#/Lizenz: New BSD License
+#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE</a>
 
 #requirements.tpl
 requirements_title: Anforderungen überprüfen
-requirements_info: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+requirements_info: Um das Frogsystem 2 verwenden zu können, sind bestimmte Systemanforderungen erforderlich. Hier siehst du, ob alle Anforderungen erfüllt sind. Und falls nicht, sagen wir dir, wie schlimm das ist.
 
-fs_version_ok: Frogsystem 2-Version ist okay
+fs_version_ok: Frogsystem 2-Version ist okay!
 fs_version_error: Frogsystem 2-Version ist nicht okay
-php_version_ok: PHP-Version ist okay
+php_version_ok: PHP-Version ist okay!
 php_version_error: PHP-Version ist nicht okay
 php_extensions_error: PHP-Erweiterungen sind nicht okay
 missing_extensions: Fehlende Erweiterungen
+
+#database.tpl
+sql_instructions_title: Datenbank-Operationen
+sql_instructions_info: Wir werden nun vesuchen die folgenden Datenbank-Operationen durchzuführen. Diese Seite wird sich dabei einige Male selbst neuladen. Falls das nicht klappt, klicke bitte solange auf &bdquo;Weiter&ldquo;, bis alle Anweisungen durchgeführt wurden.
+sql_start_instructions_button: Okay, dann mach das mal jetzt
+sql_change_connection: Verbindungsdaten ändern
+
+sql_prefill_info: Und eine Verbindung eingetragen, die hier irgendwo rumlag. Wenn alles passt, kannst du einfach mit dem nächsten Schritt weiter machen. Sonst ändere einfach die Daten.
+sql_prefill_info_title: Wir haben da mal was vorbereitet...
+
+sql_connection_title: Datenbank-Verbindung herstellen
+sql_connection_info: Es wird jetzt versucht eine Datenbank-Verbindung herzustellen. Bitte gib hier die Verbindungsdaten ein, die du von deinem Hoster erhalten hast.
+sql_host_label: Host
+sql_database_label: Datenbank
+sql_user_label: Benutzer
+sql_password_label: Passwort
+sql_table_prefix_info: Bitte gib ein Präfix an, das den Tabellennamen vorangestellt wird. Wir empfehlen dir <b>fs2_</b> als Präfix zu verwenden.
+sql_prefix_label: Tabellen-Präfix
+sql_check_connection_button: Verbindung überprüfen &amp fortfahren
+
+sql_connection_error_title: Keine Datenbank-Verbindung
+sql_host_error: Der Host wurde nicht gefunden oder antwortet nicht
+sql_userpw_error: Wir konnten uns nicht mit diesem Benutzer &amp; Passwort anmelden
+sql_database_error: Die Datenbank gibt es nicht oder der Benutzer keinen Zugriff darauf
+sql_default_error: Sovbe'lu'bogh Qoylu' Qagh (Unbekannter Fehler, bitte versuche irgendwas anderes)
+
+fs2_table_error_title: Bestehende Tabellen gefunden
+fs2_table_error: Die folgenden Tabellen werden benötigt, aber existieren bereits. Bitte wählen Sie ein anderes Tabellen-Präfix.
+
+

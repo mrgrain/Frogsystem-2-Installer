@@ -23,8 +23,10 @@ menu, nav, section {
 body {
 	line-height: 1.2;
 }
+/*
 ol, ul {
 	list-style: none;
+*/
 }
 blockquote, q {
 	quotes: none;
@@ -51,13 +53,13 @@ h1, h2, h3, h4, h5, h6, legend, thead {
     font-family: "Century Gothic","Futura",Arial,Helvetica,sans-serif;
 }
 h1, h2, h3, h4, h5, h6, p {
-  margin: 12px auto;
+    margin: 12px auto;
 }
 h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, p:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 h1 { font-size: 2em; }
@@ -69,6 +71,8 @@ h1, h2, h3 { font-weight: bold; }
 
 b { font-weight: bold; }
 i { font-style: italic; }
+
+li { margin-left: 16px; }
 
 /**************************************************/
 /* standard classes */
@@ -89,52 +93,128 @@ i { font-style: italic; }
 }
 
 .top {
-  vertical-align:top;
+    vertical-align:top;
 }
 .middle, .textmiddle {
-  vertical-align:middle;
+    vertical-align:middle;
 }
 .bottom {
-  vertical-align:bottom;
+    vertical-align:bottom;
 }
 
 .left {
-  text-align:left;
+    text-align:left;
 }
 .center {
-  text-align:center;
+    text-align:center;
 }
 .right {
-  text-align:right;
+    text-align:right;
 }
 .justify{
-  text-align:justify;
+    text-align:justify;
 }
 
 
 .atleft {
-  float:left;
+    float:left;
 }
 .atright {
-  float:right;
+    float:right;
 }
 
+.fullwidth {
+    width:100%;
+}
 
-p.error, p.success {
+p.error, p.success, p.warning, p.info {
     border-left: 3px solid transparent;
     margin-left:10px;
     padding-left:5px;
 }
 p.error { border-left-color: #FF0000; }
 p.success { border-left-color: #008800; }
+p.warning { border-left-color: #888800; }
+p.info { border-left-color: #0000FF; }
 
 b.error, i.error, span.error { color: #FF0000; }
 b.success, i.success, span.success { color: #008800; }
+b.warning, i.warning, span.warning { color: #888800; }
+b.info, i.info, span.info { color: #0000FF; }
 
 p.list label { float:left; }
 p.list br { clear:both; }
 p.list.l150 label, p.list label.l150 { width:150px; }
 p.list.l300 label, p.list label.l300 { width:300px; }
+
+p.list.aligned.error label.l150,
+p.list.aligned.success label.l150 ,
+p.list.aligned.warning label.l150 ,
+p.list.aligned.info label.l150 {
+    width:132px;
+}
+p.list.aligned.error label.l300,
+p.list.aligned.success label.l300 ,
+p.list.aligned.warning label.l300 ,
+p.list.aligned.info label.l300 {
+    width:282px;
+}
+
+.space.attop { margin-top: 24px; }
+.space.atbottom { margin-bottom: 24px; }
+.space.both { margin-top: 24px; margin-bottom: 24px; }
+.space.large.attop { margin-top: 36px; }
+.space.large.atbottom { margin-bottom: 36px; }
+.space.large.both { margin-top: 36px; margin-bottom: 36px; }
+
+/**************************************************/
+/* default form styles */
+/**************************************************/
+select, option, textarea, input[type='password'], input[type='text'], input:not([type])  {
+    color:#000000;
+    font-size:10pt;
+    font-family:Verdana, sans-serif;
+    border:2px solid #999999;
+    background-color:#ffffff;
+    font-weight:normal;
+    padding:2px 3px;
+}
+
+option {
+    border:none;
+    padding:1px 10px 1px 6px;
+
+}
+
+input[type='file'] {
+    color:#000000;
+    font-size:10pt;
+    font-family:Verdana, sans-serif;
+    background-color:#ffffff;
+    font-weight:normal;
+    padding:2px 3px;
+    cursor:pointer;
+}
+input[type='button'], input[type='reset'], input[type='submit'] {
+    padding-top:2px;
+    padding-bottom:2px;
+    cursor:pointer;
+}
+input[readonly], input[disabled] {
+    color:#444444;
+    background-color:#EEEEEE;
+}
+
+textarea {
+    font-family: "Courier New", Courier, monospace;
+    line-height:140%;
+    font-size:11pt;
+}
+textarea.nomono {
+    font-family:Verdana, sans-serif;
+    font-size:10pt;
+}
+
 
 /**************************************************/
 /* styling elements */
@@ -154,9 +234,18 @@ div#main {
 }
 
 div#footer {
-    margin-top:30px;
     text-align:center;
     font-size:10pt;
+    color: #EEEEEE;
+}
+
+h1#info_badge {
+    font-size:12pt;
+    color: #555555;
+}
+
+h1#info_badge span#version {
+    float:right;
 }
 
 
