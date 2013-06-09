@@ -104,6 +104,11 @@ abstract class SelfReloadingInstallerPage extends InstallerPage {
         return $this->first;
     }
     
+    protected function finish() {
+        if ($this->isDone())
+            unset($_SESSION['srip']);
+    }    
+    
     protected function reload($force = false) {
         // set data
         $_SESSION['srip']['next'] = $this->getNext();

@@ -5,6 +5,10 @@ continue_with: Okay, weiter mit
 continue_anyway: No Risk, no Fun! Trotzdem fortfahren
 database_operations: Datenbank-Operationen
 info_badge: Frogsystem 2: Installations- &amp; Update-Tool
+or: oder
+setup: Setup
+seconds_short:s
+total_runtime: Gesamte Laufzeit
 
 
 # start.tpl
@@ -102,11 +106,6 @@ php_extensions_error: PHP-Erweiterungen sind nicht okay
 missing_extensions: Fehlende Erweiterungen
 
 #database.tpl
-sql_instructions_title: Datenbank-Operationen
-sql_instructions_info: Wir werden nun vesuchen die folgenden Datenbank-Operationen durchzuführen. Diese Seite wird sich dabei einige Male selbst neuladen. Falls das nicht klappt, klicke bitte solange auf &bdquo;Weiter&ldquo;, bis alle Anweisungen durchgeführt wurden.
-sql_start_instructions_button: Okay, dann mach das mal jetzt
-sql_change_connection: Verbindungsdaten ändern
-
 sql_prefill_info: Und eine Verbindung eingetragen, die hier irgendwo rumlag. Wenn alles passt, kannst du einfach mit dem nächsten Schritt weiter machen. Sonst ändere einfach die Daten.
 sql_prefill_info_title: Wir haben da mal was vorbereitet...
 
@@ -126,7 +125,25 @@ sql_userpw_error: Wir konnten uns nicht mit diesem Benutzer &amp; Passwort anmel
 sql_database_error: Die Datenbank gibt es nicht oder der Benutzer keinen Zugriff darauf
 sql_default_error: Sovbe'lu'bogh Qoylu' Qagh (Unbekannter Fehler, bitte versuche irgendwas anderes)
 
-fs2_table_error_title: Bestehende Tabellen gefunden
-fs2_table_error: Die folgenden Tabellen werden benötigt, aber existieren bereits. Bitte wählen Sie ein anderes Tabellen-Präfix.
+fs2_table_error_title: Doppelte Tabellen gefunden
+fs2_table_error: Diese Tabellen werden benötigt, aber gibt es schon. Nimm entweder ein anderes Tabellen-Präfix oder fahre fort und überschreibe die Tabellen. Alle gespeicherten Daten gehen dabei verloren.
+overwrite_table_duplicates: Weg mit dem Zeug &amp; weiter machen
+
+sql_instructions_title: Datenbank-Operationen
+sql_instructions_info: Wir werden nun vesuchen die folgenden Datenbank-Operationen durchzuführen. Diese Seite wird sich dabei einige Male selbst neuladen. Falls das nicht klappt, klicke bitte solange auf &bdquo;Weiter&ldquo;, bis alle Anweisungen durchgeführt wurden.
+sql_start_instructions_button: Okay, dann mach das mal jetzt
+sql_change_connection: Verbindungsdaten ändern
+
+sql_runner_title: Datenbank-Operationen
+sql_runner_info: Es werden jetzt die nötigen Änderungen an der Datenbank durchgeführt. Falls sich die Seite nicht selbst neulädt, klicke bitte auf &bdquo;Weiter&ldquo;.
+
+sql_operations_done_title: Perfekt!
+sql_operations_done: Alle Arbeiten wurden erfolgreich ausgeführt.
+
+sql_operations_done_but_error_title: Ooops! Das hätte nicht passieren dürfen.
+sql_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
+sql_operations_retry: Hm, nochmal probieren bitte.
+sql_operations_continue_with_errors: Ich kümmer mich drum, versprochen. (Weiter mit Setup)
+
 
 

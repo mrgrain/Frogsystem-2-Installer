@@ -2,7 +2,7 @@
 /**
  * @file     SQLConnectionSolver.php
  * @folder   /classes
- * @version  0.2
+ * @version  0.3
  * @author   Sweil
  *
  * this class checks the databese connection and provides
@@ -44,8 +44,7 @@ class SQLConnectionSolver extends Solver {
     
     public function testDBConnectionFromSession() {
         // reset sql error
-        $this->sqlError = null;
-        $this->sqlErrorNo = null;
+        $this->setError(null, null);
         
         // data exists?
         if (!$this->testSessionData()) {
@@ -55,20 +54,17 @@ class SQLConnectionSolver extends Solver {
         try {
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
         } catch (Exception $e) {
-            $this->sqlError = $e->getMessage();
-            $this->sqlErrorNo = $e->getCode();
+            $this->setError($e->getMessage(), $e->getCode());
             unset($_SESSION['dbc'], $sql);
             return false;
         }
         unset($sql);
         return true;
     }
-
     
     /* Run all the solutions in this order */
     public function solutionFromPostToDBConnectionFile() {
-        $this->sqlError = null;
-        $this->sqlErrorNo = null;
+        $this->setError(null, null);
         
         // check post and Save to File
         if (isset($_POST['db_from_form'])) {
@@ -82,8 +78,7 @@ class SQLConnectionSolver extends Solver {
                     unset($dbc);
                     return true;
                 } catch (Exception $e) {
-                    $this->sqlError = $e->getMessage();
-                    $this->sqlErrorNo = $e->getCode();
+                    $this->setError($e->getMessage(), $e->getCode());
                     unset($sql);
                     return false;
                 }
@@ -132,11 +127,16 @@ class SQLConnectionSolver extends Solver {
         }
         
         // delete session
-        unset($_SESSION['dbc']);
+        unset($_SESSION['dbc'], $_SESSION['db_instructions']);
         
         // show form
         $this->ic->addCond('sql_error', !is_null($this->sqlError));
         switch ($this->sqlErrorNo) {
+            case 'table_duplicates':
+                $this->ic->addCond('table_duplicates', true);
+                $this->ic->addCond('sql_error', false);
+                $this->ic->addText('table_duplicates', $this->sqlError);
+                break;
             case 2002:
                 $this->ic->addCond('sql_host_error', true);
                 $this->ic->addText('sql_connection_error', $this->ic->getLang()->get('sql_host_error'));
@@ -156,9 +156,15 @@ class SQLConnectionSolver extends Solver {
         }
              
         
-        $this->sqlError = null;
+        $this->setError(null, null);
         print $this->ic->get('sqlconnection');
         return false;
+    }
+    
+    
+    public function setError($msg, $no) {
+        $this->sqlError = $msg;
+        $this->sqlErrorNo = $no;
     }
 }
 

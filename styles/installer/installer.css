@@ -134,12 +134,12 @@ p.error, p.success, p.warning, p.info {
 }
 p.error { border-left-color: #FF0000; }
 p.success { border-left-color: #008800; }
-p.warning { border-left-color: #888800; }
+p.warning { border-left-color: #FECC5F; }
 p.info { border-left-color: #0000FF; }
 
 b.error, i.error, span.error { color: #FF0000; }
 b.success, i.success, span.success { color: #008800; }
-b.warning, i.warning, span.warning { color: #888800; }
+b.warning, i.warning, span.warning { color: #FECC5F; }
 b.info, i.info, span.info { color: #0000FF; }
 
 p.list label { float:left; }
@@ -166,6 +166,9 @@ p.list.aligned.info label.l300 {
 .space.large.attop { margin-top: 36px; }
 .space.large.atbottom { margin-bottom: 36px; }
 .space.large.both { margin-top: 36px; margin-bottom: 36px; }
+
+.button-line { line-height: 30px; }
+.button-large-line { line-height: 34px; }
 
 /**************************************************/
 /* default form styles */

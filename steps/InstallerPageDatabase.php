@@ -15,9 +15,6 @@ class InstallerPageDatabase extends InstallerPage {
         parent::__construct();
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
-        
-        //~ unset($_SESSION['dbc'], $_SESSION['srip']); // testing
-        unset($_SESSION['db_instructions']);
     }
     
     protected function show() {

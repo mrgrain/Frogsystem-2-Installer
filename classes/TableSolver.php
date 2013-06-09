@@ -29,6 +29,10 @@ class TableSolver extends Solver {
     
     /* Run all the tests in this order */
     public function testTables() {
+        if (isset($_POST['db_table_overwrite'])) {
+            return true;
+        }
+        
         try {
             $tables = InstallerFunctions::getTableList($this->sql->getPrefix());
             $this->doubles = array();
@@ -45,16 +49,11 @@ class TableSolver extends Solver {
     
     /* Run all the solutions in this order */
     public function solutionListTablesAndShowForm() {
-        // delete session
-        unset($_SESSION['dbc']);
-                
-        // show form
-        $this->ic->addCond('sql_error', true);
-        $this->ic->addText('sql_connection_error_title', $this->ic->getLang()->get('fs2_table_error_title'));
-        $this->ic->addText('sql_connection_error', $this->ic->getLang()->get('fs2_table_error').'<br>'.implode(', ', $this->doubles));
-        $this->ic->addCond('sql_prefix_error', true);
-        print $this->ic->get('sqlconnection');
-        return false;
+        // run SQLConnectionSolver to show form
+        $solver = new SQLConnectionSolver($this->ic);
+        $solver->setError(implode(', ', $this->doubles), 'table_duplicates');
+        $solver->solve(array('solutionShowForm'), array('fail'));
+        return;        
     }
 }
 
