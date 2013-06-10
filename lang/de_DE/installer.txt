@@ -146,4 +146,11 @@ sql_operations_retry: Hm, nochmal probieren bitte.
 sql_operations_continue_with_errors: Ich kümmer mich drum, versprochen. (Weiter mit Setup)
 
 
+#setup.tpl
+superadmin_title: Super-Administrator einrichten
+superadmin_info: Jetzt wird der Account für den Super-Administrator angelegt. Der Super-Admin darf wirklich alles und steht über allen Benutzern, inklusive anderen Admins.
+setup_admin_username_label: Benutzername
+setup_admin_password_label: Passwort
+setup_admin_mail_label: E-Mail-Adresse
+setup_save_superadmin: Account für Super-Administrator anlegen
 

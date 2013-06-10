@@ -226,7 +226,7 @@ class sql {
         try {
             return $this->doQuery($qrystr); // ... and execute
         } catch (Exception $e) {
-            print_d($e->getMessage());
+            print_r($e->getMessage());
         }
     }
 

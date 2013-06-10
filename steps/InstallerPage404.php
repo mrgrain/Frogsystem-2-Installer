@@ -15,7 +15,7 @@ class InstallerPage404 extends InstallerPage {
     }
     
     protected function show() {
-        print $this->getICObject('errors.tpl')->get('404');
+        print $this->getICObject('errors.tpl')->get('notfound');
     }
 }
 

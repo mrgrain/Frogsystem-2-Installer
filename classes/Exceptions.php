@@ -14,5 +14,6 @@
  */
 class InstructionNotFoundException extends Exception { };
 class CheckerTestFailedException extends Exception { };
+class NoDatabaseConnectionException extends Exception { };
 
 ?>

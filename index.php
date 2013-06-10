@@ -13,6 +13,8 @@ if (!isset($_SESSION['upgrade_to'])) {
 define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
 define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
 
+// todo
+define('SLASH', false, true);
 
 // detect page
 if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {

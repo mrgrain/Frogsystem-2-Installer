@@ -18,14 +18,13 @@ abstract class Checker {
         
         // not array? => fail
         if (!is_array($tests)) {
-            CheckerTestFailedException('check');
-            return false;
+            $tests = array($tests);
         }
         
         // run tests
         foreach ($tests as $test) {
             if (!$this->$test()) {
-                Throw new CheckerTestFailedException($test);
+                Throw new CheckerTestFailedException('Test '.$test.' failed in class '.get_class($this));
                 return false;
             }
         }

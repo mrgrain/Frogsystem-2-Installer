@@ -68,7 +68,6 @@ class SQLConnectionSolver extends Solver {
         
         // check post and Save to File
         if (isset($_POST['db_from_form'])) {
-                //~ InstallerFunctions::writeDBConnectionFile('', '', '', '', '');
                 try {
                     $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
                     unset($sql);
