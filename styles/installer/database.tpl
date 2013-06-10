@@ -13,7 +13,7 @@
     <!--LANG::sql_prefill_info-->
 </p>
 <!--ENDIF-->
-<form name="db_connection" method="post" action="?step=database">
+<form method="post" action="?step=database">
     <input type="hidden" name="db_from_form" value="1">
     <p class="list aligned <!--IF::sql_host_error-->error<!--ENDIF-->"><label class="l150" for="db_host"><!--LANG::sql_host_label-->:</label><input type="text" name="db_host" id="db_host" value="<!--TEXT::sql_host-->" size="30"></p>
     <p class="list aligned <!--IF::sql_database_error-->error<!--ENDIF-->"><label class="l150" for="db_data"><!--LANG::sql_database_label-->:</label><input type="text" name="db_data" id="db_data" value="<!--TEXT::sql_data-->" size="30"></p>
