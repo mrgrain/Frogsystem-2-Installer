@@ -25,7 +25,6 @@ abstract class Checker {
         foreach ($tests as $test) {
             if (!$this->$test()) {
                 Throw new CheckerTestFailedException('Test '.$test.' failed in class '.get_class($this));
-                return false;
             }
         }
         return true;

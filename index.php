@@ -2,7 +2,7 @@
 // init php
 define('INSTALLER_PATH', './', true);
 require('./phpinit.php');
-
+error_reporting(E_ALL);
 // Installer constants
 if (!isset($_SESSION['upgrade_from'])) {
   $_SESSION['upgrade_from'] = UpgradeFunctions::getInstalledFS2Version();

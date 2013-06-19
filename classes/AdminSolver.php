@@ -11,6 +11,7 @@ class AdminSolver extends Solver {
     
     private $sql;
     private $ic;
+    private $error = array();
     
     public function __construct($ic, $sql) {
         $this->ic = $ic;
@@ -19,7 +20,7 @@ class AdminSolver extends Solver {
     
     /* Default tests & solutions */             
     public function getDefaultTests() {
-        return $this->getTests();
+        return array('testAdminExists');
     }    
     public function getDefaultSolutions() {
         return $this->getSolutions();
@@ -35,28 +36,112 @@ class AdminSolver extends Solver {
         return true;
     }
     
+    public function testUserExists($name) {
+		if (empty($name))
+            return false;
+            
+        $id = $this->sql->getFieldById('user', 'user_id', $name, 'user_name');
+        if (empty($id))
+            return true;
+        
+        return false;
+    }
+    
+    public function testMailExists($mail) {
+		if (empty($mail))
+            return false;
+            
+        $id = $this->sql->getFieldById('user', 'user_id', $mail, 'user_mail');
+        if (empty($id))
+            return true;
+        
+        return false;
+    }
+    
     // solvers
-    public function solutionSaveAdminFromPost() {        
+    public function solutionSaveAdminFromPost() {
+		// unset error
+		$this->error = array();
+		     
         // check post and Save to File
         if (isset($_POST['setup_admin'])) {
-            $salt = generate_spamcode ( 10 );
-        $user_salt = generate_spamcode ( 10 );
-        $userpass = md5 ( $_POST['admin_pass'].$user_salt );            
-            $sql->insertId('user', array(
+			
+			// check errors
+			if (!(isset($_POST['user']) && trim($_POST['user']) != '' && strlen(trim($_POST['user'])) > 4)) {
+				$this->error[] = 'user';
+			} else if (!$this->testUserExists($_POST['user'])) {
+				$this->error[] = 'user_exists';
+			}
+			if (!(isset($_POST['pass']) && trim($_POST['pass']) != '' && strlen(trim($_POST['pass'])) > 4)) {
+				$this->error[] = 'pass';
+			}
+			if (!(isset($_POST['mail']) && trim($_POST['mail']) != '' && strpos($_POST['mail'], '@') !== false)) {
+				$this->error[] = 'mail';
+			} else if (!$this->testMailExists($_POST['mail'])) {
+				$this->error[] = 'mail_exists';
+			}
+
+			// quit on form error;
+			if (!empty($this->error)) {
+				return false;
+			}
+
+			// create dataset
+            $salt = InstallerFunctions::getRandomCode(10);
+			$pass = md5 ( $_POST['pass'].$salt );            
+            $id = $this->sql->insertId('user', array(
                 'user_name' => $_POST['user'],
-                'user_password' => $_POST['pass'],
-                'user_salt' => $_POST['pass'],
+                'user_password' => $pass,
+                'user_salt' => $salt,
                 'user_mail' => $_POST['mail'],
                 'user_is_staff' => 1,
                 'user_group' => 0,
                 'user_is_admin' => 1,
-                'user_reg_date' => time(),
+                'user_reg_date' => time()));
                 
+			$this->sql->doQuery('UPDATE {..pref..}user SET `user_id` = 1 WHERE `user_id` = '.$id);
+            return true;
         }
         return false;
     }
 
     public function solutionShowForm() {
+		// error handling
+		$errors = array();
+		if (in_array('user', $this->error)) {
+			$this->ic->addCond('user_error', true);
+            $errors[] = $this->ic->getLang()->get('superadmin_form_error_user');
+		}
+		if (in_array('user_exists', $this->error)) {
+			$this->ic->addCond('user_error', true);
+            $errors[] = $this->ic->getLang()->get('superadmin_form_error_user_exists');
+		}
+		if (in_array('pass', $this->error)) {
+			$this->ic->addCond('pass_error', true);
+			$errors[] = $this->ic->getLang()->get('superadmin_form_error_pass');
+		}
+		if (in_array('mail', $this->error)) {
+			$this->ic->addCond('mail_error', true);
+			$errors[] = $this->ic->getLang()->get('superadmin_form_error_mail');
+		}
+		if (in_array('mail_exists', $this->error)) {
+			$this->ic->addCond('mail_error', true);
+            $errors[] = $this->ic->getLang()->get('superadmin_form_error_mail_exists');
+		}
+		if (!empty($this->error)) {
+			$this->ic->addCond('form_error', true);
+			$this->ic->addText('superadmin_form_error', implode('<br>'.PHP_EOL, $errors));			
+		}
+		
+        //prefill form
+        if (isset($_POST['setup_admin'])) {
+            $data = array('user' => null, 'pass' => null, 'mail' => null);
+            $data = InstallerFunctions::killhtml($_POST) + $data;
+            $this->ic->addText('user', $data['user']);
+            $this->ic->addText('pass', $data['pass']);
+            $this->ic->addText('mail', $data['mail']);
+        }
+
         print $this->ic->get('superadmin');
         return false;
     }        

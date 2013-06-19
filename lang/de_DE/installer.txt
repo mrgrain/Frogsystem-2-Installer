@@ -153,4 +153,9 @@ setup_admin_username_label: Benutzername
 setup_admin_password_label: Passwort
 setup_admin_mail_label: E-Mail-Adresse
 setup_save_superadmin: Account für Super-Administrator anlegen
-
+superadmin_form_error_title: Fehler beim Anlegen
+superadmin_form_error_user: Der Benutzername muss mindestens 5 Zeichen lang sein.
+superadmin_form_error_user_exists: Diesen Benutzername gibt es schon. Nimm bitte einen anderen.
+superadmin_form_error_pass: Das Passwort muss mindestens 5 Zeichen lang sein.
+superadmin_form_error_mail: Bitte gib eine gültige E-Mail-Adresse an.
+superadmin_form_error_mail_exists: Diese E-Mail-Adresse gibt es schon. Nimm bitte eine andere.

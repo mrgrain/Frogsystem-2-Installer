@@ -21,10 +21,11 @@ class InstallerPageSetup extends InstallerPage {
         try {
             // $sql connection
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
-        
+
             // admin
             $admin_solver = new AdminSolver($this->ic, $sql);
-            if (!$admin_solver->solve()) { return; };
+            if (!$admin_solver->solve()) { print_r('noes');  return; };
+            // TODO: send email
             
             //  settings migration solver
             $migration_solver = new SettingsMigrationSolver($this->ic, $sql);

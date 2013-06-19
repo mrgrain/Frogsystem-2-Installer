@@ -167,6 +167,17 @@ class InstallerFunctions {
 
         return $VAL;
     }    
+    
+    public static function getRandomCode($length, $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789') {
+		$code = '';
+		$charset_length = strlen($charset) - 1;
+		mt_srand((double)microtime() * 1001000);
+
+		while(strlen($code) < $length) {
+			$code .= $charset[mt_rand (0,$charset_length)];
+		}
+		return $code;
+	}
 }
 
 ?>
