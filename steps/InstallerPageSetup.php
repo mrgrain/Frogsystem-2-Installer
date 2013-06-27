@@ -24,13 +24,16 @@ class InstallerPageSetup extends InstallerPage {
 
             // admin
             $admin_solver = new AdminSolver($this->ic, $sql);
-            if (!$admin_solver->solve()) { print_r('noes');  return; };
+            if (!$admin_solver->solve()) { print_r('no Admin<br>');  return; };
             // TODO: send email
+            print('Admin ok<br>');
             
             //  settings migration solver
-            $migration_solver = new SettingsMigrationSolver($this->ic, $sql);
-            if (!$migration_solver->solve()) { return; };
+            $migration_solver = new SettingsMigrationSolver($sql);
+            if (!$migration_solver->solve()) { print_r('no Migration<br>');return; };
                   
+            print_r('settings ok<br>'); return; 
+            
             //  mininmal settings solver
             $settings_solver = new MinimalSettingsSolver($this->ic, $sql);
             if (!$settings_solver->solve()) { return; };

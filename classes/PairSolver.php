@@ -22,32 +22,12 @@ abstract class PairSolver extends Solver {
 		// which are not solved?
 		$not_solved = array();
 		foreach ($pairs as $pair) {
-			try {
-				if ($this->check('test'+ucfirst($pair))) { continue; }
-			} catch (CheckerTestFailedException $e) {
-				$not_solved[] = $pair;
-			}
+            if (!parent::solve(array('solution'.ucfirst($pair)), array('test'.ucfirst($pair)))) {
+                $not_solved[] = $pair;
+            }
 		}
-				if ($this->'solution'+ucfirst($pair)()) {
-					try {
-						if ($this->check('test'+ucfirst($pair))) { continue; }
-					catch (CheckerTestFailedException $e) {
-					}
-				}
-            // run solutions
-            foreach ($solutions as $solution) {
-                // try next solution & check on success
-                if ($this->$solution()) {
-                    try {
-                        if ($this->check($tests)) { return true; }
-                    } catch (CheckerTestFailedException $e) {}
-                }
-            } 
-        }
-        // rethrow others
-        catch (Exception $e) { throw $e; }        
     
-        return false;
+        return empty($not_solved);
     }
 
     public function getDefaultTests() {

@@ -291,13 +291,12 @@ class sql {
             return array();
         }
     }
-    /*
+
     // single row by Id
     public function getById ($table, $cols, $id, $id_col = 'id') {
         $options = array ('W' => '`'.$id_col."`='".$this->escape($id)."'");
         return $this->getRow($table, $cols, $options);
     }
-    */
 
     // only a single data field
     public function getField ($table, $field, $options = array(), $start = 0) {
