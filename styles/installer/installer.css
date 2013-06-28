@@ -186,7 +186,10 @@ select, option, textarea, input[type='password'], input[type='text'], input:not(
 option {
     border:none;
     padding:1px 10px 1px 6px;
+}
 
+select, option {
+    cursor:pointer;
 }
 
 input[type='file'] {

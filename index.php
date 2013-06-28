@@ -3,6 +3,7 @@
 define('INSTALLER_PATH', './', true);
 require('./phpinit.php');
 error_reporting(E_ALL);
+
 // Installer constants
 if (!isset($_SESSION['upgrade_from'])) {
   $_SESSION['upgrade_from'] = UpgradeFunctions::getInstalledFS2Version();
@@ -15,6 +16,7 @@ define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
 
 // todo
 define('SLASH', false, true);
+define('INSTALLER_LOCATION', 'fs-installer', true);
 
 // detect page
 if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {
@@ -32,5 +34,6 @@ if (!class_exists($stepClass)) {
 
 // create page object
 $page = new $stepClass();
+$page->setTitlePrefix($_SESSION['upgrade_from'] == 'none'?'fs2_install':'fs2_update');
 print $page;
 ?>

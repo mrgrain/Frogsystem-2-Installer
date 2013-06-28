@@ -379,13 +379,13 @@ class SettingsMigrationSolver extends PairSolver {
 
     // `frogsystem_alix5`.`fs2_global_config`
     private $mainConfig = array(
-        'protocol' => 'http://', //TODO set from form
-        'url' => '', //TODO set from form
+        'protocol' => 'http://',
+        'url' => '',
         'other_protocol' => '1',
-        'title' => '', //TODO set from form
+        'title' => '',
         'dyn_title' => '1',
         'dyn_title_ext' => '{title} - {ext}',
-        'admin_mail' => '', //TODO set from form
+        'admin_mail' => '',
         'description' => '',
         'keywords' => '',
         'publisher' => '',
@@ -398,12 +398,12 @@ class SettingsMigrationSolver extends PairSolver {
         'home_text' => '',
         'language_text' => 'de_DE', //TODO: Set from installer settings
         'feed' => 'rss20',
-        'timezone' => '', // TODO: set from form
+        'timezone' => '',
         'auto_forward' => '4',
         'search_index_update' => '2',
         'search_index_time' => '1340746339',
         'version' => '2.alix6',
-        'url_style' => 'default', // TODO: set from form
+        'url_style' => 'default',
         'count_referers' => '1',
         'date' => 'd.m.Y',
         'time' => 'H:i \U\h\r',
@@ -424,7 +424,7 @@ class SettingsMigrationSolver extends PairSolver {
         'cat_pic_y' => '150',
         'cat_pic_size' => '1024',
         'com_rights' => '2',
-        'com_antispam' => '1', //TODO default value
+        'com_antispam' => '1', //TODO check default value
         'com_sort' => 'DESC',
         'news_headline_lenght' => '20',
         'news_headline_ext' => ' ...',

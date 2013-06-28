@@ -24,19 +24,17 @@ class InstallerPageSetup extends InstallerPage {
 
             // admin
             $admin_solver = new AdminSolver($this->ic, $sql);
-            if (!$admin_solver->solve()) { print_r('no Admin<br>');  return; };
+            if (!$admin_solver->solve()) { return; };
             // TODO: send email
-            print('Admin ok<br>');
             
             //  settings migration solver
             $migration_solver = new SettingsMigrationSolver($sql);
-            if (!$migration_solver->solve()) { print_r('no Migration<br>');return; };
-                  
-            print_r('settings ok<br>'); return; 
-            
+            if (!$migration_solver->solve()) { return; };
+
             //  mininmal settings solver
             $settings_solver = new MinimalSettingsSolver($this->ic, $sql);
             if (!$settings_solver->solve()) { return; };
+            unset($_SESSION['minimal_settings']); // important, so user can navigate back
             
             // nothing todo => go to cleanup
             header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect

@@ -136,7 +136,7 @@ class AdminSolver extends Solver {
         //prefill form
         if (isset($_POST['setup_admin'])) {
             $data = array('user' => null, 'pass' => null, 'mail' => null);
-            $data = InstallerFunctions::killhtml($_POST) + $data;
+            $data = InstallerFunctions::killhtml(array_intersect_key($_POST, $data)) + $data;
             $this->ic->addText('user', $data['user']);
             $this->ic->addText('pass', $data['pass']);
             $this->ic->addText('mail', $data['mail']);

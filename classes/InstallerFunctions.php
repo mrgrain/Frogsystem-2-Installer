@@ -202,6 +202,37 @@ class InstallerFunctions {
         require_once(INSTALLER_PATH . 'resources/jsonwrapper/jsonwrapper_helper.php');
         return json_encode(array_map('utf8_encode', $array), JSON_FORCE_OBJECT);
     }
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    //// get timezonelist                                                                        ////
+    //// thx@Rob Kaper <http://de.php.net/manual/en/function.date-default-timezone-set.php#84459>////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    public static function get_timezones () {
+        $timezones = DateTimeZone::listAbbreviations();
+
+        $cities = array();
+        foreach( $timezones as $key => $zones )
+        {
+            foreach( $zones as $id => $zone )
+            {
+                if ( preg_match( '/^(America|Antartica|Arctic|Asia|Atlantic|Europe|Indian|Pacific)\//', $zone['timezone_id'] ) )
+                    $cities[$zone['timezone_id']][] = $key;
+            }
+        }
+
+        // For each city, have a comma separated list of all possible timezones for that city.
+        foreach( $cities as $key => $value )
+            $cities[$key] = join( ', ', $value);
+
+        // Only keep one city (the first and also most important) for each set of possibilities.
+        $cities = array_unique( $cities );
+
+        // Sort by area/city name.
+        ksort($cities);
+
+        return $cities;
+    }    
         
     
 }

@@ -5,60 +5,49 @@
  * @version  0.1
  * @author   Sweil
  *
- * provides a full page with html struct, etc.
+ * provides a full installer page with html struct, etc.
  */
-class InstallerPage {
+class InstallerPage extends Page {
     
     protected $lang;
     protected $tpl;
     protected $local;
-    protected $title;
-    protected $content;
+    protected $titlePrefix;
     
     public function __construct() {
         
         // init properties
         $this->local = detect_language();
-        $this->setTitle('default_title');
         
         //inti lang
         $this->lang = new InstallerLang($this->local, 'installer');
+        
+        // default title        
+        $this->setTitle('default_title');
 
         // init template
         $this->tpl = new InstallerTemplate();
     }
     
-    /* create & show content */
-    public function getContent($overwrite = false) {
-        // call show?
-        if(is_null($this->content) || $overwrite) {
-            ob_start();
-            try {
-                $this->show();
-            } catch (Exception $e) {
-                trigger_error($e->getMessage().PHP_EOL.$e->getTraceAsString(), E_USER_ERROR);
-            }
-            $this->content = ob_get_clean();
-        } //else use content from setContent
-        return $this->content;
-    }
-    public function setContent ($html = null) {
-        $this->content = $html;
-    }    
-    
+    /* create & show content */    
     protected function show() {
     } 
 
     
     /* Title Functions */
     public function setTitle($title) {
-        $this->title = $title;
+        $this->title = $this->lang->get($title);
+    }
+    public function setTitlePrefix($prefix) {
+        $this->titlePrefix = $this->lang->get($prefix);
     }
     protected function getTitle() {
+        if ($this->titlePrefix)
+            return $this->titlePrefix.': '.$this->title;
         return $this->title;
     }     
     protected function getTitleTag() {
-        return '<title>'.$this->lang->get($this->getTitle()).'</title>';
+        return '<title>'.$this->getTitle().'</title>';
     }   
     
     /* InstallerContent Object Creator*/
