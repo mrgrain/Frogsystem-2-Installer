@@ -2,6 +2,7 @@
 required_version: Benötigte Version
 your_version: Deine Version
 continue_with: Okay, weiter mit
+continue_with_next_step: Gut, weiter mit dem nächsten Schritt
 continue_anyway: No Risk, no Fun! Trotzdem fortfahren
 database_operations: Datenbank-Operationen
 info_badge: Frogsystem 2: Installations- &amp; Update-Tool
@@ -110,6 +111,7 @@ missing_extensions: Fehlende Erweiterungen
 #database.tpl
 sql_prefill_info: Und eine Verbindung eingetragen, die hier irgendwo rumlag. Wenn alles passt, kannst du einfach mit dem nächsten Schritt weiter machen. Sonst ändere einfach die Daten.
 sql_prefill_info_title: Wir haben da mal was vorbereitet...
+continue_sql_operations: Weiter &amp; Ausführung fortsetzen
 
 sql_connection_title: Datenbank-Verbindung herstellen
 sql_connection_info: Es wird jetzt versucht eine Datenbank-Verbindung herzustellen. Bitte gib hier die Verbindungsdaten ein, die du von deinem Hoster erhalten hast.
@@ -145,7 +147,7 @@ sql_operations_done: Alle Arbeiten wurden erfolgreich ausgeführt.
 sql_operations_done_but_error_title: Ooops! Das hätte nicht passieren dürfen.
 sql_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
 sql_operations_retry: Hm, nochmal probieren bitte.
-sql_operations_continue_with_errors: Ich kümmer mich drum, versprochen. (Weiter mit Setup)
+sql_operations_continue_with_errors: Ich kümmer mich drum, versprochen (zum nächstem Schritt).
 
 
 #setup.tpl

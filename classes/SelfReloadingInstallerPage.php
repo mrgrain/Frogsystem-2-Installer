@@ -117,17 +117,20 @@ abstract class SelfReloadingInstallerPage extends InstallerPage {
         $_SESSION['srip']['done'] = $this->isDone();
 
         // redirect
-        if (($this->scriptTime() > $this->maxRuntime && !$this->isDone()) || $force) {
+        if ($this->needReload($force)) {
             // header
             header("refresh: {$this->getRefreshTime()}; url={$this->getUrl($this->getNext())}");
-            exit;
         }
     }
+    
+    protected function needReload($force = false) {
+        return (($this->scriptTime() > $this->maxRuntime && !$this->isDone()) || $force);
+    }
 
-    public static function calcMaxRuntime($factor = 0.7) {
+    public static function calcMaxRuntime($factor = 0.7, $fallback = 15) {
         $max_time = ini_get('max_execution_time');
-        if (!$max_time) $max_time = 30;
-        if ($max_time <= 0) $max_time = 30;
+        if (!$max_time) $max_time = $fallback;
+        if ($max_time <= 0) $max_time = $fallback;
         return round($max_time*$factor);    
     }
 }

@@ -70,7 +70,7 @@
 
 <!--IF::done-->
     <!--IF::all_successful-->
-    <p><a class="button green" href="<!--TEXT::url-->">&raquo; <!--LANG::continue_with--> <!--LANG::setup--></a></p>
+    <p><a class="button green" href="<!--TEXT::url-->">&raquo; <!--LANG::continue_with_next_step--></a></p>
     <!--ELSE-->
     <p class="button-line center">
         <a class="button orange atleft" href="<!--TEXT::url_self-->">&raquo; <!--LANG::sql_operations_retry--></a>
@@ -83,3 +83,44 @@
 <!--ENDIF-->
 
 <!--section-end::sql_runner-->
+
+
+<!--section-start::sql_unslasher-->
+<h2><!--LANG::sql_unslasher_title--></h2>
+<p><!--LANG::sql_unslasher_info--></p>
+<!--IF::done-->
+    <!--IF::all_successful-->
+    <p class="space success"><b><!--LANG::sql_unslasher_done_title--></b><br><!--LANG::sql_unslasher_done--></p>
+    <!--ELSE-->
+    <p class="space warning"><b><!--LANG::sql_unslasher_done_but_error_title--></b><br><!--LANG::sql_unslasher_done_but_error--></p>
+    <!--ENDIF-->    
+<!--ENDIF-->
+
+<ul>
+<!--TEXT::instruction_list-->
+</ul>
+<p class="space atbottom"><b><!--LANG::total_runtime-->:</b> <!--TEXT::total_runtime--><!--LANG::seconds_short--></p>
+
+<!--IF::done-->
+    <!--IF::all_successful-->
+    <p><a class="button green" href="<!--TEXT::url-->">&raquo; <!--LANG::continue_with--> <!--LANG::setup--></a></p>
+    <!--ELSE-->
+    <p>
+        <a class="button orange" href="<!--TEXT::url-->">&raquo; <!--LANG::sql_unslasher_continue_with_errors--></a>
+    </p>
+    <!--ENDIF-->
+<!--ELSE-->  
+    <p><a class="button white" href="<!--TEXT::url-->">&raquo; <!--LANG::continue_sql_operations--></a></p>
+<!--ENDIF-->
+
+<!--section-end::sql_unslasher-->
+
+<!--section-start::sql_unslasher_info-->
+<h2><!--LANG::sql_unslasher_info_title--></h2>
+<p><!--LANG::sql_unslasher_info_text--></p>
+<p class="space both center button-line">
+    <a class="button green large atleft" href="<!--TEXT::url_start_unslasher-->">&raquo; <!--LANG::start_unslashing--></a>
+    <span><!--LANG::or--></span>
+    <a class="button orange large atright" href="<!--TEXT::url_setup-->">&raquo; <!--LANG::goto_setup--></a>
+</p>
+<!--section-end::sql_unslasher_info-->
