@@ -13,7 +13,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
     private $dir;
     
     public function __construct($dir, $start, $end, $sql) {
-        // create sql connection
+        // sql & lang objects
         $this->sql = $sql;
         
         // create filelist
@@ -44,22 +44,48 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
         return $this->sql->doQuery($instruction);
     }
     
-
-    
     protected  function getInfo($instruction) {
-        $db_instructions = array(
-            'CREATE DATABASE', 'DROP DATABASE',
-            'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE',
-            'CREATE INDEX', 'CREATE UNIQUE INDEX', 'DROP INDEX',
-            'INSERT INTO', 'UPDATE', 'DELETE FROM', 'TRUNCATE',
-            'SELECT', 'SELECT DISTINCT'
+        $instruction = trim($instruction);
+        
+        $create = array(
+            'create_table'      => '/CREATE *(?:TEMPORARY)? *TABLE *(?:IF *NOT *EXISTS)? *`([^`]+)`.*/is', // CREATE TABLE
+            'create_index'      => '/CREATE *(?:UNIQUE|FULLTEXT|SPATIAL)? *INDEX *`(?:[^`]+)`.*ON *`([^`]+)`.*/is', // CREATE (UNIQUE) INDEX
+            'create_database'   => '/CREATE *DATABASE *(?:IF *NOT *EXISTS)? *`([^`]+)`.*/is', // CREATE DATABASE
         );
-        foreach ($db_instructions as $dbi) {
-            if (false !== stripos($instruction, $dbi))
-                return $dbi;
+        $alter = array(
+            'alter_table'       => '/ALTER *(?:IGNORE)? *TABLE *`([^`]+)`.*/is', // ALTER TABLE
+            'alter_database'    => '/ALTER *DATABASE *`([^`]+)`.*/is', // ALTER DATABASE
+        );
+        $drop = array(
+            'drop_table'        => '/DROP *(?:TEMPORARY)? *TABLE *(?:IF *EXISTS) *`([^`]+)`.*?/is', // DROP TABLE
+            'drop_index'        => '/DROP *INDEX *`(?:[^`]+)` *ON *`([^`]+)`.*/is', // DROP INDEX
+            'drop_database'     => '/DROP *DATABASE *(?:IF *EXISTS)? *`([^`]+)`.*/is', // DROP DATABASE
+        );       
+        $rest = array(
+            'insert'            => '/INSERT *(?:LOW_PRIORITY|DELAYED|HIGH_PRIORITY)? *(?:IGNORE)? *(?:INTO)? *`([^`]+)`.*/is', // INSERT INTO
+            'update'            => '/UPDATE *(?:LOW_PRIORITY)? *(?:IGNORE)? *`([^`]+)`.*/is', // UPDATE
+            'delete'            => '/DELETE *(?:LOW_PRIORITY)? *(?:QUICK)? *(?:IGNORE)? *FROM *`([^`]+)`.*/is', // DELETE FROM
+            'truncate'          => '/TRUCNATE *(?:TABLE)? *`([^`]+)`.*/is', // TRUNCATE
+            'select'            => '/SELECT *(?:ALL|DISTINCT|DISTINCTROW)? *.*FROM`([^`]+)`.*/is', // SELECT (DISTINCT)
+        );
+        
+        // limit set
+        if (0 === stripos($instruction, 'CREATE')) $set = $create;
+        elseif (0 === stripos($instruction, 'ALTER')) $set = $alter;
+        elseif (0 === stripos($instruction, 'DROP')) $set = $drop;
+        else $set = $rest;
+
+        // brute force regex
+        foreach ($set as $key => $pattern) {
+            $matches = array();
+            $result = preg_match($pattern, $instruction, $matches);
+            if (false !== $result && $result > 0 && !empty($matches) && count($matches) >= 2) {
+                return array($key, $matches[1]);
+            }
         }
         
-        return 'GENERIC DATABASE OPERATION';
+        // not matched
+        return array('generic', null);       
     }    
     
 

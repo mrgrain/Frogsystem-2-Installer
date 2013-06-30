@@ -1,0 +1,34 @@
+#@installer
+
+#setup.tpl
+superadmin_title: Super-Administrator einrichten
+superadmin_info: Jetzt wird der Account für den Super-Administrator angelegt. Der Super-Admin darf wirklich alles und steht über allen Benutzern, inklusive anderen Admins.
+setup_admin_username_label: Benutzername
+setup_admin_password_label: Passwort
+setup_admin_mail_label: E-Mail-Adresse
+setup_save_superadmin: Account für Super-Administrator anlegen
+superadmin_form_error_title: Fehler beim Anlegen
+superadmin_form_error_user: Der Benutzername muss mindestens 5 Zeichen lang sein.
+superadmin_form_error_user_exists: Diesen Benutzername gibt es schon. Nimm bitte einen anderen.
+superadmin_form_error_pass: Das Passwort muss mindestens 5 Zeichen lang sein.
+superadmin_form_error_mail: Bitte gib eine gültige E-Mail-Adresse an.
+superadmin_form_error_mail_exists: Diese E-Mail-Adresse gibt es schon. Nimm bitte eine andere.
+
+settings_title: Einstellungen
+settings_info: Hier müssen noch einige Einstellungen festgelegt werden, um das Frogsystem 2 zu verwenden. Bitte überprüfe auch die vorausgefüllten Werte, da diese teilweise nur geraten sind.
+settings_form_error_title: Das geht so nicht!
+settings_title_label: Seitentitel
+settings_url_label: URL & Protokoll
+settings_admin_mail_label: E-Mail-Adresse
+settings_url_style_label: URL-Stil
+settings_url_style_default: Einfach (?go=seite&p1=v1)
+settings_url_style_seo: Suchmaschinen optimiert (seite--p1-v1.html) 
+settings_url_style_info: <b>Achtung:</b> Bitte die Hinweise zur Verwendung von <a href="http://wiki.frogsystem.de/seo-urls" targer="_blank">Suchmaschinen optimierten URLs</a> lesen!
+settings_timezone_label: Zeitzone
+setup_save_settings: Einstellungen speichern
+
+settings_title_empty_error: Bitte gib eine Titel für die Seite ein.
+settings_url_empty_error: URL &amp; Protokoll müssen unbedingt angegeben werden, sonst läuft die Seite nicht.
+settings_admin_mail_error: Bitte gib eine gültige E-Mail-Adresse an.
+settings_url_style_error: Entscheide dich bitte für einen URL-Stil.
+settings_timezone_error: Du musst eine gültige Zeitzone auswählen.

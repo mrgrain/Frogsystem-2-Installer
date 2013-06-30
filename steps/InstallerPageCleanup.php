@@ -13,6 +13,7 @@ class InstallerPageCleanup extends InstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'cleanup');
         $this->setTitle('cleanup_title');
         $this->ic = $this->getICObject('cleanup.tpl');
     }

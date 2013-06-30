@@ -1,0 +1,12 @@
+#@installer
+
+#requirements.tpl
+requirements_title: Anforderungen überprüfen
+requirements_info: Um das Frogsystem 2 verwenden zu können, sind bestimmte Systemanforderungen erforderlich. Hier siehst du, ob alle Anforderungen erfüllt sind. Und falls nicht, sagen wir dir, wie schlimm das ist.
+
+fs_version_ok: Frogsystem 2-Version ist okay!
+fs_version_error: Frogsystem 2-Version ist nicht okay
+php_version_ok: PHP-Version ist okay!
+php_version_error: PHP-Version ist nicht okay
+php_extensions_error: PHP-Erweiterungen sind nicht okay
+missing_extensions: Fehlende Erweiterungen

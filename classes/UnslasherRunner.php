@@ -34,10 +34,10 @@ class UnslasherRunner extends Runner  {
         
         // default data
         $this->tables = array (
-            new UnslasherData('aliases', 'alias_id', array('alias_go', 'alias_forward_to')),
+            new UnslasherData('aliasess', 'alias_id', array('alias_go', 'alias_forward_to')),
             new UnslasherData('announcement', 'id', array('announcement_text')),
             new UnslasherData('applets', 'applet_id', array('applet_file')),
-            new UnslasherData('articles', 'article_id', array('article_url', 'article_title', 'article_text')),
+          /*  new UnslasherData('articles', 'article_id', array('article_url', 'article_title', 'article_text')),
             new UnslasherData('articles_cat', 'cat_id', array('cat_name', 'cat_description')),
             new UnslasherData('comments', 'comment_id', array('content_type', 'comment_poster', 'comment_title', 'comment_text')),
             new UnslasherData('dl', 'dl_id', array('dl_name', 'dl_text', 'dl_autor', 'dl_autor_url')),
@@ -71,7 +71,7 @@ class UnslasherRunner extends Runner  {
             new UnslasherData('global_config', 'id', array('virtualhost', 'admin_mail', 'title', 'dyn_title_ext', 'description', 'keywords', 'publisher', 'copyright', 'style_tag', 'date', 'time', 'datetime', 'page', 'page_next', 'page_prev', 'feed', 'language_text', 'home_text')),
             new UnslasherData('news_config', 'id', array('news_headline_ext')),
             new UnslasherData('player_config', 'id', array('cfg_buffermessage', 'cfg_top1_url')),
-            new UnslasherData('user_config', 'id', array('reg_date_format', 'user_list_reg_date_format')),
+            new UnslasherData('user_config', 'id', array('reg_date_format', 'user_list_reg_date_format')),*/
         );
         
         // create filelist
@@ -122,7 +122,7 @@ class UnslasherRunner extends Runner  {
         if (!isset($_SESSION['unslasher_start']))
             $_SESSION['unslasher_start'] = 0;
             
-        return 'Fix table "'.$this->sql->getPrefix().$table->name.'" with LIMIT '.$_SESSION['unslasher_start'].','.$this->limit;
+        return array($this->sql->getPrefix().$table->name, $_SESSION['unslasher_start'], $this->limit);
     }
 }
 

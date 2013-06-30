@@ -68,19 +68,25 @@ class SQLConnectionSolver extends Solver {
         
         // check post and Save to File
         if (isset($_POST['db_from_form'])) {
-                try {
-                    $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
-                    unset($sql);
-                    InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
-                    require(INSTALLER_PATH.'copy/db_connection.php');
-                    $_SESSION['dbc'] = $dbc;
-                    unset($dbc);
-                    return true;
-                } catch (Exception $e) {
-                    $this->setError($e->getMessage(), $e->getCode());
-                    unset($sql);
-                    return false;
+                if (!(empty($_POST['db_host']) && empty($_POST['db_user']) && empty($dbc['db_data']))) {
+                    try {
+                        $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
+                        unset($sql);
+                        InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
+                        require(INSTALLER_PATH.'copy/db_connection.php');
+                        $_SESSION['dbc'] = $dbc;
+                        unset($dbc);
+                        return true;
+                    } catch (Exception $e) {
+                        $this->setError($e->getMessage(), $e->getCode());
+                        unset($sql);
+                        return false;
+                    }
                 }
+                
+                // no input
+                $this->setError(null, 666);
+                return false;
         } else {
             return false;
         }
@@ -97,8 +103,11 @@ class SQLConnectionSolver extends Solver {
     }
     
     public function solutionFromFSInstallation() {
+        if (!InstallerFunctions::isFrogsystem(INSTALL_TO))
+            return false;
+            
         // check old fs installations
-        if (false !== $dbc = UpgradeFunctions::getOldDBConnection(UPGRADE_FROM)) {
+        if (false !== $dbc = InstallerFunctions::getOldDBConnection(INSTALL_TO, UPGRADE_FROM)) {
             $_SESSION['dbc'] = $dbc;
             return true;
         }
@@ -148,6 +157,13 @@ class SQLConnectionSolver extends Solver {
                 $this->ic->addCond('sql_userpw_error', true);
                 $this->ic->addText('sql_connection_error', $this->ic->getLang()->get('sql_userpw_error'));
                 break;
+            case 666:
+                $this->ic->addCond('sql_error', true);
+                $this->ic->addCond('sql_host_error', true);
+                $this->ic->addCond('sql_database_error', true);
+                $this->ic->addCond('sql_userpw_error', true);
+                $this->ic->addText('sql_connection_error', $this->ic->getLang()->get('sql_no_data_error'));
+                break;
             default:
                 $this->ic->addCond('sql_default_error', true);
                 $this->ic->addText('sql_connection_error', $this->ic->getLang()->get('sql_default_error'));
@@ -156,6 +172,7 @@ class SQLConnectionSolver extends Solver {
              
         
         $this->setError(null, null);
+        $this->ic->addCond('update', (UPGRADE_FROM != 'none'));
         print $this->ic->get('sqlconnection');
         return false;
     }

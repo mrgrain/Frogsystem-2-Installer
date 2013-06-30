@@ -17,9 +17,9 @@ class InstallerPage extends Page {
     public function __construct() {
         
         // init properties
-        $this->local = detect_language();
+        $this->local = InstallerFunctions::detect_language();
         
-        //inti lang
+        //init lang
         $this->lang = new InstallerLang($this->local, 'installer');
         
         // default title        

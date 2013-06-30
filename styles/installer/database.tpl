@@ -24,7 +24,7 @@
     <p class="warning">
         <b><!--LANG::fs2_table_error_title--></b><br>
         <span class="small"><!--TEXT::table_duplicates--></span><br>
-        <!--LANG::fs2_table_error-->
+        <!--IF::update--><!--LANG::fs2_table_error_update--><!--ELSE--><!--LANG::fs2_table_error_install--><!--ENDIF-->
     </p>
     <!--ENDIF-->    
     <p class="list aligned <!--IF::table_duplicates-->warning<!--ENDIF-->"><label class="l150" for="db_pref"><!--LANG::sql_prefix_label-->:</label><input type="text" name="db_pref" id="db_pref" value="<!--TEXT::sql_pref-->" size="30"></p>
@@ -32,7 +32,7 @@
         <button class="button green <!--IF::table_duplicates-->atleft<!--ENDIF-->" type="submit">&raquo; <!--LANG::sql_check_connection_button--></button>
         <!--IF::table_duplicates-->
         <span class="middle"><!--LANG::or--></span>
-        <button name="db_table_overwrite" value="1"  type="submit" class="button orange atright">&raquo; <!--LANG::overwrite_table_duplicates--></button>
+        <button name="db_table_overwrite" value="1"  type="submit" class="button orange atright">&raquo; <!--IF::update--><!--LANG::overwrite_table_duplicates_update--><!--ELSE--><!--LANG::overwrite_table_duplicates_install--><!--ENDIF--></button>
         <!--ENDIF-->
     </p>
 </form>
@@ -49,8 +49,13 @@
 <!--section-end::sqlinstructions_info-->
 
 <!--section-start::sqlinstructions_info_element-->
-    <li><!--TEXT::instruction--> <!--IF::success-->okay!<!--ENDIF--><!--IF::error-->error<!--ENDIF--></li>
+    <li <!--IF::error-->class="error"<!--ENDIF-->><!--TEXT::instruction-->
+        <!--IF::success--><img src="<!--TEXT::success_img-->" alt="<!--LANG::success-->"><!--ENDIF-->
+        <!--IF::error--><img src="<!--TEXT::error_img-->" alt="<!--LANG::error-->"><!--ENDIF-->
+        <!--IF::error--><br><span class="small"><!--TEXT::error_message--></span><!--ENDIF-->
 <!--section-end::sqlinstructions_info_element-->
+
+<!--section-start::sqlinstructions_info_table--><b><!--TEXT::table--></b><!--section-end::sqlinstructions_info_table-->
 
 <!--section-start::sql_runner-->
 <h2><!--LANG::sql_runner_title--></h2>
@@ -119,8 +124,8 @@
 <h2><!--LANG::sql_unslasher_info_title--></h2>
 <p><!--LANG::sql_unslasher_info_text--></p>
 <p class="space both center button-line">
-    <a class="button green large atleft" href="<!--TEXT::url_start_unslasher-->">&raquo; <!--LANG::start_unslashing--></a>
+    <a class="button green atleft" href="<!--TEXT::url_start_unslasher-->">&raquo; <!--LANG::start_unslashing--></a>
     <span><!--LANG::or--></span>
-    <a class="button orange large atright" href="<!--TEXT::url_setup-->">&raquo; <!--LANG::goto_setup--></a>
+    <a class="button orange atright" href="<!--TEXT::url_setup-->">&raquo; <!--LANG::goto_setup--></a>
 </p>
 <!--section-end::sql_unslasher_info-->

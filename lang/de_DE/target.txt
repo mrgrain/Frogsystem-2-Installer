@@ -1,0 +1,23 @@
+#@installer
+
+target_title: Installations-Ziel auswählen
+target_info: Bitte wähle aus, wohin du das Frogsystem 2 installieren möchtest. Um eine Update durchzuführen, wähle den Pfad zu einer bestehenden Installation aus.
+target_path_label: Ziel-Pfad
+
+target_check_path: Ziel-Pfad für Installation/Update prüfen
+target_check_path_again: Ziel-Pfad ändern bzw. nochmal prüfen
+
+target_error_title: Ungültiger Pfad
+target_error_text: Bitte wähle einen gültigen und erreichbaren Ordner-Pfad aus.
+
+target_prefill_title: Wahrscheinlicher Ziel-Pfad
+target_prefill_info: Wir glauben, dass du dein Frogsystem 2 in den unten stehenden Pfad installieren möchtest. Jedenfalls ist es der Ordner, in dem sich dieses Tool befindet.
+
+target_update_title: Alte Version aktualisieren
+target_update_text: In dem angegebene Ziel-Pfad haben wir ein Frogsystem 2 gefunden. Wir würden dann versuchen ein Update auf die aktuelle Version durchzuführen.
+start_update: Okay, Update jetzt starten.
+
+
+target_installation_title: Neuinstallation möglich
+target_installation_text: Der Ziel-Pfad scheint gültig zu sein und es wurde kein bestehendes Frogsystem 2 gefunden. Wir würden dann eine Neuinstallation durchführen.
+start_installation: Let's go! Installation starten.

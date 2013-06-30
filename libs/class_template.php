@@ -47,7 +47,7 @@ class template
         }
         $this->clearSectionCache();
     }
-    private function getStyle() {
+    public function getStyle() {
         return $this->style;
     }
 

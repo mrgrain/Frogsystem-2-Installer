@@ -1,22 +1,13 @@
 <?php
-// init php
-define('INSTALLER_PATH', './', true);
+// SetUp
 require('./phpinit.php');
-error_reporting(E_ALL);
-
-// Installer constants
-if (!isset($_SESSION['upgrade_from'])) {
-  $_SESSION['upgrade_from'] = UpgradeFunctions::getInstalledFS2Version();
-}
-if (!isset($_SESSION['upgrade_to'])) {
-  $_SESSION['upgrade_to'] = trim(file_get_contents(INSTALLER_PATH.'copy/version'));
-}
-define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
-define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
+phpinit();
+debug();
+setup();
 
 // todo
 define('SLASH', false, true);
-define('INSTALLER_LOCATION', 'fs-installer', true);
+
 
 // detect page
 if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {
@@ -28,12 +19,17 @@ $stepClass = 'InstallerPage'.ucfirst($go);
 
 // error fallback
 if (!class_exists($stepClass)) {
-  $go = '404';
-  $stepClass = 'InstallerPage404';
+    $go = '404';
+    $stepClass = 'InstallerPage404';
 }
 
-// create page object
+// get title prefix
+$title_prefix = 'fs2_install_update_tool';
+if (isset($_SESSION['upgrade_from']))
+    $title_prefix = ($_SESSION['upgrade_from'] == 'none'?'fs2_install':'fs2_update');
+
+// create page object and display
 $page = new $stepClass();
-$page->setTitlePrefix($_SESSION['upgrade_from'] == 'none'?'fs2_install':'fs2_update');
+$page->setTitlePrefix($title_prefix);
 print $page;
 ?>

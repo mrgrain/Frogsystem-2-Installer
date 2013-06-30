@@ -5,7 +5,7 @@
 * @version  0.1
 * @author   Sweil
 *
-* page for unslashing a whole fs2-databse
+* page for unslashing a whole fs2-database of version 2.alix6
 */
 class InstallerPageDatabaseUnslasher extends SelfReloadingInstallerPage {
     
@@ -15,8 +15,16 @@ class InstallerPageDatabaseUnslasher extends SelfReloadingInstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'database');
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
+        
+        // check to header instantly
+        if (UPGRADE_FROM == 'none' || !InstallerFunctions::compareFS2Versions(UPGRADE_FROM, '2.alix6') < 0) {
+            // nothing todo => go to setup
+            header("location: {$_SERVER['PHP_SELF']}?step=setup"); // redirect
+            exit;
+        }        
     }
     
     protected function show() {
@@ -47,8 +55,16 @@ class InstallerPageDatabaseUnslasher extends SelfReloadingInstallerPage {
 				}
 				$this->setNext($pos+1);
 
-				// execute instructions & create ouptput 
-                $this->ic->addText('instruction', $runner->getCurrentInfo());
+				// create ouptput 
+                $info = $runner->getCurrentInfo();
+                $this->ic->addText('instruction', sprintf($this->lang->get('unslasher_info'), $info[0], $info[1], $info[2]));
+                
+                // images
+                $img_path = 'styles/'.$this->tpl->getStyle().'/images/';
+                $this->ic->addText('success_img', $img_path.'ok.gif');
+                $this->ic->addText('error_img', $img_path.'error.gif');                
+                
+                //execute instruction
 				try {
 					if (!$runner->runCurrentInstruction()) {
                         // reset to run that one again
@@ -57,6 +73,7 @@ class InstallerPageDatabaseUnslasher extends SelfReloadingInstallerPage {
 					$this->ic->addCond('success', true);
 				} catch (Exception $e) {
                     $this->ic->addCond('error', true);
+                    $this->ic->addText('error_message', $e->getMessage());
                     $this->success = false;
 				}
 				$this->addResult($this->ic->get('sqlinstructions_info_element'));

@@ -1,0 +1,81 @@
+#@installer
+
+#database.tpl
+database_title: Datenbank
+
+sql_prefill_info_title: Wir haben da mal was vorbereitet...
+sql_prefill_info: Und eine Verbindung eingetragen, die hier irgendwo rumlag. Wenn alles passt, kannst du mit dem nächsten Schritt weiter machen. Sonst ändere einfach die Daten.
+continue_sql_operations: Weiter &amp; Ausführung fortsetzen
+
+sql_connection_title: Datenbank-Verbindung herstellen
+sql_connection_info: Es wird jetzt versucht eine Datenbank-Verbindung herzustellen. Bitte gib hier die Verbindungsdaten ein, die du von deinem Hoster erhalten hast.
+sql_host_label: Host
+sql_database_label: Datenbank
+sql_user_label: Benutzer
+sql_password_label: Passwort
+sql_table_prefix_info: Bitte gib ein Präfix an, das den Tabellennamen vorangestellt wird. Wir empfehlen dir <b>fs2_</b> als Präfix zu verwenden.
+sql_prefix_label: Tabellen-Präfix
+sql_check_connection_button: Verbindung überprüfen &amp fortfahren
+
+sql_connection_error_title: Keine Datenbank-Verbindung
+sql_host_error: Der Host wurde nicht gefunden oder antwortet nicht
+sql_userpw_error: Wir konnten uns nicht mit diesem Benutzer &amp; Passwort anmelden
+sql_database_error: Die Datenbank gibt es nicht oder der Benutzer keinen Zugriff darauf
+sql_no_data_error: Du solltest schon irgendwelche Daten eingeben...
+sql_default_error: Sovbe'lu'bogh Qoylu' Qagh (Unbekannter Fehler, bitte versuche irgendwas anderes)
+
+fs2_table_error_title: Doppelte Tabellen gefunden
+fs2_table_error_install: Diese Tabellen werden benötigt, aber gibt es schon. Nimm entweder ein anderes Tabellen-Präfix oder fahre fort und überschreibe die Tabellen. Alle gespeicherten Daten gehen dabei verloren.
+fs2_table_error_update: Diese Tabellen werden benötigt und gibt es schon. Bei einem Update ist das durchaus beabsichtigt. Nimm dir trotzdem kurz die Zeit und schau ob es vielleicht irgendwelche Änderungen an den Tabellen gibt. Im Zweifelsfall werden nur die erwarteten Daten übernommen. Andere Daten können verloren gehen.
+overwrite_table_duplicates_install: Weg mit dem Zeug &amp; weiter machen
+overwrite_table_duplicates_update: Alles in Ordnung, bitte weiter machen
+
+sql_instructions_title: Datenbank-Operationen
+sql_instructions_info: Wir werden nun vesuchen die folgenden Datenbank-Operationen durchzuführen. Diese Seite wird sich dabei einige Male selbst neuladen. Falls das nicht klappt, klicke bitte solange auf &bdquo;Weiter&ldquo;, bis alle Anweisungen durchgeführt wurden.
+sql_start_instructions_button: Okay, dann mach das mal jetzt
+sql_change_connection: Verbindungsdaten ändern
+
+sql_runner_title: Datenbank-Operationen
+sql_runner_info: Es werden jetzt die nötigen Änderungen an der Datenbank durchgeführt. Falls sich die Seite nicht selbst neulädt, klicke bitte auf &bdquo;Weiter&ldquo;.
+
+sql_operations_done_title: Perfekt!
+sql_operations_done: Alle Arbeiten wurden erfolgreich ausgeführt.
+
+sql_operations_done_but_error_title: Ooops! Das hätte nicht passieren dürfen.
+sql_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
+sql_operations_retry: Hm, nochmal probieren bitte.
+sql_operations_continue_with_errors: Ich kümmer mich drum, versprochen (zum nächstem Schritt).
+
+#unslasher
+sql_unslasher_info_title: Datenbank konvertieren
+sql_unslasher_info_text: Das bisher vom Frogsystem 2 verwendete Datenbanksystem* ist ziemlich veraltet und wird ab dieser Version durch ein neues ersetzt. Dazu müssen alle Datensätze umgewandelt werden, was natürlich eine Weile dauern kann. Hier kannst du diese Umwandlung automatisch durchführen lassen. Die Seite wird sich dabei möglicherweise wieder selbst neuladen. Es kann auch durchaus eine Minute dauern, bis eine Anzeige kommt. Bitte Geduld haben.<br><br><b>Wichtig: Diese Umwandlung darf nur einmal durchgeführt werden!</b> Sonst kommt es zu Fehlern. Also sei bitte vorsichtig mit dem Zurück- und Neuladen-Button deines Browsers. Überhaupt empfehlen wir hier noch einmal dringend <b>ein Backup der Datenbank anzulegen und/oder das Update auf einem Test-System durchzuführen</b>.<br><br>In jedem Fall <i><b>muss</b></i> die Datenbank konvertiert sein, bevor der nächste Schritt <i><b>gestartet</b></i> wird.<br><br><span class="small">* Um genau zu sein: Bisher wurden (aus historischen Gründen) alle Daten mit zusätzlichen <a href="http://php.net/manual/de/function.addslashes.php" target="_blank">Slashes</a> gespeichert. Das ist natürlich ziemlich dämlich und muss jetzt rückgängig gemacht werden.</span>
+start_unslashing: Konvertierung jetzt starten
+goto_setup: Schritt überspringen, weiter zu den Einstellungen
+
+unslasher_info: Konvertiere Tabelle `%s`, %3$d Datensätze ab Zeile %2$d.
+sql_unslasher_title: Datenbank konvertieren
+sql_unslasher_info: Die Datenbank wird nun konvertiert. Falls sich die Seite nicht selbst neulädt, klicke bitte ganz unten auf &bdquo;Weiter&ldquo;.
+sql_unslasher_done_title: Konvertierung abgeschlossen
+sql_unslasher_done: Die Datenbank wurde ohne Fehler konvertiert. Du kannst jetzt fortfahren.
+sql_unslasher_done_but_error_title: Konvertierung mit Fehlern abgeschlossen
+sql_unslasher_done_but_error: Die Datenbank wurde konvertiert, aber es traten Fehler auf. Keine Panik, dass kann ganz normal sein. Je nach dem von welcher Version aus du aktualisierst oder ob du dein Frogsystem 2 verändert hast. Schau dir die Fehler genau an, behebe sie manuell und fahre dann fort.
+sql_unslasher_continue_with_errors: Fehler wurden kontrolliert und Probleme behoben. Jetzt bitte fortfahren.
+
+
+start_unslashing 
+# instruction infos
+info_generic: Bearbeite die Datenbank.
+info_create_database: Lege Datenbank `%s` an.
+info_drop_database: Lösche Datenbank `%s`.
+info_alter_database: Ändere Datenbank `%s`.
+info_create_table: Lege Tabelle `%s` an.
+info_alter_table: Ändere Tabelle `%s`
+info_drop_table: Lösche Tabelle `%s`.
+info_create_index: Lege Index in Tabelle `%s` an.
+info_drop_index: Lösche Index von Tabelle `%s`
+info_insert: Fülle die Tabelle `%s` mit Daten.
+info_update: Aktualisiere Daten der Tabelle `%s`.
+info_delete: Lösche Daten der Tabelle `%s`.
+info_truncate: Lösche alle Daten der Tabelle `%s`.
+info_select: Hole Daten aus der Tabelle `%s`.
+

@@ -52,7 +52,7 @@ class lang
     // load text data
     protected function import(&$data) {
         $imports = array();
-        preg_match_all('/#^@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
+        preg_match_all('/#@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
         foreach ($imports as $import) {
             $importPath = INSTALLER_PATH . 'lang/' . $this->local . '/' . $import[1] . '.txt';
             $importData = @file_get_contents($importPath);

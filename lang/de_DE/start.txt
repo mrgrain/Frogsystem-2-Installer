@@ -1,0 +1,87 @@
+#@installer
+
+# start.tpl
+reset_installer_info: Es sind bereits Daten zu dieser Installation gespeichert. Das kann daher kommen, dass du dieses Tool nicht zum ersten Mal ausführst. Falls Probleme auftreten, kannst du das Tool ganz zurücksetzen:
+reset_installer: Installations-Daten löschen
+
+welcome: Herzlich Willkommen zum Frogsystem 2!
+introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreichende <b>Änderungen im Hintergrund</b> durchgeführt, die das System für die Zukunft besser aufstellen.</p>
+#/
+#/<p>Die sichtbarsten Änderungen sind jedoch die <b>neue Kommentarliste mit Spam-Erkennung</b>, die <b>Unterstützung für SEO-URLs</b>, ein <b>neuer Style im AdminCP</b> und natürlich dieses <b>neue Installations-Tool</b>. Eine detaillierte Auflistung aller Änderungen gibt es im <a href="#changelog">Change Log</a>.</p>
+#/
+#/<p>Dieser <b>Assistent</b> wird dich durch die <b>Installation und Erstkonfiguration</b> führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch. Sobald du die Installtion startest, erklärst du dich damit einverstanden.</p>
+start_installation: Hurra, lass uns loslegen!
+
+changelog: Change Log
+notes: Installationshinweise
+copyright: Copyright
+
+changelog_text:
+
+notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/installer</b> von deinem Webspace zu löschen.
+#/
+#/<b>Sonst ist es Angreifern leicht möglich, die Installation zu manipulieren, zu zerstören oder eingegebene Zugangsdaten auszulesen.</b>
+#/
+#/-----------------------------------------------------------
+#/
+#/<b>DIE SOFTWARE WIRD "SO WIE SIE IST" BEREIT GESTELLT. ES BESTEHT KEINERLEI GARANTIE ODER GEWÄHR JEGLICHER ART ZUR BENUTZUNG DER SOFTWARE FÜR EINEN BETIMMTEN ZWECK.</b>
+#/
+#/<b>IN KEINEM FALL SIND DIE AUTOREN UND/ODER COPYRIGHTINHABER DER SOFTWARE FÜR SCHÄDEN UND/ODER RECHTSVERLETZUNGEN JEGLICHER ART VERANTWORTLICH, DIE DURCH DIE NUTZUNG DER SOFTWARE ENTSTEHEN.</b>
+
+copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
+#/
+#/-----------------------------------------------------------
+#/
+#/Die Software <b>Frogsystem&nbsp;2.alix6</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
+#/
+#/<b>Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland</b>
+#/Eine <b>Zusammenfassung</b> des Lizenzvertrags <b>in allgemeinverständlicher Sprache</b> kann unter dieser Internet-Adresse abgerufen werden:
+#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">»ttp://creativecommons.org/licenses/by-sa/3.0/de/</a>
+#/
+#/Der <b>vollständige Lizenzvertrag</b> ist unter dieser Adresse zu finden:
+#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">»http://creativecommons.org/licenses/by-sa/3.0/de/legalcode</a>
+#/
+#/-----------------------------------------------------------
+#/
+#/Die Software <b>Frogsystem&nbsp;2.alix6</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
+#/
+#/<b>BBCode-Parserklasse für PHP</b>
+#/Version 0.3.3 | Copyright (c) 2004-2009 Christian Seiler
+#/Homepage: <a href="http://www.christian-seiler.de/projekte/php/bbcode/" target="_blank">http://www.christian-seiler.de/projekte/php/bbcode/</a>
+#/Dateien: /libs/class_stringparser.php, /libs/class_stringparser_bbcode.php
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>FLV Player Maxi</b>
+#/Version 1.6.0
+#/Homepage: <a href="http://flv-player.net/players/maxi/" target="_blank">http://flv-player.net/players/maxi/</a>
+#/Dateien: /resources/player/player_flv_maxi.swf
+#/Lizenz: Creative Commons Attribution-Share Alike 3.0 Unported
+#/Lizenztext: <a href="http://creativecommons.org/licenses/by-sa/3.0/deed" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/deed</a>
+#/
+#/<b>jQuery</b>
+#/Version 1.4.2 | Copyright (c) 2010 John Resig
+#/Homepage: <a href="http://jquery.com" target="_blank">http://jquery.com</a>
+#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>Sizzle.js</b> (als Teil von jQuery)
+#/Copyright 2010, The Dojo Foundation
+#/Homepage: <a href="http://sizzlejs.com" target="_blank">http://sizzlejs.com</a>
+#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>codemirror</b>
+#/Copyright (c) 2007-2009 Marijn Haverbeke
+#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/" target="_blank">http://marijn.haverbeke.nl/codemirror/</a>
+#/Dateien: /resources/codemirror/* (ausgenommen /resources/codemirror/contrib/*)
+#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/LICENSE</a>
+#/
+#/<b>codemirror PHP Parser</b> (als Teil von codemirror)
+#/Copyright (c) 2008-2009, Yahoo! Inc.
+#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/index.html" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/index.html</a>
+#/Dateien: /resources/codemirror/contrib/php/*
+#/Lizenz: New BSD License
+#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE</a>

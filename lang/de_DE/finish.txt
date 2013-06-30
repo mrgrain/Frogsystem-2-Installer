@@ -1,0 +1,12 @@
+#@installer
+
+# finish.tpl
+finish_title: Abschluss
+congratulations: Herzlichen Glückwunsch!
+finish_text: Dein Frogsystem 2 wurde erfolgreich installiert oder aktualisiert. Du kannst dieses Installations- & Update-Tool jetzt schließen und auf deine Seite wechseln.
+finish_notes: Hinweise
+finish_note_ftp: FTP-Zugangsdaten, die du evtl. angegeben hast, waren nur für die Intstallation wichtig und wurden wieder gelöscht.
+finish_note_database: Die Zugangsdaten zur Datenbank werden zum Betrieb der Seite benötigt und wurden daher in einer Datei gespeichert.
+finish_security: Aus Sicherheitsgründen bitte jetzt sofort dieses Tool wieder vom Webspace löschen!
+goto_website: zu deiner Webseite wechseln
+goto_admin_cp: das Admin-CP aufrufen

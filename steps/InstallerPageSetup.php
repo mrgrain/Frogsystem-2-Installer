@@ -13,6 +13,7 @@ class InstallerPageSetup extends InstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'setup');
         $this->setTitle('setup_title');
         $this->ic = $this->getICObject('setup.tpl');
     }

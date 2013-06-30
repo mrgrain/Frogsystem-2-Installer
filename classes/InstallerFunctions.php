@@ -41,8 +41,105 @@ class InstallerFunctions {
     }
 
     public static function getRequiredFS2Version() {
-        return '2.alix5';
+        return '2.alix4';
     }
+    
+    public static function getInstalledFS2Version($path) {
+        $files = array(
+            '2.alix5' => array('index.php', 'login.inc.php', 'imageviewer.php'),
+            '2.alix4' => array('editor_css.php', 'index.php', 'login.inc.php', 'showimg.php', 'style_css.php'),
+        );
+        
+        $fs2 = false;
+        foreach ($files as $key => $list) {
+            $fs2 = true;
+            foreach ($list as $file) {
+                $filepath = $path.DIRECTORY_SEPARATOR.$file;
+                $fs2 = $fs2 && is_file($filepath);
+                if (!$fs2)
+                    break;
+            }
+            if ($fs2)
+                return $key;
+        }
+        
+        return false;    
+    }          
+    
+    
+    // checks wheter in a given valid path an frogsystem installation is placed 
+    public static function isFrogsystem($path) {
+        if (false !== InstallerFunctions::getInstalledFS2Version($path))
+            return true;
+        return false;
+    }       
+    
+    
+    // try to get an old database connection
+    public static function getOldDBConnection($path, $version) {
+                
+        // handle by version
+        $dbc = array('type' => null, 'host' => null, 'user' => null, 'pass' => null, 'data' => null, 'pref' => null);
+        switch($version) {
+            case '2.alix4':
+                if ($file = @file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
+                    for ($i = 0; $i <= 15; $i++) {
+                        $matches = array();
+                        if (isset($file[$i])) {
+                            @preg_match('/^\$(host|user|data|pass|pref) *= *("|\')([^\2]+)\2 *;/', trim($file[$i]), $matches);
+                            if (!empty($matches)) {
+                                if ('"' == $matches[2])
+                                    $matches[3] = str_replace('\"', '"', $matches[3]);
+                                    
+                                $dbc[$matches[1]] = $matches[3];
+                                $dbc['type'] = 'mysql';
+                            }
+                        }
+                    }
+                }
+                break;
+            case '2.alix5':
+                if ($file = @file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
+                    for ($i = 0; $i <= 15; $i++) {
+                        $matches = array();
+                        if (isset($file[$i])) {
+                            @preg_match('/^\$dbc\[("|\')(host|user|data|pass|pref)\1\] *= *("|\')([^\3]+)\3 *;/', trim($file[$i]), $matches);
+                            if (!empty($matches)) {
+                                if ('"' == $matches[3])
+                                    $matches[4] = str_replace('\"', '"', $matches[4]);
+                                    
+                                $dbc[$matches[2]] = $matches[4];
+                                $dbc['type'] = 'mysql';
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                return false;
+        }
+
+        // check if we found any values
+        if ("" != trim(implode($dbc))) {
+            return $dbc;
+        }        
+        return false;
+    }      
+    
+    
+        
+    // function to detect the language from user agent
+    public static function detect_language() {
+        // get language
+        $de = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de');
+        $en = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'en');
+
+        if ($de !== false && $de < $en) {
+            return 'de_DE';
+        } else {
+            return 'en_US';
+        }
+    }      
     
     /*
      * Accually compares to FS2 versions
@@ -232,9 +329,8 @@ class InstallerFunctions {
         ksort($cities);
 
         return $cities;
-    }    
-        
-    
+    }  
+ 
 }
 
 ?>

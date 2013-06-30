@@ -18,12 +18,12 @@ class Requirements extends Checker {
     }
     
     public static function testFS2Version() {
-        return InstallerFunctions::compareFS2Versions(UPGRADE_FROM, InstallerFunctions::getRequiredFS2Version()) >= 0;
+        return !(InstallerFunctions::compareFS2Versions(UPGRADE_FROM, InstallerFunctions::getRequiredFS2Version()) < 0);
     }
     public static function testFS2VersionWithNone($none = false) {
         if (UPGRADE_FROM == 'none')
             return true;
-        return $this->testFS2Version();
+        return Requirements::testFS2Version();
     }
     
     public static function testPHPVersion() {

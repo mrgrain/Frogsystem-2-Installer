@@ -13,6 +13,7 @@ class InstallerPageDatabase extends InstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'database');
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
     }
@@ -40,7 +41,11 @@ class InstallerPageDatabase extends InstallerPage {
                 $runner = new SQLRunner('jobs/sql/', UPGRADE_FROM, UPGRADE_TO, $sql);
                 $inst_list = array();
                 foreach($runner as $inst) {
-                    $this->ic->addText('instruction', $runner->getCurrentInfo());
+                    $info = $runner->getCurrentInfo();
+                    $info[1] = str_replace('{..pref..}', $sql->getPrefix(), $info[1]);
+                    $this->ic->addText('table', $info[1]);
+                    $info = sprintf($this->lang->get('info_'.$info[0]), $this->ic->get('sqlinstructions_info_table'));
+                    $this->ic->addText('instruction', $info);
                     $inst_list[] = $this->ic->get('sqlinstructions_info_element');
                 }
                 $_SESSION['db_instructions'] = $inst_list;

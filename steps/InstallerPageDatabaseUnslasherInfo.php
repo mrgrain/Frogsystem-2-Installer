@@ -13,11 +13,12 @@ class InstallerPageDatabaseUnslasherInfo extends InstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'database');
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
-        return;
+        
         // check to header instantly
-        if (UPGRADE_FROM == 'none' || InstallerFunctions::compareFS2Versions(UPGRADE_FROM, '2.alix6') >= 0) {
+        if (UPGRADE_FROM == 'none' || !InstallerFunctions::compareFS2Versions(UPGRADE_FROM, '2.alix6') < 0) {
             // nothing todo => go to setup
             header("location: {$_SERVER['PHP_SELF']}?step=setup"); // redirect
             exit;

@@ -15,6 +15,7 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
     
     public function __construct() {
         parent::__construct();
+        $this->lang = new InstallerLang($this->local, 'database');
         $this->setTitle('database_title');
         $this->ic = $this->getICObject('database.tpl');
         unset($_SESSION['db_instructions']); // from previous step
@@ -48,13 +49,25 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
 				}
 				$this->setNext($pos+1);
 				
-				// execute instructions & create ouptput 
-                $this->ic->addText('instruction', $runner->getCurrentInfo());
+				// create ouptput 
+                $info = $runner->getCurrentInfo();
+                $info[1] = str_replace('{..pref..}', $sql->getPrefix(), $info[1]);
+                $this->ic->addText('table', $info[1]);
+                $info = sprintf($this->lang->get('info_'.$info[0]), $this->ic->get('sqlinstructions_info_table'));
+                $this->ic->addText('instruction', $info);
+                
+                // images
+                $img_path = 'styles/'.$this->tpl->getStyle().'/images/';
+                $this->ic->addText('success_img', $img_path.'ok.gif');
+                $this->ic->addText('error_img', $img_path.'error.gif');
+                
+                //execute instruction
 				try {
 					$runner->runCurrentInstruction();
 					$this->ic->addCond('success', true);
 				} catch (Exception $e) {
                     $this->ic->addCond('error', true);
+                    $this->ic->addText('error_message', $e->getMessage());
                     $this->success = false;
 				}
 				$this->addResult($this->ic->get('sqlinstructions_info_element'));
