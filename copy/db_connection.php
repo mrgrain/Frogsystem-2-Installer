@@ -10,5 +10,5 @@ $dbc['pass'] = 'frogsystem';
 /* database name*/
 $dbc['data'] = 'fs2_fix';
 /* table prefix */
-$dbc['pref'] = 'fs2_';
+$dbc['pref'] = '';
 ?>

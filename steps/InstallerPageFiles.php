@@ -19,9 +19,16 @@ class InstallerPageFiles extends InstallerPage {
     }
     
     protected function show() {
+
+        $runner = new FileRunner('jobs/files/', UPGRADE_FROM, UPGRADE_TO);
+        $inst_list = array();
+        foreach($runner as $inst) {
+            var_dump($runner->getCurrentInfo());
+        }  
+        
         // nothing todo => go to cleanup
-        header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
-        exit;
+        //~ header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
+        //~ exit;
     }
 }
 ?>
