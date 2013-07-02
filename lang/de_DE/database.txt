@@ -62,7 +62,6 @@ sql_unslasher_done_but_error: Die Datenbank wurde konvertiert, aber es traten Fe
 sql_unslasher_continue_with_errors: Fehler wurden kontrolliert und Probleme behoben. Jetzt bitte fortfahren.
 
 
-start_unslashing 
 # instruction infos
 info_generic: Bearbeite die Datenbank.
 info_create_database: Lege Datenbank `%s` an.

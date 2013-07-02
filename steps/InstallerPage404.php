@@ -11,7 +11,7 @@ class InstallerPage404 extends InstallerPage {
     
     public function __construct() {
         parent::__construct();
-        $this->lang = new InstallerLang($this->local, '404');
+        $this->lang = new InstallerLang($this->local, 'errors');
         $this->setTitle('error404_title');
     }
     

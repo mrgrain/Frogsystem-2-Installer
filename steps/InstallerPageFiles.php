@@ -19,16 +19,31 @@ class InstallerPageFiles extends InstallerPage {
     }
     
     protected function show() {
-
-        $runner = new FileRunner('jobs/files/', UPGRADE_FROM, UPGRADE_TO);
+        $runner = new FileRunner('jobs/files/', UPGRADE_FROM, UPGRADE_TO, $this->lang);
         $inst_list = array();
+        $all_success = true;
         foreach($runner as $inst) {
-            var_dump($runner->getCurrentInfo());
+            // images
+            $img_path = 'styles/'.$this->tpl->getStyle().'/images/';
+            $this->ic->addText('success_img', $img_path.'ok.gif');
+            $this->ic->addText('error_img', $img_path.'error.gif');          
+            
+            $writable = $runner->isWritable($runner->current());
+            $all_success = $all_success && $writable;
+            $this->ic->addCond('error', !$writable);
+            //~ $this->ic->addCond('success', $writable);   // don't show the image, to not confuse the user  
+            $this->ic->addText('error_message', $this->lang->get('target_not_writable')); 
+            $this->ic->addText('instruction', $runner->getCurrentInfo());
+            $inst_list[] = $this->ic->get('instruction_element');            
         }  
         
-        // nothing todo => go to cleanup
-        //~ header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
-        //~ exit;
+        $this->ic->addCond('error', !$all_success);           
+        $this->ic->addCond('success', $all_success);           
+        $this->ic->addText('url_next', '?step=fileOperations');
+        $this->ic->addText('url_self', '?step=files');
+        $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
+        print $this->ic->get('file_info');        
+
     }
 }
 ?>

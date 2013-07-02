@@ -1,0 +1,27 @@
+DELETE ~/editor_css.php
+DELETE ~/showimg.php
+DELETE ~/style_css.php
+DELETE ~/admin/admin_allannouncement.php
+DELETE ~/admin/admin_allconfig.php
+DELETE ~/admin/admin_frogpadoriginal.php
+DELETE ~/admin/admin_includes_edit.php
+DELETE ~/admin/admin_includes_new.php
+DELETE ~/admin/admin_template_all.php
+DELETE ~/admin/admin_template_artikel.php
+DELETE ~/admin/admin_template_create.php
+DELETE ~/admin/admin_template_manage.php
+DELETE ~/admin/admin_template_partner.php
+DELETE ~/admin/admin_template_randompic.php
+DELETE ~/admin/admin_zone_create.php
+DELETE ~/admin/admin_zone_manage.php
+DELETE ~/data/editprofil.php
+DELETE ~/data/members.php
+DELETE ~/data/newsarchiv.php
+DELETE ~/data/partner.php
+DELETE ~/data/pollarchiv.php
+DELETE ~/data/profil.php
+DELETE ~/includes/stringparser.class.php
+DELETE ~/includes/stringparser_bbcode.class.php
+DELETE -R ~/images/avatare/
+DELETE -R ~/images/groups/
+DELETE -R ~/res/

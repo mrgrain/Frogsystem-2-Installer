@@ -1,0 +1,6 @@
+#@installer
+
+#404
+error404_title: Fehler - Seite nicht gefunden
+error404_info:
+back_to_start: Zurück zum Anfang

@@ -59,6 +59,10 @@ function setup() {
 
     // check for install path and from version
     if (isset($_SESSION['install_to'])) {
+        $last = substr($_SESSION['install_to'], -1, 1);
+        if(!("/" == $last || "\\" == $last || DIRECTORY_SEPARATOR == $last)) {
+            $_SESSION['install_to'] = $_SESSION['install_to'].DIRECTORY_SEPARATOR;
+        }
         define('INSTALL_TO', $_SESSION['install_to'], true);
         if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO))
             $_SESSION['upgrade_from'] = 'none';

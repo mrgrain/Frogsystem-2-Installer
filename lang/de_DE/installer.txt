@@ -12,6 +12,6 @@ seconds_short:s
 total_runtime: Gesamte Laufzeit
 fs2_install: Frogsystem 2-Installation
 fs2_update: Frogsystem 2-Update
-fs2_install_update_tool:
+fs2_install_update_tool: Frogsystem 2
 success: Okay
 error: Fehler

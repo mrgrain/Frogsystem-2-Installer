@@ -11,7 +11,10 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     
     private $dir;
     
-    public function __construct($dir, $start, $end) {       
+    public function __construct($dir, $start, $end, $lang) {
+        // langfile
+        $this->lang = $lang;
+ 
         // create filelist
         $this->dir = $dir;
         $list = scandir($dir);
@@ -36,29 +39,66 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
 
 
     protected function runInstruction($inst) {
+        $result = false;
         switch ($inst->command) {
             case 'copy':
-                return Files::copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
+                $result = Files::copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
                 break;
             case 'delete':
-                return Files::delete($inst->path, $inst->recursive);
+                $result = Files::delete($inst->path, $inst->recursive);
                 break;
             case 'move':
-                return Files::move($inst->source, $inst->destination, $inst->overwrite);
+                $result = Files::move($inst->source, $inst->destination, $inst->overwrite);
                 break;
             case 'is_writable':
-                return Files::is_writable($inst->path, $inst->recursive);
+                $result = Files::is_writable($inst->path, $inst->recursive);
                 break;
+        }
+        
+        if(!$result) {
+            throw new FileOperationException('Error with command `'.$inst->command.'`.');
         }
     }
     
-    protected function getInfo($instruction) {
-        return $instruction;
+    public function isWritable($inst) {
+        switch ($inst->command) {
+            case 'delete':
+            case 'is_writable':
+                return Files::is_writable($inst->writable, $inst->recursive);
+                break;
+            case 'copy':
+            case 'move':
+            default:
+                return Files::is_writable($inst->writable, false);
+                break;
+        }
+    }    
+    
+    protected function getInfo($inst) {
+        switch ($inst->command) {
+            case 'copy':
+                if (is_array($inst->source)) $inst->source = $inst->source[0].'*';
+                return sprintf($this->lang->get('info_'.$inst->command), $inst->source, $inst->destination);
+                break;
+            case 'delete':
+                if (is_array($inst->path)) $inst->path = $inst->path[0].'*';
+                return sprintf($this->lang->get('info_'.$inst->command),$inst->path);
+                break;
+            case 'move':
+                if (is_array($inst->source)) $inst->source = $inst->source[0].'*';
+                return sprintf($this->lang->get('info_'.$inst->command),$inst->source, $inst->destination);
+                break;
+            case 'is_writable':
+                if (is_array($inst->path)) $inst->path = $inst->path[0].'*';
+                return sprintf($this->lang->get('info_'.$inst->command),$inst->path);
+                break;
+        }        
+        return false;
     }    
     
 
     // parse a command
-    public static function parse($input) {
+    private static function parse($input) {
         $commands = array(
             'copy'              => '/^COPY *(?:-(?P<params>[OR]{1,2}))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
             'delete'            => '/^DELETE *(?:-(?P<params>R))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2).*/i',

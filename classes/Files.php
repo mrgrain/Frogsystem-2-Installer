@@ -30,7 +30,7 @@ class Files {
         if (is_array($path)) {
             $result = true;
             foreach($path as $p) {
-                $result = $result && Files::delete($p, $recursive);
+                $result = $result && self::delete($p, $recursive);
             }
             return $result;
         }
@@ -49,7 +49,7 @@ class Files {
                 $removed = true;
                 foreach(scandir($path) as $entry) {                    
                     if ($entry != "." || $entry != "..")
-                        $removed = $removed && Files::delete($path.DIRECTORY_SEPARATOR.$entry, true);
+                        $removed = $removed && self::delete($path.DIRECTORY_SEPARATOR.$entry, true);
                 }
                 return $removed && rmdir($path);
             }
@@ -64,7 +64,7 @@ class Files {
         if (is_array($source)) {
             $result = true;
             foreach($source as $s) {
-                $result = $result && Files::move($s, $destination, $overwrite);
+                $result = $result && self::move($s, $destination, $overwrite);
             }
             return $result;
         }  
@@ -90,13 +90,18 @@ class Files {
         if (is_array($path)) {
             $result = true;
             foreach($path as $p) {
-                $result = $result && Files::is_writable($p, $recursive);
+                $result = $result && self::is_writable($p, $recursive);
             }
             return $result;
         }        
-            
+        
+        // path not existin
+        if (!file_exists($path)) {
+            return self::is_writable(dirname($path), false);
+        }
+        
         // recursively ?
-        if ($recursive && is_dir($path)) {
+        if ($recursive && is_dir($path)) {var_dump($path);
         // folder & recursive
             // => each file and folder and subfolders are writable
             $writable = is_writable($path);
@@ -105,7 +110,7 @@ class Files {
                     break;
                 
                 if ($entry != "." || $entry != "..")
-                    $writable = $writable && Files::is_writable($path.DIRECTORY_SEPARATOR.$entry);
+                    $writable = $writable && self::is_writable($path.DIRECTORY_SEPARATOR.$entry);
             }
             return $writable;
             
@@ -124,21 +129,25 @@ class Files {
     // resolve path
     public static function resolve_path($path, $star = false) {
         // installer_path or install_to path
-        if (".".DIRECTORY_SEPARATOR == substr($path, 0, 2)) {
-            $path = INSTALLER_PATH.DIRECTORY_SEPARATOR.substr($path, 2);
-        } elseif ("~".DIRECTORY_SEPARATOR == substr($path, 0, 2)) {
-            $path = INSTALL_TO.DIRECTORY_SEPARATOR.substr($path, 2);
+        $start = substr($path, 0, 2);
+        if ("./" == $start || ".".DIRECTORY_SEPARATOR == $start) {
+            $path = INSTALLER_PATH.substr($path, 2);
+        } elseif ("~/" == $start || "~".DIRECTORY_SEPARATOR == $start) {
+            $path = INSTALL_TO.substr($path, 2);
         }
-        
+
         // all files in folder
-        if ($star && is_dir($path) && DIRECTORY_SEPARATOR.'*' == substr($path,-2,2)) {
-            $path = substr($path,-2,2);
-            $pathes = array($path);
-            foreach(scandir($path) as $entry) {                    
-                if ($entry != "." || $entry != "..")
-                    $pathes[] = $path.DIRECTORY_SEPARATOR.$entry;
+        $end = substr($path,-2,2);
+        if ($star && ('/*' == $end || DIRECTORY_SEPARATOR.'*' == $end)) {
+            $shortpath = substr($path,0,-1);
+            if (is_dir($shortpath)) {
+                $pathes = array($shortpath);
+                foreach(scandir($shortpath) as $entry) {                    
+                    if ($entry != "." || $entry != "..")
+                        $pathes[] = $shortpath.$entry;
+                }
+                $path = $pathes;
             }
-            $path = $pathes;
         }
         
         return $path;

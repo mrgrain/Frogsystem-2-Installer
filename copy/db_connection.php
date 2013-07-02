@@ -8,7 +8,7 @@ $dbc['user'] = 'frogsystem';
 /* database password */
 $dbc['pass'] = 'frogsystem';
 /* database name*/
-$dbc['data'] = 'fs2_fix';
+$dbc['data'] = 'fs2_install';
 /* table prefix */
-$dbc['pref'] = '';
+$dbc['pref'] = 'fs2_';
 ?>

@@ -26,7 +26,7 @@ class InstallerPageStart extends InstallerPage {
         
         
         // session and reset?
-        if (is_array($_SESSION) && count($_SESSION) > 0) {
+        if (is_array($_SESSION) && count($_SESSION) > 1) {
             $ic->addCond('session', true);
         }
         if (isset($_GET['reset'])) {

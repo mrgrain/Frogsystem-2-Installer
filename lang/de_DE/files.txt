@@ -1,1 +1,106 @@
 #@installer
+files_title: Dateien
+file_info_title: Dateien anpassen
+file_info_text: Wir werden gleich versuchen die unten stehenden Datei-Operationen durchzuführen. Bitte achte darauf, dass alle nötigen Schreibrechte vorhanden sind. Falls dem nicht so ist, bring das bitte jetzt in Ordnung.
+target_not_writable: Keine Schreibrechte für Ziel-Pfad.
+
+file_info_writable_title: Benötige Schreibrechte vorhanden
+file_info_writable_text: Für alle Ziel-Pfade sind die nötigen Schreibrechte vorhanden. Du kannst nun fortfahren.
+file_start_instructions_button: Dateien jetzt anpassen
+file_recheck_permissions: Schreibrecht erneut überprüfen
+
+file_info_not_writable_title: Fehlende Schreibrechte
+file_info_not_writable_text: Für einige (oder alle) der aufgelisteten Ziel-Pfade sind keine Schreibrechte vorhanden. Bitte passe die Dateiberechtigungen entsprechend an. <a href="http://wiki.frogsystem.de/Dateiberechtigung" target="_blank">Mehr Informationen dazu findest du im Wiki.</a>
+file_start_instructions_button_with_errors: Trotz Fehler: Bitte fortfahren & Datei anpassen
+
+file_runner_title: Dateien anpassen
+file_runner_info: Es werden jetzt die Dateien angepasst. Falls sich die Seite nicht selbst neulädt, klicke bitte auf &bdquo;Weiter&ldquo;.
+continue_file_operations: Weiter &amp; Ausführung fortsetzen
+file_operations_done_but_error_title:
+file_operations_done_but_error:
+file_operations_retry: Hm, nochmal probieren bitte.
+file_operations_continue_with_errors: Ich kümmer mich drum, versprochen (zum nächstem Schritt).
+
+info_copy: Kopiere `<b>%s</b>` nach `<b>%s</b>`.
+info_delete: Lösche `<b>%s</b>`.
+info_move: Verschiebe `<b>%s</b>` nach `<b>%s</b>`.
+info_is_writable: Prüfe Schreibrechte für `<b>%s</b>`.
+
+
+
+$steps['ftp']['title']                   = 'Dateizugriff';
+$steps['ftp']['progress']                = 'Dateizugriff';
+$steps['ftp']['navi']                    = 'Dateizugriff';
+$steps['ftp']['step'][1]['title']        = 'Berechtigungen';
+$steps['ftp']['step'][1]['long_title']   = 'Berechtigungen für Dateizugriff prüfen';
+$steps['ftp']['step'][2]['title']        = 'FTP-Verbindung';
+$steps['ftp']['step'][2]['long_title']   = 'FTP-Logindaten angeben';
+$steps['ftp']['step'][3]['title']        = 'Abschluss';
+$steps['ftp']['step'][3]['long_title']   = 'Abschluss';
+
+$steps['ftp']['step'][1]['info_text']    = 'Die <b>Berechtigungen</b> f&uuml;r den Zugriff auf die zur Installation erforderlichen Dateien m&uuml;ssen <b>gepr&uuml;ft</b> werden.';
+$steps['ftp']['step'][1]['no_ftp_error'] = 'Die <b>Überprüfung</b> der Berechtigungen war <b>nicht erfolgreich</b>. Auf die untenstehenden Dateien und Ordner muss der Installationsassistent <b>Schreib-Zugriff</b> haben.<br><br>Bitte <b>passen</b> Sie die Zugriffs-Rechte der folgenden Dateien und Ordner an:';
+$steps['ftp']['step'][1]['button']       = 'Berechtigungen prüfen';
+
+$steps['ftp']['step'][2]['info_text']    = 'Die <b>Überprüfung</b> der Berechtigungen war <b>nicht erfolgreich</b>. Bitte geben Sie die Daten Ihres <b>FTP-Zugangs</b> an, damit die notwendigen Datei-Zugriffe über eine FTP-Verbindung realisiert werden können.';
+$steps['ftp']['step'][2]['info_text2']   = 'Es wurden bereits Daten in das System eingetragen. Bitte <b>überprüfen</b> Sie deren Richtigkeit oder <b>geben</b> Sie eine andere Verbindung <b>an</b>.';
+$steps['ftp']['step'][2]['info_text3']   = 'Das <b>Wurzelverzeichnis</b> wurde bereits automatisch ermittelt. Bitte <b>überprüfen</b> Sie es auf seine Richtigkeit oder <b>geben</b> Sie das korrekte Verzeichnis <b>an</b>.';
+$steps['ftp']['step'][2]['error1']       = 'Es konnte <b>keine Verbindung</b> zum Server hergestellt werden. Bitte <b>überprüfen</b> Sie die angegebenen Daten. [FTPx1E1]';
+$steps['ftp']['step'][2]['error2']       = 'Beim Versuch sich auf dem FTP-Server <b>anzumelden</b> trat ein Fehler auf. Bitte <b>überprüfen</b> Sie die angegebenen Daten. [FTPx1E2]';
+$steps['ftp']['step'][2]['error3']       = 'Das Frogsystem wurde in dem angegebenen Verzeichnis <b>nicht gefunden</b>. Bitte <b>überprüfen</b> Sie das Wurzelverzeichnis. [FTPx1E3]';
+$steps['ftp']['step'][2]['error4']       = 'Beim Versuch Dateien zu beschreiben trat ein Fehler auf. Bitte <b>überprüfen</b> Sie die Rechte Ihres FTP-Zugangs. [FTPx1E4]';
+$steps['ftp']['step'][2]['error5']       = 'Bitte geben Sie <b>alle</b> Verbindungsdaten an. [FTPx1E5]';
+$steps['ftp']['step'][2]['host']         = 'FTP-Host';
+$steps['ftp']['step'][2]['host_desc']    = 'Host-Adresse des FTP-Servers';
+$steps['ftp']['step'][2]['port']         = 'FTP-Port';
+$steps['ftp']['step'][2]['port_desc']    = 'Port des FTP-Servers';
+$steps['ftp']['step'][2]['port_info']    = 'verwendet <b>Port 21</b> als Standard';
+$steps['ftp']['step'][2]['user']         = 'FTP-User';
+$steps['ftp']['step'][2]['user_desc']    = 'Benutzer des FTP-Zugangs';
+$steps['ftp']['step'][2]['pass']         = 'FTP-Passwort';
+$steps['ftp']['step'][2]['pass_desc']    = 'Passwort des FTP-Zugangs';
+$steps['ftp']['step'][2]['root']         = 'Wurzelverzeichnis';
+$steps['ftp']['step'][2]['root_desc']    = 'Pfad zum FS2 ausgehend vom Wurzelverzeichnis des FTP-Users';
+$steps['ftp']['step'][2]['root_info']    = 'z.B. <b>/cms/</b> oder <b>/frogsystem/</b> ';
+$steps['ftp']['step'][2]['button']       = 'Daten speichern und fortfahren';
+
+$steps['ftp']['step'][3]['info_title']   = 'Berechtigungen vorhanden';
+$steps['ftp']['step'][3]['info_text1']   = 'Die <b>Überprüfung</b> der Berechtigungen war <b>erfolgreich</b>. Sie können nun mit der Installation fortfahren.';
+$steps['ftp']['step'][3]['info_text2']   = 'Die Verbindung zum FTP-Server wurde <b>erfolgreich hergestellt</b>. Sie können nun mit der Installation fortfahren.';
+$steps['ftp']['step'][3]['info_text3']   = 'Die Verbindung zum FTP-Server konnte nicht hergestellt werden. Bitte <b>überprüfen</b> Sie ihre Eingabe.';
+$steps['ftp']['step'][3]['button']       = 'Dateizugriff erneut überprüfen';
+
+$steps['files']['title']                   = 'Dateien';
+$steps['files']['progress']                = 'Dateien';
+$steps['files']['navi']                    = 'Dateien';
+$steps['files']['step'][1]['title']        = 'Kopieren';
+$steps['files']['step'][1]['long_title']   = 'Veränderte Dateien kopieren';
+$steps['files']['step'][2]['title']        = 'Zugriffsrechte';
+$steps['files']['step'][2]['long_title']   = 'Ordner-Zugriffsrechte ändern';
+$steps['files']['step'][3]['title']        = '.htaccess';
+$steps['files']['step'][3]['long_title']   = '.htaccess Einstellungen';
+
+$steps['files']['step'][1]['info_text']    = 'Es werden nun einige <b>ver&auml;nderte Dateien</b> aus dem Installations- in das Hauptverzeichnis Ihrer Webseite <b>kopiert</b>.';
+$steps['files']['step'][1]['error1']       = 'Beim Kopieren der ver&auml;nderten Dateien trat ein Fehler auf. Bitte <b>versuchen</b> Sie es <b>erneut</b>.';
+$steps['files']['step'][1]['button']       = 'Dateien kopieren und fortfahren';
+
+$steps['files']['step'][2]['info_text']    = 'Um das <b>Frogsystem 2</b> vollständig über das Webinterface <b>steuern</b> zu können, müssen die Zugriffsrechte für folgende Ordner überprüft werden:';
+$steps['files']['step'][2]['error']        = 'Die <b>Überprüfung</b> der Zugriffsrechte war <b>nicht erfolgreich</b>.<br><br>Bitte <b>geben</b> Sie dem Frogsystem&nbsp;2 für diese Dateien und Ordner <b>Schreib-Zugriff</b>:';
+$steps['files']['step'][2]['button']       = 'Zugriffsrechte prüfen und fortfahren';
+
+$steps['files']['step'][2]['end_title']    = 'Zugriffsrechte vorhanden';
+$steps['files']['step'][2]['end_info']     = 'Die <b>&Uuml;berpr&uuml;fung</b> der Zugriffsrechte war <b>erfolgreich</b>. Sie k&ouml;nnen nun mit der Installation fortfahren.';
+$steps['files']['step'][2]['end_button']   = $_LANG['main']['continue_install'];
+
+$steps['files']['step'][3]['info_text']    = 'Das Frogsystem 2 erlaubt es durch Änderungen in der Datei <b>.htaccess</b> sog. personalisierte Fehlerseiten anzeigen zu lassen. Dafür müssen aber bestimmte Einstellungen auf Ihrem Webserver entsprechend gesetzt werden. Wenn Sie diese Funktion nutzen möchten, <b>stellen</b> Sie bitte <b>sicher</b>, dass Ihnen diese Möglichkeit zur Verfügung steht. Kontaktieren Sie ggf. auch Ihren Server- bzw. Webspace-Anbieter.';
+$steps['files']['step'][3]['info_text2']   = 'Wurden die Einstellungen nicht korrekt vorgenommen, kann es nach diesem Schritt zu einem <i>Error 500 (Internal Server Error)</i> kommen. In diesem Fall müssen Sie die dann in das Wurzel-Verzeichnis des Frogsystem 2 kopierte .htaccess Datei von Hand löschen und diesen Installationsassistenen erneut aufrufen.';
+$steps['files']['step'][3]['info_text3']   = 'Alternativ können Sie auch fortfahren <b>ohne</b> personalisierte Fehlerseiten über <b>.htaccess</b> zu verwenden. In diesem Fall bekommen Ihre Besucher die Standard-Fehlerseite des Webservers zu sehen.';
+$steps['files']['step'][3]['further_info'] = 'Weiterführende Informationen zu <b>.htaccess</b> finden Sie hier:';
+$steps['files']['step'][3]['further_url']  = 'http://de.wikipedia.org/wiki/.htaccess';
+$steps['files']['step'][3]['error1']       = '';
+$steps['files']['step'][3]['button']       = '.htaccess verwenden und fortfahren';
+$steps['files']['step'][3]['button2']      = 'ohne Verwendung von .htaccess fortfahren';
+
+$steps['files']['end_title']               = 'Dateien';
+$steps['files']['end_info']                = 'Die &Auml;nderungen am Dateisystem wurden <b>erfolgreich</b> abgeschlossen.';
+$steps['files']['end_button']              = $_LANG['main']['finish_install'];

@@ -1,6 +1,7 @@
 #@installer
 
 # start.tpl
+start_title: Installations- & Update-Tool 
 reset_installer_info: Es sind bereits Daten zu dieser Installation gespeichert. Das kann daher kommen, dass du dieses Tool nicht zum ersten Mal ausführst. Falls Probleme auftreten, kannst du das Tool ganz zurücksetzen:
 reset_installer: Installations-Daten löschen
 

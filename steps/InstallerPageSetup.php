@@ -38,7 +38,7 @@ class InstallerPageSetup extends InstallerPage {
             unset($_SESSION['minimal_settings']); // important, so user can navigate back
             
             // nothing todo => go to cleanup
-            header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
+            header("location: {$_SERVER['PHP_SELF']}?step=files"); // redirect
             exit;
             
         } catch (ErrorException $e) {

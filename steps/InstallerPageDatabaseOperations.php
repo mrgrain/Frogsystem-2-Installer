@@ -34,7 +34,7 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
         //check connection from session
         try {
             $sql = new sql($_SESSION['dbc']['host'], $_SESSION['dbc']['data'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['pref']);
-            $runner = new SQLRunner('jobs/sql/', $_SESSION['upgrade_from'], $_SESSION['upgrade_to'], $sql);
+            $runner = new SQLRunner('jobs/sql/', UPGRADE_FROM, UPGRADE_TO, $sql);
             $checkReset = true;
 
             foreach($runner as $pos => $inst) {
@@ -114,7 +114,7 @@ class InstallerPageDatabaseOperations extends SelfReloadingInstallerPage {
 	}
 	
    	protected function getUrl($next) {
-		return $_SERVER['PHP_SELF']."?step=databaseOperations&amp;next={$next}";
+		return $_SERVER['PHP_SELF']."?step=databaseOperations&next={$next}";
 	}
 }
 ?>
