@@ -1,1 +1,30 @@
 #@installer
+#@db_instructions
+#@file_instructions
+
+cleanup_info_title: Überflüßiges Zeug aufräumen
+cleanup_info_text: Einige Dateien und Datenbankeinträge werden nicht mehr benötigt. Wenn du möchtest können wir diese Daten jetzt für dich löschen und die unten stehenden Operationen ausführen. Sie stören aber nicht und du kannst sie auch später selbst löschen.
+
+cleanup_files: Dateien aufräumen
+cleanup_sql: Datenbank aufräumen
+
+cleanup_success_title: Erfolgreich aufgeräumt
+cleanup_success: Mami ist stolz auf dich! Du bekommst jetzt deinen Nachtisch und darfst weitermachen.
+cleanup_done_but_error_title: Fehler beim Aufräumen
+cleanup_done_but_error: Da hat jemand unter dem Bett nachgeschaut und noch was gefunden!<br>Leider sind beim Aufräumen Fehler aufgetreten. Schau sie dir genau an und entscheide dann, ob du es nochmal versuchen möchtest oder einfach weitermachst.
+
+files_done_but_error_title: Fehler beim Dateien aufräumen
+files_done_but_error: Beim Aufräumen der Datein sind Fehler aufgetreten.
+sql_done_but_error_title: Fehler beim Datenbank aufräumen
+sql_done_but_error: Beim Versuch die Datenbank zu bereinigen sind Fehler aufgetreten.
+
+start_cleanup:Dateien &amp; Datenbank aufräumen
+skip_cleanup: Überspringen (und selber aufräumen)
+cleanup_files_only: Nur Dateien aufräumen
+cleanup_sql_only: Nur Datenbank aufräumen
+
+finish_cleanup: Nachtisch essen &amp; weiter
+retry_cleanup:(Nochmal) Dateien &amp; Datenbank aufräumen
+continue_with_errors: Dann eben nicht aufräumen (und weiter)
+cleanup_retry_files_only: (Nochmal) Dateien aufräumen
+cleanup_retry_sql_only: (Nochmal) Datenbank aufräumen

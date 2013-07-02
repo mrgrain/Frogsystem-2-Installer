@@ -1,4 +1,5 @@
 #@installer
+#@db_instructions
 
 #database.tpl
 database_title: Datenbank
@@ -62,19 +63,5 @@ sql_unslasher_done_but_error: Die Datenbank wurde konvertiert, aber es traten Fe
 sql_unslasher_continue_with_errors: Fehler wurden kontrolliert und Probleme behoben. Jetzt bitte fortfahren.
 
 
-# instruction infos
-info_generic: Bearbeite die Datenbank.
-info_create_database: Lege Datenbank `%s` an.
-info_drop_database: Lösche Datenbank `%s`.
-info_alter_database: Ändere Datenbank `%s`.
-info_create_table: Lege Tabelle `%s` an.
-info_alter_table: Ändere Tabelle `%s`
-info_drop_table: Lösche Tabelle `%s`.
-info_create_index: Lege Index in Tabelle `%s` an.
-info_drop_index: Lösche Index von Tabelle `%s`
-info_insert: Fülle die Tabelle `%s` mit Daten.
-info_update: Aktualisiere Daten der Tabelle `%s`.
-info_delete: Lösche Daten der Tabelle `%s`.
-info_truncate: Lösche alle Daten der Tabelle `%s`.
-info_select: Hole Daten aus der Tabelle `%s`.
+
 

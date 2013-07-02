@@ -43,7 +43,6 @@ class InstallerPageFiles extends InstallerPage {
         $this->ic->addText('url_self', '?step=files');
         $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
         print $this->ic->get('file_info');        
-
     }
 }
 ?>

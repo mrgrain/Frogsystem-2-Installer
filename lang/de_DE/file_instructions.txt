@@ -1,0 +1,5 @@
+# instruction infos
+info_copy: Kopiere `<b>%s</b>` nach `<b>%s</b>`.
+info_delete: Lösche `<b>%s</b>`.
+info_move: Verschiebe `<b>%s</b>` nach `<b>%s</b>`.
+info_is_writable: Prüfe Schreibrechte für `<b>%s</b>`.

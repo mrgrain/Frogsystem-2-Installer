@@ -1,0 +1,15 @@
+# instruction infos
+info_generic: Bearbeite die Datenbank.
+info_create_database: Lege Datenbank `%s` an.
+info_drop_database: Lösche Datenbank `%s`.
+info_alter_database: Ändere Datenbank `%s`.
+info_create_table: Lege Tabelle `%s` an.
+info_alter_table: Ändere Tabelle `%s`
+info_drop_table: Lösche Tabelle `%s`.
+info_create_index: Lege Index in Tabelle `%s` an.
+info_drop_index: Lösche Index von Tabelle `%s`
+info_insert: Fülle die Tabelle `%s` mit Daten.
+info_update: Aktualisiere Daten der Tabelle `%s`.
+info_delete: Lösche Daten der Tabelle `%s`.
+info_truncate: Lösche alle Daten der Tabelle `%s`.
+info_select: Hole Daten aus der Tabelle `%s`.
