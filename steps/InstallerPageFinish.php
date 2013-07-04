@@ -19,12 +19,8 @@ class InstallerPageFinish extends InstallerPage {
     }
     
     protected function show() {
-        $url = "/";
-        if (isset($_SESSION['url'])) {
-            $url = $_SESSION['url'];
-        }
-        $this->ic->addText('url_website', $url);
-        $this->ic->addText('url_admin_cp', $url.'admin/');
+        $this->ic->addText('url_website', URL);
+        $this->ic->addText('url_admin_cp', URL.'admin/');
         print $this->ic->get('finish');
     }
 }

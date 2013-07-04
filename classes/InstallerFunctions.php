@@ -330,6 +330,23 @@ class InstallerFunctions {
 
         return $cities;
     }  
+    
+    // send mail
+    public function send_mail($from, $to, $subject, $content, $html = false) {
+        $header  = 'From: ' . $from . "\r\n";
+        $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+        $header .= 'X-Sender-IP: ' . $_SERVER['REMOTE_ADDR'] . "\r\n";
+        $header .= 'MIME-Version: 1.0' . "\r\n";
+
+        if ($this->html) {
+            $header .= 'Content-Type: text/html; charset=UTF-8';
+            $content = '<html><body>' . $content . '</body></html>';
+        } else  {
+            $header .= 'Content-Type: text/plain; charset=UTF-8';
+        }
+
+        return @mail($to, "=?UTF-8?B?".base64_encode($subject)."?=", $content, $header);
+    }    
  
 }
 

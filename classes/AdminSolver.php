@@ -12,6 +12,10 @@ class AdminSolver extends Solver {
     private $sql;
     private $ic;
     private $error = array();
+    private $isNew = false;
+    private $user = null;
+    private $mail = null;
+    private $password = null;
     
     public function __construct($ic, $sql) {
         $this->ic = $ic;
@@ -26,6 +30,19 @@ class AdminSolver extends Solver {
         return $this->getSolutions();
     } 
     
+    // access on admin data
+    public function isNew() {
+        return $this->isNew;
+    }
+    public function getUser() {
+        return $this->user;
+    }
+    public function getMail() {
+        return $this->mail;
+    }
+    public function getPassword() {
+        return $this->password;
+    }
     
     // test for existing admin
     public function testAdminExists() {
@@ -85,10 +102,16 @@ class AdminSolver extends Solver {
 			if (!empty($this->error)) {
 				return false;
 			}
-
+            
+            // save in class
+            $this->user = $_POST['user'];
+            $this->mail = $_POST['mail'];
+            $this->password = $_POST['pass'];
+            
 			// create dataset
             $salt = InstallerFunctions::getRandomCode(10);
-			$pass = md5 ( $_POST['pass'].$salt );            
+			$pass = md5 ( $_POST['pass'].$salt );
+            unset($_POST['pass']);
             $id = $this->sql->insertId('user', array(
                 'user_name' => $_POST['user'],
                 'user_password' => $pass,

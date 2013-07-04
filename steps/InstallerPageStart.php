@@ -33,7 +33,6 @@ class InstallerPageStart extends InstallerPage {
             $_SESSION = array();
             InstallerFunctions::writeDBConnectionFile("","","","","");
         }
-        var_dump($_SESSION);
         
         $ic->addText('changelog', $changelog);
         $ic->addText('notes',     $notes);

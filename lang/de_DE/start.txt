@@ -19,7 +19,7 @@ copyright: Copyright
 
 changelog_text:
 
-notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/installer</b> von deinem Webspace zu löschen.
+notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/fs2installer</b> von deinem Webspace zu löschen.
 #/
 #/<b>Sonst ist es Angreifern leicht möglich, die Installation zu manipulieren, zu zerstören oder eingegebene Zugangsdaten auszulesen.</b>
 #/

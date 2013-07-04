@@ -70,6 +70,9 @@ function setup() {
     if (isset($_SESSION['upgrade_from'])) {
       define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
     }
+    if (isset($_SESSION['url'])) {
+      define('URL', $_SESSION['url'], true);
+    }
 }
 
 ?>

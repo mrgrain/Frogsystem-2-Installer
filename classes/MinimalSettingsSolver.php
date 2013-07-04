@@ -12,11 +12,21 @@ class MinimalSettingsSolver extends Solver {
     private $sql;
     private $ic;
     private $error = array();
+    private $url = null;
+    private $protocol = null;
     
     public function __construct($ic, $sql) {
         $this->ic = $ic;
         $this->sql = $sql;
     }
+    
+    // access on url data
+    public function getUrl() {
+        return $this->url;
+    }
+    public function getProtocol() {
+        return $this->protocol;
+    }    
     
     /* Default tests & solutions */             
     public function getDefaultTests() {
@@ -77,6 +87,10 @@ class MinimalSettingsSolver extends Solver {
             $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
             $main = InstallerFunctions::json_array_decode($main);
             $main = InstallerFunctions::json_array_encode($_POST+$main);
+            
+            //save to class
+            $this->url = $_POST['url'];
+            $this->protocol = $_POST['protocol'];
             
             $this->sql->save('config', array('config_name' => 'main', 'config_data' => $main), 'config_name', false);
             $_SESSION['minimal_settings'] = true;
