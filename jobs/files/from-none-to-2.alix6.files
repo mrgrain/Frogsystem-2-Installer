@@ -1,3 +1,4 @@
+IS_WRITABLE  -R ~/styles/
 IS_WRITABLE ./copy/db_connection.php
 COPY -RO "./copy/source/*" ~/
 COPY -O ./copy/db_connection.php ~/config/db_connection.php

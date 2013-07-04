@@ -25,10 +25,9 @@
 <!--section-end::file_info-->
 
 <!--section-start::instruction_element-->
-    <li <!--IF::error-->class="error"<!--ENDIF-->><!--TEXT::instruction-->
-        <!--IF::success--><img src="<!--TEXT::success_img-->" alt="<!--LANG::success-->"><!--ENDIF-->
-        <!--IF::error--><img src="<!--TEXT::error_img-->" alt="<!--LANG::error-->"><!--ENDIF-->
-        <!--IF::error--><br><span class="small"><!--TEXT::error_message--></span><!--ENDIF-->
+    <li <!--IF::error-->class="error"<!--ENDIF-->>
+    <!--TEXT::instruction--><!--IF::success-->&nbsp;<img src="<!--TEXT::success_img-->" alt="<!--LANG::success-->"><!--ENDIF--><!--IF::error-->&nbsp;<img src="<!--TEXT::error_img-->" alt="<!--LANG::error-->"><!--ENDIF-->
+    <!--IF::error--><br><span class="small"><!--TEXT::error_message--></span><!--ENDIF-->
 <!--section-end::instruction_element-->
 
 

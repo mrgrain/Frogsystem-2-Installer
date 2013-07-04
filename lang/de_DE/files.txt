@@ -18,8 +18,8 @@ file_start_instructions_button_with_errors: Trotz Fehler: Bitte fortfahren & Dat
 file_runner_title: Dateien anpassen
 file_runner_info: Es werden jetzt die Dateien angepasst. Falls sich die Seite nicht selbst neulädt, klicke bitte auf &bdquo;Weiter&ldquo;.
 continue_file_operations: Weiter &amp; Ausführung fortsetzen
-file_operations_done_title:
-file_operations_done:
+file_operations_done_title: Dateien anpassen war erfolgreich!
+file_operations_done: Alle notwendigen Änderungen an den Dateien konnten erfolgreich ausgeführt werden.
 file_operations_done_but_error_title: Fehler 
 file_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
 file_operations_retry: Hm, nochmal probieren bitte.

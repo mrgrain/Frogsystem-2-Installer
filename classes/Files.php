@@ -1,28 +1,66 @@
 <?php
-
+/**
+ * @file     Files.php
+ * @folder   /classes
+ * @version  0.2
+ * @author   Sweil
+ *
+ * extended file operations
+ */
+ 
 class Files {
     
     // COPY (-RO)? "soruce" "destination"
     public static function copy($source, $destination, $recursive = false, $overwrite = false) {
-        return false;
-        // if recursive
-            // source file
-                // continue
-            // source folder
-                // target folder
-                    // copy each file and folder
-                // target file
-                    // => error
-            
-
+        // source is array
+        if (is_array($source)) {
+            $result = true;
+            foreach($source as $s) {
+                $result = $result && self::copy($s, $destination, $recursive, $overwrite);
+            }
+            return $result;
+        }
+        
         // source file
+        if (is_file($source)) {
+            
+            // target folder
+                // => change destination path to file name and call myself
+            if(is_dir($destination)) {
+                $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
+                return self::copy($source, $target_path, $recursive, $overwrite);
+                
+
             //target file
-                // => copy (or overwrite?) an rename
-            // folder
-                // => copy (or overwrite?) same name
-        // source folder
-            // => error
+                // => copy (or overwrite?) an rename     
+            } elseif ($overwrite || !file_exists($destination)) {           
+                return @copy($source, $destination);
+            }
+            
+        // if recursive
+            // source folder
+        } elseif (is_dir($source) && $recursive) {
+            // target does not existst
+                // create folder and call myself                  
+            if (!file_exists($destination)) {
+                if (!@mkdir($destination, 0777, $recursive));
+                    return false;
+                return self::copy($source, $destination, $recursive, $overwrite);
+  
+            // target folder
+                // copy each file and folder 
+            } elseif (is_dir($destination)) {
+                $copied = true;
+                foreach(scandir($source) as $entry) {                    
+                    if ($entry != "." && $entry != "..")
+                        $copied = $copied && self::copy($source.DIRECTORY_SEPARATOR.$entry, $recursive, $overwrite);
+                }
+                return $copied;
+            }
+        }
+        return false;
     }
+    
     
     // DELETE (-R)? "path"
     public static function delete($path, $recursive = false) {
@@ -48,7 +86,7 @@ class Files {
                     // => delete recursivly                
                 $removed = true;
                 foreach(scandir($path) as $entry) {                    
-                    if ($entry != "." || $entry != "..")
+                    if ($entry != "." && $entry != "..")
                         $removed = $removed && self::delete($path.DIRECTORY_SEPARATOR.$entry, true);
                 }
                 return $removed && rmdir($path);
@@ -101,7 +139,7 @@ class Files {
         }
         
         // recursively ?
-        if ($recursive && is_dir($path)) {var_dump($path);
+        if ($recursive && is_dir($path)) {
         // folder & recursive
             // => each file and folder and subfolders are writable
             $writable = is_writable($path);
@@ -109,8 +147,8 @@ class Files {
                 if (!$writable)
                     break;
                 
-                if ($entry != "." || $entry != "..")
-                    $writable = $writable && self::is_writable($path.DIRECTORY_SEPARATOR.$entry);
+                if ($entry != "." && $entry != "..")
+                    $writable = $writable && self::is_writable($path.DIRECTORY_SEPARATOR.$entry, $recursive);
             }
             return $writable;
             
@@ -142,14 +180,14 @@ class Files {
             $shortpath = substr($path,0,-1);
             if (is_dir($shortpath)) {
                 $pathes = array($shortpath);
-                foreach(scandir($shortpath) as $entry) {                    
-                    if ($entry != "." || $entry != "..")
+                foreach(scandir($shortpath) as $entry) {                  
+                    if ($entry != "." && $entry != "..") {
                         $pathes[] = $shortpath.$entry;
+                    }
                 }
-                $path = $pathes;
+                return $pathes;
             }
         }
-        
         return $path;
     }    
     

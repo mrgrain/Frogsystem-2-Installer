@@ -7,6 +7,7 @@
  *
  * run a list of FileOperations instructions
  */
+ 
 class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     
     private $dir;
@@ -77,20 +78,20 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     protected function getInfo($inst) {
         switch ($inst->command) {
             case 'copy':
-                if (is_array($inst->source)) $inst->source = $inst->source[0].'*';
-                return sprintf($this->lang->get('info_'.$inst->command), $inst->source, $inst->destination);
+                $source = (is_array($inst->source))?$inst->source[0].'*':$inst->source;
+                return sprintf($this->lang->get('info_'.$inst->command), $source, $inst->destination);
                 break;
             case 'delete':
-                if (is_array($inst->path)) $inst->path = $inst->path[0].'*';
-                return sprintf($this->lang->get('info_'.$inst->command),$inst->path);
+                $path = (is_array($inst->path))?$inst->path[0].'*':$inst->path;
+                return sprintf($this->lang->get('info_'.$inst->command), $path);
                 break;
             case 'move':
-                if (is_array($inst->source)) $inst->source = $inst->source[0].'*';
-                return sprintf($this->lang->get('info_'.$inst->command),$inst->source, $inst->destination);
+                $source = (is_array($inst->source))?$inst->source[0].'*':$inst->source;
+                return sprintf($this->lang->get('info_'.$inst->command),$source, $inst->destination);
                 break;
             case 'is_writable':
-                if (is_array($inst->path)) $inst->path = $inst->path[0].'*';
-                return sprintf($this->lang->get('info_'.$inst->command),$inst->path);
+                $path = (is_array($inst->path))?$inst->path[0].'*':$inst->path;
+                return sprintf($this->lang->get('info_'.$inst->command), $path);
                 break;
         }        
         return false;
@@ -130,7 +131,7 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
         if (isset($matches['first'])) {
             $matches['first'] = Files::resolve_path($matches['first'], true);
         }
-        
+
         // switch commands
         $res = new StdClass();
         $res->command = $command;

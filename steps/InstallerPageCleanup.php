@@ -100,8 +100,7 @@ class InstallerPageCleanup extends InstallerPage {
             }
         } catch (Exception $e) {
         } 
-        var_dump($files_success, $sql_sucess);
-        var_dump(!($do_any && $files_success && $sql_sucess));
+
         // nothing todo => go on
         if (empty($sql_list) && empty($files_list)) {
             header("location: {$_SERVER['PHP_SELF']}?step=finish");
