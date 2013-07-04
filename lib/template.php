@@ -122,9 +122,8 @@ class template
         // Wenn der Section-Cache wurde noch nicht befüllt wurde => alle Sections in den Cache laden
         if ( count ( $this->sections ) <= 0 ) {
             $file_path = INSTALLER_PATH . 'styles/' . $this->getStyle() . '/' . $this->getFile (); // Pfad zur Template-Datei
-            $ACCESS = new fileaccess (); // Object für Dateizugriff erzeugen
             $search_expression = '/<!--section-start::(.*)-->(.*)<!--section-end::(\1)-->/Uis'; // Regulärer Ausruck um Sections auszuwählen
-            $number_of_sections = preg_match_all ( $search_expression, $ACCESS->getFileData($file_path), $sections ); // Regulären Ausruck ausführen, Anzahl in $number_of_sections, Inhalte in $sections
+            $number_of_sections = preg_match_all ( $search_expression, file_get_contents($file_path), $sections ); // Regulären Ausruck ausführen, Anzahl in $number_of_sections, Inhalte in $sections
             $this->setSections ( array_flip ( $sections[1] ) ); // array_flip damit die Keys auch die Section-Namen sind
             $this->setSectionsContent ( $sections[2] ); // Section Inhalte speichern
         }
