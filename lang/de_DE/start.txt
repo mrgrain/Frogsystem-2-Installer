@@ -18,42 +18,43 @@ introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreiche
 start_installation: Hurra, lass uns loslegen!
 
 
-changelog_text:
-Features:
-- Kommentarliste mit lernender Spam-Erkennung
-- Neues Installations- & Update-Tool
-- Applet für Top-Downloads
-- php5.4 Support
-- viele neue Englische Sprachdateien
-- leicht veränderter Style im Admin-CP 
-- kleines Update für den lightfrog-Style
-- erweitertes System für Inhaltsbilder mit Kategorien und FTP-Upload
-- kleines Tool zur Verwaltung der Datenbank-Tabellen
-- rudimentäres System für poor-men-cronjobs
-- neue Feed-Generatoren
-- Passwort vergessen?-Funktion
-- Farbauswahl-Tool hinzugefügt
-- Referrer-Statistik kann deaktiviert oder automatisch geleert werden
-- einfache News-Suche im Admin-CP
-- verbesserte Suche
-- Suchmaschinen optimierte URLs (SEO-URLs)
-- Datums- ($DATE) und URL-Funktion ($URL) für Templates und Inhalte
-- Applets in Inhalten darstellbar ($APP)
-- News-Links mit JavaScript
-- Zeitzone für die Webseite kann/muss ausgewählt werden
-- Einstellung für Standard-Größe des Video-Players
-- automatisch eingebundene CSS-Datei bei deaktiviertem JavaScript
-- konfigurierbarer Ladezeitpunkt für Applets
-- viele kleine Arbeits-Erleichterungen
-Sicherheit:
-- neuer Datenbank-Treiber
-- einige Angriffspunkte für SQL-Injections entfernt
-- Admin-CP wird besser vor unautorisierten Zugriffen geschützt
-Bug-Fixes:
-- jQuery aktualisiert
-- sehr viele Notice- und Warning-Meldungen beseitigt
-- Download-Mirrors werden wieder als Mirrors gespeichert
-- ...
+changelog_text:<b>Neue Features:</b>
+#/ - Kommentarliste mit lernender Spam-Erkennung
+#/ - neues Installations- & Update-Tool
+#/ - Applet für Top-Downloads
+#/ - php5.4 Support
+#/ - viele neue Englische Sprachdateien
+#/ - leicht veränderter Style im Admin-CP 
+#/ - kleines Update für den lightfrog-Style
+#/ - erweitertes System für Inhaltsbilder mit Kategorien und FTP-Upload
+#/ - kleines Tool zur Verwaltung der Datenbank-Tabellen
+#/ - rudimentäres System für poor-men-cronjobs
+#/ - neue Feed-Generatoren
+#/ - Passwort vergessen?-Funktion
+#/ - Farbauswahl-Tool hinzugefügt
+#/ - Referrer-Statistik kann deaktiviert oder automatisch geleert werden
+#/ - einfache News-Suche im Admin-CP
+#/ - verbesserte Suche
+#/ - Suchmaschinen optimierte URLs (SEO-URLs)
+#/ - Datums- ($DATE) und URL-Funktion ($URL) für Templates und Inhalte
+#/ - Applets in Inhalten darstellbar ($APP)
+#/ - News-Links mit JavaScript
+#/ - Zeitzone für die Webseite kann/muss ausgewählt werden
+#/ - Einstellung für Standard-Größe des Video-Players
+#/ - automatisch eingebundene CSS-Datei bei deaktiviertem JavaScript
+#/ - konfigurierbarer Ladezeitpunkt für Applets
+#/ - viele kleine Arbeits-Erleichterungen
+#/
+#/<b>Sicherheits-Verbesserungen:</b>
+#/ - neuer Datenbank-Treiber
+#/ - einige Angriffspunkte für SQL-Injections entfernt
+#/ - Admin-CP wird besser vor unautorisierten Zugriffen geschützt
+#/
+#/<b>Bug-Fixes:</b>
+#/ - jQuery aktualisiert
+#/ - sehr viele Notice- und Warning-Meldungen beseitigt
+#/ - Download-Mirrors werden wieder als Mirrors gespeichert
+#/ - ...
 
 
 
