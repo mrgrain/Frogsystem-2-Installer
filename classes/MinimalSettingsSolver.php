@@ -139,7 +139,7 @@ class MinimalSettingsSolver extends Solver {
         } else {
             $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
             $main = InstallerFunctions::json_array_decode($main);
-            $data = InstallerFunctions::killhtml(array_intersect_key($main, $data)) + $data;
+            $data = array_intersect_key($main, $data) + $data;
 
             // guess url if empty
             if(empty($data['url'])) {                
@@ -178,7 +178,7 @@ class MinimalSettingsSolver extends Solver {
             // guess timezone if empty
             if(empty($data['timezone'])) {
                 $data['timezone'] = date_default_timezone_get(); // in worst case this is UTC
-            }            
+            }
         }
         
         // add trailing slash to url
@@ -187,6 +187,7 @@ class MinimalSettingsSolver extends Solver {
         }        
         
 		// show stuff
+        $data = InstallerFunctions::killhtml($data);  
         $this->ic->addText('title', $data['title']);
         $this->ic->addCond('protocol_http', $data['protocol'] === 'http://');
         $this->ic->addCond('protocol_https', $data['protocol'] === 'https://');
