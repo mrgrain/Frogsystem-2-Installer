@@ -126,20 +126,30 @@ class MinimalSettingsSolver extends Solver {
             $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
             $main = InstallerFunctions::json_array_decode($main);
             $data = InstallerFunctions::killhtml(array_intersect_key($main, $data)) + $data;
-            
+
             // guess url if empty
-            if(empty($data['url'])) {
+            if(empty($data['url'])) {                
+                // guess from install_to
+                // strip non web available part from install_to, append rest du serverroot
+                $server_root = realpath(str_replace($_SERVER['PHP_SELF'], '', $_SERVER['SCRIPT_FILENAME']));
+                $install_to = realpath(INSTALL_TO);
+                if (false !== $server_root && false !== $install_to) {
+                    $scriptpath = str_replace($server_root, '',  $install_to);
+                    $scriptpath = str_replace(array('\\', '//'), '/', $scriptpath);
+                } 
+                
                 // guess one folder up
-                $scriptlist = explode('/',$_SERVER['PHP_SELF']);
-                $scriptname = end($scriptlist);
-                $scriptpath = str_replace('/'.INSTALLER_LOCATION.'a/'.$scriptname,'',$_SERVER['PHP_SELF']);
+                else {
+                    $scriptlist = explode('/',$_SERVER['PHP_SELF']);
+                    $scriptname = end($scriptlist);
+                    $scriptpath = str_replace('/'.INSTALLER_LOCATION.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
+                }
                 
                 // guess direct in domain
-                if ($scriptpath == $_SERVER['PHP_SELF'])
+                if ($scriptpath == @dirname($_SERVER['PHP_SELF'])) {
                     $scriptpath = "";
-                
-                // guess from install_to TODO
-                    
+                }
+
                 // prefill
                 $data['url'] = $_SERVER['SERVER_NAME'].$scriptpath;
             }

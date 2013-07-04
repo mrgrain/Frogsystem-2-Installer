@@ -1,6 +1,4 @@
 <?php
-//TODO: Beinhaltet fileaccess
-
 /**
  * @file     class_adminpage.php
  * @folder   /libs

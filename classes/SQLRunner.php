@@ -27,7 +27,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
     }
     
     public function load($file) {
-        //TODO Generic Fileaccess FTP/NOT_FTP
+        //TODO Generic Fileaccess Class
         $lines = file($this->dir.$file);
         $last_instruction = "";
         foreach ($lines as $line) {

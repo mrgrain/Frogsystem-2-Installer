@@ -25,7 +25,7 @@ function phpinit ($session = true, $header = false, $libloader = null) {
         $libloader = create_function ('$classname', '
             if (false !== (@include_once(INSTALLER_PATH . \'steps/\'.$classname.\'.php\')))
                 return;
-            if (false !== (@include_once(INSTALLER_PATH . \'lib/.$classname.\'.php\')))
+            if (false !== (@include_once(INSTALLER_PATH . \'lib/\'.$classname.\'.php\')))
                 return;
             if (false !== (@include_once(INSTALLER_PATH . \'classes/\'.$classname.\'.php\')))
                 return;');

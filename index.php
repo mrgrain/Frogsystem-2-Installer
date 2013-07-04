@@ -5,11 +5,7 @@ phpinit();
 debug();
 setup();
 
-// todo
-define('SLASH', false, true);
-
-
-// detect page
+// detect step
 if (!isset($_REQUEST['step']) || empty($_REQUEST['step'])) {
     $go = 'start';
 } else {

@@ -1,6 +1,4 @@
 <?php
-//TODO: Beinhaltet fileaccess
-
 /**
 * @file     class_template.php
 * @folder   /libs/

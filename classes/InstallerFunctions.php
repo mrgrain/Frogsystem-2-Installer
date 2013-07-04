@@ -19,7 +19,7 @@ class InstallerFunctions {
         $file[10] = '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL;
         $file[12] = '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL;
         
-        // TODO fileaccess
+        // TODO Generic Fileaccess Class
         return file_put_contents($file_path, $file);
     }
     

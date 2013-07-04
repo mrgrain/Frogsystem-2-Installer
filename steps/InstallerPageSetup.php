@@ -27,10 +27,10 @@ class InstallerPageSetup extends InstallerPage {
             $admin_solver = new AdminSolver($this->ic, $sql);
             if (!$admin_solver->solve()) { return; };
             // TODO: send email
-            
+          
             //  settings migration solver
             $migration_solver = new SettingsMigrationSolver($sql);
-            if (!$migration_solver->solve()) { return; };
+            if (!$migration_solver->solve()) { var_dump("d");return; };
 
             //  mininmal settings solver
             $settings_solver = new MinimalSettingsSolver($this->ic, $sql);

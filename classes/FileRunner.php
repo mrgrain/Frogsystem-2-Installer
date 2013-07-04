@@ -27,7 +27,7 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     }
     
     public function load($file) {
-        //TODO Generic Fileaccess FTP/NOT_FTP
+        //TODO Generic Fileaccess Class
         $lines = file($this->dir.$file);
         foreach ($lines as $line) {
             if ("" != trim($line)) {

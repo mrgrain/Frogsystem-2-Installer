@@ -48,13 +48,6 @@ class sql {
     // save sql data
     public function escape ($VAL) {
 
-        // remove fucking magic quotes
-        if (get_magic_quotes_gpc())
-            $VAL = stripslashes($VAL);
-
-        // fallback
-        if (SLASH)
-            $VAL = addslashes($VAL);
 
         // save data
         if (is_numeric($VAL)) {
@@ -76,10 +69,6 @@ class sql {
 
     // "unsave" sql data (stripslash if on old systems)
     public static function unslash ($VAL) {
-        // fallback
-        if (SLASH) {
-            $VAL = stripslashes($VAL);
-        }
         return $VAL;
     }
 

@@ -146,6 +146,9 @@ class SettingsMigrationSolver extends PairSolver {
             } else {
                 $config['protocol'] = 'http://';
             }
+            
+            //set lang
+            $config['language_text'] = InstallerFunctions::detect_language();
         }
         
         // not possible in property
@@ -301,9 +304,9 @@ class SettingsMigrationSolver extends PairSolver {
         'cat_pic_x' => '150',
         'cat_pic_y' => '150',
         'cat_pic_size' => '1024',
-        'com_rights' => '2', //TODO check default value
-        'com_antispam' => '1', //TODO check default value
-        'com_sort' => 'DESC', //TODO check default value
+        'com_rights' => '2', 
+        'com_antispam' => '2',
+        'com_sort' => 'DESC',
         'acp_per_page' => '25',
         'acp_view' => '2'
     );
@@ -396,7 +399,7 @@ class SettingsMigrationSolver extends PairSolver {
         'show_favicon' => '0',
         'home' => '0',
         'home_text' => '',
-        'language_text' => 'de_DE', //TODO: Set from installer settings
+        'language_text' => 'de_DE',
         'feed' => 'rss20',
         'timezone' => '',
         'auto_forward' => '4',
@@ -424,7 +427,7 @@ class SettingsMigrationSolver extends PairSolver {
         'cat_pic_y' => '150',
         'cat_pic_size' => '1024',
         'com_rights' => '2',
-        'com_antispam' => '1', //TODO check default value
+        'com_antispam' => '2',
         'com_sort' => 'DESC',
         'news_headline_lenght' => '20',
         'news_headline_ext' => ' ...',
@@ -436,7 +439,7 @@ class SettingsMigrationSolver extends PairSolver {
     // `frogsystem_alix5`.`fs2_poll_config`
     private $pollsConfig = array(
         'answerbar_width' => '100',
-        'answerbar_type' => '1' // TODO check default value
+        'answerbar_type' => '0'
     );
 
     // `frogsystem_alix5`.`fs2_press_config`
