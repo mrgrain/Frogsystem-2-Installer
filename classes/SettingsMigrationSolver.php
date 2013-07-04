@@ -14,7 +14,7 @@ class SettingsMigrationSolver extends PairSolver {
 		'affiliatesConfig', 'articlesConfig', 'captchaConfig', 'downloadsConfig', 'galleryConfig', 
 		'groupsConfig', 'mainConfig', 'newsConfig', 'pollsConfig', 'pressConfig', 'previewImagesConfig', 
 		'searchConfig', 'usersConfig', 'videoPlayerConfig',
-        'systemConfig', 'envConfig', 'infoConfig'
+        'systemConfig', 'envConfig', 'infoConfig', 'cronjobConfig'
 	);
     
     public function __construct($sql) {
@@ -78,6 +78,9 @@ class SettingsMigrationSolver extends PairSolver {
     }
     public function testInfoConfig() {
 		return $this->genericConfigTester('info');
+    }
+    public function testCronjobConfig() {
+		return $this->genericConfigTester('cronjob');
     }
     
     
@@ -230,6 +233,9 @@ class SettingsMigrationSolver extends PairSolver {
     public function solutionInfoConfig() {
         return $this->genericFillConfig('info', array(), 'startup');
     }
+    public function solutionCronjobConfig() {
+        return $this->genericFillConfig('cronjob', array(), 'startup');
+    }
     
 	// generic config tester
     private function genericConfigTester($name) {
@@ -282,6 +288,18 @@ class SettingsMigrationSolver extends PairSolver {
     private $systemConfig = array('var_loop' => '20');    
     private $envConfig = array();    
     private $infoConfig = array();    
+    private $cronjobConfig = array(
+        'last_cronjob_time' => '0',
+        'last_cronjob_time_daily' => '0',
+        'last_cronjob_time_hourly' => '0',
+        'search_index_update' => '2',
+        'ref_cron' => '1',
+        'ref_days' => '7',
+        'ref_hits' => '5',
+        'ref_contact' => 'first',
+        'ref_age' => 'older',
+        'ref_amount' => 'less'
+    );    
     
 
     // `frogsystem_alix5`.`fs2_partner_config`
@@ -412,7 +430,7 @@ class SettingsMigrationSolver extends PairSolver {
         'time' => 'H:i \U\h\r',
         'datetime' => 'd.m.Y, H:i \U\h\r',
         'page' => '<div align="center" style="width:270px;"><div style="width:70px; float:left;">{..prev..}&nbsp;</div>Seite <b>{..page_number..}</b> von <b>{..total_pages..}</b><div style="width:70px; float:right;">&nbsp;{..next..}</div></div>',
-        'page_next' => '|&nbsp<a href="{..url..}">weiter&nbsp»</a>',
+        'page_next' => '|&nbsp;<a href="{..url..}">weiter&nbsp»</a>',
         'page_prev' => '<a href="{..url..}">«&nbsp;zurück</a>&nbsp|'
     );
 
