@@ -3,6 +3,10 @@
 <!--LANG::introduction-->
 <p class="space both center"><a class="button green large" href="?step=target">&raquo; <!--LANG::start_installation--></a></p>
 
+<!--IF::session-->
+<p class="small space both">(<!--LANG::reset_installer_info--> <a href="?step=start&amp;reset"><!--LANG::reset_installer--></a>)</p>
+<!--ENDIF-->
+
 <p class="big"><span>&raquo;</span> <a class="big" href="#changelog"><!--LANG::changelog--></a></p>
 <div id="changelog" class="hidden"><!--TEXT::changelog--></div>
 
@@ -11,10 +15,6 @@
 
 <p class="big"><span>&raquo;</span> <a class="big" href="#copyright"><!--LANG::copyright--></a></p>
 <div id="copyright" class="hidden"><!--TEXT::copyright--></div>
-
-<!--IF::session-->
-<p class="small space attop">(<!--LANG::reset_installer_info--> <a href="?step=start&amp;reset"><!--LANG::reset_installer--></a>)</p>
-<!--ENDIF-->
 
 <script type="text/javascript">    
     $("a[href^=#]").click(function(e) {    

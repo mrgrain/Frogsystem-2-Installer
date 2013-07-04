@@ -4,6 +4,10 @@
 start_title: Installations- & Update-Tool 
 reset_installer_info: Es sind bereits Daten zu dieser Installation gespeichert. Das kann daher kommen, dass du dieses Tool nicht zum ersten Mal ausführst. Falls Probleme auftreten, kannst du das Tool ganz zurücksetzen:
 reset_installer: Installations-Daten löschen
+changelog: Change Log
+notes: Installationshinweise
+copyright: Copyright
+
 
 welcome: Herzlich Willkommen zum Frogsystem 2!
 introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreichende <b>Änderungen im Hintergrund</b> durchgeführt, die das System für die Zukunft besser aufstellen.</p>
@@ -13,11 +17,46 @@ introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreiche
 #/<p>Dieser <b>Assistent</b> wird dich durch die <b>Installation und Erstkonfiguration</b> führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch. Sobald du die Installtion startest, erklärst du dich damit einverstanden.</p>
 start_installation: Hurra, lass uns loslegen!
 
-changelog: Change Log
-notes: Installationshinweise
-copyright: Copyright
 
 changelog_text:
+Features:
+- Kommentarliste mit lernender Spam-Erkennung
+- Neues Installations- & Update-Tool
+- Applet für Top-Downloads
+- php5.4 Support
+- viele neue Englische Sprachdateien
+- leicht veränderter Style im Admin-CP 
+- kleines Update für den lightfrog-Style
+- erweitertes System für Inhaltsbilder mit Kategorien und FTP-Upload
+- kleines Tool zur Verwaltung der Datenbank-Tabellen
+- rudimentäres System für poor-men-cronjobs
+- neue Feed-Generatoren
+- Passwort vergessen?-Funktion
+- Farbauswahl-Tool hinzugefügt
+- Referrer-Statistik kann deaktiviert oder automatisch geleert werden
+- einfache News-Suche im Admin-CP
+- verbesserte Suche
+- Suchmaschinen optimierte URLs (SEO-URLs)
+- Datums- ($DATE) und URL-Funktion ($URL) für Templates und Inhalte
+- Applets in Inhalten darstellbar ($APP)
+- News-Links mit JavaScript
+- Zeitzone für die Webseite kann/muss ausgewählt werden
+- Einstellung für Standard-Größe des Video-Players
+- automatisch eingebundene CSS-Datei bei deaktiviertem JavaScript
+- konfigurierbarer Ladezeitpunkt für Applets
+- viele kleine Arbeits-Erleichterungen
+Sicherheit:
+- neuer Datenbank-Treiber
+- einige Angriffspunkte für SQL-Injections entfernt
+- Admin-CP wird besser vor unautorisierten Zugriffen geschützt
+Bug-Fixes:
+- jQuery aktualisiert
+- sehr viele Notice- und Warning-Meldungen beseitigt
+- Download-Mirrors werden wieder als Mirrors gespeichert
+- ...
+
+
+
 
 notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/fs2installer</b> von deinem Webspace zu löschen.
 #/
@@ -29,6 +68,7 @@ notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu ge
 #/
 #/<b>IN KEINEM FALL SIND DIE AUTOREN UND/ODER COPYRIGHTINHABER DER SOFTWARE FÜR SCHÄDEN UND/ODER RECHTSVERLETZUNGEN JEGLICHER ART VERANTWORTLICH, DIE DURCH DIE NUTZUNG DER SOFTWARE ENTSTEHEN.</b>
 
+
 copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
 #/
 #/-----------------------------------------------------------
@@ -37,10 +77,10 @@ copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frog
 #/
 #/<b>Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland</b>
 #/Eine <b>Zusammenfassung</b> des Lizenzvertrags <b>in allgemeinverständlicher Sprache</b> kann unter dieser Internet-Adresse abgerufen werden:
-#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">»ttp://creativecommons.org/licenses/by-sa/3.0/de/</a>
+#/» <a href="http://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/de/</a>
 #/
 #/Der <b>vollständige Lizenzvertrag</b> ist unter dieser Adresse zu finden:
-#/<a href="http://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">»http://creativecommons.org/licenses/by-sa/3.0/de/legalcode</a>
+#/» <a href="http://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/de/legalcode</a>
 #/
 #/-----------------------------------------------------------
 #/
@@ -61,28 +101,50 @@ copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frog
 #/Lizenztext: <a href="http://creativecommons.org/licenses/by-sa/3.0/deed" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/deed</a>
 #/
 #/<b>jQuery</b>
-#/Version 1.4.2 | Copyright (c) 2010 John Resig
-#/Homepage: <a href="http://jquery.com" target="_blank">http://jquery.com</a>
-#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/Version 1.10.2 | Copyright (c) 2005, 2013 jQuery Foundation, Inc.
+#/Homepage: <a href="http://jquery.com" target="_blank">https://jquery.org</a>
+#/Dateien: /resources/jquery/jquery.min.js
 #/Lizenz: The MIT License
-#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/Lizenztext: <a href="https://jquery.org/license/" target="_blank">https://jquery.org/license/</a>
 #/
-#/<b>Sizzle.js</b> (als Teil von jQuery)
-#/Copyright 2010, The Dojo Foundation
-#/Homepage: <a href="http://sizzlejs.com" target="_blank">http://sizzlejs.com</a>
-#/Dateien: /resources/jquery/jquery-1.4.min.js (nur entsprechend gekennzeichnete Teile)
+#/<b>jQuery UI</b>
+#/Version 1.10.3 | Copyright (c) 2013 jQuery Foundation and other contributors
+#/Homepage: <a href="http://jqueryui.com" target="_blank">http://jqueryui.com</a>
+#/Dateien: /resources/jquery/jquery-ui.min.js
 #/Lizenz: The MIT License
-#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/Lizenztext: <a href="https://jquery.org/license/" target="_blank">https://jquery.org/license/</a>
 #/
 #/<b>codemirror</b>
-#/Copyright (c) 2007-2009 Marijn Haverbeke
-#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/" target="_blank">http://marijn.haverbeke.nl/codemirror/</a>
+#/Version 1.0 | Copyright (c) 2007-2010 Marijn Haverbeke
+#/Homepage: <a href="http://codemirror.net/1/" target="_blank">http://codemirror.net/1/</a>
 #/Dateien: /resources/codemirror/* (ausgenommen /resources/codemirror/contrib/*)
-#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/LICENSE</a>
+#/Lizenztext: <a href="http://codemirror.net/1/LICENSE" target="_blank">http://codemirror.net/1/LICENSE</a>
 #/
 #/<b>codemirror PHP Parser</b> (als Teil von codemirror)
 #/Copyright (c) 2008-2009, Yahoo! Inc.
-#/Homepage: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/index.html" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/index.html</a>
+#/Homepage: <a href="http://codemirror.net/1/contrib/php/" target="_blank">http://codemirror.net/1/contrib/php/</a>
 #/Dateien: /resources/codemirror/contrib/php/*
 #/Lizenz: New BSD License
-#/Lizenztext: <a href="http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE" target="_blank">http://marijn.haverbeke.nl/codemirror/contrib/php/LICENSE</a>
+#/Lizenztext: <a href="http://codemirror.net/1/contrib/php/LICENSE" target="_blank">http://codemirror.net/1/contrib/php/LICENSE</a>
+#/
+#/<b>Color Picker - jQuery plugin</b>
+#/Copyright (c) Stefan Petre
+#/Homepage: <a href="http://www.eyecon.ro/colorpicker/" target="_blank">http://www.eyecon.ro/colorpicker/</a>
+#/Dateien: /resources/colorpicker/*
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
+#/
+#/<b>Services_JSON & jsonwrapper</b>
+#/Copyright (c) 2005 Michal Migurski & thelinuxlich
+#/Homepage (Services_JSON): <a href="hhttp://pear.php.net/pepr/pepr-proposal-show.php?id=198" target="_blank">http://pear.php.net/pepr/pepr-proposal-show.php?id=198</a>
+#/Homepage (jsonwrapper): <a href="https://github.com/thelinuxlich/phpdao/tree/master/jsonwrapper" target="_blank">https://github.com/thelinuxlich/phpdao/tree/master/jsonwrapper</a>
+#/Dateien: /resources/jsonwrapper/*
+#/Lizenz: The BSD 2-Clause License
+#/Lizenztext: <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">http://www.opensource.org/licenses/bsd-license.php</a>
+#/
+#/<b>b8</b>
+#/Version 0.6 | Copyright (c) 2006-2012 Tobias Leupold <tobias.leupold@web.de>
+#/Homepage: <a href="http://nasauber.de/opensource/b8/" target="_blank">http://nasauber.de/opensource/b8/</a>
+#/Dateien: /resources/spamdetector/*
+#/Lizenz: GNU Lesser General Public License (LGPL), Version 2.1
+#/Lizenztext: <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" target="_blank">http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</a>
