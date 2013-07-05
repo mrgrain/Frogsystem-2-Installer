@@ -332,13 +332,20 @@ class InstallerFunctions {
     }  
     
     // send mail
-    public function send_mail($from, $to, $subject, $content, $html = false) {
+    public static function send_mail($from, $to, $subject, $content, $html = false) {
         $header  = 'From: ' . $from . "\r\n";
         $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
         $header .= 'X-Sender-IP: ' . $_SERVER['REMOTE_ADDR'] . "\r\n";
         $header .= 'MIME-Version: 1.0' . "\r\n";
 
-        if ($this->html) {
+        if (!self::detectUTF8($content)) {
+            $content = utf8_encode($content);
+        }
+        if (!self::detectUTF8($subject)) {
+            $subject = utf8_encode($subject);
+        }
+
+        if ($html) {
             $header .= 'Content-Type: text/html; charset=UTF-8';
             $content = '<html><body>' . $content . '</body></html>';
         } else  {
@@ -347,6 +354,20 @@ class InstallerFunctions {
 
         return @mail($to, "=?UTF-8?B?".base64_encode($subject)."?=", $content, $header);
     }    
+    
+    // thanks to chris@w3style.co.uk
+    // http://www.php.net/manual/en/function.mb-detect-encoding.php#68607
+    public static function detectUTF8($string) {
+        return preg_match('%(?:
+        [\xC2-\xDF][\x80-\xBF]        # non-overlong 2-byte
+        |\xE0[\xA0-\xBF][\x80-\xBF]               # excluding overlongs
+        |[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}      # straight 3-byte
+        |\xED[\x80-\x9F][\x80-\xBF]               # excluding surrogates
+        |\xF0[\x90-\xBF][\x80-\xBF]{2}    # planes 1-3
+        |[\xF1-\xF3][\x80-\xBF]{3}                  # planes 4-15
+        |\xF4[\x80-\x8F][\x80-\xBF]{2}    # plane 16
+        )+%xs', $string);
+    }
  
 }
 

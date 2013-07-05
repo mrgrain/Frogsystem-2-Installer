@@ -30,19 +30,30 @@ class InstallerPageSetup extends InstallerPage {
             //  mininmal settings solver
             $settings_solver = new MinimalSettingsSolver($this->ic, $sql);
             if (!$settings_solver->solve()) { return; };
-            
-            // url and proto to session
+
+            // url and protocol to session
             if (!is_null($settings_solver->getUrl()) && !is_null($settings_solver->getProtocol())) {
                 $_SESSION['url'] = $settings_solver->getProtocol().$settings_solver->getUrl();
             }
-            unset($settings_solver);
-        
+            if (!is_null($settings_solver->getAdminMail())) {
+                $_SESSION['admin_mail'] = $settings_solver->getAdminMail();
+            }
+            
             // admin
             $admin_solver = new AdminSolver($this->ic, $sql);
             if (!$admin_solver->solve()) { return; };
-            
+
             // generate & send email
             if ($admin_solver->isNew()) {
+                // fallback
+                if (!isset($_SESSION['url']) || empty($_SESSION['url'])) {
+                    $_SESSION['url'] = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']);
+                }                
+                if (!isset($_SESSION['admin_mail']) || empty($_SESSION['admin_mail'])) {
+                    $_SESSION['admin_mail'] = $admin_solver->getMail();
+                }
+                
+                // content
                 $mail = new InstallerLang($this->local, 'mail');
                 $content = $mail->get('content');
                 $content = str_replace("{..url..}", $_SESSION['url'], $content);      
@@ -50,11 +61,12 @@ class InstallerPageSetup extends InstallerPage {
                 $content = str_replace("{..password..}", $admin_solver->getPassword(), $content);
                 
                 // send email
-                send_mail($admin_solver->getMail(), $admin_solver->getMail(), $mail->get('subject'), $content);
+                InstallerFunctions::send_mail($_SESSION['admin_mail'], $admin_solver->getMail(), $mail->get('subject'), $content);
+                unset($_SESSION['admin_mail']);
             }
-            unset($admin_solver);    
             
             // nothing more todo => go to cleanup
+            unset($admin_solver, $settings_solver);       
             unset($_SESSION['minimal_settings']); // important, so user can navigate back        
             header("location: {$_SERVER['PHP_SELF']}?step=files"); // redirect
             exit;

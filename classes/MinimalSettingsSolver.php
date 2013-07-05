@@ -14,6 +14,7 @@ class MinimalSettingsSolver extends Solver {
     private $error = array();
     private $url = null;
     private $protocol = null;
+    private $admin_mail = null;
     
     public function __construct($ic, $sql) {
         $this->ic = $ic;
@@ -26,6 +27,9 @@ class MinimalSettingsSolver extends Solver {
     }
     public function getProtocol() {
         return $this->protocol;
+    }    
+    public function getAdminMail() {
+        return $this->admin_mail;
     }    
     
     /* Default tests & solutions */             
@@ -91,6 +95,7 @@ class MinimalSettingsSolver extends Solver {
             //save to class
             $this->url = $_POST['url'];
             $this->protocol = $_POST['protocol'];
+            $this->admin_mail = $_POST['admin_mail'];
             
             $this->sql->save('config', array('config_name' => 'main', 'config_data' => $main), 'config_name', false);
             $_SESSION['minimal_settings'] = true;

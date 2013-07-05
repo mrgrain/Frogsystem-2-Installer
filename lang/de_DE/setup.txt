@@ -1,6 +1,8 @@
 #@installer
 
 #setup.tpl
+setup_title: Einstellungen
+
 superadmin_title: Super-Administrator einrichten
 superadmin_info: Jetzt wird der Account für den Super-Administrator angelegt. Der Super-Admin darf wirklich alles und steht über allen Benutzern, inklusive anderen Admins.
 setup_admin_username_label: Benutzername

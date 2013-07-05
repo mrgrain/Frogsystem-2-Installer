@@ -104,6 +104,7 @@ class AdminSolver extends Solver {
 			}
             
             // save in class
+            $this->isNew = true;
             $this->user = $_POST['user'];
             $this->mail = $_POST['mail'];
             $this->password = $_POST['pass'];
