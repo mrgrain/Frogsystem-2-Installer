@@ -480,7 +480,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}ftp` (
   `ftp_ssl` tinyint(1) NOT NULL,
   `ftp_http_url` varchar(255) NOT NULL,
   PRIMARY KEY (`ftp_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `{..pref..}hashes`;
