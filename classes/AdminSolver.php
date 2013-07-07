@@ -119,7 +119,7 @@ class AdminSolver extends Solver {
                 'user_salt' => $salt,
                 'user_mail' => $_POST['mail'],
                 'user_is_staff' => 1,
-                'user_group' => 0,
+                'user_group' => 1,
                 'user_is_admin' => 1,
                 'user_reg_date' => time()));
                 
