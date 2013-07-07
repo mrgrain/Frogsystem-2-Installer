@@ -14,7 +14,7 @@ class SettingsMigrationSolver extends PairSolver {
 		'affiliatesConfig', 'articlesConfig', 'captchaConfig', 'downloadsConfig', 'galleryConfig', 
 		'groupsConfig', 'mainConfig', 'newsConfig', 'pollsConfig', 'pressConfig', 'previewImagesConfig', 
 		'searchConfig', 'usersConfig', 'videoPlayerConfig',
-        'systemConfig', 'envConfig', 'infoConfig', 'cronjobConfig'
+        'systemConfig', 'envConfig', 'infoConfig', 'cronjobsConfig'
 	);
     
     public function __construct($sql) {
@@ -79,8 +79,8 @@ class SettingsMigrationSolver extends PairSolver {
     public function testInfoConfig() {
 		return $this->genericConfigTester('info');
     }
-    public function testCronjobConfig() {
-		return $this->genericConfigTester('cronjob');
+    public function testCronjobsConfig() {
+		return $this->genericConfigTester('cronjobs');
     }
     
     
@@ -240,8 +240,8 @@ class SettingsMigrationSolver extends PairSolver {
     public function solutionInfoConfig() {
         return $this->genericFillConfig('info', array(), 'startup');
     }
-    public function solutionCronjobConfig() {
-        return $this->genericFillConfig('cronjob', array(), 'startup');
+    public function solutionCronjobsConfig() {
+        return $this->genericFillConfig('cronjobs', array(), 'startup');
     }
     
 	// generic config tester
@@ -296,7 +296,7 @@ class SettingsMigrationSolver extends PairSolver {
     private $systemConfig = array('var_loop' => '20');    
     private $envConfig = array();    
     private $infoConfig = array();    
-    private $cronjobConfig = array(
+    private $cronjobsConfig = array(
         'last_cronjob_time' => '0',
         'last_cronjob_time_daily' => '0',
         'last_cronjob_time_hourly' => '0',
