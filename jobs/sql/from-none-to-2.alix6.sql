@@ -1,6 +1,3 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
 DROP TABLE IF EXISTS `{..pref..}admin_cp`;
 CREATE TABLE IF NOT EXISTS `{..pref..}admin_cp` (
   `page_id` varchar(255) NOT NULL,

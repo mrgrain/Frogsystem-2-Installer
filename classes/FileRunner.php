@@ -78,19 +78,19 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     protected function getInfo($inst) {
         switch ($inst->command) {
             case 'copy':
-                $source = (is_array($inst->source))?$inst->source[0].'*':$inst->source;
+                $source = (is_array($inst->source))?dirname($inst->source[0]).'/*':$inst->source;
                 return sprintf($this->lang->get('info_'.$inst->command), $source, $inst->destination);
                 break;
             case 'delete':
-                $path = (is_array($inst->path))?$inst->path[0].'*':$inst->path;
+                $path = (is_array($inst->path))?dirname($inst->path[0]).'/*':$inst->path;
                 return sprintf($this->lang->get('info_'.$inst->command), $path);
                 break;
             case 'move':
-                $source = (is_array($inst->source))?$inst->source[0].'*':$inst->source;
+                $source = (is_array($inst->source))?dirname($inst->source[0]).'/*':$inst->source;
                 return sprintf($this->lang->get('info_'.$inst->command),$source, $inst->destination);
                 break;
             case 'is_writable':
-                $path = (is_array($inst->path))?$inst->path[0].'*':$inst->path;
+                $path = (is_array($inst->path))?dirname($inst->path[0]).'/*':$inst->path;
                 return sprintf($this->lang->get('info_'.$inst->command), $path);
                 break;
         }        

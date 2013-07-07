@@ -15,8 +15,8 @@ class Files {
         // source is array
         if (is_array($source)) {
             $result = true;
-            foreach($source as $s) {
-                $result = $result && self::copy($s, $destination, $recursive, $overwrite);
+            foreach($source as $path) {
+                $result = $result && self::copy($path, $destination, $recursive, $overwrite);
             }
             return $result;
         }
@@ -29,7 +29,6 @@ class Files {
             if(is_dir($destination)) {
                 $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
                 return self::copy($source, $target_path, $recursive, $overwrite);
-                
 
             //target file
                 // => copy (or overwrite?) an rename     
@@ -43,24 +42,31 @@ class Files {
             // target does not existst
                 // create folder and call myself                  
             if (!file_exists($destination)) {
-                if (!@mkdir($destination, 0777, $recursive));
+                if (!mkdir($destination, 0777, $recursive));
                     return false;
                 return self::copy($source, $destination, $recursive, $overwrite);
   
             // target folder
                 // copy each file and folder 
             } elseif (is_dir($destination)) {
+                $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
+                if (!file_exists($target_path)) {
+                    if (!@mkdir($target_path, 0777, $recursive)) {
+                        return false;                    
+                    }
+                }
                 $copied = true;
                 foreach(scandir($source) as $entry) {                    
-                    if ($entry != "." && $entry != "..")
-                        $copied = $copied && self::copy($source.DIRECTORY_SEPARATOR.$entry, $recursive, $overwrite);
+                    if ($entry != "." && $entry != "..") {
+                        $copied = $copied && self::copy($source.DIRECTORY_SEPARATOR.$entry, $target_path, $recursive, $overwrite);
+                    }
                 }
                 return $copied;
             }
         }
         return false;
     }
-    
+    //.str_replace(dirname($source), '', $source)
     
     // DELETE (-R)? "path"
     public static function delete($path, $recursive = false) {
@@ -179,7 +185,7 @@ class Files {
         if ($star && ('/*' == $end || DIRECTORY_SEPARATOR.'*' == $end)) {
             $shortpath = substr($path,0,-1);
             if (is_dir($shortpath)) {
-                $pathes = array($shortpath);
+                $pathes = array();
                 foreach(scandir($shortpath) as $entry) {                  
                     if ($entry != "." && $entry != "..") {
                         $pathes[] = $shortpath.$entry;

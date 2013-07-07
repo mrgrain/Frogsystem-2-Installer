@@ -64,9 +64,13 @@ function setup() {
             $_SESSION['install_to'] = $_SESSION['install_to'].DIRECTORY_SEPARATOR;
         }
         define('INSTALL_TO', $_SESSION['install_to'], true);
-        if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO))
-            $_SESSION['upgrade_from'] = 'none';
-    }
+        
+        if (!isset($_SESSION['upgrade_from'])) {
+            if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO))
+                $_SESSION['upgrade_from'] = 'none';
+            }
+        }
+
     if (isset($_SESSION['upgrade_from'])) {
       define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
     }
