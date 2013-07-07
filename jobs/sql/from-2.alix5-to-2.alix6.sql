@@ -301,3 +301,43 @@ CREATE TABLE IF NOT EXISTS `{..pref..}hashes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `_temp_{..pref..}styles`;
+CREATE TABLE `_temp_{..pref..}styles` (
+  `style_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `style_tag` varchar(30) NOT NULL,
+  `style_allow_use` tinyint(1) NOT NULL DEFAULT '1',
+  `style_allow_edit` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`style_id`),
+  UNIQUE KEY `style_tag` (`style_tag`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+INSERT INTO `_temp_{..pref..}styles` (`style_id`, `style_tag`, `style_allow_use`, `style_allow_edit`) VALUES (1, 'default', 0, 0);
+INSERT INTO `_temp_{..pref..}styles` (`style_tag`, `style_allow_use`, `style_allow_edit`) SELECT `style_tag`, `style_allow_use`, `style_allow_edit` FROM `{..pref..}styles` WHERE `style_tag` != 'default';
+DROP TABLE `{..pref..}styles`;
+ALTER TABLE `_temp_{..pref..}styles` RENAME `{..pref..}styles`;
+ALTER TABLE `{..pref..}styles` AUTO_INCREMENT = 0;
+UPDATE `{..pref..}global_config` C SET C.`style_id` = (SELECT `style_tag` FROM `{..pref..}styles` S WHERE S.`style_id` = C.`style_id`) WHERE C.`id` = 1;
+
+
+DROP TABLE IF EXISTS `_temp_{..pref..}user_groups`;
+CREATE TABLE `_temp_{..pref..}user_groups` (
+  `user_group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `user_group_name` varchar(50) NOT NULL,
+  `user_group_description` text,
+  `user_group_title` varchar(50) DEFAULT NULL,
+  `user_group_color` varchar(6) NOT NULL DEFAULT '-1',
+  `user_group_highlight` tinyint(1) NOT NULL DEFAULT '0',
+  `user_group_date` int(11) NOT NULL,
+  `user_group_user` mediumint(8) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+INSERT INTO `_temp_{..pref..}user_groups` (`user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) SELECT 1, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user` FROM `{..pref..}user_groups` WHERE `user_group_id` = 0;
+INSERT INTO `_temp_{..pref..}user_groups` (`user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) SELECT `user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user` FROM `{..pref..}user_groups` WHERE `user_group_id` > 1;
+ALTER TABLE `_temp_{..pref..}user_groups` AUTO_INCREMENT = 0;
+INSERT INTO `_temp_{..pref..}user_groups` (`user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) SELECT `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user` FROM `{..pref..}user_groups` WHERE `user_group_id` = 1;
+UPDATE `{..pref..}user` SET `user_group` = LAST_INSERT_ID() WHERE `user_group` = 1;
+UPDATE `{..pref..}user` SET `user_group` = 1 WHERE `user_group` = 0 AND `user_is_admin` = 1;
+DROP TABLE `{..pref..}user_groups`;
+ALTER TABLE `_temp_{..pref..}user_groups` RENAME `{..pref..}user_groups`;
+ALTER TABLE `{..pref..}user_groups` AUTO_INCREMENT = 0;
