@@ -246,9 +246,10 @@ CREATE TABLE `_temp_{..pref..}comments` (
  FULLTEXT KEY `comment_title_text` ( `comment_text`, `comment_title` ),
  PRIMARY KEY  ( `comment_id` )
 ) ENGINE = MyISAM CHARACTER SET = utf8;
-INSERT INTO `_temp_{..pref..}comments`(`comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title`) SELECT `comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title` FROM `{..pref..}news_comments`;
+INSERT INTO `_temp_{..pref..}comments`(`content_id`, `content_type`, `comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title`) SELECT `news_id`, 'news', `comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title` FROM `{..pref..}news_comments`;
 DROP TABLE `{..pref..}news_comments`;
 ALTER TABLE `_temp_{..pref..}comments` RENAME `{..pref..}comments`;
+ALTER TABLE `{..pref..}comments` AUTO_INCREMENT = 0;
 
 
 DROP TABLE IF EXISTS `{..pref..}config`;

@@ -218,16 +218,16 @@ CREATE TABLE IF NOT EXISTS `{..pref..}applets` (
   UNIQUE KEY `applet_file` (`applet_file`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}applets` (`applet_file`, `applet_active`, `applet_include`, `applet_output`) VALUES
-('dl-forwarding', 1, 1, 0),
+('affiliates', 1, 2, 1),
 ('user-menu', 1, 2, 1),
 ('announcement', 1, 2, 1),
 ('mini-statistics', 1, 2, 1),
 ('poll-system', 1, 2, 1),
 ('preview-image', 1, 2, 1),
 ('shop-system', 1, 2, 1),
-('topdownloads', 1, 2, 1),
+('dl-forwarding', 1, 1, 0),
 ('mini-search', 1, 1, 1),
-('affiliates', 1, 2, 1);
+('topdownloads', 1, 2, 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}articles_cat`;

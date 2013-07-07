@@ -41,7 +41,7 @@ class InstallerFunctions {
     }
 
     public static function getRequiredFS2Version() {
-        return '2.alix4';
+        return '2.alix5';
     }
     
     public static function getInstalledFS2Version($path) {
