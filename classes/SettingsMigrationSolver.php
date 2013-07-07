@@ -253,7 +253,7 @@ class SettingsMigrationSolver extends PairSolver {
     }
     
     // generic config filler
-    public function genericFillConfig($name, $old) {
+    public function genericFillConfig($name, $old, $loadhook = 'none') {
         //data-array
         $data = $this->getDataArray($name);
         
@@ -264,6 +264,7 @@ class SettingsMigrationSolver extends PairSolver {
         
         // write into new config
         $data['config_data'] = InstallerFunctions::json_array_encode($config);
+        $data['config_loadhook'] = $loadhook;
         try {
             $this->sql->save('config', $data, 'config_name', false);
         } catch (Exception $e) {

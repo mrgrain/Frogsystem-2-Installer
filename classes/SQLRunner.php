@@ -67,6 +67,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
             'delete'            => '/DELETE *(?:LOW_PRIORITY)? *(?:QUICK)? *(?:IGNORE)? *FROM *`([^`]+)`.*/is', // DELETE FROM
             'truncate'          => '/TRUCNATE *(?:TABLE)? *`([^`]+)`.*/is', // TRUNCATE
             'select'            => '/SELECT *(?:ALL|DISTINCT|DISTINCTROW)? *.*FROM`([^`]+)`.*/is', // SELECT (DISTINCT)
+            'set'               => '/SET *(.*)/is', // SET
         );
         
         // limit set

@@ -1,5 +1,5 @@
 # instruction infos
-info_generic: Bearbeite die Datenbank.
+info_generic: Führe eine Datenbank-Anweisung aus.
 info_create_database: Lege Datenbank `%s` an.
 info_drop_database: Lösche Datenbank `%s`.
 info_alter_database: Ändere Datenbank `%s`.
@@ -13,3 +13,4 @@ info_update: Aktualisiere Daten der Tabelle `%s`.
 info_delete: Lösche Daten der Tabelle `%s`.
 info_truncate: Lösche alle Daten der Tabelle `%s`.
 info_select: Hole Daten aus der Tabelle `%s`.
+info_set: Setze eine Datenbank-Variable.
