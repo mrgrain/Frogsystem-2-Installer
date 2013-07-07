@@ -361,7 +361,8 @@ class SettingsMigrationSolver extends PairSolver {
         'thumb_y' => '90',
         'quickinsert' => '',
         'dl_rights' => '2',
-        'dl_show_sub_cats' => '0'
+        'dl_show_sub_cats' => '0',
+        'dl_comments' => '0',
     );
     
     // `frogsystem_alix5`.`fs2_screen_config`
