@@ -1,1 +1,58 @@
 DELETE -R ~/images/content/
+
+DELETE -R ~/images/phrases/
+
+DELETE ~/libs/class_langDataInit.php
+
+DELETE ~/lang/de_DE/admin.php
+DELETE ~/lang/de_DE/frontend.php
+DELETE ~/lang/de_DE/template.php
+
+DELETE ~/includes/bbcodefunctions.php
+
+DELETE ~/admin/admin.css
+DELETE ~/admin/editor.css
+DELETE ~/admin/html-editor.css
+DELETE ~/admin/admin_frogpad.php
+DELETE ~/admin/admin_statspace.php
+
+DELETE ~/admin/img/bg.jpg
+DELETE ~/admin/img/bigpointer_down.png
+DELETE ~/admin/img/bigpointer_down_grey.png
+DELETE ~/admin/img/bigpointer_up.png
+DELETE ~/admin/img/bigpointer_up_grey.png
+DELETE ~/admin/img/content_foot.jpg
+DELETE ~/admin/img/content_foot_small.jpg
+DELETE ~/admin/img/content_loop.jpg
+DELETE ~/admin/img/content_loop_small.jpg
+DELETE ~/admin/img/content_top.jpg
+DELETE ~/admin/img/content_top_small.jpg
+DELETE ~/admin/img/cs_bot_left.jpg
+DELETE ~/admin/img/cs_bot_loop.jpg
+DELETE ~/admin/img/cs_bot_right.jpg
+DELETE ~/admin/img/cs_mid_left.jpg
+DELETE ~/admin/img/cs_mid_loop.jpg
+DELETE ~/admin/img/cs_mid_right.jpg
+DELETE ~/admin/img/cs_top_left.jpg
+DELETE ~/admin/img/cs_top_loop.jpg
+DELETE ~/admin/img/cs_top_right.jpg
+DELETE ~/admin/img/frogsystem_new.gif
+DELETE ~/admin/img/frogsystem_old.gif
+DELETE ~/admin/img/great_loop.jpg
+DELETE ~/admin/img/head.jpg
+DELETE ~/admin/img/index.htm
+DELETE ~/admin/img/line_loop.jpg
+DELETE ~/admin/img/line_red_loop.jpg
+DELETE ~/admin/img/logbg.jpg
+DELETE ~/admin/img/login.gif
+DELETE ~/admin/img/logout.gif
+DELETE ~/admin/img/menubg.jpg
+DELETE ~/admin/img/menubg_hover.jpg
+DELETE ~/admin/img/menu_top_l.jpg
+DELETE ~/admin/img/menu_top_r.jpg
+DELETE ~/admin/img/menu_top_r_hover.jpg
+DELETE ~/admin/img/navi_headline.jpg
+DELETE ~/admin/img/navi_top.jpg
+DELETE ~/admin/img/pointer_down.png
+DELETE ~/admin/img/pointer_up.png
+DELETE ~/admin/img/sub-right-arrow.gif
