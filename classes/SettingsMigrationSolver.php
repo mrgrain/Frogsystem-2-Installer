@@ -152,6 +152,13 @@ class SettingsMigrationSolver extends PairSolver {
             
             //set lang
             $config['language_text'] = InstallerFunctions::detect_language();
+            
+            //set style_id
+            if(isset($config['style_tag'])) {
+                if (false !== $style_id = $this->sql->getById('styles', array('style_id'), $config['style_tag'], 'style_tag')) {
+                    $config['style_id'] = $style_id;
+                }
+            }
         }
         
         // not possible in property
@@ -412,7 +419,7 @@ class SettingsMigrationSolver extends PairSolver {
         'keywords' => '',
         'publisher' => '',
         'copyright' => '',
-        'style_id' => '1',
+        'style_id' => '2',
         'style_tag' => 'lightfrog',
         'allow_other_designs' => '0',
         'show_favicon' => '0',
