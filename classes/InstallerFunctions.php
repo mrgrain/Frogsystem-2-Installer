@@ -12,7 +12,8 @@ class InstallerFunctions {
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
         $file_path = INSTALLER_PATH.'copy/db_connection.php';
         
-        $file = file($file_path);
+        $file = @file($file_path);
+        $file[2] = '$dbc[\'type\'] = \'mysql\';'.PHP_EOL;
         $file[4] = '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL;
         $file[6] = '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL;
         $file[8] = '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL;
@@ -20,7 +21,7 @@ class InstallerFunctions {
         $file[12] = '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL;
         
         // TODO Generic Fileaccess Class
-        return file_put_contents($file_path, $file);
+        return @file_put_contents($file_path, $file);
     }
     
     public static function getRequiredPHPVersion() {

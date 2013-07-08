@@ -72,9 +72,9 @@ class SQLConnectionSolver extends Solver {
                     try {
                         $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
                         unset($sql);
+                        $_SESSION['dbc'] = array('type' => 'mysql', 'host' => $_POST['db_host'], 'data' => $_POST['db_data'], 'user' => $_POST['db_user'], 'pass' => $_POST['db_pass'], 'pref' => $_POST['db_pref']);
                         InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
                         require(INSTALLER_PATH.'copy/db_connection.php');
-                        $_SESSION['dbc'] = $dbc;
                         unset($dbc);
                         return true;
                     } catch (Exception $e) {

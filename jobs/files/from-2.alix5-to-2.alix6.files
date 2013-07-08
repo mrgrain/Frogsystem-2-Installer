@@ -4,7 +4,12 @@ DELETE      -R  ~/styles/default/
 DELETE      -R  ~/resources/
 
 MOVE        -O  "~/images/content/*"            ~/media/content/
+
 COPY        -RO "./copy/source/*"               ~/
+COPY            "./copy/install/applets/*"      ~/applets/
+COPY        -R  "./copy/install/images/*"       ~/images/
+COPY        -R  "./copy/install/media/*"        ~/media/
+COPY        -R  "./copy/install/styles/*"       ~/styles/
 COPY        -O  ./copy/db_connection.php        ~/config/db_connection.php
 
 IS_WRITABLE -R  ~/styles/

@@ -52,9 +52,12 @@ class InstallerPageTarget extends InstallerPage {
             $scriptlist = explode('/',$_SERVER['PHP_SELF']);
             $scriptname = end($scriptlist);
             $scriptpath = str_replace('/'.INSTALLER_LOCATION.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
-                
+
             // prefill
             $_POST['target_path'] = $_SERVER['DOCUMENT_ROOT'].$scriptpath;
+            if ($scriptpath == $_SERVER['PHP_SELF']) {
+                $_POST['target_path'] = @dirname(@dirname($_SERVER['PHP_SELF']));
+            }            
 
             $this->ic->addCond('target_prefill', true);
         }
