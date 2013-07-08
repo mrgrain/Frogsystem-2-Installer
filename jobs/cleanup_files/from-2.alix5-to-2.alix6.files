@@ -1,6 +1,6 @@
 DELETE -R ~/images/content/
 
-DELETE -R ~/images/phrases/
+DELETE -R ~/phrases/
 
 DELETE ~/libs/class_langDataInit.php
 

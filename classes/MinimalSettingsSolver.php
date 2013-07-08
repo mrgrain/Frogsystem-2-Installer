@@ -182,7 +182,7 @@ class MinimalSettingsSolver extends Solver {
             
             // guess timezone if empty
             if(empty($data['timezone'])) {
-                $data['timezone'] = date_default_timezone_get(); // in worst case this is UTC
+                $data['timezone'] = @date_default_timezone_get(); // in worst case this is UTC
             }
         }
         

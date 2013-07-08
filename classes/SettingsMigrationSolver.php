@@ -155,18 +155,22 @@ class SettingsMigrationSolver extends PairSolver {
             
             //set style_id
             if(isset($config['style_tag'])) {
-                if (false !== $style_id = $this->sql->getById('styles', array('style_id'), $config['style_tag'], 'style_tag')) {
+                if (false !== $style_id = $this->sql->getFieldById('styles', 'style_id', $config['style_tag'], 'style_tag')) {
                     $config['style_id'] = $style_id;
                 }
             }
+            
+            //update dyn title
+            $config['dyn_title_ext'] = str_replace(array('{title}', '{ext}'), array('{..title..}', '{..ext..}'), $config['dyn_title_ext']);      
         }
         
         // overwrite version
         $config['version'] = '2.alix6';
         
         // not possible in property
-        if (!isset($config['timezone']) || empty($config['timezone'])) {
-            $config['timezone'] = @date_default_timezone_get();
+        $server_timezone = @date_default_timezone_get();
+        if (false !== $server_timezone && (!isset($config['timezone']) || empty($config['timezone']))) {
+            $config['timezone'] = $server_timezone;
         }
         
         return $this->genericFillConfig('main', $config, 'startup');         
@@ -264,7 +268,7 @@ class SettingsMigrationSolver extends PairSolver {
         $defaultConfig = $name.'Config';
         $config = array_intersect_key($old, $this->$defaultConfig);
         $config = $config+$this->$defaultConfig;
-        
+
         // write into new config
         $data['config_data'] = InstallerFunctions::json_array_encode($config);
         $data['config_loadhook'] = $loadhook;
@@ -418,7 +422,7 @@ class SettingsMigrationSolver extends PairSolver {
         'other_protocol' => '1',
         'title' => '',
         'dyn_title' => '1',
-        'dyn_title_ext' => '{title} - {ext}',
+        'dyn_title_ext' => '{..title..} - {..ext..}',
         'admin_mail' => '',
         'description' => '',
         'keywords' => '',
@@ -432,19 +436,18 @@ class SettingsMigrationSolver extends PairSolver {
         'home_text' => '',
         'language_text' => 'de_DE',
         'feed' => 'rss20',
-        'timezone' => '',
+        'timezone' => 'UTC',
         'auto_forward' => '4',
         'search_index_update' => '2',
-        'search_index_time' => '1340746339',
-        'version' => '2.alix6',
+        'search_index_time' => '0',
         'url_style' => 'default',
         'count_referers' => '1',
         'date' => 'd.m.Y',
         'time' => 'H:i \U\h\r',
         'datetime' => 'd.m.Y, H:i \U\h\r',
         'page' => '<div align="center" style="width:270px;"><div style="width:70px; float:left;">{..prev..}&nbsp;</div>Seite <b>{..page_number..}</b> von <b>{..total_pages..}</b><div style="width:70px; float:right;">&nbsp;{..next..}</div></div>',
-        'page_next' => '|&nbsp;<a href="{..url..}">weiter&nbspÂ»</a>',
-        'page_prev' => '<a href="{..url..}">Â«&nbsp;zurÃ¼ck</a>&nbsp|'
+        'page_next' => '|&nbsp;<a href="{..url..}">weiter&nbsp»</a>',
+        'page_prev' => '<a href="{..url..}">«&nbsp;zurück</a>&nbsp|'
     );
 
     // `frogsystem_alix5`.`fs2_news_config`

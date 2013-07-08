@@ -34,7 +34,7 @@ class UnslasherRunner extends Runner  {
         
         // default data
         $this->tables = array (
-            new UnslasherData('aliasess', 'alias_id', array('alias_go', 'alias_forward_to')),
+            new UnslasherData('aliases', 'alias_id', array('alias_go', 'alias_forward_to')),
             new UnslasherData('announcement', 'id', array('announcement_text')),
             new UnslasherData('applets', 'applet_id', array('applet_file')),
             new UnslasherData('articles', 'article_id', array('article_url', 'article_title', 'article_text')),

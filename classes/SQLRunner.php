@@ -57,7 +57,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
             'alter_database'    => '/ALTER *DATABASE *`([^`]+)`.*/is', // ALTER DATABASE
         );
         $drop = array(
-            'drop_table'        => '/DROP *(?:TEMPORARY)? *TABLE *(?:IF *EXISTS) *`([^`]+)`.*?/is', // DROP TABLE
+            'drop_table'        => '/DROP *(?:TEMPORARY)? *TABLE *(?:IF *EXISTS)? *`([^`]+)`.*?/is', // DROP TABLE
             'drop_index'        => '/DROP *INDEX *`(?:[^`]+)` *ON *`([^`]+)`.*/is', // DROP INDEX
             'drop_database'     => '/DROP *DATABASE *(?:IF *EXISTS)? *`([^`]+)`.*/is', // DROP DATABASE
         );       

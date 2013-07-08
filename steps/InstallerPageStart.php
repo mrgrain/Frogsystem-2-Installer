@@ -2,7 +2,7 @@
 /**
 * @file     InstallerPageStart.php
 * @folder   /steps
-* @version  0.1
+* @version  0.2
 * @author   Sweil
 *
 * welcome page for installer
@@ -32,8 +32,10 @@ class InstallerPageStart extends InstallerPage {
         if (isset($_GET['reset'])) {
             $_SESSION = array();
             InstallerFunctions::writeDBConnectionFile("","","","","");
+            header("location: {$_SERVER['PHP_SELF']}?step=start");
+            exit;
         }
-        
+
         $ic->addText('changelog', $changelog);
         $ic->addText('notes',     $notes);
         $ic->addText('copyright', $copyright);
