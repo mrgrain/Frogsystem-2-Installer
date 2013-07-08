@@ -161,6 +161,9 @@ class SettingsMigrationSolver extends PairSolver {
             }
         }
         
+        // overwrite version
+        $config['version'] = '2.alix6';
+        
         // not possible in property
         if (!isset($config['timezone']) || empty($config['timezone'])) {
             $config['timezone'] = @date_default_timezone_get();
@@ -409,6 +412,7 @@ class SettingsMigrationSolver extends PairSolver {
 
     // `frogsystem_alix5`.`fs2_global_config`
     private $mainConfig = array(
+        'version' => '2.alix6',
         'protocol' => 'http://',
         'url' => '',
         'other_protocol' => '1',
