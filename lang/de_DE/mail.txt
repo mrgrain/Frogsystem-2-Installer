@@ -1,19 +1,17 @@
-subject: Frogsystem 2 erfolgreich eingerichtet
+subject: Dein Super-Administrator-Account im Frogsystem 2
 content:Hallo {..username..}!
 #/
-#/Du wurdest als Super-Administrator für das Frogsystem 2 auf {..url..}
+#/Du hast dich als Super-Administrator für das Frogsystem 2 auf {..url..}
 #/registriert.
 #/
-#/Diese E-Mail enthält wichtige Zugangsdaten zu der Installation, die
-#/du gut aufbewahren solltest. Das Passwort wurde nur verschlüsselt in
-#/der Datenbank gespeichert und kann nicht wiederhergestellt werden!
+#/Diese E-Mail enthält deine Zugangsdaten, die du gut aufbewahren solltest.
+#/Das Passwort wurde nur verschlüsselt in der Datenbank gespeichert und 
+#/kann nicht wiederhergestellt werden!
 #/
 #/
 #/----------------------------
-#/
 #/Benutzename: {..username..}
 #/Passwort: {..password..}
-#/
 #/----------------------------
 #/
 #/Weitere Informationen zum Frogsystem 2, sowie Supportforen und
