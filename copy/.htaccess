@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    # Aktiviere RewriteEngine
+    RewriteEngine On
+
+    # SEO-URLs
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)\.html$ index.php?seoq=$1 [L,QSA]
+</IfModule>

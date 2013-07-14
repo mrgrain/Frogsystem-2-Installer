@@ -618,14 +618,14 @@ CREATE TABLE IF NOT EXISTS `{..pref..}press_admin` (
   `type` tinyint(1) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}press_admin` (`type`, `title`) VALUES
-(1, 'Beispiel-Spiel'),
-(2, 'Preview'),
-(2, 'Review'),
-(2, 'Interview'),
-(3, 'Deutsch'),
-(3, 'Englisch');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
+INSERT INTO `{..pref..}press_admin` (`id`, `type`, `title`) VALUES
+(1, 1, 'Beispiel-Spiel'),
+(2, 2, 'Preview'),
+(3, 2, 'Review'),
+(4, 2, 'Interview'),
+(5, 3, 'Deutsch'),
+(6, 3, 'Englisch');
 
 
 DROP TABLE IF EXISTS `{..pref..}screen`;
@@ -713,18 +713,18 @@ CREATE TABLE IF NOT EXISTS `{..pref..}smilies` (
   `replace_string` varchar(15) NOT NULL,
   `order` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}smilies` (`replace_string`, `order`) VALUES
-(':-)', 1),
-(':-(', 2),
-(';-)', 3),
-(':-P', 4),
-('xD', 5),
-(':-o', 6),
-('^_^', 7),
-(':-/', 8),
-(':-]', 9),
-('&gt;-(', 10);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11;
+INSERT INTO `{..pref..}smilies` (`id`, `replace_string`, `order`) VALUES
+(1, ':-)', 1),
+(2, ':-(', 2),
+(3, ';-)', 3),
+(4, ':-P', 4),
+(5, 'xD',  5),
+(6, ':-o', 6),
+(7, '^_^', 7),
+(8, ':-/', 8),
+(9, ':-]', 9),
+(10, '&gt;-(', 10);
 
 
 DROP TABLE IF EXISTS `{..pref..}snippets`;

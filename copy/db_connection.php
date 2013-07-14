@@ -1,14 +1,14 @@
 <?php
 /* database connection type */
-$dbc['type'] = 'mysql';
+$dbc['type'] = '';
 /* database host */
-$dbc['host'] = 'localhost';
+$dbc['host'] = '';
 /* database user */
-$dbc['user'] = 'frogsystem';
+$dbc['user'] = '';
 /* database password */
-$dbc['pass'] = 'frogsystem';
+$dbc['pass'] = '';
 /* database name*/
-$dbc['data'] = 'fs2_installer';
+$dbc['data'] = '';
 /* table prefix */
-$dbc['pref'] = 'fs2_';
+$dbc['pref'] = '';
 ?>
