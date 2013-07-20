@@ -74,7 +74,7 @@ class SQLConnectionSolver extends Solver {
                         unset($sql);
                         $_SESSION['dbc'] = array('type' => 'mysql', 'host' => $_POST['db_host'], 'data' => $_POST['db_data'], 'user' => $_POST['db_user'], 'pass' => $_POST['db_pass'], 'pref' => $_POST['db_pref']);
                         InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
-                        require(INSTALLER_PATH.'copy/db_connection.php');
+                        require('./copy/db_connection.php');
                         unset($dbc);
                         return true;
                     } catch (Exception $e) {
@@ -94,7 +94,7 @@ class SQLConnectionSolver extends Solver {
     
     public function solutionDBConnectionFile() {
         // check copy file
-        require(INSTALLER_PATH.'copy/db_connection.php');
+        require('./copy/db_connection.php');
         if ($dbc && !empty($dbc['type']) && !empty($dbc['host']) && !empty($dbc['user']) && !empty($dbc['data'])) {
             $_SESSION['dbc'] = $dbc;
             return true;

@@ -27,5 +27,5 @@ if (isset($_SESSION['upgrade_from']))
 // create page object and display
 $page = new $stepClass();
 $page->setTitlePrefix($title_prefix);
-print $page;var_dump($_SESSION);
+print $page;
 ?>

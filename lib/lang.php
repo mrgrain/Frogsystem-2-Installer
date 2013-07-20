@@ -21,9 +21,6 @@ class lang
 
     // constructor
     public function  __construct ($local = false, $type = false) {
-        global $FD;
-        require_once(INSTALLER_PATH.'includes/indexfunctions.php');
-
         if ($local == false)
             $this->local = $FD->cfg('language_text');
         else
@@ -54,7 +51,7 @@ class lang
         $imports = array();
         preg_match_all('/#@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
         foreach ($imports as $import) {
-            $importPath = INSTALLER_PATH . 'lang/' . $this->local . '/' . $import[1] . '.txt';
+            $importPath = INSTALLER_PATH . DIRECTORY_SEPARATOR. 'lang/' . $this->local . '/' . $import[1] . '.txt';
             $importData = @file_get_contents($importPath);
             
             // getting file content ok
@@ -75,7 +72,7 @@ class lang
         $this->phrases = array();
 
         // set file path
-        $langDataPath = INSTALLER_PATH . 'lang/' . $this->local . '/' . $this->type . '.txt';
+        $langDataPath = INSTALLER_PATH . DIRECTORY_SEPARATOR. 'lang/' . $this->local . '/' . $this->type . '.txt';
 
         // include language data file
         if (file_exists($langDataPath)) {

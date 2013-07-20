@@ -161,7 +161,7 @@ class MinimalSettingsSolver extends Solver {
                 else {
                     $scriptlist = explode('/',$_SERVER['PHP_SELF']);
                     $scriptname = end($scriptlist);
-                    $scriptpath = str_replace('/'.INSTALLER_LOCATION.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
+                    $scriptpath = str_replace('/'.INSTALLER_FOLDER.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
                 }
                 
                 // guess direct in domain

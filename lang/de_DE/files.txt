@@ -24,3 +24,7 @@ file_operations_done_but_error_title: Fehler
 file_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
 file_operations_retry: Hm, nochmal probieren bitte.
 file_operations_continue_with_errors: Ich kümmer mich drum, versprochen (zum nächstem Schritt).
+
+skip_title: Dateien manuell anpassen
+skip_info: Falls du uns nicht vertraust, kannst du die Dateien auch selber anpassen. Klicke einfach hier und dieser Schritt wird komplett übersprungen. Was du zu tun hast, steht im Prinzip da oben. Genauere Infos gibt's in "<b>dateien.txt</b>".
+skip_file_instructions: Ich mach's selber. Diesen Schritt bitte überspringen.

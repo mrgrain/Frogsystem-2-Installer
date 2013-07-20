@@ -13,14 +13,18 @@
 
 <p class="space attop <!--IF::error-->button-line center<!--ENDIF-->">
 <!--IF::success-->
-    <a class="button green <!--IF::error-->atleft<!--ENDIF-->" href="<!--TEXT::url_next-->">&raquo; <!--LANG::file_start_instructions_button--></a>
-<!--ELSE-->
-    <a class="button white <!--IF::error-->atleft<!--ENDIF-->" href="<!--TEXT::url_self-->">&raquo; <!--LANG::file_recheck_permissions--></a>
+    <a class="button green" href="<!--TEXT::url_next-->">&raquo; <!--LANG::file_start_instructions_button--></a><br>
 <!--ENDIF-->
 <!--IF::error-->
+    <a class="button white atleft" href="<!--TEXT::url_self-->">&raquo; <!--LANG::file_recheck_permissions--></a>
     <span><!--LANG::or--></span>
     <a class="button orange atright" href="<!--TEXT::url_next-->">&raquo; <!--LANG::file_start_instructions_button_with_errors--></a>
 <!--ENDIF-->
+</p>
+<h3 class="space attop large"><!--LANG::skip_title--></h3>
+<p><!--LANG::skip_info--></p>
+<p class="space attop">
+    <a class="button white" href="<!--TEXT::url_skip-->">&raquo; <!--LANG::skip_file_instructions--></a><br>
 </p>
 <!--section-end::file_info-->
 

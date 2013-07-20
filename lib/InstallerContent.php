@@ -18,7 +18,7 @@ class InstallerContent extends adminpage
         $this->setLang($lang);
         
         // load tpl file
-        $path = INSTALLER_PATH.$file;
+        $path = INSTALLER_PATH.DIRECTORY_SEPARATOR.$file;
 
         if (is_readable($path)) {
             $this->loadTpl(file_get_contents($path));

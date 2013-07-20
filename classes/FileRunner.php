@@ -27,8 +27,7 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     }
     
     public function load($file) {
-        //TODO Generic Fileaccess Class
-        $lines = file($this->dir.$file);
+        $lines = Files::file($this->dir.$file);
         foreach ($lines as $line) {
             if ("" != trim($line)) {
                 $command = $this->parse($line);
@@ -43,16 +42,16 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
         $result = false;
         switch ($inst->command) {
             case 'copy':
-                $result = Files::copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
+                $result = FilesX::x_copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
                 break;
             case 'delete':
-                $result = Files::delete($inst->path, $inst->recursive);
+                $result = FilesX::x_delete($inst->path, $inst->recursive);
                 break;
             case 'move':
-                $result = Files::move($inst->source, $inst->destination, $inst->overwrite);
+                $result = FilesX::x_move($inst->source, $inst->destination, $inst->overwrite);
                 break;
             case 'is_writable':
-                $result = Files::is_writable($inst->path, $inst->recursive);
+                $result = FilesX::x_is_writable($inst->path, $inst->recursive);
                 break;
         }
         
@@ -65,12 +64,12 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
         switch ($inst->command) {
             case 'delete':
             case 'is_writable':
-                return Files::is_writable($inst->writable, $inst->recursive);
+                return FilesX::x_is_writable($inst->writable, $inst->recursive);
                 break;
             case 'copy':
             case 'move':
             default:
-                return Files::is_writable($inst->writable, false);
+                return FilesX::x_is_writable($inst->writable, false);
                 break;
         }
     }    
@@ -126,10 +125,10 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
         
         // resolve pathes
         if (isset($matches['second']))
-            $matches['second'] = Files::resolve_path($matches['second']);
+            $matches['second'] = FilesX::resolve_path($matches['second']);
             
         if (isset($matches['first'])) {
-            $matches['first'] = Files::resolve_path($matches['first'], true);
+            $matches['first'] = FilesX::resolve_path($matches['first'], true);
         }
 
         // switch commands

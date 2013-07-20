@@ -5,199 +5,125 @@
  * @version  0.2
  * @author   Sweil
  *
- * extended file operations
+ * file operations, working with php >= 5.1.0
  */
  
 class Files {
     
-    // COPY (-RO)? "soruce" "destination"
-    public static function copy($source, $destination, $recursive = false, $overwrite = false) {
-        // source is array
-        if (is_array($source)) {
-            $result = true;
-            foreach($source as $path) {
-                $result = $result && self::copy($path, $destination, $recursive, $overwrite);
-            }
-            return $result;
-        }
-        
-        // source file
-        if (is_file($source)) {
-            
-            // target folder
-                // => change destination path to file name and call myself
-            if(is_dir($destination)) {
-                $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
-                return self::copy($source, $target_path, $recursive, $overwrite);
-
-            //target file
-                // => copy (or overwrite?) an rename     
-            } elseif ($overwrite || !file_exists($destination)) {           
-                return @copy($source, $destination);
-            }
-            
-        // if recursive
-            // source folder
-        } elseif (is_dir($source) && $recursive) {
-            // target does not existst
-                // create folder and call myself                  
-            if (!file_exists($destination)) {
-                if (!mkdir($destination, 0777, $recursive));
-                    return false;
-                return self::copy($source, $destination, $recursive, $overwrite);
-  
-            // target folder
-                // copy each file and folder 
-            } elseif (is_dir($destination)) {
-                $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
-                if (!file_exists($target_path)) {
-                    if (!@mkdir($target_path, 0777, $recursive)) {
-                        return false;                    
-                    }
-                }
-                $copied = true;
-                foreach(scandir($source) as $entry) {                    
-                    if ($entry != "." && $entry != "..") {
-                        $copied = $copied && self::copy($source.DIRECTORY_SEPARATOR.$entry, $target_path, $recursive, $overwrite);
-                    }
-                }
-                return $copied;
-            }
-        }
-        return false;
-    }
-    //.str_replace(dirname($source), '', $source)
-    
-    // DELETE (-R)? "path"
-    public static function delete($path, $recursive = false) {
-        // $path is array
-        if (is_array($path)) {
-            $result = true;
-            foreach($path as $p) {
-                $result = $result && self::delete($p, $recursive);
-            }
-            return $result;
-        }
-        
-        // path file
-            // => delete file
-        if (is_file($path))
-            return @unlink($path);
-        // path folder
-        if (is_dir($path)) {
-            if (!$recursive) {
-                return @rmdir($path);
-            } else {
-                // recursivly?
-                    // => delete recursivly                
-                $removed = true;
-                foreach(scandir($path) as $entry) {                    
-                    if ($entry != "." && $entry != "..")
-                        $removed = $removed && self::delete($path.DIRECTORY_SEPARATOR.$entry, true);
-                }
-                return $removed && rmdir($path);
-            }
-        }
-        
-        return false;
+    // set url-wrapper for filesystem functions
+    private static $uw = '';
+    public static function setUrlWrapper($_uw) {
+        self::$uw = $_uw;
     }
     
-    // MOVE (-O)? "source" "destination"
-    public static function move($source, $destination, $overwrite = false) {
-        // source is array
-        if (is_array($source)) {
-            $result = true;
-            foreach($source as $s) {
-                $result = $result && self::move($s, $destination, $overwrite);
-            }
-            return $result;
-        }  
-                
-        // target not existing
-            // => rename
-        // target file
-            // => rename if overwrite
-        if (!file_exists($destination) || $overwrite)
-            return rename($source, $destination);
-            
-        // source is file and target folder
-            // => rename if target not exists
-        $new_dest = $destination.DIRECTORY_SEPARATOR.basename($source);
-        if (is_file($source) && is_dir($destination) && !file_exists($new_dest))
-            return rename($source, $new_dest);
-        
-    }
-
-    // IS_WRITABLE (-R)? "path"
-    public static function is_writable($path, $recursive = false) {
-        // path is array
-        if (is_array($path)) {
-            $result = true;
-            foreach($path as $p) {
-                $result = $result && self::is_writable($p, $recursive);
-            }
-            return $result;
-        }        
-        
-        // path not existin
-        if (!file_exists($path)) {
-            return self::is_writable(dirname($path), false);
+    // pseudo callStatic for functions
+    private static function call($name, $arguments, $keys) {
+        // prepend url-wrapper
+        foreach($keys as $key) {
+            $arguments[$key] = self::$uw.$arguments[$key];
         }
-        
-        // recursively ?
-        if ($recursive && is_dir($path)) {
-        // folder & recursive
-            // => each file and folder and subfolders are writable
-            $writable = is_writable($path);
-            foreach(scandir($path) as $entry) {
-                if (!$writable)
-                    break;
-                
-                if ($entry != "." && $entry != "..")
-                    $writable = $writable && self::is_writable($path.DIRECTORY_SEPARATOR.$entry, $recursive);
-            }
-            return $writable;
-            
-        } else {
-        // source file
-            // => is wrtiable?          
-        // source folder
-            // => is wrtiable?
-            return is_writable($path);            
-        }
-        
-        return false;
+        // call function
+        return call_user_func_array($name, $arguments);
     }
     
+    // map filesystem functions
+    public static function copy() {
+        return self::call('copy', func_get_args(), array(0,1));
+    }
+    public static function file_exists() {
+        return self::call('file_exists', func_get_args(), array(0));
+    }
+    public static function file_get_contents() {
+        return self::call('file_get_contents', func_get_args(), array(0));
+    }
+    public static function file_put_contents() {
+        return self::call('file_put_contents', func_get_args(), array(0));
+    }
+    public static function file() {
+        return self::call('file', func_get_args(), array(0));
+    }
+    public static function fileatime() {
+        return self::call('fileatime', func_get_args(), array(0));
+    }
+    public static function filectime() {
+        return self::call('filectime', func_get_args(), array(0));
+    }
+    public static function filegroup() {
+        return self::call('filegroup', func_get_args(), array(0));
+    }
+    public static function fileinode() {
+        return self::call('fileinode', func_get_args(), array(0));
+    }
+    public static function filemtime() {
+        return self::call('filemtime', func_get_args(), array(0));
+    }
+    public static function fileowner() {
+        return self::call('fileowner', func_get_args(), array(0));
+    }
+    public static function fileperms() {
+        return self::call('fileperms', func_get_args(), array(0));
+    }
+    public static function filesize() {
+        return self::call('filesize', func_get_args(), array(0));
+    }
+    public static function filetype() {
+        return self::call('filetype', func_get_args(), array(0));
+    }
+    public static function fopen() {
+        return self::call('fopen', func_get_args(), array(0));
+    }
+    public static function is_dir() {
+        return self::call('is_dir', func_get_args(), array(0));
+    }
+    public static function is_executable() {
+        return self::call('is_executable', func_get_args(), array(0));
+    }
+    public static function is_file() {
+        return self::call('is_file', func_get_args(), array(0));
+    }
+    public static function is_link() {
+        return self::call('is_link', func_get_args(), array(0));
+    }
+    public static function is_readable() {
+        return self::call('is_readable', func_get_args(), array(0));
+    }
+    public static function is_writable() {
+        return self::call('is_writable', func_get_args(), array(0));
+    }
+    public static function lstat() {
+        return self::call('lstat', func_get_args(), array(0));
+    }
+    public static function mkdir() {
+        return self::call('mkdir', func_get_args(), array(0));
+    }
+    public static function move_uploaded_file() { //?
+        return self::call('move_uploaded_file', func_get_args(), array(1));
+    }
+    public static function readfile() {
+        return self::call('readfile', func_get_args(), array(0));
+    }
+    public static function rename() {
+        return self::call('rename', func_get_args(), array(0,1));
+    }
+    public static function rmdir() {
+        return self::call('rmdir', func_get_args(), array(0));
+    }
+    public static function stat() {
+        return self::call('stat', func_get_args(), array(0));
+    }
+    public static function touch() { //?
+        return self::call('touch', func_get_args(), array(0));
+    }
+    public static function unlink() {
+        return self::call('unlink', func_get_args(), array(0));
+    }
     
-    // resolve path
-    public static function resolve_path($path, $star = false) {
-        // installer_path or install_to path
-        $start = substr($path, 0, 2);
-        if ("./" == $start || ".".DIRECTORY_SEPARATOR == $start) {
-            $path = INSTALLER_PATH.substr($path, 2);
-        } elseif ("~/" == $start || "~".DIRECTORY_SEPARATOR == $start) {
-            $path = INSTALL_TO.substr($path, 2);
-        }
-
-        // all files in folder
-        $end = substr($path,-2,2);
-        if ($star && ('/*' == $end || DIRECTORY_SEPARATOR.'*' == $end)) {
-            $shortpath = substr($path,0,-1);
-            if (is_dir($shortpath)) {
-                $pathes = array();
-                foreach(scandir($shortpath) as $entry) {                  
-                    if ($entry != "." && $entry != "..") {
-                        $pathes[] = $shortpath.$entry;
-                    }
-                }
-                return $pathes;
-            }
-        }
-        return $path;
-    }    
-    
+    // map directory functions    
+    public static function scandir() {
+        return self::call('scandir', func_get_args(), array(0));
+    }
+    public static function opendir() {
+        return self::call('opendir', func_get_args(), array(0));
+    }
 }
-
-
 ?>

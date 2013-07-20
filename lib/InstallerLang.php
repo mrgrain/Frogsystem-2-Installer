@@ -14,8 +14,6 @@ class InstallerLang extends lang
    
     // constructor
     public function  __construct ($local, $type = false) {
-        //~ require_once(INSTALLER_PATH.'includes/indexfunctions.php');
-
         $this->local = $local;
 
         if ($type !== false)

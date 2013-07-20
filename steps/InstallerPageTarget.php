@@ -35,10 +35,12 @@ class InstallerPageTarget extends InstallerPage {
                 $this->ic->addCond('update', true);
                 $this->ic->addCond('target_path', true);
                 $_SESSION['install_to'] = $_POST['target_path'];
+                unset($_SESSION['upgrade_from']);
             } else {
                 $this->ic->addCond('installation', true);  
                 $this->ic->addCond('target_path', true);
                 $_SESSION['install_to'] = $_POST['target_path'];
+                unset($_SESSION['upgrade_from']);
             }
             
         
@@ -51,7 +53,7 @@ class InstallerPageTarget extends InstallerPage {
             // guess one folder up
             $scriptlist = explode('/',$_SERVER['PHP_SELF']);
             $scriptname = end($scriptlist);
-            $scriptpath = str_replace('/'.INSTALLER_LOCATION.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
+            $scriptpath = str_replace('/'.INSTALLER_FOLDER.'/'.$scriptname,'',$_SERVER['PHP_SELF']);
 
             // prefill
             $_POST['target_path'] = $_SERVER['DOCUMENT_ROOT'].$scriptpath;

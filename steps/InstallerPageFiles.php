@@ -41,6 +41,7 @@ class InstallerPageFiles extends InstallerPage {
         $this->ic->addCond('success', $all_success);           
         $this->ic->addText('url_next', '?step=fileOperations');
         $this->ic->addText('url_self', '?step=files');
+        $this->ic->addText('url_skip', '?step=cleanup');
         $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
         print $this->ic->get('file_info');        
     }

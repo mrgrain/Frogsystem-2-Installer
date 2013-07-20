@@ -1,10 +1,7 @@
 IS_WRITABLE     ./copy/db_connection.php
 
 COPY        -RO "./copy/source/*"               ~/
-COPY        -O  "./copy/data/applets/*"         ~/applets/
-COPY        -RO "./copy/data/images/*"          ~/images/
-COPY        -RO "./copy/data/media/*"           ~/media/
-COPY        -RO "./copy/data/styles/*"          ~/styles/
+COPY        -RO "./copy/data/*"                 ~/applets
 COPY        -O  ./copy/db_connection.php        ~/config/db_connection.php
 
 IS_WRITABLE -R  ~/styles/

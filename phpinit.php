@@ -1,9 +1,6 @@
 <?php
 // init some php stuff
-function phpinit ($session = true, $header = false, $libloader = null) {
-    // path for includes
-    define('INSTALLER_PATH', './', true);
-    
+function phpinit ($session = true, $header = false, $libloader = null) {    
     // Header?
     if ($header !== false) {
         // Set header
@@ -23,11 +20,11 @@ function phpinit ($session = true, $header = false, $libloader = null) {
     // Default libloader
     if (is_null($libloader)) {
         $libloader = create_function ('$classname', '
-            if (false !== (@include_once(INSTALLER_PATH . \'steps/\'.$classname.\'.php\')))
+            if (false !== (@include_once(\'./steps/\'.$classname.\'.php\')))
                 return;
-            if (false !== (@include_once(INSTALLER_PATH . \'lib/\'.$classname.\'.php\')))
+            if (false !== (@include_once(\'./lib/\'.$classname.\'.php\')))
                 return;
-            if (false !== (@include_once(INSTALLER_PATH . \'classes/\'.$classname.\'.php\')))
+            if (false !== (@include_once(\'./classes/\'.$classname.\'.php\')))
                 return;');
     }
 
@@ -38,7 +35,7 @@ function phpinit ($session = true, $header = false, $libloader = null) {
         spl_autoload_register($libloader);
         
     // load exceptions
-    require(INSTALLER_PATH.'classes/Exceptions.php');        
+    require('./classes/Exceptions.php');        
 }
 
 // turn on debuggin mode
@@ -48,21 +45,49 @@ function debug() {
     ini_set('display_errors', true);
 }
 
+// setup file access type
+function fileaccess() {
+    include('./copy/ftp_connection.php');
+    if (ini_get('allow_url_fopen') && !empty($ftp['host']) && !empty($ftp['install_to']) && !empty($ftp['installer_path'])) {
+        // create wrapper url
+        $conn = ($ftp['ssl']?'ftps://':'ftp://')
+                .(!empty($ftp['user'])?$ftp['user'].(!empty($ftp['pass'])?':'.$ftp['pass']:'').'@':'')
+                .$ftp['host'];
+        
+        // set to file access class
+        Files::setUrlWrapper($conn);
+        
+        // update install to/from
+        $_SESSION['install_to'] = $ftp['install_to'];
+        $_SESSION['installer_path'] = $ftp['installer_path'];
+    }
+}
+
+
 // perform some inits for the installer
 function setup() {
-    // Installer constants
-    define('INSTALLER_LOCATION', 'fs-installer', true);
+    // setup fileaccess
+    fileaccess();
+    
+    // Installer Folder Name
+    define('INSTALLER_FOLDER', 'fs2installer', true);
+    
+    // installer path
+    if (isset($_SESSION['installer_path'])) {
+      define('INSTALLER_PATH', $_SESSION['installer_path'], true);
+    } else {
+      define('INSTALLER_PATH', '.', true);
+    }
+    
+    // New version to be installed
     if (!isset($_SESSION['upgrade_to'])) {
-        $_SESSION['upgrade_to'] = trim(file_get_contents(INSTALLER_PATH.'copy/version'));
+        $_SESSION['upgrade_to'] = trim(file_get_contents(INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/version'));
     }
     define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
-
+    
     // check for install path and from version
     if (isset($_SESSION['install_to'])) {
-        $last = substr($_SESSION['install_to'], -1, 1);
-        if(!("/" == $last || "\\" == $last || DIRECTORY_SEPARATOR == $last)) {
-            $_SESSION['install_to'] = $_SESSION['install_to'].DIRECTORY_SEPARATOR;
-        }
+        $_SESSION['install_to'] = rtrim($_SESSION['install_to'], '/\\');
         define('INSTALL_TO', $_SESSION['install_to'], true);
         
         if (!isset($_SESSION['upgrade_from'])) {
@@ -70,13 +95,15 @@ function setup() {
                 $_SESSION['upgrade_from'] = 'none';
             }
         }
-
+    
+    // old version
     if (isset($_SESSION['upgrade_from'])) {
       define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
     }
+    
+    // URL to installed property
     if (isset($_SESSION['url'])) {
       define('URL', $_SESSION['url'], true);
     }
 }
-
 ?>

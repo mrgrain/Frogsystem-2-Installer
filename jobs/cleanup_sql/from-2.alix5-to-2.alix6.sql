@@ -4,6 +4,7 @@ DROP TABLE `{..pref..}dl_config`;
 DROP TABLE `{..pref..}global_config`;
 DROP TABLE `{..pref..}iplist`;
 DROP TABLE `{..pref..}news_config`;
+DROP TABLE `{..pref..}news_comments`;
 DROP TABLE `{..pref..}partner_config`;
 DROP TABLE `{..pref..}player_config`;
 DROP TABLE `{..pref..}poll_config`;

@@ -10,7 +10,7 @@
 class InstallerFunctions {
     
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
-        $file_path = INSTALLER_PATH.'copy/db_connection.php';
+        $file_path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/db_connection.php';
         
         $file = @file($file_path);
         $file[2] = '$dbc[\'type\'] = \'mysql\';'.PHP_EOL;
@@ -20,8 +20,7 @@ class InstallerFunctions {
         $file[10] = '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL;
         $file[12] = '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL;
         
-        // TODO Generic Fileaccess Class
-        return @file_put_contents($file_path, $file);
+        return @Files::file_put_contents($file_path, $file);
     }
     
     public static function getRequiredPHPVersion() {
@@ -284,7 +283,7 @@ class InstallerFunctions {
     ////////////////////////////////////////
     public static function json_array_decode ($string) {
         // JSON for PHP <= 5.2
-        require_once(INSTALLER_PATH . 'resources/jsonwrapper/jsonwrapper_helper.php');
+        require_once('./resources/jsonwrapper/jsonwrapper_helper.php');
         
         $data = json_decode($string, true);
         // empty json creates null not emtpy array => error
@@ -297,7 +296,7 @@ class InstallerFunctions {
     ///////////////////////////////////////
     public static function json_array_encode ($array) {
         // JSON for PHP <= 5.2
-        require_once(INSTALLER_PATH . 'resources/jsonwrapper/jsonwrapper_helper.php');
+        require_once('./resources/jsonwrapper/jsonwrapper_helper.php');
         return json_encode(array_map('utf8_encode', $array), JSON_FORCE_OBJECT);
     }
     

@@ -38,7 +38,7 @@ class template
 
     // functions to set & get default values
     public function setStyle($style) {
-        if (file_exists(INSTALLER_PATH.'styles/'.$style)) {
+        if (file_exists(INSTALLER_PATH.DIRECTORY_SEPARATOR.'styles/'.$style)) {
             $this->style = $style;
         } else  {
             $this->style = 'default';
@@ -57,7 +57,7 @@ class template
     }
 
     public function setFile($file) {
-        if ( is_readable ( INSTALLER_PATH.'styles/'.$this->getStyle().'/'.$file ) ) {
+        if ( is_readable ( INSTALLER_PATH.DIRECTORY_SEPARATOR.'styles/'.$this->getStyle().'/'.$file ) ) {
             $this->file = $file;
             $this->clearSectionCache ();
         } else {
@@ -119,7 +119,7 @@ class template
     public function load($section) {
         // Wenn der Section-Cache wurde noch nicht befüllt wurde => alle Sections in den Cache laden
         if ( count ( $this->sections ) <= 0 ) {
-            $file_path = INSTALLER_PATH . 'styles/' . $this->getStyle() . '/' . $this->getFile (); // Pfad zur Template-Datei
+            $file_path = INSTALLER_PATH . DIRECTORY_SEPARATOR.'styles/' . $this->getStyle() . '/' . $this->getFile (); // Pfad zur Template-Datei
             $search_expression = '/<!--section-start::(.*)-->(.*)<!--section-end::(\1)-->/Uis'; // Regulärer Ausruck um Sections auszuwählen
             $number_of_sections = preg_match_all ( $search_expression, file_get_contents($file_path), $sections ); // Regulären Ausruck ausführen, Anzahl in $number_of_sections, Inhalte in $sections
             $this->setSections ( array_flip ( $sections[1] ) ); // array_flip damit die Keys auch die Section-Namen sind

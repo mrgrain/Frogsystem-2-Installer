@@ -23,7 +23,7 @@ class adminpage {
         $this->name = substr($pagefile, 0, -4);
 
         // load tpl file
-        $path = INSTALLER_PATH.'admin/templates/'.$this->name.'.tpl';
+        $path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'admin/templates/'.$this->name.'.tpl';
 
         if (is_readable($path)) {
             $this->loadTpl(file_get_contents($path));
