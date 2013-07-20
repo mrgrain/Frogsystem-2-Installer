@@ -82,7 +82,7 @@ class InstallerFunctions {
         $dbc = array('type' => null, 'host' => null, 'user' => null, 'pass' => null, 'data' => null, 'pref' => null);
         switch($version) {
             case '2.alix4':
-                if ($file = @file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
+                if ($file = @Files::file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
                     for ($i = 0; $i <= 15; $i++) {
                         $matches = array();
                         if (isset($file[$i])) {
@@ -99,7 +99,7 @@ class InstallerFunctions {
                 }
                 break;
             case '2.alix5':
-                if ($file = @file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
+                if ($file = @Files::file($path.DIRECTORY_SEPARATOR.'login.inc.php')) {
                     for ($i = 0; $i <= 15; $i++) {
                         $matches = array();
                         if (isset($file[$i])) {
