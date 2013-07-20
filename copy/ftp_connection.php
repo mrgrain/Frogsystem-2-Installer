@@ -7,8 +7,9 @@ $ftp['user'] = '';
 $ftp['pass'] = '';
 /* using secure connection */
 $ftp['ssl'] = true;
-/* path from ftp-root to frogsystem installation */
-$ftp['install_to'] = '';
 /* path from ftp-root to the installer */
 $ftp['installer_path'] = '';
+/* relative path from installer to frogsystem installation */
+$ftp['install_to'] = '';
+
 ?>

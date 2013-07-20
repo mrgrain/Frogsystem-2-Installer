@@ -55,11 +55,11 @@ function fileaccess() {
                 .$ftp['host'];
 
         // set to file access class
-        Files::setUrlWrapper($conn);
+        Files::setUrlWrapper($conn, $ftp['installer_path']);
 
         // update install to/from
         $_SESSION['install_to'] = $ftp['install_to'];
-        $_SESSION['installer_path'] = $ftp['installer_path'];
+        $_SESSION['installer_path'] = '.';
     }
 }
 

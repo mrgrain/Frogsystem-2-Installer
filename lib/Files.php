@@ -7,25 +7,44 @@
  *
  * file operations, working with php >= 5.1.0
  */
- 
+
 class Files {
-    
+
     // set url-wrapper for filesystem functions
     private static $uw = '';
-    public static function setUrlWrapper($_uw) {
+    private static $current_dir = '';
+
+    public static function setUrlWrapper($_uw, $_current_dir) {
         self::$uw = $_uw;
+        self::$current_dir = $_current_dir;
     }
-    
+
+    private static function getPath($path) {
+        return self::$uw.self::$current_dir.DIRECTORY_SEPARATOR.$path;
+    }
+
+    // is file wrapper
+    private static function isFileWrapper() {
+        if (empty(self::$uw)) {
+            return true;
+        }
+        if (strpos(self::$uw, 'file') === 0) {
+            return true;
+        }
+        return false;
+    }
+
     // pseudo callStatic for functions
     private static function call($name, $arguments, $keys) {
         // prepend url-wrapper
         foreach($keys as $key) {
-            $arguments[$key] = self::$uw.$arguments[$key];
+            $arguments[$key] = self::getPath($arguments[$key]);
         }
         // call function
         return call_user_func_array($name, $arguments);
     }
-    
+
+
     // map filesystem functions
     public static function copy() {
         return self::call('copy', func_get_args(), array(0,1));
@@ -117,13 +136,23 @@ class Files {
     public static function unlink() {
         return self::call('unlink', func_get_args(), array(0));
     }
-    
-    // map directory functions    
+
+    // map directory functions
+    // url wrapper is never used!
     public static function scandir() {
-        return self::call('scandir', func_get_args(), array(0));
+        return self::call('scandir', func_get_args(), array());
     }
     public static function opendir() {
-        return self::call('opendir', func_get_args(), array(0));
+        return self::call('opendir', func_get_args(), array());
+    }
+    public static function readdir() {
+        return self::call('readdir', func_get_args(), array());
+    }
+    public static function rewinddir() {
+        return self::call('rewinddir', func_get_args(), array());
+    }
+    public static function closedir() {
+        return self::call('closedir', func_get_args(), array());
     }
 }
 ?>
