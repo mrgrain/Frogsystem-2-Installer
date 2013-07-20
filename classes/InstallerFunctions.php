@@ -8,10 +8,10 @@
  * provides some static compatibilty functions for the updater
  */
 class InstallerFunctions {
-    
+
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
         $file_path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/db_connection.php';
-        
+
         $file = @file($file_path);
         $file[2] = '$dbc[\'type\'] = \'mysql\';'.PHP_EOL;
         $file[4] = '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL;
@@ -19,18 +19,18 @@ class InstallerFunctions {
         $file[8] = '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL;
         $file[10] = '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL;
         $file[12] = '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL;
-        
+
         return @Files::file_put_contents($file_path, $file);
     }
-    
+
     public static function getRequiredPHPVersion() {
         return '5.1.0';
     }
-    
+
     public static function getRequiredPHPExtensions() {
         return array('pdo', 'pdo_mysql');
     }
-    
+
     public static function getFS2Versions() {
         return array(
             'none',
@@ -43,41 +43,41 @@ class InstallerFunctions {
     public static function getRequiredFS2Version() {
         return '2.alix5';
     }
-    
+
     public static function getInstalledFS2Version($path) {
         $files = array(
             '2.alix5' => array('index.php', 'login.inc.php', 'imageviewer.php'),
             '2.alix4' => array('editor_css.php', 'index.php', 'login.inc.php', 'showimg.php', 'style_css.php'),
         );
-        
+
         $fs2 = false;
         foreach ($files as $key => $list) {
             $fs2 = true;
             foreach ($list as $file) {
                 $filepath = $path.DIRECTORY_SEPARATOR.$file;
-                $fs2 = $fs2 && is_file($filepath);
+                $fs2 = $fs2 && Files::is_file($filepath);
                 if (!$fs2)
                     break;
             }
             if ($fs2)
                 return $key;
         }
-        
-        return false;    
-    }          
-    
-    
-    // checks wheter in a given valid path an frogsystem installation is placed 
+
+        return false;
+    }
+
+
+    // checks wheter in a given valid path an frogsystem installation is placed
     public static function isFrogsystem($path) {
         if (false !== InstallerFunctions::getInstalledFS2Version($path))
             return true;
         return false;
-    }       
-    
-    
+    }
+
+
     // try to get an old database connection
     public static function getOldDBConnection($path, $version) {
-                
+
         // handle by version
         $dbc = array('type' => null, 'host' => null, 'user' => null, 'pass' => null, 'data' => null, 'pref' => null);
         switch($version) {
@@ -90,7 +90,7 @@ class InstallerFunctions {
                             if (!empty($matches)) {
                                 if ('"' == $matches[2])
                                     $matches[3] = str_replace('\"', '"', $matches[3]);
-                                    
+
                                 $dbc[$matches[1]] = $matches[3];
                                 $dbc['type'] = 'mysql';
                             }
@@ -107,7 +107,7 @@ class InstallerFunctions {
                             if (!empty($matches)) {
                                 if ('"' == $matches[3])
                                     $matches[4] = str_replace('\"', '"', $matches[4]);
-                                    
+
                                 $dbc[$matches[2]] = $matches[4];
                                 $dbc['type'] = 'mysql';
                             }
@@ -122,12 +122,12 @@ class InstallerFunctions {
         // check if we found any values
         if ("" != trim(implode($dbc))) {
             return $dbc;
-        }        
+        }
         return false;
-    }      
-    
-    
-        
+    }
+
+
+
     // function to detect the language from user agent
     public static function detect_language() {
         // get language
@@ -139,17 +139,17 @@ class InstallerFunctions {
         } else {
             return 'en_US';
         }
-    }      
-    
+    }
+
     /*
      * Accually compares to FS2 versions
-     */    
+     */
     public static function compareFS2Versions($one, $two) {
         // equal
         if ($one == $two) {
             return 0;
         }
-        
+
         // return what ever element is found first in the versions array
         $versions = InstallerFunctions::getFS2Versions();
         foreach ($versions as $v) {
@@ -159,11 +159,11 @@ class InstallerFunctions {
                 return 1;
             }
         }
-        
+
         // not found in list
         return false;
     }
-    
+
     public static function orderByIncrementalFilenames(&$list) {
         usort($list, create_function('$a, $b', '
             $regex = \'~^from-(none|2\.[0-9a-zA-Z\.]+)-to-(none|2\.[0-9a-zA-Z\.]+)(\.[^.]+){1}$~\';
@@ -182,8 +182,8 @@ class InstallerFunctions {
             }
             return $first;
         '));
-    }   
-    
+    }
+
     public static function getTableList ($prefix = "") {
         $tables = array (
             'admin_cp',
@@ -233,22 +233,22 @@ class InstallerFunctions {
             'wallpaper',
             'wallpaper_sizes',
         );
-        
+
         if (!empty($prefix)) {
             foreach ($tables as $k => $v) {
                 $tables[$k] = $prefix.$v;
             }
         }
-        
+
         return $tables;
-    } 
-    
+    }
+
     public static function killhtml ($VAL, $ARR = true) {
         // save data
         if (is_array($VAL)) {
             if ($ARR)
                 $VAL = array_map(array('InstallerFunctions', 'killhtml'), $VAL);
-        } 
+        }
         elseif (is_numeric($VAL)) {
             if (floatval($VAL) == intval($VAL)) {
                 $VAL = intval($VAL);
@@ -263,8 +263,8 @@ class InstallerFunctions {
         }
 
         return $VAL;
-    }    
-    
+    }
+
     public static function getRandomCode($length, $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789') {
 		$code = '';
 		$charset_length = strlen($charset) - 1;
@@ -275,16 +275,16 @@ class InstallerFunctions {
 		}
 		return $code;
 	}
-    
 
-    
+
+
     ////////////////////////////////////////
     //// Decode JSON to Array with UTF8 ////
     ////////////////////////////////////////
     public static function json_array_decode ($string) {
         // JSON for PHP <= 5.2
         require_once('./resources/jsonwrapper/jsonwrapper_helper.php');
-        
+
         $data = json_decode($string, true);
         // empty json creates null not emtpy array => error
         if (empty($data)) // prevent this
@@ -299,8 +299,8 @@ class InstallerFunctions {
         require_once('./resources/jsonwrapper/jsonwrapper_helper.php');
         return json_encode(array_map('utf8_encode', $array), JSON_FORCE_OBJECT);
     }
-    
-    
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////
     //// get timezonelist                                                                        ////
     //// thx@Rob Kaper <http://de.php.net/manual/en/function.date-default-timezone-set.php#84459>////
@@ -329,8 +329,8 @@ class InstallerFunctions {
         ksort($cities);
 
         return $cities;
-    }  
-    
+    }
+
     // send mail
     public static function send_mail($from, $to, $subject, $content, $html = false) {
         $header  = 'From: ' . $from . "\r\n";
@@ -353,8 +353,8 @@ class InstallerFunctions {
         }
 
         return @mail($to, "=?UTF-8?B?".base64_encode($subject)."?=", $content, $header);
-    }    
-    
+    }
+
     // thanks to chris@w3style.co.uk
     // http://www.php.net/manual/en/function.mb-detect-encoding.php#68607
     public static function detectUTF8($string) {
@@ -368,7 +368,7 @@ class InstallerFunctions {
         |\xF4[\x80-\x8F][\x80-\xBF]{2}    # plane 16
         )+%xs', $string);
     }
- 
+
 }
 
 ?>

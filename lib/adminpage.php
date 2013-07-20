@@ -25,8 +25,8 @@ class adminpage {
         // load tpl file
         $path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'admin/templates/'.$this->name.'.tpl';
 
-        if (is_readable($path)) {
-            $this->loadTpl(file_get_contents($path));
+        if (Files::is_readable($path)) {
+            $this->loadTpl(Files::file_get_contents($path));
         }
     }
 
@@ -80,11 +80,11 @@ class adminpage {
                 $tmpval = $this->lambdavars($tmpval, $lambdas);
 
                 // closure for replace callback
-                
+
                 $GLOBALS["AP_cond"] = $this->cond;
                 $GLOBALS["AP_lambdas"] = $lambdas;
 
-                $GLOBALS["getcond"] = create_function ('$match', ' 
+                $GLOBALS["getcond"] = create_function ('$match', '
                     if (isset($GLOBALS["AP_cond"][$GLOBALS["AP_lambdas"][$match[1]]]) && $GLOBALS["AP_cond"][$GLOBALS["AP_lambdas"][$match[1]]]) { // IF-branch
                         return adminpage::replacer($match[2], $GLOBALS["getcond"]); // call replacer recursiv
                     } elseif (isset($match[3])) { // ELSE-branch
@@ -134,7 +134,7 @@ class adminpage {
     protected function lambdavars($tpl, &$name) {
         $num = 0;
         $push = array();
-        
+
         $tokenizer = create_function("\$match,&\$num,&\$name,&\$push", "
             if (\$match[1] == \"IF\") {
                 \$name[\$num] = \$match[2];
@@ -147,7 +147,7 @@ class adminpage {
             } elseif (\$match[1] == \"ENDIF\") {
                 return \"<!--ENDIF::\".array_pop(\$push).\"-->\";
             }
-            return \$match[0];       
+            return \$match[0];
         ");
 
         $tpl = preg_replace('/(?|<!\-\-(IF)::([-_a-zA-Z0-9]+?)\-\->|<!\-\-(ELSE)\-\->|<!\-\-(ENDIF)\-\->)/e', '$tokenizer(array(\'$0\',\'$1\',\'$2\'),$num,$name,$push)', $tpl);

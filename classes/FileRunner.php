@@ -7,25 +7,25 @@
  *
  * run a list of FileOperations instructions
  */
- 
+
 class FileRunner extends IncrementalFSVersionRunner implements Iterator {
-    
+
     private $dir;
-    
+
     public function __construct($dir, $start, $end, $lang) {
         // langfile
         $this->lang = $lang;
- 
+
         // create filelist
         $this->dir = $dir;
-        $list = scandir($dir);
+        $list = Files::scandir($dir);
         $list = array_diff($list, array('.', '..'));
         InstallerFunctions::orderByIncrementalFilenames($list);
 
         // call parent __construct
         parent::__construct($list, $start, $end);
     }
-    
+
     public function load($file) {
         $lines = Files::file($this->dir.$file);
         foreach ($lines as $line) {
@@ -35,7 +35,7 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
                     $this->addInstruction($command);
             }
         }
-    }    
+    }
 
 
     protected function runInstruction($inst) {
@@ -54,12 +54,12 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
                 $result = FilesX::x_is_writable($inst->path, $inst->recursive);
                 break;
         }
-        
+
         if(!$result) {
             throw new FileOperationException('Error with command `'.$inst->command.'`.');
         }
     }
-    
+
     public function isWritable($inst) {
         switch ($inst->command) {
             case 'delete':
@@ -72,8 +72,8 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
                 return FilesX::x_is_writable($inst->writable, false);
                 break;
         }
-    }    
-    
+    }
+
     protected function getInfo($inst) {
         switch ($inst->command) {
             case 'copy':
@@ -92,10 +92,10 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
                 $path = (is_array($inst->path))?dirname($inst->path[0]).'/*':$inst->path;
                 return sprintf($this->lang->get('info_'.$inst->command), $path);
                 break;
-        }        
+        }
         return false;
-    }    
-    
+    }
+
 
     // parse a command
     private static function parse($input) {
@@ -115,18 +115,18 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
             if (false !== $result && $result > 0 && !empty($matches) && count($matches) >= 2) {
                 break;
             }
-            
+
         }
-        
+
         // not matched
         if (!$result) {
             return false;
         }
-        
+
         // resolve pathes
         if (isset($matches['second']))
             $matches['second'] = FilesX::resolve_path($matches['second']);
-            
+
         if (isset($matches['first'])) {
             $matches['first'] = FilesX::resolve_path($matches['first'], true);
         }
@@ -159,7 +159,7 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
                 $res->recursive = ('R' == strtoupper($matches['params']));
                 break;
         }
-        
+
         return $res;
     }
 }

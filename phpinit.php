@@ -1,6 +1,6 @@
 <?php
 // init some php stuff
-function phpinit ($session = true, $header = false, $libloader = null) {    
+function phpinit ($session = true, $header = false, $libloader = null) {
     // Header?
     if ($header !== false) {
         // Set header
@@ -33,9 +33,9 @@ function phpinit ($session = true, $header = false, $libloader = null) {
         spl_autoload_register();
     else
         spl_autoload_register($libloader);
-        
+
     // load exceptions
-    require('./classes/Exceptions.php');        
+    require('./classes/Exceptions.php');
 }
 
 // turn on debuggin mode
@@ -53,10 +53,10 @@ function fileaccess() {
         $conn = ($ftp['ssl']?'ftps://':'ftp://')
                 .(!empty($ftp['user'])?$ftp['user'].(!empty($ftp['pass'])?':'.$ftp['pass']:'').'@':'')
                 .$ftp['host'];
-        
+
         // set to file access class
         Files::setUrlWrapper($conn);
-        
+
         // update install to/from
         $_SESSION['install_to'] = $ftp['install_to'];
         $_SESSION['installer_path'] = $ftp['installer_path'];
@@ -68,39 +68,39 @@ function fileaccess() {
 function setup() {
     // setup fileaccess
     fileaccess();
-    
+
     // Installer Folder Name
     define('INSTALLER_FOLDER', 'fs2installer', true);
-    
+
     // installer path
     if (isset($_SESSION['installer_path'])) {
       define('INSTALLER_PATH', $_SESSION['installer_path'], true);
     } else {
       define('INSTALLER_PATH', '.', true);
     }
-    
+
     // New version to be installed
     if (!isset($_SESSION['upgrade_to'])) {
-        $_SESSION['upgrade_to'] = trim(file_get_contents(INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/version'));
+        $_SESSION['upgrade_to'] = trim(Files::file_get_contents(INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/version'));
     }
     define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
-    
+
     // check for install path and from version
     if (isset($_SESSION['install_to'])) {
         $_SESSION['install_to'] = rtrim($_SESSION['install_to'], '/\\');
         define('INSTALL_TO', $_SESSION['install_to'], true);
-        
+
         if (!isset($_SESSION['upgrade_from'])) {
             if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO))
                 $_SESSION['upgrade_from'] = 'none';
             }
         }
-    
+
     // old version
     if (isset($_SESSION['upgrade_from'])) {
       define('UPGRADE_FROM', $_SESSION['upgrade_from'], true);
     }
-    
+
     // URL to installed property
     if (isset($_SESSION['url'])) {
       define('URL', $_SESSION['url'], true);

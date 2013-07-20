@@ -40,11 +40,11 @@ class lang
     protected function add($tag, $text) {
         $this->phrases[$tag] = tpl_functions($text, 1, array('DATE', 'VAR', 'URL'));
     }
-    
+
     // function to extend a phrase
     protected function extend($tag, $text) {
         $this->phrases[$tag] = $this->phrases[$tag].tpl_functions($text, 1, array('DATE', 'VAR', 'URL'));
-    }    
+    }
 
     // load text data
     protected function import(&$data) {
@@ -52,8 +52,8 @@ class lang
         preg_match_all('/#@([-a-z0-9\/_]+)\\n/is', $data, $imports, PREG_SET_ORDER);
         foreach ($imports as $import) {
             $importPath = INSTALLER_PATH . DIRECTORY_SEPARATOR. 'lang/' . $this->local . '/' . $import[1] . '.txt';
-            $importData = @file_get_contents($importPath);
-            
+            $importData = @Files::file_get_contents($importPath);
+
             // getting file content ok
             if ($importData != false) {
                 $importData = str_replace(array("\r\n", "\r"), "\n", $importData); // unify linebreaks
@@ -75,9 +75,9 @@ class lang
         $langDataPath = INSTALLER_PATH . DIRECTORY_SEPARATOR. 'lang/' . $this->local . '/' . $this->type . '.txt';
 
         // include language data file
-        if (file_exists($langDataPath)) {
+        if (Files::file_exists($langDataPath)) {
             // load file
-            $langData = file_get_contents($langDataPath);
+            $langData = Files::file_get_contents($langDataPath);
             $langData = str_replace(array("\r\n", "\r"), "\n", $langData); // unify linebreaks
             $this->import($langData);
 
@@ -89,16 +89,16 @@ class lang
             $last = false;
             foreach ($langData as $line) {
                 $match = array();
-                
+
                 // match line extender
                 if (false !== $last) {
                     preg_match("~^#\/(.*)~i", $line, $match);
                     if (count($match) == 2) {
                         $this->extend($last, PHP_EOL.$match[1]);
                         continue;
-                    }                    
+                    }
                 }
-                
+
                 // match content
                 preg_match ("#([a-z0-9_-]+?)\s*?:\s*(.*)#is", $line, $match);
                 if (count($match) >= 2) {

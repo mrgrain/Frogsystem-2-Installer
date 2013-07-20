@@ -8,24 +8,24 @@
  * run a list of SQL instructions
  */
 class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
-    
+
     private $sql;
     private $dir;
-    
+
     public function __construct($dir, $start, $end, $sql) {
         // sql & lang objects
         $this->sql = $sql;
-        
+
         // create filelist
         $this->dir = $dir;
-        $list = scandir($dir);
+        $list = Files::scandir($dir);
         $list = array_diff($list, array('.', '..'));
         InstallerFunctions::orderByIncrementalFilenames($list);
 
         // call parent __construct
         parent::__construct($list, $start, $end);
     }
-    
+
     public function load($file) {
         $lines = Files::file($this->dir.$file);
         $last_instruction = "";
@@ -36,16 +36,16 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
                 $last_instruction = '';
             }
         }
-    }    
+    }
 
 
     protected function runInstruction($instruction) {
         return $this->sql->doQuery($instruction);
     }
-    
+
     protected  function getInfo($instruction) {
         $instruction = trim($instruction);
-        
+
         $create = array(
             'create_table'      => '/CREATE *(?:TEMPORARY)? *TABLE *(?:IF *NOT *EXISTS)? *`([^`]+)`.*/is', // CREATE TABLE
             'create_index'      => '/CREATE *(?:UNIQUE|FULLTEXT|SPATIAL)? *INDEX *`(?:[^`]+)`.*ON *`([^`]+)`.*/is', // CREATE (UNIQUE) INDEX
@@ -59,7 +59,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
             'drop_table'        => '/DROP *(?:TEMPORARY)? *TABLE *(?:IF *EXISTS)? *`([^`]+)`.*?/is', // DROP TABLE
             'drop_index'        => '/DROP *INDEX *`(?:[^`]+)` *ON *`([^`]+)`.*/is', // DROP INDEX
             'drop_database'     => '/DROP *DATABASE *(?:IF *EXISTS)? *`([^`]+)`.*/is', // DROP DATABASE
-        );       
+        );
         $rest = array(
             'insert'            => '/INSERT *(?:LOW_PRIORITY|DELAYED|HIGH_PRIORITY)? *(?:IGNORE)? *(?:INTO)? *`([^`]+)`.*/is', // INSERT INTO
             'update'            => '/UPDATE *(?:LOW_PRIORITY)? *(?:IGNORE)? *`([^`]+)`.*/is', // UPDATE
@@ -68,7 +68,7 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
             'select'            => '/SELECT *(?:ALL|DISTINCT|DISTINCTROW)? *.*FROM`([^`]+)`.*/is', // SELECT (DISTINCT)
             'set'               => '/SET *(.*)/is', // SET
         );
-        
+
         // limit set
         if (0 === stripos($instruction, 'CREATE')) $set = $create;
         elseif (0 === stripos($instruction, 'ALTER')) $set = $alter;
@@ -83,11 +83,11 @@ class SQLRunner extends IncrementalFSVersionRunner implements Iterator {
                 return array($key, $matches[1]);
             }
         }
-        
+
         // not matched
-        return array('generic', null);       
-    }    
-    
+        return array('generic', null);
+    }
+
 
 }
 
