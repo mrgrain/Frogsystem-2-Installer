@@ -97,7 +97,44 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
     }
 
 
-    // parse a command
+    /* parse a file command in fs2installer syntax
+     *
+     * SYNTAX-DOCUMENTATION:
+     *
+     * FILE PATHS:
+     *      ./  will be replaced by path to the installer
+     *      ~/  will be replaced by path to installation target
+     *      Paths with a space MUST be enclosed by quotes. Others MAY be.
+     *
+     * WILDCARDS:
+     *      /*  at the very end of a path to a directory MAY be
+     *          interpreted as "all files and directories in this
+     *          directory, do this"
+     *          (possible use is indicated by a * after the argument)
+     *      Atm all paths with a wildcard MUST be enclosed by quotes.
+     *
+     * COMMANDS:
+     *
+     *      COPY [-(OPTIONS)] source* target
+     *      copy files from source to target. if source is a file copy
+     *      file to target (in target if target is a directory)
+     *          R   copy recursive if source is a directory
+     *          O   overwrite if target exists
+     *
+     *      DELETE [-(OPTIONS)] path*
+     *      delete file or empty directory speciefied by path
+     *          R   delete a non empty directory recursivly
+     *
+     *      MOVE [-(OPTIONS)] source* target
+     *      move file or directory from source to target. if source is a
+     *      file and target a directory, move file into directory
+     *          O   overwrite if target exists
+     *
+     *      IS_WRITABLE [-(OPTIONS)] path*
+     *      checks wheter a file or directory is writable
+     *          R   check each file and directory recursivly
+     *
+     */
     private static function parse($input) {
         $commands = array(
             'copy'              => '/^COPY *(?:-(?P<params>[OR]{1,2}))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
