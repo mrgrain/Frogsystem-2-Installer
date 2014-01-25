@@ -41,7 +41,7 @@ function phpinit ($session = true, $header = false, $libloader = null) {
 // turn on debuggin mode
 function debug() {
     // turn on errors
-    error_reporting(E_ALL);
+    error_reporting(E_ALL | E_STRICT);
     ini_set('display_errors', true);
 }
 

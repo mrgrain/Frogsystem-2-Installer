@@ -12,14 +12,16 @@ class Files {
 
     // set url-wrapper for filesystem functions
     protected static $uw = '';
+    protected static $current_dir = '';
+
     public static function setUrlWrapper($_uw, $_current_dir) {
         self::$uw = $_uw;
-        self::$current_dir = $_current_dir;
+        self::$current_dir = $_current_dir.DIRECTORY_SEPARATOR;
     }
 
     // get path with current dir prefixed
     protected static function getPath($path) {
-        return self::$uw.self::$current_dir.DIRECTORY_SEPARATOR.$path;
+        return self::$uw.self::$current_dir.$path;
     }
 
     // is file wrapper
@@ -33,10 +35,22 @@ class Files {
         return false;
     }
 
-    // pseudo callStatic for functions
-    protected static function call($name, $arguments, $keys, $contexts = array(), $use_defaults = array()) {
+
+    /**
+     * Static call of PHP functions
+     *
+     * @param array $name Name of the file function to be called
+     * @param array $arguments List of arguments to use in funciton call
+     * @param array $paths List of arguments which are path and should be extended
+     * @param array $contexts List of numeric keys, which arguments are of type context and musst be extended
+     * @param array $use_defaults List of numeric keys and values for which arguments should be set with a default value, if empty.
+     *
+     * @return mixed
+     **/
+
+    protected static function call($name, $arguments, $paths, $contexts = array(), $use_defaults = array()) {
         // prepend url-wrapper
-        foreach($keys as $key) {
+        foreach($paths as $key) {
             $arguments[$key] = self::getPath($arguments[$key]);
         }
 
@@ -46,16 +60,18 @@ class Files {
             if (isset($arguments[$context])) {
                 stream_context_set_option($arguments[$context], $options);
             } else {
-                $arguments[$key] = stream_context_create($options);
-                foreach($use_defaults as $key => $default) {
-                    if (!isset($arguments[$key])) {
-                        $arguments[$key] = $default;
-                    }
-                }
+                $arguments[$context] = stream_context_create($options);
             }
         }
 
+        // set defaults for empty arguments
+        foreach($use_defaults as $key => $default) {
+            if (!isset($arguments[$key])) {
+                $arguments[$key] = $default;
+            }
+        }
         // call function
+        ksort($arguments);
         return call_user_func_array($name, $arguments);
     }
 
