@@ -12,13 +12,27 @@ class InstallerFunctions {
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
         $file_path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/db_connection.php';
 
+        // new file
+        $newfile = array(
+            '<?php'.PHP_EOL,
+            '/* database connection type */'.PHP_EOL,
+            '$dbc[\'type\'] = \'mysql\';'.PHP_EOL,
+            '/* database host */'.PHP_EOL,
+            '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL,
+            '/* database user */'.PHP_EOL,
+            '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL,
+            '/* database password */'.PHP_EOL,
+            '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL,
+            '/* database name*/'.PHP_EOL,
+            '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL,
+            '/* table prefix */'.PHP_EOL,
+            '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL,
+            '?>'.PHP_EOL,
+        );
+
+        // write to file
         $file = @file($file_path);
-        $file[2] = '$dbc[\'type\'] = \'mysql\';'.PHP_EOL;
-        $file[4] = '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL;
-        $file[6] = '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL;
-        $file[8] = '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL;
-        $file[10] = '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL;
-        $file[12] = '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL;
+        $file = $newfile;
 
         return @Files::file_put_contents($file_path, $file);
     }
