@@ -31,7 +31,7 @@ class FilesX extends Files {
                 return self::x_copy($source, $target_path, $recursive, $overwrite);
 
             //target file
-                // => copy (or overwrite?) an rename
+                // => copy (or overwrite?) and rename
             } elseif ($overwrite || !self::file_exists($destination)) {
                 return self::copy($source, $destination);
             }
@@ -49,7 +49,7 @@ class FilesX extends Files {
                 $perms = octdec(intval(substr(decoct(@self::fileperms($destination)),1)));
                 $oldumask = @umask(0);
 
-                if (!@self::mkdir($destination, $perms, $recursive)) {
+                if (!@self::mkdir($target_path, $perms, $recursive)) {
                     @umask($oldumask);
                     return false;
                 }
@@ -140,7 +140,7 @@ class FilesX extends Files {
             return $result;
         }
 
-        // path not existin
+        // path not existing
         if (!self::file_exists($path)) {
             return self::x_is_writable(dirname($path), false);
         }

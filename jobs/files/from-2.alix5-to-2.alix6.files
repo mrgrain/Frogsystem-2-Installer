@@ -6,7 +6,7 @@ DELETE      -R  ~/resources/
 MOVE        -O  "~/images/content/*"            ~/upload/
 
 COPY        -RO "./copy/source/*"               ~/
-COPY        -R  "./copy/data/*"                 ~/
+COPY        -R  "./copy/data/applets/*"         ~/applets
 COPY        -O  ./copy/db_connection.php        ~/config/db_connection.php
 
 IS_WRITABLE -R  ~/styles/

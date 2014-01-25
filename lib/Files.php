@@ -201,11 +201,14 @@ class Files {
 
     // helper functions
     protected static function is_writable_file($filename) {
-        $unlink = self::file_exists($filename)?true:false;
-        $file = self::fopen($filename, 'ab');
-        if ($file !== false) {
-            self:fclose($file);
-            self::unlink($filename);
+        $unlink = self::file_exists($filename)?false:true;
+        $handle = self::fopen($filename, 'ab');
+
+        if ($handle !== false) {
+            self::fclose($handle);
+            if ($unlink) {
+                self::unlink($filename);
+            }
             return true;
         }
         return false;
@@ -213,7 +216,7 @@ class Files {
 
     protected static function is_writable_dir($filename) {
         do {
-            $path = $filename.DIRECTORY_SEPERATOR.mt_rand(0, 9999999);
+            $path = $filename.DIRECTORY_SEPARATOR.mt_rand(0, 9999999);
         } while (self::file_exists($path));
 
         $file = self::fopen($path, 'ab');
