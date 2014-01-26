@@ -70,13 +70,14 @@ class SQLConnectionSolver extends Solver {
         if (isset($_POST['db_from_form'])) {
                 if (!(empty($_POST['db_host']) && empty($_POST['db_user']) && empty($dbc['db_data']))) {
                     try {
+                        // try connecting to database with given credentials
                         $sql = new sql($_POST['db_host'], $_POST['db_data'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_pref']);
                         unset($sql);
                         $_SESSION['dbc'] = array('type' => 'mysql', 'host' => $_POST['db_host'], 'data' => $_POST['db_data'], 'user' => $_POST['db_user'], 'pass' => $_POST['db_pass'], 'pref' => $_POST['db_pref']);
                         InstallerFunctions::writeDBConnectionFile($_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_data'], $_POST['db_pref']);
-                        require('./copy/db_connection.php');
-                        unset($dbc);
                         return true;
+
+                    // Catch DB-Connection Error
                     } catch (Exception $e) {
                         $this->setError($e->getMessage(), $e->getCode());
                         unset($sql);
@@ -132,6 +133,9 @@ class SQLConnectionSolver extends Solver {
             $this->ic->addText('sql_pass', $_SESSION['dbc']['pass']);
             $this->ic->addText('sql_pref', $_SESSION['dbc']['pref']);
             $this->ic->addCond('sql_prefill', true);
+        } else {
+            $this->ic->addText('sql_host', 'localhost');
+            $this->ic->addText('sql_pref', 'fs2_');
         }
 
         // delete session

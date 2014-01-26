@@ -47,20 +47,23 @@ function debug() {
 
 // setup file access type
 function fileaccess() {
-    include('./copy/ftp_connection.php');
-    if (ini_get('allow_url_fopen') && !empty($ftp['host']) && !empty($ftp['install_to']) && !empty($ftp['installer_path'])) {
-        // create wrapper url
-        $conn = ($ftp['ssl']?'ftps://':'ftp://')
-                .(!empty($ftp['user'])?$ftp['user'].(!empty($ftp['pass'])?':'.$ftp['pass']:'').'@':'')
-                .$ftp['host'];
+    @include('./copy/file_connection.php');
+    if (isset($wrapper) && ini_get('allow_url_fopen')) {
+        // set path prefixes
+        if (!empty($wrapper['target']) && isset($wrapper['install_to'])) {
+            Path::setPrefix($wrapper['target'].$wrapper['install_to'], 'target', 'write_wrapper');
+        }
+        if (!empty($wrapper['installer']) && isset($wrapper['installer_path'])) {
+            Path::setPrefix($wrapper['installer'].$wrapper['installer_path'], 'current', 'write_wrapper');
+        }
 
-        // set to file access class
-        Files::setUrlWrapper($conn, $ftp['installer_path']);
-
-        // update install to/from
-        $_SESSION['install_to'] = $ftp['install_to'];
-        $_SESSION['installer_path'] = '.';
+    //~ var_dump($wrapper);
     }
+    unset($wrapper);
+    // create wrapper url
+    //~ $conn = ($ftp['ssl']?'ftps://':'ftp://')
+            //~ .(!empty($ftp['user'])?$ftp['user'].(!empty($ftp['pass'])?':'.$ftp['pass']:'').'@':'')
+            //~ .$ftp['host'];
 }
 
 
@@ -73,15 +76,15 @@ function setup() {
     define('INSTALLER_FOLDER', 'fs2installer', true);
 
     // installer path
-    if (isset($_SESSION['installer_path'])) {
-      define('INSTALLER_PATH', $_SESSION['installer_path'], true);
-    } else {
-      define('INSTALLER_PATH', '.', true);
+    if (!isset($_SESSION['installer_path'])) {
+        $_SESSION['installer_path'] = '.';
     }
+    define('INSTALLER_PATH', $_SESSION['installer_path'], true);
+    Path::setPrefix(INSTALLER_PATH, 'current');
 
     // New version to be installed
     if (!isset($_SESSION['upgrade_to'])) {
-        $_SESSION['upgrade_to'] = trim(Files::file_get_contents(INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/version'));
+        $_SESSION['upgrade_to'] = trim(Files::file_get_contents(new Path('copy/version', 'current')));
     }
     define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
 
@@ -89,12 +92,15 @@ function setup() {
     if (isset($_SESSION['install_to'])) {
         $_SESSION['install_to'] = rtrim($_SESSION['install_to'], '/\\');
         define('INSTALL_TO', $_SESSION['install_to'], true);
+        Path::setPrefix(INSTALL_TO, 'target');
 
         if (!isset($_SESSION['upgrade_from'])) {
-            if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO))
+            if (false === $_SESSION['upgrade_from'] = InstallerFunctions::getInstalledFS2Version(INSTALL_TO)) {
                 $_SESSION['upgrade_from'] = 'none';
             }
         }
+    }
+
 
     // old version
     if (isset($_SESSION['upgrade_from'])) {

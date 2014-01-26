@@ -37,6 +37,32 @@ class InstallerFunctions {
         return @Files::file_put_contents($file_path, $file);
     }
 
+    public static function writeFileConnectionFile($h, $u, $pa, $d, $pr) {
+        // path within installer
+        $file_path = new Path('copy/db_connection.php', 'current');
+
+        // new file
+        $newfile = array(
+            '<?php'.PHP_EOL,
+            '/* database connection type */'.PHP_EOL,
+            '$dbc[\'type\'] = \'mysql\';'.PHP_EOL,
+            '/* database host */'.PHP_EOL,
+            '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL,
+            '/* database user */'.PHP_EOL,
+            '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL,
+            '/* database password */'.PHP_EOL,
+            '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL,
+            '/* database name*/'.PHP_EOL,
+            '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL,
+            '/* table prefix */'.PHP_EOL,
+            '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL,
+            '?>'.PHP_EOL,
+        );
+
+        // write to file
+        return @Files::file_put_contents($file_path, $newfile);
+    }
+
     public static function getRequiredPHPVersion() {
         return '5.1.0';
     }

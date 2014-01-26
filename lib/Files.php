@@ -9,33 +9,6 @@
  */
 
 class Files {
-
-    // set url-wrapper for filesystem functions
-    protected static $uw = '';
-    protected static $current_dir = '';
-
-    public static function setUrlWrapper($_uw, $_current_dir) {
-        self::$uw = $_uw;
-        self::$current_dir = $_current_dir.DIRECTORY_SEPARATOR;
-    }
-
-    // get path with current dir prefixed
-    protected static function getPath($path) {
-        return self::$uw.self::$current_dir.$path;
-    }
-
-    // is file wrapper
-    protected static function isFileWrapper() {
-        if (empty(self::$uw)) {
-            return true;
-        }
-        if (strpos(self::$uw, 'file') === 0) {
-            return true;
-        }
-        return false;
-    }
-
-
     /**
      * Static call of PHP functions
      *
@@ -48,10 +21,13 @@ class Files {
      * @return mixed
      **/
 
-    protected static function call($name, $arguments, $paths, $contexts = array(), $use_defaults = array()) {
+    protected static function call($name, $arguments, $write_paths = array(), $contexts = array(), $use_defaults = array()) {
         // prepend url-wrapper
-        foreach($paths as $key) {
-            $arguments[$key] = self::getPath($arguments[$key]);
+        foreach($write_paths as $path) {
+            if (!is_object($arguments[$path]) || !is_a($arguments[$path], 'Path')) {
+                $arguments[$path] = new Path($arguments[$path]);
+            }
+            $arguments[$path] = $arguments[$path]->get('write_wrapper');
         }
 
         // set context to overwrite
@@ -70,72 +46,84 @@ class Files {
                 $arguments[$key] = $default;
             }
         }
+
         // call function
         ksort($arguments);
         return call_user_func_array($name, $arguments);
     }
 
+    protected static function makePath($filename) {
+        if (!is_object($filename) || !is_a($filename, 'Path')) {
+            $filename = new Path($filename);
+        }
+        return $filename;
+    }
+
 
     // map filesystem functions
     public static function copy() {
-        return self::call('copy', func_get_args(), array(0,1), array(2));
+        return self::call('copy', func_get_args(), array(1), array(2));
     }
     public static function file_exists() {
-        return self::call('file_exists', func_get_args(), array(0));
+        return self::call('file_exists', func_get_args());
     }
     public static function file_get_contents() {
-        return self::call('file_get_contents', func_get_args(), array(0), array(2), array(1 => false));
+        return self::call('file_get_contents', func_get_args(), array(), array(2), array(1 => false));
     }
     public static function file_put_contents() {
         return self::call('file_put_contents', func_get_args(), array(0), array(3), array(2 => 0));
     }
     public static function file() {
-        return self::call('file', func_get_args(), array(0), array(2), array(1 => 0));
+        return self::call('file', func_get_args(), array(), array(2), array(1 => 0));
     }
     public static function fileatime() {
-        return self::call('fileatime', func_get_args(), array(0));
+        return self::call('fileatime', func_get_args(), array());
     }
     public static function filectime() {
-        return self::call('filectime', func_get_args(), array(0));
+        return self::call('filectime', func_get_args(), array());
     }
     public static function filegroup() {
-        return self::call('filegroup', func_get_args(), array(0));
+        return self::call('filegroup', func_get_args(), array());
     }
     public static function fileinode() {
-        return self::call('fileinode', func_get_args(), array(0));
+        return self::call('fileinode', func_get_args(), array());
     }
     public static function filemtime() {
-        return self::call('filemtime', func_get_args(), array(0));
+        return self::call('filemtime', func_get_args(), array());
     }
     public static function fileowner() {
-        return self::call('fileowner', func_get_args(), array(0));
+        return self::call('fileowner', func_get_args(), array());
     }
     public static function fileperms() {
-        return self::call('fileperms', func_get_args(), array(0));
+        return self::call('fileperms', func_get_args(), array());
     }
     public static function filesize() {
-        return self::call('filesize', func_get_args(), array(0));
+        return self::call('filesize', func_get_args(), array());
     }
     public static function filetype() {
-        return self::call('filetype', func_get_args(), array(0));
+        return self::call('filetype', func_get_args(), array());
     }
     public static function fopen() {
-        return self::call('fopen', func_get_args(), array(0), array(3), array(2 => false));
+        $paths = array();
+        if (0 !== strpos(func_get_arg(1), 'r')) {
+            $paths = array(0);
+        }
+        return self::call('fopen', func_get_args(), $paths, array(3), array(2 => false));
     }
     public static function fclose() {
         return call_user_func_array('fclose', func_get_args());
     }
     public static function is_dir() {
-        return self::call('is_dir', func_get_args(), array(0));
+        return self::call('is_dir', func_get_args(), array());
     }
     public static function is_executable() {
-        return self::call('is_executable', func_get_args(), array(0));
+        return self::call('is_executable', func_get_args(), array());
     }
     public static function is_file() {
-        return self::call('is_file', func_get_args(), array(0));
+        return self::call('is_file', func_get_args(), array());
     }
     public static function is_link() {
-        return self::call('is_link', func_get_args(), array(0));
+        return self::call('is_link', func_get_args(), array());
     }
     public static function is_readable($filename) {
         $file = self::fopen($filename, 'r');
@@ -146,6 +134,7 @@ class Files {
         return false;
     }
     public static function is_writable($filename) {
+        $filename = self::makePath($filename);
         if (self::is_dir($filename)) {
             return self::is_writable_dir($filename);
         } else {
@@ -153,7 +142,7 @@ class Files {
         }
     }
     public static function lstat() {
-        return self::call('lstat', func_get_args(), array(0));
+        return self::call('lstat', func_get_args(), array());
     }
     public static function mkdir() {
         return self::call('mkdir', func_get_args(), array(0), array(3), array(1 => 0777, 2 => false));
@@ -162,7 +151,7 @@ class Files {
         return self::call('move_uploaded_file', func_get_args(), array(1));
     }
     public static function readfile() {
-        return self::call('readfile', func_get_args(), array(0));
+        return self::call('readfile', func_get_args(), array());
     }
     public static function rename() {
         return self::call('rename', func_get_args(), array(0,1), array(1));
@@ -171,7 +160,7 @@ class Files {
         return self::call('rmdir', func_get_args(), array(0), array(1));
     }
     public static function stat() {
-        return self::call('stat', func_get_args(), array(0));
+        return self::call('stat', func_get_args(), array());
     }
     public static function touch() { //?
         return self::call('touch', func_get_args(), array(0));
@@ -181,7 +170,7 @@ class Files {
     }
 
     // map directory functions
-    // url wrapper is never used!
+    // url wrapper is never used because ftps doesn't work (BUG!)
     public static function scandir() {
         return self::call('scandir', func_get_args(), array());
     }
@@ -205,7 +194,7 @@ class Files {
         $handle = self::fopen($filename, 'ab');
 
         if ($handle !== false) {
-            self::fclose($handle);
+            @self::fclose($handle);
             if ($unlink) {
                 self::unlink($filename);
             }
@@ -216,12 +205,12 @@ class Files {
 
     protected static function is_writable_dir($filename) {
         do {
-            $path = $filename.DIRECTORY_SEPARATOR.mt_rand(0, 9999999);
+            $path = new Path($filename->getPath().DIRECTORY_SEPARATOR.mt_rand(0, 9999999), $filename->getType());
         } while (self::file_exists($path));
 
-        $file = self::fopen($path, 'ab');
-        if ($file !== false) {
-            self:fclose($file);
+        $handle = self::fopen($path, 'ab');
+        if ($handle !== false) {
+            self:fclose($handle);
             self::unlink($path);
             return true;
         }

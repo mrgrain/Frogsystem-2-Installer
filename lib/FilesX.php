@@ -26,8 +26,8 @@ class FilesX extends Files {
 
             // target folder
                 // => change destination path to file name and call myself
-            if(self::is_dir($destination)) {
-                $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
+            if (self::is_dir($destination)) {
+                $target_path = new Path($destination->getPath().DIRECTORY_SEPARATOR.basename($source->getPath()), $destination->getType());
                 return self::x_copy($source, $target_path, $recursive, $overwrite);
 
             //target file
@@ -40,7 +40,7 @@ class FilesX extends Files {
         } elseif ($recursive && self::is_dir($source) && self::is_dir($destination)) {
 
             // create target path
-            $target_path = $destination.DIRECTORY_SEPARATOR.basename($source);
+            $target_path = new Path($destination->getPath().DIRECTORY_SEPARATOR.basename($source->getPath()), $destination->getType());
 
             // target folder not yet exists
             if (!self::file_exists($target_path)) {
@@ -60,7 +60,7 @@ class FilesX extends Files {
             $copied = true;
             foreach(self::scandir($source) as $entry) {
                 if ($entry != "." && $entry != "..") {
-                    $copied = self::x_copy($source.DIRECTORY_SEPARATOR.$entry, $target_path, $recursive, $overwrite) && $copied;
+                    $copied = self::x_copy(new Path($source->getPath().DIRECTORY_SEPARATOR.$entry, $source->getType()), $target_path, $recursive, $overwrite) && $copied;
                 }
             }
             return $copied;
@@ -94,7 +94,7 @@ class FilesX extends Files {
                 $removed = true;
                 foreach(self::scandir($path) as $entry) {
                     if ($entry != "." && $entry != "..")
-                        $removed = self::x_delete($path.DIRECTORY_SEPARATOR.$entry, true) && $removed;
+                        $removed = self::x_delete(new Path($path->getPath().DIRECTORY_SEPARATOR.$entry, $path->getType()), true) && $removed;
                 }
                 return @self::rmdir($path) && $removed;
             }
@@ -123,14 +123,14 @@ class FilesX extends Files {
 
         // source is file and target folder
             // => rename if target not exists
-        $new_dest = $destination.DIRECTORY_SEPARATOR.basename($source);
+        $new_dest = new Path($destination->getPath().DIRECTORY_SEPARATOR.basename($source->getPath()), $destination->getType());
         if (self::is_file($source) && self::is_dir($destination) && !self::file_exists($new_dest))
             return self::rename($source, $new_dest);
-
     }
 
     // IS_WRITABLE (-R)? "path"
     public static function x_is_writable($path, $recursive = false) {
+
         // path is array
         if (is_array($path)) {
             $result = true;
@@ -142,7 +142,7 @@ class FilesX extends Files {
 
         // path not existing
         if (!self::file_exists($path)) {
-            return self::x_is_writable(dirname($path), false);
+            return self::x_is_writable(new Path(dirname($path->getPath()), $path->getType()), false);
         }
 
         // recursively ?
@@ -155,7 +155,7 @@ class FilesX extends Files {
                     break;
 
                 if ($entry != "." && $entry != "..")
-                    $writable = self::x_is_writable($path.DIRECTORY_SEPARATOR.$entry, $recursive) && $writable;
+                    $writable = self::x_is_writable(new Path($path->getPath().DIRECTORY_SEPARATOR.$entry, $path->getType()), $recursive) && $writable;
             }
             return $writable;
 
@@ -176,20 +176,22 @@ class FilesX extends Files {
         // installer_path or install_to path
         $start = substr($path, 0, 2);
         if ("./" == $start || ".".DIRECTORY_SEPARATOR == $start) {
-            $path = INSTALLER_PATH.DIRECTORY_SEPARATOR.substr($path, 2);
+            $path = new Path(substr($path, 2), 'current');
         } elseif ("~/" == $start || "~".DIRECTORY_SEPARATOR == $start) {
-            $path = INSTALL_TO.DIRECTORY_SEPARATOR.substr($path, 2);
+            $path = new Path(substr($path, 2), 'target');
+        } else {
+            $path = new Path($path);
         }
 
         // all files in folder
-        $end = substr($path,-2,2);
+        $end = substr($path->getPath(),-2,2);
         if ($star && ('/*' == $end || DIRECTORY_SEPARATOR.'*' == $end)) {
-            $shortpath = substr($path,0,-1);
+            $shortpath = new Path(substr($path->getPath(),0,-1), $path->getType());
             if (Files::is_dir($shortpath)) {
                 $pathes = array();
                 foreach(self::scandir($shortpath) as $entry) {
                     if ($entry != "." && $entry != "..") {
-                        $pathes[] = $shortpath.$entry;
+                        $pathes[] = new Path($shortpath->getPath().$entry, $shortpath->getType());
                     }
                 }
                 return $pathes;

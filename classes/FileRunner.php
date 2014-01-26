@@ -163,7 +163,6 @@ class FileRunner extends IncrementalFSVersionRunner implements Iterator {
         // resolve pathes
         if (isset($matches['second']))
             $matches['second'] = FilesX::resolve_path($matches['second']);
-
         if (isset($matches['first'])) {
             $matches['first'] = FilesX::resolve_path($matches['first'], true);
         }
