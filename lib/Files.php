@@ -30,6 +30,13 @@ class Files {
             $arguments[$path] = $arguments[$path]->get('write_wrapper');
         }
 
+        // set defaults for empty arguments
+        foreach($use_defaults as $key => $default) {
+            if (!isset($arguments[$key])) {
+                $arguments[$key] = $default;
+            }
+        }
+
         // set context to overwrite
         $options = array('ftp' => array('overwrite' => true));
         foreach($contexts as $context) {
@@ -37,13 +44,6 @@ class Files {
                 stream_context_set_option($arguments[$context], $options);
             } else {
                 $arguments[$context] = stream_context_create($options);
-            }
-        }
-
-        // set defaults for empty arguments
-        foreach($use_defaults as $key => $default) {
-            if (!isset($arguments[$key])) {
-                $arguments[$key] = $default;
             }
         }
 
@@ -62,7 +62,12 @@ class Files {
 
     // map filesystem functions
     public static function copy() {
-        return self::call('copy', func_get_args(), array(1), array(2));
+        $args = func_get_args();
+        // remove existing file
+        if (self::file_exists($args[1])) {
+            self::unlink($args[1]);
+        }
+        return self::call('copy', $args, array(0,1), array(2));
     }
     public static function file_exists() {
         return self::call('file_exists', func_get_args());
@@ -154,7 +159,12 @@ class Files {
         return self::call('readfile', func_get_args(), array());
     }
     public static function rename() {
-        return self::call('rename', func_get_args(), array(0,1), array(1));
+        $args = func_get_args();
+        // remove existing file
+        if (self::file_exists($args[1])) {
+            self::unlink($args[1]);
+        }
+        return self::call('rename', $args, array(0,1), array(1));
     }
     public static function rmdir() {
         return self::call('rmdir', func_get_args(), array(0), array(1));
@@ -194,7 +204,7 @@ class Files {
         $handle = self::fopen($filename, 'ab');
 
         if ($handle !== false) {
-            @self::fclose($handle);
+            self::fclose($handle);
             if ($unlink) {
                 self::unlink($filename);
             }

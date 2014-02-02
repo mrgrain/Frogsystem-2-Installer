@@ -10,34 +10,6 @@
 class InstallerFunctions {
 
     public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
-        $file_path = INSTALLER_PATH.DIRECTORY_SEPARATOR.'copy/db_connection.php';
-
-        // new file
-        $newfile = array(
-            '<?php'.PHP_EOL,
-            '/* database connection type */'.PHP_EOL,
-            '$dbc[\'type\'] = \'mysql\';'.PHP_EOL,
-            '/* database host */'.PHP_EOL,
-            '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL,
-            '/* database user */'.PHP_EOL,
-            '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL,
-            '/* database password */'.PHP_EOL,
-            '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL,
-            '/* database name*/'.PHP_EOL,
-            '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL,
-            '/* table prefix */'.PHP_EOL,
-            '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL,
-            '?>'.PHP_EOL,
-        );
-
-        // write to file
-        $file = @file($file_path);
-        $file = $newfile;
-
-        return @Files::file_put_contents($file_path, $file);
-    }
-
-    public static function writeFileConnectionFile($h, $u, $pa, $d, $pr) {
         // path within installer
         $file_path = new Path('copy/db_connection.php', 'current');
 
@@ -60,7 +32,20 @@ class InstallerFunctions {
         );
 
         // write to file
-        return @Files::file_put_contents($file_path, $newfile);
+        return Files::file_put_contents($file_path, $newfile);
+    }
+
+    public static function writeFileConnectionFile() {
+        // path within installer
+        $file_path = new Path('copy/file_connection.php', 'current');
+
+        // new file
+        $newfile = array(
+        );
+
+        // write to file
+        //~ return @Files::file_put_contents($file_path, $newfile);
+        return true;
     }
 
     public static function getRequiredPHPVersion() {
@@ -86,6 +71,7 @@ class InstallerFunctions {
 
     public static function getInstalledFS2Version($path) {
         $files = array(
+            '2.alix6' => array('config/db_connection.php', 'libs/class_StringCutter.php'),
             '2.alix5' => array('index.php', 'login.inc.php', 'imageviewer.php'),
             '2.alix4' => array('editor_css.php', 'index.php', 'login.inc.php', 'showimg.php', 'style_css.php'),
         );
