@@ -1,13 +1,13 @@
 <?php
 /**
-* @file     InstallerPageFileOperations.php
+* @file     InstallerPageTemplateOperations.php
 * @folder   /steps
 * @version  0.1
 * @author   Sweil
 *
-* page for file operations
+* page for template operations
 */
-class InstallerPageFileOperations extends SelfReloadingInstallerPage {
+class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
 
     private $ic;
     protected $result = array();
@@ -15,16 +15,13 @@ class InstallerPageFileOperations extends SelfReloadingInstallerPage {
 
     public function __construct() {
         parent::__construct();
-        $this->lang = new InstallerLang($this->local, 'files');
-        $this->setTitle('files_title');
-        $this->ic = $this->getICObject('files.tpl');
-
-        // now finally write db-connection file, it may have failed earlier
-        InstallerFunctions::writeDBConnectionFile($_SESSION['dbc']['host'], $_SESSION['dbc']['user'], $_SESSION['dbc']['pass'], $_SESSION['dbc']['data'], $_SESSION['dbc']['pref']);
+        $this->lang = new InstallerLang($this->local, 'templates');
+        $this->setTitle('templates_title');
+        $this->ic = $this->getICObject('templates.tpl');
     }
 
     protected function show() {
-        $runner = new FileRunner('jobs/files/', UPGRADE_FROM, UPGRADE_TO, $this->lang);
+        $runner = new TemplateRunner('jobs/templates/', UPGRADE_FROM, UPGRADE_TO, $this->lang);
         $checkReset = true;
 
         foreach($runner as $pos => $inst) {
@@ -74,7 +71,7 @@ class InstallerPageFileOperations extends SelfReloadingInstallerPage {
         if ($this->isDone()) {
             $this->ic->addCond('done', true);
             $this->ic->addText('url', '?step=templates');
-            $this->ic->addText('url_self', '?step=fileOperations');
+            $this->ic->addText('url_self', '?step=templateOperations');
         } else {
             $this->ic->addText('url', $this->getUrl($this->getNext()));
         }
@@ -88,14 +85,6 @@ class InstallerPageFileOperations extends SelfReloadingInstallerPage {
 
         // call last to reset session if neccessary
         $this->finish();
-    }
-
-    private function addResult($result) {
-        $this->result[] = $result;
-    }
-
-    protected function getUrl($next) {
-        return $_SERVER['PHP_SELF']."?step=fileOperations&next={$next}";
     }
 }
 ?>

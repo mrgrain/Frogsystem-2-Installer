@@ -10,13 +10,9 @@
 
 class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
 
-    private $targets;
     private $dir;
 
-    public function __construct($targets, $dir, $start, $end, $lang) {
-        // target array
-        $this->targets = $targets;
-
+    public function __construct($dir, $start, $end, $lang) {
         // langfile
         $this->lang = $lang;
 
@@ -46,16 +42,16 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
         $result = false;
         switch ($inst->command) {
             case 'copy':
-                $result = FilesX::x_copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
+                //~ $result = FilesX::x_copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
                 break;
             case 'delete':
-                $result = FilesX::x_delete($inst->path, $inst->recursive);
+                //~ $result = FilesX::x_delete($inst->path, $inst->recursive);
                 break;
             case 'move':
-                $result = FilesX::x_move($inst->source, $inst->destination, $inst->overwrite);
+                //~ $result = FilesX::x_move($inst->source, $inst->destination, $inst->overwrite);
                 break;
             case 'is_writable':
-                $result = FilesX::x_is_writable($inst->path, $inst->recursive);
+                //~ $result = FilesX::x_is_writable($inst->path, $inst->recursive);
                 break;
         }
 
@@ -130,7 +126,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
      *      Examples:
      *          SECTION CREATE 0_main.tpl COPYRIGHT
      *          SECTION CREATE -O 0_main.tpl HEADER ./path/to/source/file
-     *          SECTION DELETE 0_main.tpl FOOTER
+     *          #SECTION DELETE 0_main.tpl FOOTER
      *          SECTION MOVE -O 0_old.tpl CONTENT 0_new.tpl BODY
      *
      *          CREATE [-(OPTIONS)] filename sectionname [source]
@@ -140,7 +136,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
      *          the new section.
      *              O   overwrite if section already exists
      *
-     *          #DELETE filename sectionname
+     *          DELETE filename sectionname
      *          delete the section called "sectionname" from file "filename"
      *
      *          MOVE [-(OPTIONS)] sourcefile sourcesection targetfile sectionname
@@ -153,14 +149,14 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
      *      operating with specific tags of a section
      *      Examples:
      *          TAG RENAME 0_search.tpl RESULT_LINE num_matches rank
-     *          TAG REPLACE 0_main.tpl FOOTER ./path/to/source/file
-     *          TAG REPLACE 0_main.tpl NONSENSE
+     *          TAG REPLACE 0_main.tpl FOOTER a_tag ./path/to/source/file
+     *          TAG REPLACE 0_main.tpl NONSENSE a_tag
      *
      *          RENAME filename sectionname oldtag newtag
      *          replace all occurances of "{..oldtag..}" with "{..newtag..}"
      *          in the section "sectionname" of file "filename"
      *
-     *          REPLACE filename sectionname tagname [source]
+     *          #REPLACE filename sectionname tagname [source]
      *          replace all occurances of "{..tagname..}" with the content
      *          from a source file. if no source file is given, "{..tagname..}"
      *          will be replaced by an empty string (i.e. deleted).
@@ -180,10 +176,11 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
      */
     private static function parse($input) {
         $commands = array(
-            'copy'              => '/^COPY *(?:-(?P<params>[OR]{1,2}))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
-            'delete'            => '/^DELETE *(?:-(?P<params>R))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2).*/i',
-            'move'              => '/^MOVE *(?:-(?P<params>O))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
-            'is_writable'       => '/^IS_WRITABLE *(?:-(?P<params>R))? *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2).*/i',
+            'file'              => '/^FILE *(?P<type>CREATE|DELETE|MOVE) *(?:-(?P<params>O))? *("|\')?(?P<first>(?(3)[^\3]|[^\s])+)(?(3)\3)( *("|\')?(?P<second>(?(5)[^\5]|[^\s])+)(?(5)\5))?.*/i',
+            'section'               => '/^SECTION *(?P<type>CREATE|MOVE) *(?:-(?P<params>O))? *("|\')?(?P<first>(?(3)[^\3]|[^\s])+)(?(3)\3) *("|\')?(?P<second>(?(5)[^\5]|[^\s])+)(?(5)\5)(?: *("|\')?(?P<third>(?(7)[^\7]|[^\s])+)(?(7)\7))?(?: *("|\')?(?P<fourth>(?(9)[^\9]|[^\s])+)(?(9)\9))?.*/i',
+            'section_delete'        => '/^SECTION *(?P<type>DELETE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
+            'tag'                   => '/^TAG *(?P<type>RENAME|REPLACE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4) *("|\')?(?P<third>(?(6)[^\6]|[^\s])+)(?(6)\6)(?: *("|\')?(?P<fourth>(?(8)[^\8]|[^\s])+)(?(8)\8))?.*/i',
+            'info'                  => '/^INFO *("|\')?(?P<first>(?(1)[^\1]|[^\s])+)(?(1)\1)(?: *("|\')?(?P<second>(?(3)[^\3]|[^\s])+)(?(3)\3))?(?: *("|\')?(?P<third>(?(5)[^\5]|[^\s])+)(?(5)\5))?(?: *("|\')?(?P<fourth>(?(7)[^\7]|[^\s])+)(?(7)\7))?.*/i',
         );
 
         // brute force regex
@@ -203,40 +200,74 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
             return false;
         }
 
-        // resolve pathes
-        if (isset($matches['second']))
-            $matches['second'] = FilesX::resolve_path($matches['second']);
-
-        if (isset($matches['first'])) {
-            $matches['first'] = FilesX::resolve_path($matches['first'], true);
-        }
+        // Get named matches
+        $args = array_intersect_key($matches, array_flip(array('type', 'first', 'second', 'third', 'fourth')));
 
         // switch commands
         $res = new StdClass();
         $res->command = $command;
         switch ($command) {
-            case 'copy':
-                $res->writable = $matches['second'];
-                $res->source = $matches['first'];
-                $res->destination = $matches['second'];
-                $res->recursive = (in_array('R', str_split(strtoupper($matches['params']))));
-                $res->overwrite = (in_array('O', str_split(strtoupper($matches['params']))));
-                break;
-            case 'delete':
-                $res->writable = $matches['first'];
-                $res->path = $matches['first'];
-                $res->recursive = ('R' == strtoupper($matches['params']));
-                break;
-            case 'move':
-                $res->writable = $matches['second'];
-                $res->source = $matches['first'];
-                $res->destination = $matches['second'];
+            case 'file':
+                $res->type = strtolower($args['type']);
+                $res->file = $args['first'];
+                if (isset($args['second'])) $res->second_file = $args['second'];
                 $res->overwrite = ('O' == strtoupper($matches['params']));
+
+                if ('create' == $res->type && isset($res->second_file)) {
+                    $res->second_file = FilesX::resolve_path($res->second_file);
+                }
                 break;
-            case 'is_writable':
-                $res->writable = $matches['first'];
-                $res->path = $matches['first'];
-                $res->recursive = ('R' == strtoupper($matches['params']));
+            case 'section':
+                $res->type = strtolower($args['type']);
+                $res->file = $matches['first'];
+                $res->section = $args['second'];
+                $res->overwrite = ('O' == strtoupper($matches['params']));
+
+                if (isset($args['third'])) $res->second_file = $args['third'];
+                if (isset($args['fourth'])) $res->second_section = $args['fourth'];
+
+                if ('create' == $res->type && isset($res->second_file)) {
+                    $res->second_file = FilesX::resolve_path($res->second_file);
+                }
+                break;
+            case 'section_delete':
+                $res->command = 'delete';
+                $res->type = strtolower($args['type']);
+                $res->file = $args['first'];
+                $res->section = $args['second'];
+                break;
+            case 'tag':
+                $res->type = strtolower($args['type']);
+                $res->file = $args['first'];
+                $res->section = $args['second'];
+                $res->tag = $args['third'];
+
+                // fourth
+                if ('replace' == $res->type && isset($args['fourth'])) {
+                    $args['fourth'] = FilesX::resolve_path($args['fourth']);
+                }
+                if (!isset($args['fourth'])) {
+                    $args['fourth'] = null;
+                }
+                $res->new = $args['fourth'];
+
+                break;
+            case 'info':
+                $res->type = 'note';
+                $res->lang = array_pop($args);
+
+                if (isset($args['first'])) {
+                    $res->file = $args['first'];
+                    $res->type = 'file';
+                }
+                if (isset($args['second'])) {
+                    $res->section = $args['second'];
+                    $res->type = 'section';
+                }
+                if (isset($args['third'])) {
+                    $res->tag = $args['third'];
+                    $res->type = 'tag';
+                }
                 break;
         }
 

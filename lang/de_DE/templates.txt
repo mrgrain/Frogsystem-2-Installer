@@ -1,0 +1,9 @@
+#@installer
+#@file_instructions
+
+templates_title: Templates
+templates_info_title: Templates aktualisieren
+templates_info_text: Wir werden gleich versuchen die unten stehenden Datei-Operationen durchzuführen. Bitte achte darauf, dass alle nötigen Schreibrechte vorhanden sind. Falls dem nicht so ist, bring das bitte jetzt in Ordnung.
+target_not_writable: Keine Schreibrechte für Ziel-Pfad.
+templates_start_instructions_button: START
+

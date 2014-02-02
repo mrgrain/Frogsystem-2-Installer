@@ -8,13 +8,13 @@
 * welcome page for installer
 */
 class InstallerPageStart extends InstallerPage {
-    
+
     public function __construct() {
         parent::__construct();
         $this->lang = new InstallerLang($this->local, 'start');
         $this->setTitle('start_title');
     }
-    
+
     protected function show() {
         $ic = $this->getICObject('start.tpl');
         $ic->addText('changelog_text', nl2br($this->lang->get('changelog_text'), false));
@@ -23,10 +23,11 @@ class InstallerPageStart extends InstallerPage {
         $notes     = $ic->get('notes');
         $ic->addText('copyright_text', nl2br($this->lang->get('copyright_text'), false));
         $copyright = $ic->get('copyright');
-        
-        
+
+
         // session and reset?
-        if (is_array($_SESSION) && count($_SESSION) > 1) {
+        $good_keys = array('installer_path', 'upgrade_to');
+        if (is_array($_SESSION) && count(array_diff_key($_SESSION, array_flip($good_keys))) > 0) {
             $ic->addCond('session', true);
         }
         if (isset($_GET['reset'])) {
