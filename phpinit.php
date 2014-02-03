@@ -56,8 +56,6 @@ function fileaccess() {
         if (!empty($wrapper['installer']) && isset($wrapper['installer_path'])) {
             Path::setPrefix($wrapper['installer'].$wrapper['installer_path'], 'current', 'write_wrapper');
         }
-
-    //~ var_dump($wrapper);
     }
     unset($wrapper);
     // create wrapper url

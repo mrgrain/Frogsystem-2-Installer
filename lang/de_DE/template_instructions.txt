@@ -1,0 +1,20 @@
+info_file_create: Erstelle eine neue Template-Datei mit dem Namen %1$s.
+info_file_create_from: Erstelle eine neue Template-Datei mit dem Namen %1$s aus der Vorlage %2$s.
+info_file_delete: Lösche die Template-Datei %1$s.
+info_file_move: Bennenne die Template-Datei %1$s um in %2$s.
+
+info_section_create: Erzeuge in der Template-Datei %1$s die Sekion %2$s.
+info_section_create_from: Erzeuge in der Template-Datei %1$s die Sekion %2$s aus der Voralge %3$s.
+info_section_delete: Lösche die Sektion %2$s aus der Template-Datei %1$s.
+info_section_move: Verschiebe Sektion %2$s aus der Template-Datei %1$s als %4$s in die Datei %3$s.
+
+info_tag_rename: Bennene Tag %3$s in der Sektion %2$s der Template-Datei %1$s um in %4$s.
+info_tag_replace: Ersetze den Tag %3$s in der Sektion %2$s der Template-Datei %1$s mit dem Inhalt aus der Vorlage %4$s.
+info_tag_replace_empty: Entferne den Tag %3$s aus der Sektion %2$s der Template-Datei %1$s.
+
+info_info_note: <b>%1$s</b><br>%2$s
+info_info_file: Hinweis zur Datei %1$s: %2$s
+info_info_section: Hinweis zu Sektion %2$s in Datei %1$s: %3$s
+info_info_tag: Hinweis zum Tag %3$s in Sektion %2$s der Datei %1$s: %4$s
+
+

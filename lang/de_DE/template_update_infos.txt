@@ -1,0 +1,9 @@
+new_url_style_title: Neuer URL Stil
+new_url_style_text: Langer Text zu "Neuer URL Stil". Lorem ipsum dolor sit amet.
+
+polls_form_poll_id_change: Text zu "Neue ID für das Umfragen Formular"
+search_update_phonetic_help: Text zu "Tipps für Phonetische Suche"
+search_new_tag_operators: Text zu "Tipps zu Suchoperatoren"
+search_update_rank: Text zu "Tipps zum Suchrang"
+search_new_tag_info: Text zu "Infos zu neu verfügbaren Tags."
+user_reset_password_link: Text zu "Infos zum Tag und der PW zurücksetzen URL".

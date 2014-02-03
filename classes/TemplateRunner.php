@@ -62,23 +62,66 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
 
 
     protected function getInfo($inst) {
+        $info = $this->lang->get('info_'.$inst->command.'_'.$inst->type);
+
         switch ($inst->command) {
-            case 'copy':
-                $source = (is_array($inst->source))?dirname($inst->source[0]).'/*':$inst->source;
-                return sprintf($this->lang->get('info_'.$inst->command), $source, $inst->destination);
-                break;
-            case 'delete':
-                $path = (is_array($inst->path))?dirname($inst->path[0]).'/*':$inst->path;
-                return sprintf($this->lang->get('info_'.$inst->command), $path);
-                break;
-            case 'move':
-                $source = (is_array($inst->source))?dirname($inst->source[0]).'/*':$inst->source;
-                return sprintf($this->lang->get('info_'.$inst->command),$source, $inst->destination);
-                break;
-            case 'is_writable':
-                $path = (is_array($inst->path))?dirname($inst->path[0]).'/*':$inst->path;
-                return sprintf($this->lang->get('info_'.$inst->command), $path);
-                break;
+            case 'file':
+                switch ($inst->type) {
+                    case 'create':
+                        if (isset($inst->second_file)) {
+                            return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
+                                           $inst->file, $inst->second_file);
+                        } else {
+                            return sprintf($info, $inst->file);
+                        }
+                    case 'delete':
+                        return sprintf($info, $inst->file);
+                    case 'move':
+                        return sprintf($info, $inst->file, $inst->second_file);
+                }
+
+            case 'section':
+                switch ($inst->type) {
+                    case 'create':
+                        if (isset($inst->second_file)) {
+                            return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
+                                           $inst->file, $inst->section, $inst->second_file);
+                        } else {
+                            return sprintf($info, $inst->file, $inst->section);
+                        }
+                    case 'delete':
+                        return sprintf($info, $inst->file, $inst->section);
+                    case 'move':
+                        return sprintf($info, $inst->file, $inst->section, $inst->second_file, $inst->second_section);
+                }
+
+            case 'tag':
+                switch ($inst->type) {
+                    case 'rename':
+                        return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
+                    case 'replace':
+                        if (!empty($inst->new)) {
+                            return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
+                        } else {
+                            return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_empty'),
+                                           $inst->file, $inst->section, $inst->tag);
+                        }
+                }
+
+            case 'info':
+                switch ($inst->type) {
+                    case 'note':
+                        return sprintf($info, $this->lang->get($inst->lang.'_title'), $this->lang->get($inst->lang.'_text'));
+                    case 'file':
+                        return sprintf($info, $inst->file, $this->lang->get($inst->lang));
+                    case 'section':
+                        return sprintf($info, $inst->file, $inst->section, $this->lang->get($inst->lang));
+                    case 'tag':
+                        return sprintf($info, $inst->file, $inst->section, $inst->tag, $this->lang->get($inst->lang));
+                }
+
+            default:
+                return $inst->command;
         }
         return false;
     }
@@ -177,10 +220,10 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
     private static function parse($input) {
         $commands = array(
             'file'              => '/^FILE *(?P<type>CREATE|DELETE|MOVE) *(?:-(?P<params>O))? *("|\')?(?P<first>(?(3)[^\3]|[^\s])+)(?(3)\3)( *("|\')?(?P<second>(?(5)[^\5]|[^\s])+)(?(5)\5))?.*/i',
-            'section'               => '/^SECTION *(?P<type>CREATE|MOVE) *(?:-(?P<params>O))? *("|\')?(?P<first>(?(3)[^\3]|[^\s])+)(?(3)\3) *("|\')?(?P<second>(?(5)[^\5]|[^\s])+)(?(5)\5)(?: *("|\')?(?P<third>(?(7)[^\7]|[^\s])+)(?(7)\7))?(?: *("|\')?(?P<fourth>(?(9)[^\9]|[^\s])+)(?(9)\9))?.*/i',
-            'section_delete'        => '/^SECTION *(?P<type>DELETE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
-            'tag'                   => '/^TAG *(?P<type>RENAME|REPLACE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4) *("|\')?(?P<third>(?(6)[^\6]|[^\s])+)(?(6)\6)(?: *("|\')?(?P<fourth>(?(8)[^\8]|[^\s])+)(?(8)\8))?.*/i',
-            'info'                  => '/^INFO *("|\')?(?P<first>(?(1)[^\1]|[^\s])+)(?(1)\1)(?: *("|\')?(?P<second>(?(3)[^\3]|[^\s])+)(?(3)\3))?(?: *("|\')?(?P<third>(?(5)[^\5]|[^\s])+)(?(5)\5))?(?: *("|\')?(?P<fourth>(?(7)[^\7]|[^\s])+)(?(7)\7))?.*/i',
+            'section'           => '/^SECTION *(?P<type>CREATE|MOVE) *(?:-(?P<params>O))? *("|\')?(?P<first>(?(3)[^\3]|[^\s])+)(?(3)\3) *("|\')?(?P<second>(?(5)[^\5]|[^\s])+)(?(5)\5)(?: *("|\')?(?P<third>(?(7)[^\7]|[^\s])+)(?(7)\7))?(?: *("|\')?(?P<fourth>(?(9)[^\9]|[^\s])+)(?(9)\9))?.*/i',
+            'section_delete'    => '/^SECTION *(?P<type>DELETE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) +("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4).*/i',
+            'tag'               => '/^TAG *(?P<type>RENAME|REPLACE) *("|\')?(?P<first>(?(2)[^\2]|[^\s])+)(?(2)\2) *("|\')?(?P<second>(?(4)[^\4]|[^\s])+)(?(4)\4) *("|\')?(?P<third>(?(6)[^\6]|[^\s])+)(?(6)\6)(?: *("|\')?(?P<fourth>(?(8)[^\8]|[^\s])+)(?(8)\8))?.*/i',
+            'info'              => '/^INFO *("|\')?(?P<first>(?(1)[^\1]|[^\s])+)(?(1)\1)(?: *("|\')?(?P<second>(?(3)[^\3]|[^\s])+)(?(3)\3))?(?: *("|\')?(?P<third>(?(5)[^\5]|[^\s])+)(?(5)\5))?(?: *("|\')?(?P<fourth>(?(7)[^\7]|[^\s])+)(?(7)\7))?.*/i',
         );
 
         // brute force regex
@@ -231,7 +274,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                 }
                 break;
             case 'section_delete':
-                $res->command = 'delete';
+                $res->command = 'section';
                 $res->type = strtolower($args['type']);
                 $res->file = $args['first'];
                 $res->section = $args['second'];
