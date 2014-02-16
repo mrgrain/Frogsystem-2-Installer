@@ -16,5 +16,6 @@ class InstructionNotFoundException extends Exception { };
 class CheckerTestFailedException extends Exception { };
 class NoDatabaseConnectionException extends Exception { };
 class FileOperationException extends Exception { };
+class TemplateOperationException extends Exception { };
 
 ?>

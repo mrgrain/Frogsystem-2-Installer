@@ -48,7 +48,7 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
             try {
                 $runner->runCurrentInstruction();
                 $this->ic->addCond('success', true);
-            } catch (FileOperationException $e) {
+            } catch (TemplateOperationException $e) {
                 $this->ic->addCond('error', true);
                 $this->ic->addText('error_message', $e->getMessage());
                 $this->success = false;
@@ -78,13 +78,21 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
         $this->ic->addCond('all_successful', $this->success);
         $this->ic->addText('total_runtime', sprintf('%.3f', $this->getRuntime()));
         $this->ic->addText('instruction_list', implode(PHP_EOL, $this->getResult()));
-        print $this->ic->get('file_runner');
+        print $this->ic->get('template_runner');
 
         // redirect (or not)
         $this->reload();
 
         // call last to reset session if neccessary
         $this->finish();
+    }
+
+    private function addResult($result) {
+        $this->result[] = $result;
+    }
+
+    protected function getUrl($next) {
+        return $_SERVER['PHP_SELF']."?step=templateOperations&next={$next}";
     }
 }
 ?>

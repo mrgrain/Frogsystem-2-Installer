@@ -3,9 +3,15 @@
 #@template_update_infos
 
 templates_title: Templates
-templates_info_title: Templates aktualisieren
-templates_info_text: Zur Aktualisierung werden wir nun die hier aufgelisteten Arbeiten durchführen. Du kannst auswählen für welche Styles das erledigt werden soll. Bitte beachte auch unbedingt die Hinweise zu Änderungen, die <b>nicht automatisiert</b> durchgeführt werden können und erledige diese Arbeiten dann manuell. Alle Infos stehen auch nochmal in <b>templates.txt</b>.
-target_not_writable: Keine Schreibrechte für Ziel-Pfad.
-templates_start_instructions_button: Na dann mal los!
-templates_skip_instructions_button: Das mach ich lieber selber.
+templates_info_title: Styles aktualisieren
+templates_info_text: Um das Update nutzen zu können, müssen auch die Styles auf den neusten Stand gebracht werden.
+
+template_jobs_title: Nötige Template Änderungen
+template_jobs_info: Um die Styles zu aktualisieren, werden wir nun die hier aufgelisteten Arbeiten an den Templates vornhemen. Bitte beachte auch die Hinweise zu Änderungen, die <b>nicht automatisiert</b> durchgeführt werden können und erledige diese Arbeiten <b>unbedingt</b> von Hand. Alle Infos stehen auch nochmal in <b>templates.txt</b>.
+
+template_styles_title: Styles auswählen
+template_styles_info: Du kannst auswählen für welche Styles die Änderungen durchgeführt werden sollen. Bitte wähle diese jetzt aus. Nicht aktualiserte Styles werden warhscheinlich nicht mehr funktionieren.
+
+templates_start_instructions_button: Okay, dann mal los. Stylus convertus!
+templates_skip_instructions_button: Schritt überspringen. Ich mach alles selber.
 

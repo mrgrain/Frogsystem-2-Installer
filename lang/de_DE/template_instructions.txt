@@ -1,16 +1,16 @@
-info_file_create: Erstelle eine neue Template-Datei mit dem Namen %1$s.
-info_file_create_from: Erstelle eine neue Template-Datei mit dem Namen %1$s aus der Vorlage %2$s.
-info_file_delete: Lösche die Template-Datei %1$s.
-info_file_move: Bennenne die Template-Datei %1$s um in %2$s.
+info_file_create: Neues Template <b>%1$s</b> erstellen.
+info_file_create_from: Neues Template <b>%1$s</b> aus Vorlage <i>%2$s</i> erstellen.
+info_file_delete: Template <b>%1$s</b> löschen.
+info_file_move: Template <b>%1$s</b> umbenennen in <b>%2$s</b>.
 
-info_section_create: Erzeuge in der Template-Datei %1$s die Sekion %2$s.
-info_section_create_from: Erzeuge in der Template-Datei %1$s die Sekion %2$s aus der Voralge %3$s.
-info_section_delete: Lösche die Sektion %2$s aus der Template-Datei %1$s.
-info_section_move: Verschiebe Sektion %2$s aus der Template-Datei %1$s als %4$s in die Datei %3$s.
+info_section_create: Neue Sektion <b>%2$s</b> in <i>%1$s</i> erstellen.
+info_section_create_from: Neue Sektion <b>%2$s</b> in <i>%1$s</i> aus Vorlage <i>%3$s</i> erstellen.
+info_section_delete: Sektion <b>%2$s</b> löschen aus <i>%1$s</i>.
+info_section_move: Sektion <i>%1$s</i>/<b>%2$s</b> verschieben nach <i>%3$s</i>/<b>%4$s</b>.
 
-info_tag_rename: Bennene Tag %3$s in der Sektion %2$s der Template-Datei %1$s um in %4$s.
-info_tag_replace: Ersetze den Tag %3$s in der Sektion %2$s der Template-Datei %1$s mit dem Inhalt aus der Vorlage %4$s.
-info_tag_replace_empty: Entferne den Tag %3$s aus der Sektion %2$s der Template-Datei %1$s.
+info_tag_rename: Tag <b>{..%3$s..}</b> in <i>%1$s</i>/<i>%2$s</i> umbenennen in <b>{..%4$s..}</b>.
+info_tag_replace: Tag <b>{..%3$s..}</b> in <i>%1$s</i>/<i>%2$s</i> ersetzen durch Vorlage <i>%4$s</i>.
+info_tag_replace_empty: Tag <b>{..%3$s..}</b> entfernen aus <i>%1$s</i>/<i>%2$s</i>.
 
 info_info_note: <b>%1$s</b><br>%2$s
 info_info_file: Hinweis zur Datei %1$s: %2$s

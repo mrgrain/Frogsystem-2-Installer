@@ -8,12 +8,12 @@
  * provides an abstract page construct
  */
 abstract class Page {
-    
+
     protected $title;
     protected $content;
-    
+
     abstract public function __construct();
-    
+
     /* create & show content */
     public function getContent($overwrite = false) {
         // call show?
@@ -30,21 +30,21 @@ abstract class Page {
     }
     public function setContent ($html = null) {
         $this->content = $html;
-    }    
-    
+    }
+
     abstract protected function show();
 
-    
+
     /* Title Functions */
     public function setTitle($title) {
         $this->title = $title;
     }
     protected function getTitle() {
         return $this->title;
-    }     
+    }
     abstract protected function getTitleTag();
 
     /* create ouptut */
-    abstract public function __toString(); 
+    abstract public function __toString();
 }
 ?>

@@ -29,7 +29,8 @@ class InstallerPageTemplates extends InstallerPage {
         }
 
         $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
-        $this->ic->addText('url', '?step=templateOperations');
+        $this->ic->addText('url_start', '?step=templateOperations');
+        $this->ic->addText('url_skip', '?step=cleanup');
         print $this->ic->get('templates_info');
     }
 }

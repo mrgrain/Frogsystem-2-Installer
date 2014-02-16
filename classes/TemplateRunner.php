@@ -40,24 +40,66 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
 
     protected function runInstruction($inst) {
         $result = false;
+
         switch ($inst->command) {
-            case 'copy':
-                //~ $result = FilesX::x_copy($inst->source, $inst->destination, $inst->recursive, $inst->overwrite);
-                break;
-            case 'delete':
-                //~ $result = FilesX::x_delete($inst->path, $inst->recursive);
-                break;
-            case 'move':
-                //~ $result = FilesX::x_move($inst->source, $inst->destination, $inst->overwrite);
-                break;
-            case 'is_writable':
-                //~ $result = FilesX::x_is_writable($inst->path, $inst->recursive);
-                break;
+            case 'file':
+                switch ($inst->type) {
+                    case 'create':
+                        if (isset($inst->second_file)) {
+                            $result = true; // TODO
+                            //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
+                                           //~ $inst->file, $inst->second_file);
+                        } else {
+                            //~ return sprintf($info, $inst->file);
+                            $result = true; // TODO
+                        }
+                    case 'delete':
+                        $result = false; // NOT IMPLEMENTED
+                    case 'move':
+                        $result = false; // NOT IMPLEMENTED
+                }
+
+            case 'section':
+                switch ($inst->type) {
+                    case 'create':
+                        if (isset($inst->second_file)) {
+                            $result = true; // TODO
+                            //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
+                                           //~ $inst->file, $inst->section, $inst->second_file);
+                        } else {
+                            $result = true; // TODO
+                            //~ return sprintf($info, $inst->file, $inst->section);
+                        }
+                    case 'delete':
+                        $result = false; // NOT IMPLEMENTED
+                    case 'move':
+                        $result = true; // TODO
+                        //~ return sprintf($info, $inst->file, $inst->section, $inst->second_file, $inst->second_section);
+                }
+
+            case 'tag':
+                switch ($inst->type) {
+                    case 'rename':
+                        $result = true; // TODO
+                        //~ return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
+                    case 'replace':
+                        if (!empty($inst->new)) {
+                            $result = false; // NOT IMPLEMENTED
+                        } else {
+                            $result = false; // NOT IMPLEMENTED
+                        }
+                }
+
+            case 'info':
+            default:
+                $result = true;
         }
 
         if(!$result) {
-            throw new FileOperationException('Error with command `'.$inst->command.'`.');
+            throw new TemplateOperationException('Error with command `'.$inst->command.'`.');
         }
+
+        return $result;
     }
 
 
