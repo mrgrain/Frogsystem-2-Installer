@@ -2,16 +2,27 @@
 #@template_instructions
 #@template_update_infos
 
-templates_title: Templates
+templates_title: Styles
+
 templates_info_title: Styles aktualisieren
 templates_info_text: Um das Update nutzen zu können, müssen auch die Styles auf den neusten Stand gebracht werden.
 
 template_jobs_title: Nötige Template Änderungen
-template_jobs_info: Um die Styles zu aktualisieren, werden wir nun die hier aufgelisteten Arbeiten an den Templates vornhemen. Bitte beachte auch die Hinweise zu Änderungen, die <b>nicht automatisiert</b> durchgeführt werden können und erledige diese Arbeiten <b>unbedingt</b> von Hand. Alle Infos stehen auch nochmal in <b>templates.txt</b>.
+template_jobs_info: Um die Styles zu aktualisieren, werden wir die hier aufgelisteten Arbeiten an den Templates vornehmen. Beachte die Hinweise zu Beginn. Es geht um Änderungen, die <b>nicht automatisiert</b> durchgeführt werden können. Du musst diese Arbeiten <b>unbedingt</b> von Hand durchführen. Alle Infos stehen auch nochmal in <b>templates.txt</b>.
 
 template_styles_title: Styles auswählen
-template_styles_info: Du kannst auswählen für welche Styles die Änderungen durchgeführt werden sollen. Bitte wähle diese jetzt aus. Nicht aktualiserte Styles werden warhscheinlich nicht mehr funktionieren.
+template_styles_info: Du kannst auswählen für welche Styles die Änderungen durchgeführt werden sollen. Nicht aktualisierte Styles werden wahrscheinlich nicht mehr funktionieren.
 
 templates_start_instructions_button: Okay, dann mal los. Stylus convertus!
 templates_skip_instructions_button: Schritt überspringen. Ich mach alles selber.
 
+
+template_runner_title: Styles aktualisieren
+template_runner_info: Es werden jetzt die Änderungen an den Templates vorgenommen. Falls sich die Seite nicht selbst neulädt, klicke bitte auf &bdquo;Weiter&ldquo;.
+continue_template_operations: Weiter &amp; Ausführung fortsetzen
+template_operations_done_title: Styles erfolgreich aktualisiert!
+template_operations_done: Die Styles wurden aktualisiert. Alle Template-Änderungen wurden erfolgreich ausgeführt.
+template_operations_done_but_error_title: Fehler
+template_operations_done_but_error: Es traten Fehler auf, die leider nicht behoben werden konnten. Du kannst versuchen den Vorgang einfach nochmal neu zu starten oder dich selbst um eine Lösung kümmern.
+template_operations_retry: Okay, nochmal probieren bitte.
+template_operations_continue_with_errors: Da muss ich wohl selber nachschauen. Weiter!

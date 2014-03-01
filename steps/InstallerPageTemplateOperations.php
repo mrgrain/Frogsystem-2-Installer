@@ -28,6 +28,11 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
             // break out
             if ($this->isDone()) { break; }
 
+            // skip infos
+            if ($runner->currentIsOfType('info')) {
+                continue;
+            }
+
             // set next step
             if ($checkReset && !$this->isFirstRun()) {
                 $runner->setCurrent($this->getNext()-1);
@@ -70,7 +75,7 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
         // show output
         if ($this->isDone()) {
             $this->ic->addCond('done', true);
-            $this->ic->addText('url', '?step=templates');
+            $this->ic->addText('url', '?step=cleanup');
             $this->ic->addText('url_self', '?step=templateOperations');
         } else {
             $this->ic->addText('url', $this->getUrl($this->getNext()));

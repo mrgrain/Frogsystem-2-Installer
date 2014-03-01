@@ -1,10 +1,10 @@
 info_file_create: Neues Template <b>%1$s</b> erstellen.
-info_file_create_from: Neues Template <b>%1$s</b> aus Vorlage <i>%2$s</i> erstellen.
+info_file_create_from: Neues Template <b>%1$s</b> erstellen aus Vorlage <i>%2$s</i>.
 info_file_delete: Template <b>%1$s</b> löschen.
 info_file_move: Template <b>%1$s</b> umbenennen in <b>%2$s</b>.
 
 info_section_create: Neue Sektion <b>%2$s</b> in <i>%1$s</i> erstellen.
-info_section_create_from: Neue Sektion <b>%2$s</b> in <i>%1$s</i> aus Vorlage <i>%3$s</i> erstellen.
+info_section_create_from: Neue Sektion <b>%2$s</b> in <i>%1$s</i> erstellen aus Vorlage <i>%3$s</i>.
 info_section_delete: Sektion <b>%2$s</b> löschen aus <i>%1$s</i>.
 info_section_move: Sektion <i>%1$s</i>/<b>%2$s</b> verschieben nach <i>%3$s</i>/<b>%4$s</b>.
 
@@ -13,8 +13,8 @@ info_tag_replace: Tag <b>{..%3$s..}</b> in <i>%1$s</i>/<i>%2$s</i> ersetzen durc
 info_tag_replace_empty: Tag <b>{..%3$s..}</b> entfernen aus <i>%1$s</i>/<i>%2$s</i>.
 
 info_info_note: <b>%1$s</b><br>%2$s
-info_info_file: Hinweis zur Datei %1$s: %2$s
-info_info_section: Hinweis zu Sektion %2$s in Datei %1$s: %3$s
-info_info_tag: Hinweis zum Tag %3$s in Sektion %2$s der Datei %1$s: %4$s
+info_info_file: Hinweis zu <b>%1$s</b><br>%2$s
+info_info_section: Hinweis zu <b>%2$s</b> in <i>%1$s</i><br>%3$s
+info_info_tag: Hinweis zu <b>{..%3$s..}</b> in <i>%1$s/%2$s</i><br>%4$s
 
 

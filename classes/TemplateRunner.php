@@ -37,10 +37,14 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
         }
     }
 
+    public function currentIsOfType($type) {
+        return ($type == $this->current()->command);
+    }
+
 
     protected function runInstruction($inst) {
-        $result = false;
 
+        $result = false;
         switch ($inst->command) {
             case 'file':
                 switch ($inst->type) {
@@ -53,11 +57,15 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                             //~ return sprintf($info, $inst->file);
                             $result = true; // TODO
                         }
+                        break;
                     case 'delete':
                         $result = false; // NOT IMPLEMENTED
+                        break;
                     case 'move':
                         $result = false; // NOT IMPLEMENTED
+                        break;
                 }
+                break;
 
             case 'section':
                 switch ($inst->type) {
@@ -70,25 +78,32 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                             $result = true; // TODO
                             //~ return sprintf($info, $inst->file, $inst->section);
                         }
+                        break;
                     case 'delete':
                         $result = false; // NOT IMPLEMENTED
+                        break;
                     case 'move':
                         $result = true; // TODO
                         //~ return sprintf($info, $inst->file, $inst->section, $inst->second_file, $inst->second_section);
+                        break;
                 }
+                break;
 
             case 'tag':
                 switch ($inst->type) {
                     case 'rename':
                         $result = true; // TODO
                         //~ return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
+                        break;
                     case 'replace':
                         if (!empty($inst->new)) {
                             $result = false; // NOT IMPLEMENTED
                         } else {
                             $result = false; // NOT IMPLEMENTED
                         }
+                        break;
                 }
+                break;
 
             case 'info':
             default:
@@ -357,6 +372,19 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
         }
 
         return $res;
+    }
+
+    public static function getStyleIniData($STYLE_INI_FILE) {
+        $ini_lines = Files::file($STYLE_INI_FILE);
+        $ini_lines = array_map('trim', $ini_lines);
+        $ini_lines = array_map('htmlspecialchars', $ini_lines);
+
+        return (object) array(
+            'name'          => !empty($ini_lines[0]) ? $ini_lines[0] : null,
+            'version'       => !empty($ini_lines[1]) ? $ini_lines[1] : null,
+            'copyright'     => !empty($ini_lines[2]) ? $ini_lines[2] : null,
+            'fs2_version'     => !empty($ini_lines[3]) ? $ini_lines[3] : null
+        );
     }
 }
 

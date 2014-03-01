@@ -2,6 +2,8 @@
 #@db_instructions
 #@file_instructions
 
+cleanup_title: Aufräumarbeiten
+
 cleanup_info_title: Überflüßiges Zeug aufräumen
 cleanup_info_text: Einige Dateien und Datenbankeinträge werden nicht mehr benötigt. Wenn du möchtest können wir diese Daten jetzt für dich löschen und die unten stehenden Operationen ausführen. Sie stören aber nicht und du kannst sie auch später selbst löschen.
 

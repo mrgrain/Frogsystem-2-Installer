@@ -27,10 +27,10 @@
     </div>
     <div id="footer">
       <span class="copyright">{..copyright..}</span>
-    </div>  
+    </div>
 </body><!--section-end::MAIN-->
 
-<!--section-start::COPYRIGHT-->&copy; 2013 Frogsystem 2-Team<br><a href="http://www.frogsystem.de" target="_blank">www.frogsystem.de</a><!--section-end::COPYRIGHT-->
+<!--section-start::COPYRIGHT-->&copy; 2007-2014 Frogsystem 2-Team<br><a href="http://www.frogsystem.de" target="_blank">www.frogsystem.de</a><!--section-end::COPYRIGHT-->
 
 
 
