@@ -43,7 +43,8 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
 
 
     protected function runInstruction($inst, $style) {
-		$tpl = new Template($style);
+		$tpl = new InstallerTemplate();
+        $tpl->setStyle($style);
 
         $result = false;
         switch ($inst->command) {
@@ -69,7 +70,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                 break;
 
             case 'section':
-				$tpl->setFile($inst->file); 
+				$tpl->setFile($inst->file);
                 switch ($inst->type) {
                     case 'create':
                         if (isset($inst->second_file)) {
@@ -92,17 +93,17 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                 break;
 
             case 'tag':
-				$tpl->setSection($inst->section);
+				$tpl->setFile($inst->file);
                 switch ($inst->type) {
                     case 'rename':
-                        $result = $tpl->renameTag($inst->tag, $inst->new); // TODO
+                        $result = $tpl->renameTag($inst->section, $inst->tag, $inst->new); // TODO
                         //~ return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
                         break;
                     case 'replace':
                         if (!empty($inst->new)) {
-                            $result = $tpl->replaceTag($inst->tag, $inst->new); // NOT IMPLEMENTED
+                            $result = $tpl->replaceTag($inst->section, $inst->tag, $inst->new); // NOT IMPLEMENTED
                         } else {
-                            $result = $tpl->replaceTag($inst->tag); // NOT IMPLEMENTED
+                            $result = $tpl->replaceTag($inst->section, $inst->tag); // NOT IMPLEMENTED
                         }
                         break;
                 }
@@ -112,6 +113,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
             default:
                 $result = true;
         }
+        unset($tpl);
 
         if(!$result) {
             throw new TemplateOperationException('Error with command `'.$inst->command.'`.');
