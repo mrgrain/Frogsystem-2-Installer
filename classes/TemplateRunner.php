@@ -42,7 +42,8 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
     }
 
 
-    protected function runInstruction($inst) {
+    protected function runInstruction($inst, $style) {
+		$tpl = new Template($style);
 
         $result = false;
         switch ($inst->command) {
@@ -50,56 +51,58 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                 switch ($inst->type) {
                     case 'create':
                         if (isset($inst->second_file)) {
-                            $result = true; // TODO
+                            $result = $tpl->createFile($inst->file, $inst->second_file); // TODO
                             //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
                                            //~ $inst->file, $inst->second_file);
                         } else {
                             //~ return sprintf($info, $inst->file);
-                            $result = true; // TODO
+                            $result = $tpl->createFile($inst->file); // TODO
                         }
                         break;
                     case 'delete':
-                        $result = false; // NOT IMPLEMENTED
+                        $result = $tpl->removeFile($inst->file); // NOT IMPLEMENTED
                         break;
                     case 'move':
-                        $result = false; // NOT IMPLEMENTED
+                        $result = $tpl->moveFile($inst->file, $inst->second_file); // NOT IMPLEMENTED
                         break;
                 }
                 break;
 
             case 'section':
+				$tpl->setFile($inst->file); 
                 switch ($inst->type) {
                     case 'create':
                         if (isset($inst->second_file)) {
-                            $result = true; // TODO
+                            $result = $tpl->createSection($inst->section, $inst->second_file); // TODO
                             //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
                                            //~ $inst->file, $inst->section, $inst->second_file);
                         } else {
-                            $result = true; // TODO
+                            $result = $tpl->createSection($inst->section); // TODO
                             //~ return sprintf($info, $inst->file, $inst->section);
                         }
                         break;
                     case 'delete':
-                        $result = false; // NOT IMPLEMENTED
+                        $result = $tpl->removeSection($inst->section); // NOT IMPLEMENTED
                         break;
                     case 'move':
-                        $result = true; // TODO
+                        $result = $tpl->moveSection($inst->section, $inst->second_file, $inst->second_section, true); // TODO
                         //~ return sprintf($info, $inst->file, $inst->section, $inst->second_file, $inst->second_section);
                         break;
                 }
                 break;
 
             case 'tag':
+				$tpl->setSection($inst->section);
                 switch ($inst->type) {
                     case 'rename':
-                        $result = true; // TODO
+                        $result = $tpl->renameTag($inst->tag, $inst->new); // TODO
                         //~ return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
                         break;
                     case 'replace':
                         if (!empty($inst->new)) {
-                            $result = false; // NOT IMPLEMENTED
+                            $result = $tpl->replaceTag($inst->tag, $inst->new); // NOT IMPLEMENTED
                         } else {
-                            $result = false; // NOT IMPLEMENTED
+                            $result = $tpl->replaceTag($inst->tag); // NOT IMPLEMENTED
                         }
                         break;
                 }
