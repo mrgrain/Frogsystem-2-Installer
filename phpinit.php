@@ -20,11 +20,15 @@ function phpinit ($session = true, $header = false, $libloader = null) {
     // Default libloader
     if (is_null($libloader)) {
         $libloader = create_function ('$classname', '
-            if (false !== (@include_once(\'./steps/\'.$classname.\'.php\')))
+            $step = \'./steps/\'.$classname.\'.php\';
+            $lib = \'./lib/\'.$classname.\'.php\';
+            $class = \'./classes/\'.$classname.\'.php\';
+
+            if (file_exists($step) && false !== (require_once($step)))
                 return;
-            if (false !== (@include_once(\'./lib/\'.$classname.\'.php\')))
+            if (file_exists($lib) && false !== (require_once($lib)))
                 return;
-            if (false !== (@include_once(\'./classes/\'.$classname.\'.php\')))
+            if (file_exists($class) && false !== (require_once($class)))
                 return;');
     }
 
@@ -41,7 +45,7 @@ function phpinit ($session = true, $header = false, $libloader = null) {
 // turn on debuggin mode
 function debug() {
     // turn on errors
-    error_reporting(E_ALL | E_STRICT);
+    error_reporting(E_ALL);
     ini_set('display_errors', true);
 }
 

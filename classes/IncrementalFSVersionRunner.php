@@ -10,11 +10,11 @@
  * thus it only implements consturctor and some compare functions
  */
 abstract class IncrementalFSVersionRunner extends IncrementalRunner {
-    
+
     private $versions = array();
-        
+
     /**
-     * Cunstructor, creates Runners from the list and starts 
+     * Cunstructor, creates Runners from the list and starts
      * @param array $list a sorted array
      * @param $start element to start with instructions
      * @param $end last element with instructions
@@ -25,7 +25,7 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
         $this->start = $start;
         $this->end = $end;
         $this->versions = InstallerFunctions::getFS2Versions();
-       
+
         $loadList = array();
         $last = new StdClass();
         $last->diff = -1;
@@ -39,9 +39,9 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
 
             if (!$res) continue;
             // skip when element is lower than default start
-            // we need this twice because 
-            if ($res->compare < 0) continue; 
-            
+            // we need this twice because
+            if ($res->compare < 0) continue;
+
             // set virtul Start
             if (isset($last) && isset($loadList[$last->matches[1]]) && $last->matches[1] != $res->matches[1]) {
                 $virtualStart = $loadList[$last->matches[1]]->matches[2];
@@ -50,8 +50,8 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
             }
             // skip top border
             if ($this->compare($element, $this->end) >= 0)  break;
-            
-            // found a match: now check if its the best one            
+
+            // found a match: now check if its the best one
             if ($res->compare == 0 && 1 > InstallerFunctions::compareFS2Versions($res->matches[2], $this->end)) {
                 $a = array_search($res->matches[1], $this->versions);
                 $b = array_search($res->matches[2], $this->versions);
@@ -69,8 +69,8 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
         foreach($loadList as $element) {
             $this->load($element->matches[0]);
         }
-    } 
-    
+    }
+
     /*
      *  This compare function only checks against the from entry.
      *  Works very well with IncrementalRunner default constructor
@@ -81,19 +81,19 @@ abstract class IncrementalFSVersionRunner extends IncrementalRunner {
         $res->matches = array();
         $regex = '~^from-(none|2\.[0-9a-zA-Z\.]+)-to-(none|2\.[0-9a-zA-Z\.]+)(\.[^.]+){1}$~';
         preg_match($regex, $element, $res->matches);
-                
+
         //reg_ex_not_match
         if (empty($res->matches)) {
             return false;
         }
-        
+
         //compare versions
         if (false === ($res->compare = InstallerFunctions::compareFS2Versions($res->matches[1], $testValue))) {
             return false; // not found in list
         }
         return $res;
     }
-    
+
     /*
      * Wrapper for compareWithMatches
      */
