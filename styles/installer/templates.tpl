@@ -5,14 +5,13 @@
 <!--section-end::instruction_element-->
 
 <!--section-start::templates_info-->
+<form method="post" action="<!--TEXT::url_start-->">
 <h2><!--LANG::templates_info_title--></h2>
 <p><!--LANG::templates_info_text--></p>
 
 <h3><!--LANG::template_styles_title--></h3>
 <p><!--LANG::template_styles_info--></p>
-<ul class="checkbox-list">
 <!--TEXT::styles_selection-->
-</ul>
 
 <h3><!--LANG::template_jobs_title--></h3>
 <p><!--LANG::template_jobs_info--></p>
@@ -22,23 +21,24 @@
 </ul>
 
 <p class="space attop atbottom button-line center">
-    <a class="button green atleft" href="<!--TEXT::url_start-->">&raquo; <!--LANG::templates_start_instructions_button--></a>
+    <button class="button green atleft">&raquo; <!--LANG::templates_start_instructions_button--></button>
     <span><!--LANG::or--></span>
     <a class="button white atright" href="<!--TEXT::url_skip-->">&raquo; <!--LANG::templates_skip_instructions_button--></a>
 </p>
+</form>
 <!--section-end::templates_info-->
 
 
 <!--section-start::styles_selection-->
-<form>
+<ul class="checkbox-list">
     <!--TEXT::styles_selection_list-->
-</form>
+</ul>
 <!--section-end::styles_selection-->
 
 <!--section-start::styles_selection_element-->
     <li>
         <label class="pointer middle sans-serif small" for="style_<!--TEXT::style-->">
-            <input checked type="checkbox" id="style_<!--TEXT::style-->" value="<!--TEXT::style-->">
+            <input checked type="checkbox" name="styles[]" id="style_<!--TEXT::style-->" value="<!--TEXT::style-->">
             <span><!--TEXT::style--></span> - <!--TEXT::info-->
         </label>
     </li>
@@ -47,9 +47,10 @@
 
 
 <!--section-start::instruction_element-->
-    <li <!--IF::error-->class="error"<!--ENDIF-->>
+    <li<!--IF::error--> class="error"<!--ENDIF-->>
     <!--TEXT::instruction--><!--IF::success-->&nbsp;<img src="<!--TEXT::success_img-->" alt="<!--LANG::success-->"><!--ENDIF--><!--IF::error-->&nbsp;<img src="<!--TEXT::error_img-->" alt="<!--LANG::error-->"><!--ENDIF-->
     <!--IF::error--><br><span class="small"><!--TEXT::error_message--></span><!--ENDIF-->
+    </li>
 <!--section-end::instruction_element-->
 
 <!--section-start::info_element-->

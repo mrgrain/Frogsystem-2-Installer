@@ -12,15 +12,33 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
     private $ic;
     protected $result = array();
     private $success = true;
+    private $styles = array();
 
     public function __construct() {
         parent::__construct();
         $this->lang = new InstallerLang($this->local, 'templates');
         $this->setTitle('templates_title');
         $this->ic = $this->getICObject('templates.tpl');
+
+        // add styles
+        if (isset($_POST['styles'])) {
+            $styles = $_POST['styles'];
+        } else if (isset($_SESSION['update_styles'])) {
+            $styles = $_SESSION['update_styles'];
+        } else {
+            $styles = array();
+        }
+
+        // check styles
+        foreach ($styles as $style) {
+            if (Files::is_dir(new Path('styles/'.$style, 'target'))) {
+                $this->styles[] = $style;
+            }
+        }
     }
 
     protected function show() {
+        // start runner
         $runner = new TemplateRunner('jobs/templates/', UPGRADE_FROM, UPGRADE_TO, $this->lang);
         $checkReset = true;
 
@@ -42,23 +60,27 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
             $this->setNext($pos+1);
 
             // create ouptput
-            $this->ic->addText('instruction', $runner->getCurrentInfo());
+            $info = $runner->getCurrentInfo();
 
             // images
             $img_path = 'styles/'.$this->tpl->getStyle().'/images/';
-            $this->ic->addText('success_img', $img_path.'ok.gif');
-            $this->ic->addText('error_img', $img_path.'error.gif');
 
             //execute instruction
-            try {
-                $runner->runCurrentInstruction();
-                $this->ic->addCond('success', true);
-            } catch (TemplateOperationException $e) {
-                $this->ic->addCond('error', true);
-                $this->ic->addText('error_message', $e->getMessage());
-                $this->success = false;
+            foreach ($this->styles as $style) {
+                $runner->setStyle($style);
+                try {
+                    $runner->runCurrentInstruction();
+                    $this->ic->addCond('success', true);
+                } catch (TemplateOperationException $e) {
+                    $this->ic->addCond('error', true);
+                    $this->ic->addText('error_message', $e->getMessage());
+                    $this->success = false;
+                }
+                $this->ic->addText('success_img', $img_path.'ok.gif');
+                $this->ic->addText('error_img', $img_path.'error.gif');
+                $this->ic->addText('instruction', $style.": ".$info);
+                $this->addResult($this->ic->get('instruction_element'));
             }
-            $this->addResult($this->ic->get('instruction_element'));
 
             // done?
             if ($runner->getLastKey() == $pos) {
@@ -90,6 +112,11 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
 
         // call last to reset session if neccessary
         $this->finish();
+    }
+
+    protected function reload($force = false) {
+        $_SESSION['update_styles'] = $this->styles;
+        parent::reload();
     }
 
     private function addResult($result) {

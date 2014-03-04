@@ -20,15 +20,15 @@ class template
     const CLOSER                = '..}';
 
     // vars for class options
-    private $style              = 'default';
-    private $file               = null;
-    private $clear_unassigned   = FALSE;
+    protected $style              = 'default';
+    protected $file               = null;
+    protected $clear_unassigned   = FALSE;
 
     // other vars
-    private $tags               = array();
-    private $sections           = array();
-    private $sections_content   = array();
-    private $template           = null;
+    protected $tags               = array();
+    protected $sections           = array();
+    protected $sections_content   = array();
+    protected $template           = null;
 
     // constructor
     public function  __construct() {

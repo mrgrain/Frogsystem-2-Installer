@@ -11,6 +11,7 @@
 class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
 
     private $dir;
+    private $style;
 
     public function __construct($dir, $start, $end, $lang) {
         // langfile
@@ -41,10 +42,16 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
         return ($type == $this->current()->command);
     }
 
+    public function setStyle($style) {
+        $this->style = $style;
+    }
 
-    protected function runInstruction($inst, $style) {
+
+    protected function runInstruction($inst) {
 		$tpl = new InstallerTemplate();
-        $tpl->setStyle($style);
+        $tpl->setStyle($this->style, 'target', true);
+
+        $prefix = 'styles'.DIRECTORY_SEPARATOR.$tpl->getStyle().DIRECTORY_SEPARATOR;
 
         $result = false;
         switch ($inst->command) {
@@ -52,52 +59,44 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                 switch ($inst->type) {
                     case 'create':
                         if (isset($inst->second_file)) {
-                            $result = $tpl->createFile($inst->file, $inst->second_file); // TODO
-                            //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
-                                           //~ $inst->file, $inst->second_file);
+                            $result = $tpl->createFile(new Path($prefix.$inst->file, 'target'), new Path($inst->second_file, 'current'));
                         } else {
-                            //~ return sprintf($info, $inst->file);
-                            $result = $tpl->createFile($inst->file); // TODO
+                            $result = $tpl->createFile(new Path($prefix.$inst->file, 'target'));
                         }
                         break;
                     case 'delete':
-                        $result = $tpl->removeFile($inst->file); // NOT IMPLEMENTED
+                        $result = $tpl->removeFile(new Path($prefix.$inst->file, 'target')); // NOT IMPLEMENTED
                         break;
                     case 'move':
-                        $result = $tpl->moveFile($inst->file, $inst->second_file); // NOT IMPLEMENTED
+                        $result = $tpl->moveFile(new Path($prefix.$inst->file, 'target'), new Path($prefix.$inst->second_file, 'target')); // NOT IMPLEMENTED
                         break;
                 }
                 break;
 
             case 'section':
-				$tpl->setFile($inst->file);
+				$tpl->setFile($inst->file, 'target');
                 switch ($inst->type) {
                     case 'create':
                         if (isset($inst->second_file)) {
-                            $result = $tpl->createSection($inst->section, $inst->second_file); // TODO
-                            //~ return sprintf($this->lang->get('info_'.$inst->command.'_'.$inst->type.'_from'),
-                                           //~ $inst->file, $inst->section, $inst->second_file);
+                            $result = $tpl->createSectionFromFile($inst->section, new Path($inst->second_file, 'current'));
                         } else {
-                            $result = $tpl->createSection($inst->section); // TODO
-                            //~ return sprintf($info, $inst->file, $inst->section);
+                            $result = $tpl->createSection($inst->section);
                         }
                         break;
                     case 'delete':
                         $result = $tpl->removeSection($inst->section); // NOT IMPLEMENTED
                         break;
                     case 'move':
-                        $result = $tpl->moveSection($inst->section, $inst->second_file, $inst->second_section, true); // TODO
-                        //~ return sprintf($info, $inst->file, $inst->section, $inst->second_file, $inst->second_section);
+                        $result = $tpl->moveSection($inst->section, $inst->second_file, $inst->second_section, true);
                         break;
                 }
                 break;
 
             case 'tag':
-				$tpl->setFile($inst->file);
+				$tpl->setFile($inst->file, 'target');
                 switch ($inst->type) {
                     case 'rename':
-                        $result = $tpl->renameTag($inst->section, $inst->tag, $inst->new); // TODO
-                        //~ return sprintf($info, $inst->file, $inst->section, $inst->tag, $inst->new);
+                        $result = $tpl->renameTag($inst->section, $inst->tag, $inst->new);
                         break;
                     case 'replace':
                         if (!empty($inst->new)) {
@@ -115,7 +114,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
         }
         unset($tpl);
 
-        if(!$result) {
+        if(false === $result) {
             throw new TemplateOperationException('Error with command `'.$inst->command.'`.');
         }
 

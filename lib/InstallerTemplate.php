@@ -16,14 +16,34 @@ class InstallerTemplate extends template
     }
 
     // functions to set & get default values
-    public function setStyle($style, $no_default = false) {
+    public function setStyle($style, $target = 'current', $no_default = false) {
         $this->clearSectionCache();
-        if (Files::file_exists(INSTALLER_PATH.DIRECTORY_SEPARATOR.'styles/'.$style)) {
+        if (Files::file_exists(new Path('styles/'.$style, $target))) {
             $this->style = $style;
-        } else if ($no_default) {
+        } else if (!$no_default) {
             $this->style = 'default';
         } else {
             return false;
+        }
+    }
+
+    // functions to access templates
+    public function load($section) {
+        // Wenn der Section-Cache wurde noch nicht befüllt wurde => alle Sections in den Cache laden
+        if ( count ( $this->sections ) <= 0 ) {
+            $file_path = $this->getFile (); // Pfad zur Template-Datei
+            $search_expression = '/<!--section-start::(.*)-->(.*)<!--section-end::(\1)-->/Uis'; // Regulärer Ausruck um Sections auszuwählen
+            $number_of_sections = preg_match_all ( $search_expression, Files::file_get_contents($file_path), $sections ); // Regulären Ausruck ausführen, Anzahl in $number_of_sections, Inhalte in $sections
+            $this->setSections ( array_flip ( $sections[1] ) ); // array_flip damit die Keys auch die Section-Namen sind
+            $this->setSectionsContent ( $sections[2] ); // Section Inhalte speichern
+        }
+
+        // Section-Cache wurde bereits befüllt => einfach auslesen
+        if ( $this->sectionExists ( $section ) ) {
+            $this->setTemplate ( $this->getSectionContent ( $this->getSectionNumber ( $section ) ) );
+            return TRUE;
+        } else { // Falls die Section nicht gefunden wurde
+            return FALSE;
         }
     }
 
@@ -35,8 +55,7 @@ class InstallerTemplate extends template
             $file_data[] = '<!--section-start::'.$name.'-->'.$content.'<!--section-end::'.$name.'-->';
         }
 
-        $file_path =  new Path('styles/'.$this->getStyle().'/'.$this->getFile(), 'target');
-        return Files::file_put_contents($file_path, implode(PHP_EOL.PHP_EOL, $file_data));
+        return Files::file_put_contents($this->getFile(), implode(PHP_EOL.PHP_EOL, $file_data));
     }
 
     // save template to file
@@ -47,9 +66,10 @@ class InstallerTemplate extends template
     }
 
 
-    public function setFile($file) {
-        if (Files::is_readable(new Path('styles/'.$this->getStyle().'/'.$file, 'target'))) {
-            $this->file = $file;
+    public function setFile($file, $target = "current") {
+        $file_path = new Path('styles/'.$this->getStyle().'/'.$file,  $target);
+        if (Files::is_readable($file_path)) {
+            $this->file = $file_path;
             $this->clearSectionCache();
             $this->fillSectionCache();
         } else {
@@ -66,9 +86,10 @@ class InstallerTemplate extends template
 
         // load source
         $content = "";
-        if ($source) {
+        if ($source && Files::file_exists($source)) {
             $content = Files::file_get_contents($source);
         }
+
         return Files::file_put_contents($file, $content);
     }
     public function removeFile($file) {
@@ -81,16 +102,20 @@ class InstallerTemplate extends template
         return false;
     }
 
-    public function createSection($section, $source = null, $overwrite = true) {
-        //overwrite?
-        if (!$overwrite && $this->sectionExists($section)) {
-            return false;
-        }
-
+    public function createSectionFromFile($section, $source = null, $overwrite = true) {
         // load source
         $content = "";
         if ($source) {
             $content = Files::file_get_contents($source);
+        }
+
+        return $this->createSection($section, $content, $overwrite);
+    }
+
+    public function createSection($section, $content = "", $overwrite = true) {
+        //overwrite?
+        if (!$overwrite && $this->sectionExists($section)) {
+            return false;
         }
 
         $this->sections[$section] = $section;
@@ -98,16 +123,22 @@ class InstallerTemplate extends template
         return $this->saveToFile();
     }
     public function removeSection($section) {
+        if (!$this->sectionExists($section)) {
+            return false;
+        }
         unset($this->sections_content[$this->getSectionNumber($section)]);
         unset($this->sections[$section]);
         return $this->saveToFile();
     }
     public function moveSection($source, $target_file, $target_section, $overwrite = true) {
-        $content = $this->getSectionContent($this->getSectionNumber($section));
+        if (!$this->sectionExists($source)) {
+            return false;
+        }
+        $content = $this->getSectionContent($this->getSectionNumber($source));
 
-        $other = new Template($style);
-        $other->setStyle($this->getStyle());
-        $other->setFile($target_file);
+        $other = new InstallerTemplate();
+        $other->setStyle($this->getStyle(), 'target', false);
+        $other->setFile($target_file, 'target');
         if ($other->createSection($target_section, $content, $overwrite)) {
             return $this->removeSection($source);
         } else {
@@ -119,12 +150,44 @@ class InstallerTemplate extends template
         return $this->replaceTag($section, $old, self::OPENER.$new.self::CLOSER);
     }
     public function replaceTag($section, $tag, $content = "") {
+        if (!$this->sectionExists($section)) {
+            return false;
+        }
+
         $sec = $this->getSectionContent($this->getSectionNumber($section));
         $this->sections_content[$this->getSectionNumber($section)] = str_replace(self::OPENER.$tag.self::CLOSER, $content, $this->getSectionContent($this->getSectionNumber($section)));
         return $this->saveToFile();
     }
 
 
+/* copy n paste */
+    private function getFile() {
+        return $this->file;
+    }
+    private function setSections($sections) {
+        $this->sections = $sections;
+    }
+    private function getSectionNumber($section) {
+        return $this->sections[$section];
+    }
+    private function setSectionsContent($content) {
+        $this->sections_content = $content;
+    }
+    private function getSectionContent($section_number) {
+        return $this->sections_content[$section_number];
+    }
 
+    private function sectionExists ( $section ) {
+        if ( isset ( $this->sections[$section] ) ) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    private function setTemplate($template) {
+        $this->template = $template;
+    }
+    private function getTemplate() {
+        return $this->template;
+    }
 }
 ?>

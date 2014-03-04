@@ -1,12 +1,12 @@
 <?php
 /* url wrapper for frogsystem target */
-$wrapper['target'] = 'file://';
+$wrapper['target'] = '';
 /* path from wrapper-root to the frogsystem installation */
-$wrapper['install_to'] = 'D:/Server/test_empty';
+$wrapper['install_to'] = '';
 
 /* url wrapper for installer */
-$wrapper['installer'] = 'file://';
+$wrapper['installer'] = '';
 /* path from wrapper-root to the installer */
-$wrapper['installer_path'] = 'D:/Server/fs2installer';
+$wrapper['installer_path'] = '';
 
 ?>
