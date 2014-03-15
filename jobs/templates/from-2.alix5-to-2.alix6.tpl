@@ -16,16 +16,3 @@ SECTION CREATE 0_search.tpl INFO ./copy/templates/searchinfo.tpl
 TAG RENAME 0_search.tpl RESULT_LINE num_matches rank
 FILE CREATE 0_top_downloads.tpl ./copy/templates/top_downloads.tpl
 SECTION CREATE 0_user.tpl NEW_PASSWORD ./copy/templates/newpassword.tpl
-
-
-#INFO 0_test.tpl testSection testTag testLang
-#TAG RENAME "0_search.tpl" TEST 'test' test2
-#TAG REPLACE 0_search.tpl TEST test ./copy/templates/newpassword.tpl
-#TAG REPLACE "0_search.tpl" TEST test
-#SECTION DELETE 0_general.tpl BLUBB
-#SECTION CREATE -O 0_search.tpl EMPTYSECTION
-#SECTION MOVE -O 0_general.tpl MATRIX 0_main.tpl OVERWRITE
-#FILE CREATE -O 0_main2.tpl ./copy/templates/top_downloads.tpl
-#FILE DELETE 0_main2.tpl
-#FILE MOVE -O 0_old.tpl 0_new.tpl
-#FILE MOVE 0_old.tpl 0_new.tpl

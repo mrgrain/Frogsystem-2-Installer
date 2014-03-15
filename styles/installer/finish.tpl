@@ -3,6 +3,7 @@
 <p><!--LANG::finish_text--></p>
 <ul>
     <b><!--LANG::finish_notes-->:</b>
+    <li><!--LANG::finish_note_cimg--></li>
     <li><!--LANG::finish_note_ftp--></li>
     <li><!--LANG::finish_note_database--></li>
 </ul>

@@ -3,11 +3,11 @@ IS_WRITABLE     ./copy/db_connection.php
 DELETE      -R  ~/styles/default/
 DELETE      -R  ~/resources/
 
-MOVE        -O  "~/images/content/*"            ~/upload/
+COPY        -RO ./copy/source/*                ~/
+COPY        -R  ./copy/data/applets/*          ~/applets/
+COPY        -O  ./copy/db_connection.php       ~/config/db_connection.php
 
-COPY        -RO "./copy/source/*"               ~/
-COPY        -R  "./copy/data/applets/*"         ~/applets
-COPY        -O  ./copy/db_connection.php        ~/config/db_connection.php
+MOVE        -O  ~/images/content/*             ~/upload/
 
 IS_WRITABLE -R  ~/styles/
 IS_WRITABLE -R  ~/upload/
