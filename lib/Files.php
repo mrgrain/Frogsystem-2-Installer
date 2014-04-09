@@ -161,10 +161,10 @@ class Files {
     public static function rename() {
         $args = func_get_args();
         // remove existing file
-        if (self::file_exists($args[1])) {
+        if (self::file_exists($args[1]) && self::is_file($args[1])) {
             self::unlink($args[1]);
         }
-        return self::call('rename', $args, array(0,1), array(1));
+        return self::call('rename', $args, array(0,1), array(2));
     }
     public static function rmdir() {
         return self::call('rmdir', func_get_args(), array(0), array(1));

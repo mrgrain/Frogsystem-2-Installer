@@ -242,12 +242,7 @@ class sql {
 
         // Unslash the result
         if ($num > 0) {
-			$lokal = create_function('$row', '
-				return array_map(create_function(\'$r\', \'
-					return sql::unslash($r);
-				\'), $row);
-			');
-            $rows = array_map($lokal, $rows);
+            $this->unslashRows($rows);
         }
 
         // Return the result
@@ -258,6 +253,14 @@ class sql {
         );
     }
 
+    // iterative unslasher
+    private function unslashRows(&$rows) {
+        foreach ($rows as $key => $row) {
+            foreach ($row as $name => $value) {
+                $rows[$key][$name] = sql::unslash($value);
+            }
+        }
+    }
 
     // get data from database
     public function getData ($table, $cols, $options = array(), $distinct = false) {

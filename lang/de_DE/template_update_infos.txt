@@ -1,10 +1,10 @@
 new_url_style_title: Neuer URL Stil
-new_url_style_text: Ab dieser Version unterstützt das Frogsystem 2 verschiedene <a href="http://wiki.frogsystem.de/seo-urls">URL-Stile</a>. Um Seiten-interne Links immer korrekt zu erzeugen, sollten URLs nicht mehr direkt angegeben werden. In Templates verwendest du stattdessen die neue <a href="http://wiki.frogsystem.de/url-function">URL-Funktion</a>. Bei Inhalten wie bisher auch den FSCode [home].<br>Änderungen der bestehenden Daten können leider nicht automatisch vorgenommen werden. Insbesondere wenn die neuen SEO-URLs verwendet werden, sollten alle URLs geändert werden.
+new_url_style_text: Ab dieser Version unterstützt das Frogsystem 2 verschiedene <a href="http://wiki.frogsystem.de/seo-urls" target="_blank">URL-Stile</a>. Um Seiten-interne Links korrekt zu erzeugen, können URLs nicht mehr direkt angegeben werden. In Templates verwendest du stattdessen die neue <a href="http://wiki.frogsystem.de/url-function" target="_blank">URL-Funktion</a>. Bei Inhalten wie bisher auch den FSCode [home].<br>Änderungen an den bestehenden Daten können leider nicht automatisch vorgenommen werden. Insbesonders wenn ein neuer URL-Stil verwendet werden soll, müssen alle URLs von Hand angepasst werden.
 
 
-polls_form_poll_id_change: Das <i>name</i>-Attribut des input-Elements muss von <i>id</i> geändert werden in <b>poll_id</b>
-search_update_phonetic_help: Die neue Phonetische Suche kann erst nach einigen Template-Anpassungen genutzt werden. Ein Beispiel dafür findest du im Original-Template.
-search_new_tag_operators: Suchoperatoren können jetzt über das Admin-CP eingestellt werden. Für die Ausgabe in der Suchmaske, wurde das neue Tag {..operators..} hinzugefügt.
-search_update_rank: Das Ergebnis einer Suchanfrage wird nicht mehr durch die Anzahl der Fundstellen gewichtet, sondern durch einen einheitenlosen Such-Rang. Evtl. muss die Beschreibung angepasst werden.
-search_new_tag_info: Der neue Informations-Block kann hier mit dem Tag {..info..} eingebunden werden.
-user_reset_password_link: Auf den Login-Seiten sollte ein Link zur Passwort zurücksetzen-Funktion eingefügt werden: $URL(login[newpassword=]). Beispiele findest du in den Original-Templates.
+polls_form_poll_id_change: Der <i>name</i> des input-Elements <i>id</i> muss in <b>poll_id</b> geändert werden.
+search_update_phonetic_help: Die neue Phonetische Suche kann nur mit verschiedenen Template-Anpassungen genutzt werden. Ein Beispiel dafür findest du im Original-Template.
+search_new_tag_operators: Suchoperatoren werden jetzt über das Admin-CP eingestellt. Für die Ausgabe in der Suchmaske, wurde das neue Tag <b>{..operators..}</b> hinzugefügt.
+search_update_rank: Das Ergebnis einer Suchanfrage wird nicht mehr durch die Anzahl der Fundstellen gewichtet, sondern durch den neuen Such-Rang. Evtl. muss die textuelle Beschreibung angepasst werden.
+search_new_tag_info: Der neue Informations-Block kann mit dem Tag <b>{..info..}</b> eingebunden werden.
+user_reset_password_link: Auf den Login-Seiten sollte ein Link zur "Passwort zurücksetzen"-Funktion eingefügt werden: <b>$URL(login[newpassword=])</b>. Beispiele findest du auch in den Original-Templates.
