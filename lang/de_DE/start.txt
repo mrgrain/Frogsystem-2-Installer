@@ -1,7 +1,7 @@
 #@installer
 
 # start.tpl
-start_title: Installations- & Update-Tool 
+start_title: Installations- & Update-Tool
 reset_installer_info: Es sind bereits Daten zu dieser Installation gespeichert. Das kann daher kommen, dass du dieses Tool nicht zum ersten Mal ausführst. Falls Probleme auftreten, kannst du das Tool ganz zurücksetzen:
 reset_installer: Installations-Daten löschen
 changelog: Change Log
@@ -24,7 +24,7 @@ changelog_text:<b>Neue Features:</b>
 #/ - Applet für Top-Downloads
 #/ - php5.4 Support
 #/ - viele neue Englische Sprachdateien
-#/ - leicht veränderter Style im Admin-CP 
+#/ - leicht veränderter Style im Admin-CP
 #/ - kleines Update für den lightfrog-Style
 #/ - erweitertes System für Inhaltsbilder mit Kategorien und FTP-Upload
 #/ - kleines Tool zur Verwaltung der Datenbank-Tabellen
@@ -70,7 +70,7 @@ notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu ge
 #/<b>IN KEINEM FALL SIND DIE AUTOREN UND/ODER COPYRIGHTINHABER DER SOFTWARE FÜR SCHÄDEN UND/ODER RECHTSVERLETZUNGEN JEGLICHER ART VERANTWORTLICH, DIE DURCH DIE NUTZUNG DER SOFTWARE ENTSTEHEN.</b>
 
 
-copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
+copyright_text: <b>&copy; 2007 - 2014 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
 #/
 #/-----------------------------------------------------------
 #/
@@ -144,7 +144,7 @@ copyright_text: <b>&copy; 2007 - 2013 Frogsystem-Team - <a href="http://www.frog
 #/Lizenztext: <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">http://www.opensource.org/licenses/bsd-license.php</a>
 #/
 #/<b>b8</b>
-#/Version 0.6 | Copyright (c) 2006-2012 Tobias Leupold <tobias.leupold@web.de>
+#/Version 0.6.1 | Copyright (c) 2006-2013 Tobias Leupold <tobias.leupold@web.de>
 #/Homepage: <a href="http://nasauber.de/opensource/b8/" target="_blank">http://nasauber.de/opensource/b8/</a>
 #/Dateien: /resources/spamdetector/*
 #/Lizenz: GNU Lesser General Public License (LGPL), Version 2.1
