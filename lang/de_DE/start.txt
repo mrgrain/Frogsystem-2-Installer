@@ -19,44 +19,54 @@ start_installation: Hurra, lass uns loslegen!
 
 
 changelog_text:<b>Neue Features:</b>
-#/ - Kommentarliste mit lernender Spam-Erkennung
-#/ - neues Installations- & Update-Tool
-#/ - Applet für Top-Downloads
-#/ - php5.4 Support
-#/ - viele neue Englische Sprachdateien
-#/ - leicht veränderter Style im Admin-CP
-#/ - kleines Update für den lightfrog-Style
-#/ - erweitertes System für Inhaltsbilder mit Kategorien und FTP-Upload
-#/ - kleines Tool zur Verwaltung der Datenbank-Tabellen
-#/ - rudimentäres System für poor-men-cronjobs
-#/ - neue Feed-Generatoren
-#/ - Passwort vergessen?-Funktion
-#/ - Farbauswahl-Tool hinzugefügt
-#/ - Referrer-Statistik kann deaktiviert oder automatisch geleert werden
-#/ - einfache News-Suche im Admin-CP
-#/ - verbesserte Suche
-#/ - Suchmaschinen optimierte URLs (SEO-URLs)
-#/ - Datums- ($DATE) und URL-Funktion ($URL) für Templates und Inhalte
-#/ - Applets in Inhalten darstellbar ($APP)
-#/ - News-Links mit JavaScript
-#/ - Zeitzone für die Webseite kann/muss ausgewählt werden
-#/ - Einstellung für Standard-Größe des Video-Players
-#/ - automatisch eingebundene CSS-Datei bei deaktiviertem JavaScript
-#/ - konfigurierbarer Ladezeitpunkt für Applets
-#/ - viele kleine Arbeits-Erleichterungen
+#/ - PHP 5.4 wird unterstützt
+#/ - SEO-URLs
+#/ - Verwendung kanonische URLs
+#/ - Neues Installations- & Update-Tool
+#/ - Bessere Feeds mit vielen Einstellungsmöglichkeiten (via Script)
+#/ - Applets können in Inhalten dargestellt werden (z.B. Umfrage innerhalb einer News)
+#/ - User: Passwort-Vergessen Funktion
+#/ - Downloads: Kommentar-System ist jetzt auch bei Downloads verfügbar
+#/ - Downloads: Applet für Top-Downloads
+#/ - Suche: Bessere Suchergebnisse
+#/ - Suche: Option zur Phonetische Suche
+#/ - FSCodes: [html] zur Verwendung von HTML in Inhalten
+#/ - FSCodes: [nohtml] fügt HTML-Code als normalen Text ein
+#/ - FSCodes: [nofscode] hinzugefügt, entspricht [noparse]
+#/ - FSCodes: [home] erzeugt interne Links entsprechen dem URL-Stil
+#/ - Style: Kleine Anpassungen am lightfrog-Style
+#/ - Style: CSS-Datei die ausschließlich bei deaktiviertem JavaScript eingebunden wird
+#/ - System: Neue bzw. erweiterte Template-Funktionen für Datum, URLs und Applets
+#/ - System: Überflüssige DB-Tabellen entfernt
+#/ - System: Rudimentäres System für Poor Men-Cronjobs
+#/ - System: Zeitzone für die Webseite kann/muss ausgewählt werden
+#/ - System: Konfigurierbarer Ladezeitpunkt für Applets
+#/ - Admin-CP: Verbesserter Style im Admin-CP
+#/ - Admin-CP: Colorpicker zur Farbauswahl (noch nicht überall)
+#/ - Admin-CP: stark erweiterte englische Übersetzung
+#/ - Admin-CP: viele kleine Arbeitserleichterungen
+#/ - News: Mehrere News/Kommentare gleichzeitig löschen
+#/ - News: Einfachere Verwaltung der Links (Javascript basiert)
+#/ - News: Filter/Suche nach Stichwort oder ID
+#/ - News: Autor wählbar durch Eingabe des Namens
+#/ - Kommentare: Liste mit lernender Spam-Erkennung
+#/ - Statistik: Referrer automatisch löschen
+#/ - User/Gruppen-Rechte: alle/keine-Auswahl
+#/ - Video-Player: Einstellung für Standardgröße
+#/ - Inhaltsbilder: Kategorien hinzugefügt
+#/ - Inhaltsbilder: Hinzufügen über Verzeichnis (z.B. FTP-Upload)
+#/ - MySQL: Tabellen-Wartung über Admin-CP
 #/
 #/<b>Sicherheits-Verbesserungen:</b>
+#/ - Besserer Schutz der Admin-Scripte
 #/ - neuer Datenbank-Treiber
-#/ - einige Angriffspunkte für SQL-Injections entfernt
-#/ - Admin-CP wird besser vor unautorisierten Zugriffen geschützt
+#/ - viele, viele Sicherheitslöcher gestopft
 #/
 #/<b>Bug-Fixes:</b>
-#/ - jQuery aktualisiert
+#/ - PHP-Fehlermeldungen deaktiviert
 #/ - sehr viele Notice- und Warning-Meldungen beseitigt
+#/ - jQuery aktualisiert
 #/ - Download-Mirrors werden wieder als Mirrors gespeichert
-#/ - ...
-
-
 
 
 notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/fs2installer</b> von deinem Webspace zu löschen.
