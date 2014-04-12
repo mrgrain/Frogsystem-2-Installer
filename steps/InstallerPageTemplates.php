@@ -12,7 +12,6 @@ class InstallerPageTemplates extends InstallerPage {
     private $ic;
 
     public function __construct() {
-        $_SESSION['upgrade_from'] = '2.alix5';
         parent::__construct();
         $this->lang = new InstallerLang($this->local, 'templates');
         $this->setTitle('templates_title');
@@ -20,9 +19,9 @@ class InstallerPageTemplates extends InstallerPage {
 
         // check to header instantly
         if (UPGRADE_FROM == 'none') {
-            // nothing todo => go to setup
-            //~ header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
-            //~ exit;
+            // nothing todo => go to cleanup
+            header("location: {$_SERVER['PHP_SELF']}?step=cleanup"); // redirect
+            exit;
         }
     }
 
