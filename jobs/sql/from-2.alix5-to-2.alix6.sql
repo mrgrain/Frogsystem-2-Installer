@@ -273,9 +273,11 @@ CREATE TABLE `_temp_{..pref..}email` (
 	`html` tinyint(1) NOT NULL default '1',
 	PRIMARY KEY  ( `id` )
 ) ENGINE = MyISAM CHARACTER SET = utf8;
-INSERT INTO `_temp_{..pref..}email` ( `change_password`, `delete_account`, `email`, `html`, `id`, `signup`, `use_admin_mail` ) SELECT `change_password`, `delete_account`, `email`, `html`, `id`, `signup`, `use_admin_mail` FROM `{..pref..}email`;
+INSERT INTO `_temp_{..pref..}email` ( `id`, `signup`, `change_password`, `use_admin_mail`, `email`, `html`) SELECT 1, `signup`, `change_password`, `use_admin_mail`, `email`, `html` FROM `{..pref..}email`;
 DROP TABLE `{..pref..}email`;
 ALTER TABLE `_temp_{..pref..}email` RENAME `{..pref..}email`;
+INSERT INTO `{..pref..}email` ( `delete_account`, `change_password_ack`) VALUES
+('Hallo {..user_name..},\r\n\r\nSchade, dass du dich von unserer Seite abgemeldet hast. Falls du es dir anders überlegst, [url=$URL()]darfst du gerne mal wieder vorbeischauen[/url].\r\n\r\nDein Team von $VAR(page_title)!', 'Hallo {..user_name..},\r\n\r\nDu hast für deinen Account auf $VAR(page_title) ein neues Passwort angefordert. Um den Vorgang abzuschließen musst du nur noch innerhalb der nächsten zwei Tage den folgenden Link anklicken: [url={..new_password_url..}]Neues Passwort setzen[/url]\r\n\r\nFalls du [b]kein[/b] neues Passwort angefordert hast, ignoriere diese E-Mail einfach. Du kannst dich weiterhin mit deinem bisherigen Passwort bei uns anmelden.\r\n\r\nDein Team von $VAR(page_title)!') WHERE `id` = 1;
 
 
 CREATE TABLE IF NOT EXISTS `{..pref..}ftp` (

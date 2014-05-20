@@ -1,6 +1,9 @@
 new_url_style_title: Neuer URL Stil
 new_url_style_text: Ab dieser Version unterstützt das Frogsystem 2 verschiedene <a href="http://wiki.frogsystem.de/seo-urls" target="_blank">URL-Stile</a>. Um Seiten-interne Links korrekt zu erzeugen, können URLs nicht mehr direkt angegeben werden. In Templates verwendest du stattdessen die neue <a href="http://wiki.frogsystem.de/url-function" target="_blank">URL-Funktion</a>. Bei Inhalten wie bisher auch den FSCode [home].<br>Änderungen an den bestehenden Daten können leider nicht automatisch vorgenommen werden. Insbesonders wenn ein neuer URL-Stil verwendet werden soll, müssen alle URLs von Hand angepasst werden.
 
+mail_templates_title: E-Mail-Templates anpassen
+mail_templates_text: Damit weiterhin korrekte E-Mails verschickt werden, musst du auch die E-Mail-Templates anpassen. Die Template-Tags haben sich hier geändert und du solltest auch die URLs auf das neue Schema umstellen. Das neue Template für die Passwortänderung wird automatisch angelegt.
+
 
 polls_form_poll_id_change: Der <i>name</i> des input-Elements <i>id</i> muss in <b>poll_id</b> geändert werden.
 search_update_phonetic_help: Die neue Phonetische Suche kann nur mit verschiedenen Template-Anpassungen genutzt werden. Ein Beispiel dafür findest du im Original-Template.

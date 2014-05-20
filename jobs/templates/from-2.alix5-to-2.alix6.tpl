@@ -1,3 +1,4 @@
+INFO mail_templates
 INFO new_url_style
 INFO 0_polls.tpl APPLET_POLL_BODY polls_form_poll_id_change
 INFO 0_search.tpl SEARCH search_update_phonetic_help
