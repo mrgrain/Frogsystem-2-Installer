@@ -1,0 +1,33 @@
+#IS_WRITABLE     ./copy/db_connection.php
+#COPY        -O  ./copy/db_connection.php       ~/config/db_connection.php
+
+COPY		-O ./copy/source/admin/admin_cimg.php 						~/admin/admin_cimg.php
+COPY		-O ./copy/source/admin/admin_dlnewcat.php					~/admin/admin_dlnewcat.php
+COPY		-O ./copy/source/applets/dl-forwarding.php					~/applets/dl-forwarding.php
+COPY		-O ./copy/source/imageviewer.php							~/imageviewer.php
+COPY		-O ./copy/source/includes/fscode.php						~/includes/fscode.php
+COPY		-O ./copy/source/includes/indexfunctions.php				~/includes/indexfunctions.php
+COPY		-O ./copy/source/includes/phpinit.php						~/includes/phpinit.php
+COPY		-O ./copy/source/index.php									~/index.php
+COPY		-O ./copy/source/lang/de_DE/frontend.txt					~/lang/de_DE/frontend.txt
+COPY		-O ./copy/source/lang/en_US/frontend.txt					~/lang/en_US/frontend.txt
+COPY		-O ./copy/source/libs/class_Hash.php						~/libs/class_Hash.php
+COPY		-O ./copy/source/libs/class_StringCutter.php				~/libs/class_StringCutter.php
+COPY		-O ./copy/source/resources/player/player_flv_include.php	~/resources/player/player_flv_include.php
+COPY		-O ./copy/source/styles/default/0_user.tpl					~/styles/default/0_user.tpl
+
+COPY		-O ./copy/data/applets/social-meta-tags.php					~/applets/social-meta-tags.php
+
+IS_WRITABLE -R  ~/styles/
+IS_WRITABLE -R  ~/upload/
+IS_WRITABLE -R  ~/media/content/
+IS_WRITABLE -R  ~/media/group-images/
+IS_WRITABLE -R  ~/media/user-images/
+IS_WRITABLE -R  ~/images/cat/
+IS_WRITABLE -R  ~/images/downloads/
+IS_WRITABLE -R  ~/images/partner/
+IS_WRITABLE -R  ~/images/press/
+IS_WRITABLE -R  ~/images/screenshots/
+IS_WRITABLE -R  ~/images/shop/
+IS_WRITABLE -R  ~/images/smilies/
+IS_WRITABLE -R  ~/images/wallpaper/

@@ -1,0 +1,1 @@
+INFO 0_user.tpl NEW_PASSWORD user_reset_password_form

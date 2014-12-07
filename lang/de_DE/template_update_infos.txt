@@ -1,3 +1,7 @@
+# 2.alix6b
+user_reset_password_form: Im mitgelieferte Template der vorherigen Version wurde das <b>form</b>-Tag nicht wieder geschlossen. Bitte überprüfe die Templates und korrigiere den Fehler, falls vorhanden.
+
+# 2.alix6
 new_url_style_title: Neuer URL Stil
 new_url_style_text: Ab dieser Version unterstützt das Frogsystem 2 verschiedene <a href="http://wiki.frogsystem.de/seo-urls" target="_blank">URL-Stile</a>. Um Seiten-interne Links korrekt zu erzeugen, können URLs nicht mehr direkt angegeben werden. In Templates verwendest du stattdessen die neue <a href="http://wiki.frogsystem.de/url-function" target="_blank">URL-Funktion</a>. Bei Inhalten wie bisher auch den FSCode [home].<br>Änderungen an den bestehenden Daten können leider nicht automatisch vorgenommen werden. Insbesonders wenn ein neuer URL-Stil verwendet werden soll, müssen alle URLs von Hand angepasst werden.
 

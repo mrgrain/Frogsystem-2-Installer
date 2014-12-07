@@ -1,0 +1,21 @@
+IS_WRITABLE     ./copy/db_connection.php
+
+COPY        -RO "./copy/source/*"               ~/
+COPY        -RO "./copy/data/*"                 ~/
+COPY        -O  ./copy/db_connection.php        ~/config/db_connection.php
+
+IS_WRITABLE -R  ~/styles/
+IS_WRITABLE -R  ~/upload/
+IS_WRITABLE -R  ~/media/content/
+IS_WRITABLE -R  ~/media/group-images/
+IS_WRITABLE -R  ~/media/user-images/
+IS_WRITABLE -R  ~/images/cat/
+IS_WRITABLE -R  ~/images/downloads/
+IS_WRITABLE -R  ~/images/partner/
+IS_WRITABLE -R  ~/images/press/
+IS_WRITABLE -R  ~/images/screenshots/
+IS_WRITABLE -R  ~/images/shop/
+IS_WRITABLE -R  ~/images/smilies/
+IS_WRITABLE -R  ~/images/wallpaper/
+
+

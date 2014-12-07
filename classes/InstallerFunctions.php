@@ -59,7 +59,7 @@ class InstallerFunctions {
     public static function getFS2Versions() {
         return array(
             'none',
-            '2.alix3','2.alix4','2.alix5','2.alix6','2.alix7','2.alix8','2.alix9',
+            '2.alix3','2.alix4','2.alix5','2.alix6','2.alix6b','2.alix7','2.alix8','2.alix9',
             '2.beta1','2.beta2','2.beta3','2.beta4','2.beta5','2.beta6','2.beta7','2.beta8','2.beta9',
             '2.rc1','2.rc2','2.rc3','2.rc4','2.rc5'
         );
