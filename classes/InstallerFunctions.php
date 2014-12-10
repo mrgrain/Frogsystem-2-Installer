@@ -163,6 +163,7 @@ class InstallerFunctions {
         if ($de !== false && $de < $en) {
             return 'de_DE';
         } else {
+            return 'de_DE';
             return 'en_US';
         }
     }
