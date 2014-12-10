@@ -10,15 +10,24 @@ copyright: Copyright
 
 
 welcome: Herzlich Willkommen zum Frogsystem 2!
-introduction: <p>Mit dem <b>Frogsystem&nbsp;2.alix6</b> wurden einige weitreichende <b>Änderungen im Hintergrund</b> durchgeführt, die das System für die Zukunft besser aufstellen.</p>
-#/
-#/<p>Die sichtbarsten Änderungen sind jedoch die <b>neue Kommentarliste mit Spam-Erkennung</b>, die <b>Unterstützung für SEO-URLs</b>, ein <b>neuer Style im AdminCP</b> und natürlich dieses <b>neue Installations-Tool</b>. Eine detaillierte Auflistung aller Änderungen gibt es im <a href="#changelog">Change Log</a>.</p>
+introduction: <p>Das <b>Frogsystem&nbsp;2.alix6b</b> ist ein kleines Bug Fix-Release für die vorherige Version. Mit dieser wurden weitreichende Änderungen im Hintergrund durchgeführt, die das System für die Zukunft besser aufstellen.</p>
 #/
 #/<p>Dieser <b>Assistent</b> wird dich durch die <b>Installation und Erstkonfiguration</b> führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch. Sobald du die Installtion startest, erklärst du dich damit einverstanden.</p>
 start_installation: Hurra, lass uns loslegen!
 
 
-changelog_text:<b>Neue Features:</b>
+changelog_text:<b>Bug Fixes 2.alix6b:</b>
+#/ - Improved Social Meta Tags Applet
+#/ - Fixed Bug with SEO URL redirects (possible infinite loop)
+#/ - New namespace compatible autoloader
+#/ - Fix for broken Downloads
+#/ - Fix for StringCutter edge cases
+#/ - Updated YouTube embed code
+#/ - Fixed bug with Content Image file endings
+#/ - Fix for Hash URLs
+#/ - Some fixes for the request new password feature
+#/
+#/<b>Neue Features:</b>
 #/ - PHP 5.4 wird unterstützt
 #/ - SEO-URLs
 #/ - Verwendung kanonische URLs
@@ -84,7 +93,7 @@ copyright_text: <b>&copy; 2007 - 2014 Frogsystem-Team - <a href="http://www.frog
 #/
 #/-----------------------------------------------------------
 #/
-#/Die Software <b>Frogsystem&nbsp;2.alix6</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
+#/Die Software <b>Frogsystem&nbsp;2.alix6b</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
 #/
 #/<b>Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland</b>
 #/Eine <b>Zusammenfassung</b> des Lizenzvertrags <b>in allgemeinverständlicher Sprache</b> kann unter dieser Internet-Adresse abgerufen werden:
@@ -95,7 +104,7 @@ copyright_text: <b>&copy; 2007 - 2014 Frogsystem-Team - <a href="http://www.frog
 #/
 #/-----------------------------------------------------------
 #/
-#/Die Software <b>Frogsystem&nbsp;2.alix6</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
+#/Die Software <b>Frogsystem&nbsp;2.alix6b</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
 #/
 #/<b>BBCode-Parserklasse für PHP</b>
 #/Version 0.3.3 | Copyright (c) 2004-2009 Christian Seiler

@@ -10,7 +10,7 @@
  */
 abstract class PairSolver extends Solver {
     
-    public function solve($pairs = true) {
+    public function solve($pairs = true, $noop = false) {
         // load default pairs
         if ($pairs === true) {
             $pairs = $this->getDefaultPairs();
