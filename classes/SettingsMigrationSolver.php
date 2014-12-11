@@ -10,6 +10,7 @@
 class SettingsMigrationSolver extends PairSolver {
     
     private $sql;
+    private $version;
     private $configs = array(
 		'affiliatesConfig', 'articlesConfig', 'captchaConfig', 'downloadsConfig', 'galleryConfig', 
 		'groupsConfig', 'mainConfig', 'newsConfig', 'pollsConfig', 'pressConfig', 'previewImagesConfig', 
@@ -20,6 +21,16 @@ class SettingsMigrationSolver extends PairSolver {
     public function __construct($sql) {
         $this->sql = $sql;
     }
+    
+	// solve only alix5
+    public function solve($version = false, $noop = false) {
+		switch ($version) {
+			case '2.alix5':
+				return parent::solve(true, false);
+			default:
+				return true;
+		}
+	}    
     
     /* Default tests & solutions */             
     public function getDefaultPairs() {

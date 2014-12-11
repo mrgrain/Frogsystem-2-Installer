@@ -141,6 +141,18 @@ class InstallerFunctions {
                     }
                 }
                 break;
+            case '2.alix6':
+            case '2.alix6b':
+				$file = $path.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'db_connection.php';
+                if (@Files::file_exists($file)) {
+                    try {
+						require $file;
+						return $dbc;
+					} catch (Exception $e) {
+						return false;
+					}
+                }
+                break;
             default:
                 return false;
         }

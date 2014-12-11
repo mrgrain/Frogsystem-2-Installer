@@ -48,6 +48,10 @@ class InstallerPageTemplateOperations extends SelfReloadingInstallerPage {
 
             // skip infos
             if ($runner->currentIsOfType('info')) {
+				if ($runner->getLastKey() == $pos) {
+					$this->done();
+					break;
+				}
                 continue;
             }
 

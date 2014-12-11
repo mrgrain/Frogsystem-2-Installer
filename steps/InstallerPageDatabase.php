@@ -52,6 +52,11 @@ class InstallerPageDatabase extends InstallerPage {
             } else {
                 $inst_list = $_SESSION['db_instructions'];
             }
+            
+            // no instructions => skip
+            if (empty($inst_list)) {
+				header("location: {$_SERVER['PHP_SELF']}?step=databaseUnslasherInfo");
+			}
 
             $this->ic->addText('instruction_list', implode(PHP_EOL, $inst_list));
             $this->ic->addText('url', '?step=databaseOperations');

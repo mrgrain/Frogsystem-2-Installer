@@ -85,9 +85,7 @@ function setup() {
     Path::setPrefix(INSTALLER_PATH, 'current');
 
     // New version to be installed
-    if (!isset($_SESSION['upgrade_to'])) {
-        $_SESSION['upgrade_to'] = trim(Files::file_get_contents(new Path('copy/version', 'current')));
-    }
+    $_SESSION['upgrade_to'] = trim(Files::file_get_contents(new Path('copy/version', 'current')));
     define('UPGRADE_TO', $_SESSION['upgrade_to'], true);
 
     // check for install path and from version

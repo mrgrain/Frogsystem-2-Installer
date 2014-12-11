@@ -48,6 +48,13 @@ class MinimalSettingsSolver extends Solver {
     
     
     // solvers
+    public function solutionSufficientVersion() {
+		if (InstallerFunctions::compareFS2Versions(UPGRADE_FROM, '2.alix6') >= 0) {
+			$_SESSION['minimal_settings'] = true;
+		}
+		return true;
+	}
+	
     public function solutionSaveSettingsFromPost() {
 		// unset error
 		$this->error = array();
