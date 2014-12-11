@@ -14,3 +14,5 @@ COPY        -O ./copy/source/resources/player/player_flv_include.php    ~/resour
 COPY        -O ./copy/source/styles/default/0_user.tpl                  ~/styles/default/0_user.tpl
 
 COPY        -O ./copy/data/applets/social-meta-tags.php                 ~/applets/social-meta-tags.php
+
+COPY        -O ./copy/source/config/version                             ~/config/version

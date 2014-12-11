@@ -28,7 +28,7 @@ class SettingsMigrationSolver extends PairSolver {
 			case '2.alix5':
 				return parent::solve(true, false);
 			default:
-				return true;
+				return $this->solutionUpdateVersion();
 		}
 	}    
     
@@ -96,6 +96,14 @@ class SettingsMigrationSolver extends PairSolver {
     
     
     // solutions
+    public function solutionUpdateVersion() {
+        $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
+        $main = InstallerFunctions::json_array_decode($main);
+        $main['version'] = UPGRADE_TO;
+        $main = InstallerFunctions::json_array_encode($main);
+        return $this->sql->save('config', array('config_name' => 'main', 'config_data' => $main), 'config_name', false);
+    }
+    
     public function solutionAffiliatesConfig() {
         $config = array();
         if ($this->tableExists('partner_config')) {
@@ -142,7 +150,7 @@ class SettingsMigrationSolver extends PairSolver {
     }   
     public function solutionMainConfig() {
         $config = array();
-        if ($this->tableExists('global_config')) {
+        if ($this->tableExists('global_config')) { // alix5 and lower
             $config = $this->sql->getById('global_config', '*', 1);
             
             // url slash & leading http://
@@ -176,7 +184,7 @@ class SettingsMigrationSolver extends PairSolver {
         }
         
         // overwrite version
-        $config['version'] = '2.alix6';
+        $config['version'] = UPGRADE_TO;
         
         // not possible in property
         $server_timezone = @date_default_timezone_get();
