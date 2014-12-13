@@ -108,8 +108,9 @@ function setup() {
     }
 
     // URL to installed property
-    if (isset($_SESSION['url'])) {
-      define('URL', $_SESSION['url'], true);
+    if (!isset($_SESSION['url'])) {
+      $_SESSION['url'] = $_SERVER['PHP_SELF'];
     }
+    define('URL', $_SESSION['url'], true);
 }
 ?>
