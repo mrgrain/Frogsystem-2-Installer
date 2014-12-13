@@ -1,0 +1,215 @@
+
+----- Frogsystem 2.alix6b! ------------------------------------------------------------------
+----- Datei-Operationen manuell ausführen --------------------------------------------------
+
+Bei einem Update von einer älteren Version bitte die einzelnen Updates hintereinander
+ausführen, wenn keine speziellen Anweisungen existieren.
+
+----- Installation -------------------------------------------------------------------------
+
+   1) Haupt-Dateien kopieren
+
+      => Alle Dateien aus dem Ordner /fs2installer/copy/source in das Zielverzeichnis der
+         Installation kopieren.
+
+      => Alle Dateien aus dem Ordner /fs2installer/copy/data in das Zielverzeichnis der
+         Installation kopieren. Bereits vorhandene Ordner/Dateien überschreiben.
+
+
+   2) Zugriffsrechte festlegen
+
+      => Der Webserver benötigt Schreib-Zugriff für folgende Dateien und Ordner:
+
+            /styles (sowie alle Unterordner und Dateien)
+            /upload
+            /media/content
+            /media/group-images
+            /media/user-images
+            /images/cat
+            /images/downloads
+            /images/partner
+            /images/press
+            /images/screenshots
+            /images/shop
+            /images/smilies
+            /images/wallpaper
+
+      !! Weiterführende Informationen gibt es im Frogsystem 2-Wiki unter:
+         http://wiki.frogsystem.de/filesystem-permissions
+
+
+   3) Datenbank-Verbindung einrichten
+
+      => In der Datei /fs2installer/copy/db_connection.php die Verbindungsdaten zur
+         Datenbank eingegeben.
+
+      => Kopiere diese Datei den Ordner /config im Zielverzeichnis. Die vorhandene Datei
+         muss überschrieben werden.
+
+      !! Diese Datei sollte vor unbefugten Zugriffen geschützt werden und nicht von anderen
+         Benutzern außer dem Webserver und dir selbst lesbar sein. Siehe dazu ebenfalls:
+         http://wiki.frogsystem.de/filesystem-permissions
+
+
+----- Update von 2.alix6 auf 2.alix6b ------------------------------------------------------
+
+   1) Geänderte Dateien kopieren
+
+      => Folgende Dateien aus dem Ordner /fs2installer/copy/source in das Zielverzeichnis der
+         Installation kopieren:
+         
+			/admin/admin_cimg.php
+			/admin/admin_dlnewcat.php
+			/applets/dl-forwarding.php
+			/imageviewer.php
+			/includes/fscode.php
+			/includes/indexfunctions.php
+			/includes/phpinit.php
+			/index.php
+			/lang/de_DE/frontend.txt
+			/lang/en_US/frontend.txt
+			/libs/class_Hash.php
+			/libs/class_StringCutter.php
+			/resources/player/player_flv_include.php
+			/styles/default/0_user.tpl
+			
+      => Folgende Dateien aus dem Ordner /fs2installer/copy/data in das Zielverzeichnis der
+         Installation kopieren:
+         
+			/applets/social-meta-tags.php
+
+
+
+----- Update von 2.alix5 auf 2.alix6b ------------------------------------------------------
+
+   1) Veraltete Dateien löschen
+
+      => Diese Ordner (inkl. Dateien) aus dem Zielverzeichnis der Installation sind veraltet
+         und sollten vorher gelöscht werden:
+
+            /styles/default
+            /resources
+            /upload
+
+
+   2) Haupt-Dateien kopieren
+
+      => Alle Dateien aus dem Ordner /fs2installer/copy/source in das Zielverzeichnis der
+         Installation kopieren. Bereits vorhandene Ordner und Dateien überschreiben.
+
+      => Dateien aus dem Ordner /fs2installer/copy/data in das Zielverzeichnis der
+         Installation kopieren. Bereits vorhandene Dateien überprüfen und NUR BEI BEDARF
+         überschreiben.
+
+      !! Schau dir die Änderungen aus /fs2installer/copy/data im Vergleich zu den aktuellen
+         Dateien deiner Installation an. Vielleicht ist etwas Wichtiges oder Interessantes
+         für dein Frogsystem 2 dabei.
+
+
+   3) Inhaltsbilder verschieben
+
+      => Die Inhalsbilder müssen an einen neuen Speicherort verschoben werden. Bitte
+         verschiebe oder kopiere alle Dateien aus
+
+            /images/content      in den Ordner     /upload
+
+
+   4) Zugriffsrechte festlegen
+
+      => Der Webserver benötigt Schreib-Zugriff für folgende Dateien und Ordner:
+
+            /styles (sowie alle Unterordner und Dateien)
+            /upload
+            /media/content
+            /media/group-images
+            /media/user-images
+            /images/cat
+            /images/downloads
+            /images/partner
+            /images/press
+            /images/screenshots
+            /images/shop
+            /images/smilies
+            /images/wallpaper
+
+      !! Weiterführende Informationen gibt es im Frogsystem 2-Wiki unter:
+         http://wiki.frogsystem.de/filesystem-permissions
+
+
+   5) Datenbank-Verbindung einrichten
+
+      => In der Datei /fs2installer/copy/db_connection.php die Verbindungsdaten zur
+         Datenbank eingegeben.
+
+      => Kopiere diese Datei den Ordner /config im Zielverzeichnis. Die vorhandene Datei
+         muss überschrieben werden.
+
+      !! Diese Datei sollte vor unbefugten Zugriffen geschützt werden und nicht von anderen
+         Benutzern außer dem Webserver und dir selbst lesbar sein. Siehe dazu ebenfalls:
+         http://wiki.frogsystem.de/filesystem-permissions
+
+
+   6) Alte Dateien aufräumen
+
+      => Wir empfehlen NACH der Installation die folgenen veralteten und nicht mehr
+         verwendeten Dateien und Ordner vom Webserver bzw. Webspace zu löschen:
+
+            /images/content
+
+            /phrases
+
+            /libs/class_langDataInit.php
+
+            /lang/de_DE/admin.php
+            /lang/de_DE/frontend.php
+            /lang/de_DE/template.php
+
+            /includes/bbcodefunctions.php
+
+            /admin/admin.css
+            /admin/editor.css
+            /admin/html-editor.css
+            /admin/admin_frogpad.php
+            /admin/admin_statspace.php
+
+            !! Hinweis: Das sind NICHT alle Bilder aus dem Ordner !!
+            /admin/img/bg.jpg
+            /admin/img/bigpointer_down.png
+            /admin/img/bigpointer_down_grey.png
+            /admin/img/bigpointer_up.png
+            /admin/img/bigpointer_up_grey.png
+            /admin/img/content_foot.jpg
+            /admin/img/content_foot_small.jpg
+            /admin/img/content_loop.jpg
+            /admin/img/content_loop_small.jpg
+            /admin/img/content_top.jpg
+            /admin/img/content_top_small.jpg
+            /admin/img/cs_bot_left.jpg
+            /admin/img/cs_bot_loop.jpg
+            /admin/img/cs_bot_right.jpg
+            /admin/img/cs_mid_left.jpg
+            /admin/img/cs_mid_loop.jpg
+            /admin/img/cs_mid_right.jpg
+            /admin/img/cs_top_left.jpg
+            /admin/img/cs_top_loop.jpg
+            /admin/img/cs_top_right.jpg
+            /admin/img/frogsystem_new.gif
+            /admin/img/frogsystem_old.gif
+            /admin/img/great_loop.jpg
+            /admin/img/head.jpg
+            /admin/img/index.htm
+            /admin/img/line_loop.jpg
+            /admin/img/line_red_loop.jpg
+            /admin/img/logbg.jpg
+            /admin/img/login.gif
+            /admin/img/logout.gif
+            /admin/img/menubg.jpg
+            /admin/img/menubg_hover.jpg
+            /admin/img/menu_top_l.jpg
+            /admin/img/menu_top_r.jpg
+            /admin/img/menu_top_r_hover.jpg
+            /admin/img/navi_headline.jpg
+            /admin/img/navi_top.jpg
+            /admin/img/pointer_down.png
+            /admin/img/pointer_up.png
+            /admin/img/sub-right-arrow.gif

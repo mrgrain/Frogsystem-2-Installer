@@ -1,0 +1,99 @@
+
+----- Frogsystem 2.alix6b! -----------------------------------------------------------------
+----- Template-Operationen manuell ausführen -----------------------------------------------
+
+Bei einem Update von einer älteren Version bitte die einzelnen Updates hintereinander
+ausführen, wenn keine speziellen Anweisungen existieren.
+
+----- Installation -------------------------------------------------------------------------
+
+Bei einer Neuinstallation sind keine manuellen Änderungen der Templates nötig.
+
+
+----- Update von 2.alix6 auf 2.alix6b ------------------------------------------------------
+
+   1)  Hinweise beachten
+
+      => Datei "0_user.tpl" Abschnitt "NEW_PASSWORD"
+         Im mitgelieferte Template der vorherigen Version wurde das form-Tag nicht wieder geschlossen.
+         Bitte überprüfe die Templates und korrigiere den Fehler, falls vorhanden.
+         
+         
+----- Update von 2.alix5 auf 2.alix6 -------------------------------------------------------
+
+   1) Änderungen durchführen
+
+   Die folgenden Änderungen sind für JEDEN Style durchzuführen, der mit der neuen Version
+   2.alix6 verwendet werden soll. Pfad- und Dateiangaben beziehen sich immer auf den jeweilgen
+   Style-Ordner.
+
+      => Neue Datei "0_main.tpl" ohne Inhalt erstellen.
+
+      => Kopiere den Abschnitt "DOCTYPE" aus "0_general.tpl" nach "0_main.tpl".
+
+      => Kopiere den Abschnitt "MAINPAGE" aus "0_general.tpl" nach "0_main.tpl"
+         und ändere den Namen in "MAIN".
+
+      => Kopiere den Abschnitt "MATRIX" aus "0_general.tpl" nach "0_main.tpl".
+
+      => Neue Datei "0_viewer.tpl" ohne Inhalt erstellen.
+
+      => Kopiere den Abschnitt "POPUPVIEWER" aus "0_general.tpl" nach "0_viewer.tpl"
+         und ändere den Namen in "VIEWER".
+
+      => Füge in "0_search.tpl" den neuen Abschnitt "INFO" ein. Der Inhalt dazu ist
+         in der Datei "./copy/templates/searchinfo.tpl".
+
+      => Ersetze in der Datei "0_search.tpl" und dem Abschnitt "RESULT_LINE"
+         den Tag "{..num_matches..}" durch {..rank..}"
+
+      => Neue Datei "0_top_downloads.tpl" erstellen. Der Inhalt steht
+         in der Datei "./copy/templates/top_downloads.tpl".
+
+      => Füge in "0_user.tpl" den neuen Abschnitt "NEW_PASSWORD" ein. Der Inhalt
+         dazu ist in der Datei "./copy/templates/newpassword.tpl".
+
+
+   2) Hinweise beachten
+
+      => Allgemein: E-Mail-Templates anpassen
+         Damit weiterhin korrekte E-Mails verschickt werden, musst du auch die
+         E-Mail-Templates anpassen. Die Template-Tags haben sich hier geändert und du
+         solltest auch die URLs auf das neue Schema umstellen. Das neue Template für die
+         Passwortänderung wird automatisch angelegt.
+
+      => Allgemein: Neuer URL Stil
+         Ab dieser Version unterstützt das Frogsystem 2 verschiedene URL-Stile
+         [http://wiki.frogsystem.de/seo-urls]. Um Seiten-interne Links korrekt zu erzeugen,
+         können URLs nicht mehr direkt angegeben werden. In Templates verwendest du
+         stattdessen die neue URL-Funktion [http://wiki.frogsystem.de/url-function]. Bei
+         Inhalten wie bisher auch den FSCode [home].
+         Änderungen an den bestehenden Daten können leider nicht automatisch vorgenommen
+         werden. Insbesonders wenn ein neuer URL-Stil verwendet werden soll, müssen alle
+         URLs von Hand angepasst werden.
+
+      => Datei "0_polls.tpl" Abschnitt "APPLET_POLL_BODY"
+         Der Name des input-Elements "id" muss in "poll_id" geändert werden.
+
+      => Datei "0_search.tpl" Abschnitt "SEARCH"
+         Die neue Phonetische Suche kann nur mit verschiedenen Template-Anpassungen genutzt
+         werden. Ein Beispiel dafür findest du im Original-Template.
+
+      => Datei "0_search.tpl" Abschnitt "SEARCH"
+         Suchoperatoren werden jetzt über das Admin-CP eingestellt. Für die Ausgabe in der
+         Suchmaske, wurde das neue Tag "{..operators..}" hinzugefügt.
+
+      => Datei "0_search.tpl" Abschnitt "RESULT_LINE"
+         Das Ergebnis einer Suchanfrage wird nicht mehr durch die Anzahl der Fundstellen
+         gewichtet, sondern durch den neuen Such-Rang. Evtl. muss die textuelle
+         Beschreibung angepasst werden.
+
+      => Datei "0_search.tpl" Abschnitt "BODY"
+         Der neue Informations-Block kann mit dem Tag "{..info..}" eingebunden werden.
+
+      => Datei "0_user.tpl" allgemein
+         Auf den Login-Seiten sollte ein Link zur "Passwort zurücksetzen"-Funktion
+         eingefügt werden: $URL(login[newpassword=]).
+         Beispiele findest du auch in den Original-Templates.
+
+

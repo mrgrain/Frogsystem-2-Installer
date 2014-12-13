@@ -1,0 +1,196 @@
+-----------------------------------------------------------
+Change Log
+-----------------------------------------------------------
+Die Version 2.alix6b beinhaltet folgende Änderungen zur vorherigen Version:
+	* Improved Social Meta Tags Applet
+	* Fixed Bug with SEO URL redirects (possible infinite loop)
+	* New namespace compatible autoloader
+	* Fix for broken Downloads
+	* Fix for StringCutter edge cases
+	* Updated YouTube embed code
+	* Fixed bug with Content Image file endings
+	* Fix for Hash URLs
+	* Some fixes for the request new password feature
+
+
+-----------------------------------------------------------
+Änderungen der Vorgänger-Versionen:
+-----------------------------------------------------------
+
+2.alix6:
+
+Features:
+    * PHP 5.4 wird unterstützt
+    * SEO-URLs
+    * Verwendung kanonische URLs
+    * Neues Installations- & Update-Tool
+    * Bessere Feeds mit vielen Einstellungsmöglichkeiten (via Script)
+    * Applets können in Inhalten dargestellt werden (z.B. Umfrage innerhalb einer News)
+    * User: Passwort-Vergessen Funktion
+    * Downloads: Kommentar-System ist jetzt auch bei Downloads verfügbar
+    * Downloads: Applet für Top-Downloads
+    * Suche: Bessere Suchergebnisse
+    * Suche: Option zur Phonetische Suche
+    * FSCodes: [html] zur Verwendung von HTML in Inhalten
+    * FSCodes: [nohtml] fügt HTML-Code als normalen Text ein
+    * FSCodes: [nofscode] hinzugefügt, entspricht [noparse]
+    * FSCodes: [home] erzeugt interne Links entsprechen dem URL-Stil
+    * Style: Kleine Anpassungen am lightfrog-Style
+    * Style: CSS-Datei die ausschließlich bei deaktiviertem JavaScript eingebunden wird
+    * System: Neue bzw. erweiterte Template-Funktionen für Datum, URLs und Applets
+    * System: Überflüssige DB-Tabellen entfernt
+    * System: Rudimentäres System für Poor Men-Cronjobs
+    * System: Zeitzone für die Webseite kann/muss ausgewählt werden
+    * System: Konfigurierbarer Ladezeitpunkt für Applets
+    * Admin-CP: Verbesserter Style im Admin-CP
+    * Admin-CP: Colorpicker zur Farbauswahl (noch nicht überall)
+    * Admin-CP: stark erweiterte englische Übersetzung
+    * Admin-CP: viele kleine Arbeitserleichterungen
+    * News: Mehrere News/Kommentare gleichzeitig löschen
+    * News: Einfachere Verwaltung der Links (Javascript basiert)
+    * News: Filter/Suche nach Stichwort oder ID
+    * News: Autor wählbar durch Eingabe des Namens
+    * Kommentare: Liste mit lernender Spam-Erkennung
+    * Statistik: Referrer automatisch löschen
+    * User/Gruppen-Rechte: alle/keine-Auswahl
+    * Video-Player: Einstellung für Standardgröße
+    * Inhaltsbilder: Kategorien hinzugefügt
+    * Inhaltsbilder: Hinzufügen über Verzeichnis (z.B. FTP-Upload)
+    * MySQL: Tabellen-Wartung über Admin-CP
+
+Bug-Fixes:
+    * PHP-Fehlermeldungen deaktiviert
+    * sehr viele Notice- und Warning-Meldungen beseitigt
+    * jQuery aktualisiert
+    * Download-Mirrors werden wieder als Mirrors gespeichert
+
+Sicherheit:
+    * Besserer Schutz der Admin-Scripte
+    * neuer Datenbank-Treiber
+    * viele, viele Sicherheitslöcher gestopft
+
+
+2.alix5c:
+
+    * verbesserte Performance in der Artikel-Ansicht
+    * Newsvorschau
+    * ein Fehler wurde behoben der verhindert hat, dass IE Nutzer News bearbeiten können
+    * es stehen nun 5 Felder zum Upload von Galerie-Bildern zur verfügung
+    * Neues Template HTML-Matrix
+    * neue spezielle CSS Dateinamen [http://wiki.frogsystem.de/special-css-filenames]
+    * FTP-Dateibrowser zur direkten Auswahl von Downloads [http://wiki.frogsystem.de/ftp-file-browser]
+    * einige Php-Warnungen beseitigt
+
+-----------------------------------------------------------
+
+2.alix5:
+
+Features:
+    * Neues Style- und Template-System, das auf Dateien basiert
+    * Neuer Default-Style „Light Frog“
+    * Neuer HTML-Template-Editor mit Syntaxhervorhebung
+    * Neues CSS-Datei System, das beliebig viele CSS-Dateien pro Style erlaubt und das bisherige System ersetzt
+    * Neues Javascript-Datei System, das beliebig viele Javascript-Dateien pro Style erlaubt und das bisherige System ersetzt
+    * Neues Navigations-Template-System, das beliebig viele Navigations-Templates pro Style erlaubt und das bisher verwendete Template "main_menu" ersetzt
+    * Änderung der Syntax für Template-Definitionen (Template-Tags) von {*} zu {..*..} um bessere Kompatibilität mit Javascript zu gewährleisten
+    * Die erweiterten Kontaktinformationen im User-Profil (Messenger, Homepage) sind nun vollständig implementiert
+    * Weitere zusätzliche Informationen im User-Profil (Teamstatus, Gruppenmitgliedschaft, Benutzer-Rang)
+    * Automatische Weiterleitung (sog. "Refresh") nach Formulareingaben
+    * Ausgabe einer Fehlermeldung nach Anmeldung mit falschen Benutzerdaten
+    * Titel von Artikeln und News können im Browser-Seitentitel angezeigt werden
+    * Mehrere News können nun gleichzeitig gelöscht werden
+    * Das doppelte Absenden von Kommentaren wird nun verhindert (Weiterleitungs-Seite und Überprüfung auf Duplikate)
+    * Mehrere Kommentare können nun gleichzeitig gelöscht werden
+    * Applets werden eingeführt, dafür entfallen die sog. Echten Includes
+    * Globale Variablen werden eingeführt
+    * Schnipsel werden eingeführt, dafür entfallen die Seitenvariablen
+    * Neues flexibleres Text-System, dass v.a. beim Erstellen von AddOns das Arbeiten erleichtert (nicht vollständig implementiert, beide System laufen erstmal parallel)
+    * Das Captcha kann jetzt vollständig individualisiert werden
+    * Verwaltung für das Alias-System wurde hinzugefügt
+    * Erweiterung der Rechte-Verwaltung um Sub-Rechte
+    * Seitensuche für News, Artikel und Downloads mit einem Suchindex
+    * Mehr Standard-Größen im Wallpaper-System als Schnellauswahl
+
+Bug-Fixes:
+    * Download-Kategorien mit gleichem Namen können jetzt direkt angelegt werden (ohne Umweg über nachträgliches Umbenennen)
+    * Im Auswahl-Filter der Downloads werden die Kategorien jetzt wie ebenfalls in der Sub-Kategorie-Struktur angezeigt
+    * Beim Bearbeiten von News-Links wird das Link-Ziel jetzt übernommen
+    * Die Statistik der Interaktiv-Startseite zeigt nun korrekte Daten
+    * Das De-/Aktivieren der Ankündigung funktioniert nun korrekt
+    * Fehler behoben, der unter bestimmten Umständen bei der Style-Ermittlung auftrat
+    * Fehlerhafte Darstellungen in der Shop-Verwaltung wurden behoben
+
+-----------------------------------------------------------
+
+2.alix4:
+
+Features:
+    * Modular aufgebautes Admin-CP (interessant für AddOns, die jetzt leichter integriert werden können)
+    * Menü-Startseiten, die einen schnellen Überblick über die einzelnen Navigations-Menüs geben
+    * Erweiterte Kontaktinformationen im User-Profil (Messenger, Homepage), noch nicht vollständig implementiert
+    * Aufteilung der bisherigen Administratoren in einen Super-Administrator, Administratoren (mit allen Rechten) und normalen Mitarbeitern
+    * Mitarbeiter-Gruppen, inkl. Rechtevergabe, Hervorhebungen und Gruppensymbolen
+    * Verbesserung der Benutzer-Seiten im Admin-CP, unter Einbeziehung der neuen Features
+    * Flash-Videoplayer zur Wiedergabe eigener Videos
+    * Video Datenbank mit Einbindung eigener Videos, vereinfachter Einbindung von YouTube- und MyVideo-Videos, und HTML-Einbindung anderer externer Videos
+    * Bei den Templates werden jetzt standardmäßig die Templates das aktiven Designs zur Bearbeitung geladen
+    * News können jetzt unveröffentlicht gespeichert werden
+    * Das Kommentarsystem kann nun für einzelne News deaktiviert werden
+    * Kommentare können ab sofort auch für einen bestimmten Benutzer-Status freigeschaltet werden
+    * Bei der Ansicht der News/Artikel in der Bearbeiten-Liste kann jetzt zwischen drei Darstellungsarten gewählt werden
+    * Die Zahl der pro Seite dargestellten News/Artikel in der Bearbeiten-Liste kann jetzt frei festgelegt werden
+    * Im Newsarchiv können die News eines Monats oder zu einem Stichwort ab sofort auch über GET-Variablen aufgerufen werden (ermöglicht z.B. das Aufrufen der Suche von anderen Seiten aus)
+    * Headlines können jetzt auf eine maximale Zeichenzahl beschränkt werden
+    * Einige Konfigurationsmöglichkeiten wurden sinnvoller auf die verschiedenen Konfigurationsseiten verteilt
+    * Anführungszeichen im Seitentitel und in den Meta-Daten der Seite werden ab sofort korrekt dargestellt
+    * Besucher werden jetzt noch konsequenter tageweise gezählt, d.h. ab 0 Uhr wird ein Besucher auch wieder als "neu" betrachtet
+    * E-Mails können nun auch im HTML-Format versendet werden
+    * Die 404 & 403 Fehlerseiten liefern jetzt auch einen entsprechenden HTML-Header
+
+Sicherheit:
+    * Einige wenige unsichere Datenbank-Abfragen wurden korrigiert
+
+Bug-Fixes:
+    * Ein Fehler in der Mitgliederliste wurde behoben, der bei der Sortierung nach Artikeln auftrat
+    * Die Sortier- und Filterfunktion der Bearbeiten-Liste von News/Artikeln funktioniert nun korrekt
+    * E-Mails bei der Registrierung oder einer Passwortänderung über das Admin-CP werden nun auch tatsächlich gesendet
+    * Ein PHP-Syntax-Fehler, der beim Hinzufügen von Benutzern auftreten konnte, wurde korrigiert
+
+-----------------------------------------------------------
+
+2.alix3:
+
+Features:
+    * Design- & Komfortverbesserungen bei den meisten Seiten aus den Registern „Allgemein“ und „Inhalt“
+    * Versions-Anzeige im Admin-CP
+    * Copyright-Hinweis hinzugefügt
+    * Kategorie-System für Artikel hinzugefügt
+    * Kategorie-System für News überarbeitet
+    * „Formular springen“ wird in Browsern mit der Gecko-Engine (Mozilla) unterbunden
+    * Userbilder lassen sich jetzt über das Admin-CP ändern und löschen
+    * Passwortänderung im Profil verlangt jetzt die Eingabe des alten Passworts
+    * Kommentare werden ab sofort mit der IP-Adresse des Benutzer gespeichert
+    * Bei der Template-Bearbeitung wurde ein „Speichern & Neuladen“-Button hinzugefügt
+    * Die Ankündigung muss ab sofort erst freigeschaltet werden, bevor sie angezeigt wird
+    * Besuche und Seitenaufrufe werden ab sofort nur noch auf der Hauptseite und nicht mehr im Admin-CP gezählt
+    * Zugriffe von der Seite selbst werden nicht mehr als Referrer gespeichert
+    * Die Funktion der Referrer-Anzeige im Admin-CP wurde erweitert
+    * Es ist jetzt möglich bei den Umfrage-Ergebnissen die Balken-Breite für 100% der Antworten selbst zu wählen
+    * Artikel können ab sofort auch über „?go=articles&id=XYZ“ aufgerufen werden
+    * Die Startseite kann jetzt selbst gewählt werden
+    * Die „Wer-ist-online?“ Anzeige kann ab sofort zwischen Gästen und angemeldeten Usern unterscheiden
+    * „[FS]/index.php“ wurde gründlich entrümpelt
+
+Sicherheit:
+    * Passwörter werden ab sofort zusätzlich mit einem sog. Salt gesichert
+
+Bug-Fixes:
+    * News mit fehlender Datumsangabe werden nicht mehr mit dem Datum 1.1.1970 gespeichert
+    * Das Presseberichtformular wird bei fehlenden Angaben nicht mehr gelöscht
+    * Die Seitennavigation der Mitgliederliste wird jetzt korrekt dargestellt
+    * Ein Fehler wurde behoben, der es ermöglichte größere Bilder als eigentlich erlaubt hochzuladen
+    * Es ist ab sofort möglich, mehr als einen „realen Include“ zu verwenden
+    * Das Anti-Spam-Captcha aktualisiert sich nun bei jedem Seitenaufruf
+    * Ein Fehler wurde beseitigt, der Hits unter bestimmten Umständen doppelt zählte
+    * Sonderzeichen in Passwörtern werden jetzt korrekt gespeichert, so dass der Login damit wieder möglich ist
+    * Die Artikelvorschau funktioniert nun
