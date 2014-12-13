@@ -51,8 +51,16 @@ class MinimalSettingsSolver extends Solver {
     public function solutionSufficientVersion() {
 		if (InstallerFunctions::compareFS2Versions(UPGRADE_FROM, '2.alix6') >= 0) {
 			$_SESSION['minimal_settings'] = true;
+            
+            //save important data to class
+            $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
+            $main = InstallerFunctions::json_array_decode($main);
+            $this->url = $main['url'];
+            $this->protocol = $main['protocol'];
+            $this->admin_mail = $main['admin_mail'];
+            return true;
 		}
-		return true;
+		return false;
 	}
 	
     public function solutionSaveSettingsFromPost() {
