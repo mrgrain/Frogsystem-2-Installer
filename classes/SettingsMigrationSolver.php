@@ -25,6 +25,7 @@ class SettingsMigrationSolver extends PairSolver {
 	// solve only alix5
     public function solve($version = false, $noop = false) {
 		switch ($version) {
+			case 'none':
 			case '2.alix5':
 				return parent::solve(true, false);
 			default:
