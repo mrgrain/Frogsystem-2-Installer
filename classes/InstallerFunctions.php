@@ -181,7 +181,7 @@ class InstallerFunctions {
     }
 
     /*
-     * Accually compares to FS2 versions
+     * Actually compares two FS2 versions
      */
     public static function compareFS2Versions($one, $two) {
         // equal
