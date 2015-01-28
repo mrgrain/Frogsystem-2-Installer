@@ -1,0 +1,32 @@
+DELETE      -R  ~/admin/
+COPY        -R ./copy/source/admin/          ~/admin/
+
+COPY        -RO "./copy/source/applets/*"   ~/applets/
+
+COPY        -RO ./copy/source/assets/       ~/
+
+COPY        -O "./copy/source/config/*"     ~/config/
+COPY        -O  ./copy/config/env.cfg.php   ~/config/env.cfg.php
+
+COPY        -RO "./copy/source/data/*"      ~/data/
+
+COPY        -RO "./copy/source/lang/*"      ~/lang/
+
+DELETE      -R  ~/libs/
+COPY        -R ./copy/source/libs/          ~/libs/
+
+MOVE        -O  ~/images/cat/               ~/media/cat/
+MOVE        -O  ~/images/downloads/         ~/media/downloads/
+MOVE        -O  ~/images/partner/           ~/media/partner/
+MOVE        -O  ~/images/press/             ~/media/press/
+MOVE        -O  ~/images/screenshots/       ~/media/gallery/
+MOVE        -O  ~/images/shop/              ~/media/shop
+MOVE        -O  ~/images/smilies/           ~/media/smilies
+MOVE        -O  ~/images/wallpaper/         ~/media/wallpaper
+COPY        -RO "./copy/source/media/stopwords/*"      ~/media/
+
+COPY        -O ./copy/source/index.php      ~/
+
+IS_WRITABLE -R  ~/styles/
+IS_WRITABLE -R  ~/upload/
+IS_WRITABLE -R  ~/media/

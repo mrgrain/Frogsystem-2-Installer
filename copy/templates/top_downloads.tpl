@@ -8,4 +8,3 @@
 <!--section-end::download_entry-->
 
 <!--section-start::no_entries--><span style="display: block; text-align: center;">Keine Downloads gefunden!</span><!--section-end::no_entries-->
-

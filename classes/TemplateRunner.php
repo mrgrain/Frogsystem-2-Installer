@@ -100,9 +100,10 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
                         break;
                     case 'replace':
                         if (!empty($inst->new)) {
-                            $result = $tpl->replaceTag($inst->section, $inst->tag, $inst->new); // NOT IMPLEMENTED
+                            $new = new Path($inst->new, 'current');
+                            $result = $tpl->replaceTag($inst->section, $inst->tag, Files::file_get_contents($new));
                         } else {
-                            $result = $tpl->replaceTag($inst->section, $inst->tag); // NOT IMPLEMENTED
+                            $result = $tpl->replaceTag($inst->section, $inst->tag);
                         }
                         break;
                 }
@@ -260,7 +261,7 @@ class TemplateRunner extends IncrementalFSVersionRunner implements Iterator {
      *          replace all occurances of "{..oldtag..}" with "{..newtag..}"
      *          in the section "sectionname" of file "filename"
      *
-     *          #REPLACE filename sectionname tagname [source]
+     *          REPLACE filename sectionname tagname [source]
      *          replace all occurances of "{..tagname..}" with the content
      *          from a source file. if no source file is given, "{..tagname..}"
      *          will be replaced by an empty string (i.e. deleted).

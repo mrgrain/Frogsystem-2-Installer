@@ -1,0 +1,10 @@
+IS_WRITABLE     ./copy/config/env.cfg.php
+
+COPY        -RO "./copy/source/*"               ~/
+# data is only media/press|smilies|group_images
+COPY        -RO "./copy/data/*"                 ~/
+COPY        -O  ./copy/config/env.cfg.php       ~/config/env.cfg.php
+
+IS_WRITABLE -R  ~/styles/
+IS_WRITABLE -R  ~/upload/
+IS_WRITABLE -R  ~/media/

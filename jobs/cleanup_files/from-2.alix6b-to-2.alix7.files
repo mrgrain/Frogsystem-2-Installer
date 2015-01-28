@@ -1,0 +1,9 @@
+DELETE      -R  ~/classes/
+DELETE      -R  ~/feeds/
+DELETE      -R  ~/images/
+DELETE      -R  ~/includes/
+DELETE      -R  ~/resources/
+DELETE      -R  ~/styles/default/
+DELETE          ~/imageviewer.php
+DELETE          ~/login.inc.php
+DELETE          ~/config/db_connection.php

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}admin_cp` (
   `page_pos` tinyint(3) NOT NULL DEFAULT '0',
   `page_int_sub_perm` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}admin_cp` (`page_id`, `group_id`, `page_file`, `page_pos`, `page_int_sub_perm`) VALUES
 ('start_general', '-1', 'general', 1, 0),
 ('start_content', '-1', 'content', 2, 0),
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}admin_groups` (
   `group_id` varchar(20) NOT NULL,
   `menu_id` varchar(20) NOT NULL,
   `group_pos` tinyint(3) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}admin_groups` (`group_id`, `menu_id`, `group_pos`) VALUES
 ('-1', 'none', 0),
 ('0', 'none', 0),
@@ -171,7 +171,7 @@ DROP TABLE IF EXISTS `{..pref..}admin_inherited`;
 CREATE TABLE IF NOT EXISTS `{..pref..}admin_inherited` (
   `group_id` varchar(255) NOT NULL,
   `pass_to` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}admin_inherited` (`group_id`, `pass_to`) VALUES
 ('applets', 'find_applet'),
 ('news', 'find_user'),
@@ -190,7 +190,7 @@ CREATE TABLE `_temp_{..pref..}applets` (
 	`applet_output` tinyint(1) NOT NULL default '1',
 	UNIQUE INDEX `applet_file` ( `applet_file` ),
 	PRIMARY KEY  ( `applet_id` )
-) ENGINE = MyISAM CHARACTER SET = utf8;
+) CHARACTER SET = utf8;
 INSERT INTO `_temp_{..pref..}applets` ( `applet_active`, `applet_file`, `applet_id`, `applet_output` ) SELECT `applet_active`, `applet_file`, `applet_id`, `applet_output` FROM `{..pref..}applets`;
 DROP TABLE `{..pref..}applets`;
 ALTER TABLE `_temp_{..pref..}applets` RENAME `{..pref..}applets`;
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}b8_wordlist` (
   `count_ham` int(10) unsigned DEFAULT NULL,
   `count_spam` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`token`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}b8_wordlist` (`token`, `count_ham`, `count_spam`) VALUES
 ('b8*dbversion', 3, NULL),
 ('b8*texts', 0, 0);
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}cimg` (
   `hasthumb` tinyint(1) NOT NULL,
   `cat` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `{..pref..}cimg_cats`;
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}cimg_cats` (
   `name` varchar(25) NOT NULL,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `_temp_{..pref..}comments`;
@@ -249,7 +249,7 @@ CREATE TABLE `_temp_{..pref..}comments` (
  `needs_update` tinyint(4) NOT NULL DEFAULT '1',
  FULLTEXT KEY `comment_title_text` ( `comment_text`, `comment_title` ),
  PRIMARY KEY  ( `comment_id` )
-) ENGINE = MyISAM CHARACTER SET = utf8;
+) CHARACTER SET = utf8;
 INSERT INTO `_temp_{..pref..}comments`(`content_id`, `content_type`, `comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title`) SELECT `news_id`, 'news', `comment_date`, `comment_id`, `comment_poster`, `comment_poster_id`, `comment_poster_ip`, `comment_text`, `comment_title` FROM `{..pref..}news_comments`;
 DROP TABLE IF EXISTS `{..pref..}comments`;
 ALTER TABLE `_temp_{..pref..}comments` RENAME `{..pref..}comments`;
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}config` (
   `config_data` text NOT NULL,
   `config_loadhook` varchar(255) NOT NULL DEFAULT 'none',
   UNIQUE KEY `config_name` (`config_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `_temp_{..pref..}email`;
@@ -276,7 +276,7 @@ CREATE TABLE `_temp_{..pref..}email` (
 	`email` varchar(100) NOT NULL,
 	`html` tinyint(1) NOT NULL default '1',
 	PRIMARY KEY  ( `id` )
-) ENGINE = MyISAM CHARACTER SET = utf8;
+) CHARACTER SET = utf8;
 INSERT INTO `_temp_{..pref..}email` ( `id`, `signup`, `change_password`, `use_admin_mail`, `email`, `html`) SELECT 1, `signup`, `change_password`, `use_admin_mail`, `email`, `html` FROM `{..pref..}email`;
 DROP TABLE `{..pref..}email`;
 ALTER TABLE `_temp_{..pref..}email` RENAME `{..pref..}email`;
@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}ftp` (
   `ftp_ssl` tinyint(1) NOT NULL,
   `ftp_http_url` varchar(255) NOT NULL,
   PRIMARY KEY (`ftp_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `{..pref..}hashes`;
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}hashes` (
   `deleteTime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hash` (`hash`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `_temp_{..pref..}styles`;
@@ -316,7 +316,7 @@ CREATE TABLE `_temp_{..pref..}styles` (
   `style_allow_edit` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`style_id`),
   UNIQUE KEY `style_tag` (`style_tag`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `_temp_{..pref..}styles` (`style_id`, `style_tag`, `style_allow_use`, `style_allow_edit`) VALUES (1, 'default', 0, 0);
 INSERT INTO `_temp_{..pref..}styles` (`style_tag`, `style_allow_use`, `style_allow_edit`) SELECT `style_tag`, `style_allow_use`, `style_allow_edit` FROM `{..pref..}styles` WHERE `style_tag` != 'default';
 DROP TABLE `{..pref..}styles`;
@@ -336,7 +336,7 @@ CREATE TABLE `_temp_{..pref..}user_groups` (
   `user_group_date` int(11) NOT NULL,
   `user_group_user` mediumint(8) NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `_temp_{..pref..}user_groups` (`user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) SELECT 1, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user` FROM `{..pref..}user_groups` WHERE `user_group_id` = 0;
 INSERT INTO `_temp_{..pref..}user_groups` (`user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) SELECT `user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user` FROM `{..pref..}user_groups` WHERE `user_group_id` > 1;
 ALTER TABLE `_temp_{..pref..}user_groups` AUTO_INCREMENT = 0;
