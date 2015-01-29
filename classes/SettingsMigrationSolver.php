@@ -89,7 +89,12 @@ class SettingsMigrationSolver extends PairSolver {
     
     // test version
     public function testVersion() {
-		return false; // always update to new version
+        $config = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
+        if (empty($config))
+            return false;
+        
+        $config = InstallerFunctions::json_array_decode($config);
+        return ($config['version'] == UPGRADE_TO);
     }
     
     
@@ -229,11 +234,11 @@ class SettingsMigrationSolver extends PairSolver {
         if (empty($config))
             return false;
         
-        $config = json_array_decode($config);
+        $config = InstallerFunctions::json_array_decode($config);
         $defaultConfig = $name.'Config';
-        if (!empty(array_diff_key($this->$defaultConfig, $config))) // any new default keys not present in current config
+        if (0 < count(array_diff_key($this->$defaultConfig, $config))) // any new default keys not present in current config
             return false;
-        if (!empty(array_diff_key($config, $this->$defaultConfig))) // any old keys not longer present in current config
+        if (0 < count(array_diff_key($config, $this->$defaultConfig))) // any old keys not longer present in current config
             return false;
         
         return true;
@@ -259,7 +264,7 @@ class SettingsMigrationSolver extends PairSolver {
         
         // map conversion function to config
         if (is_callable($converter)) {
-            array_walk($config, $converter;
+            array_walk($config, $converter);
         }
     
         return $this->genericFillConfig($name, $config, $loadhook);

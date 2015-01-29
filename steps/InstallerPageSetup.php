@@ -25,7 +25,7 @@ class InstallerPageSetup extends InstallerPage {
             
             //  settings migration solver
             $migration_solver = new SettingsMigrationSolver($sql);
-            if (!$migration_solver->solve(UPGRADE_FROM)) { return; };
+            if (!$migration_solver->solve()) { return; };
             
             //  mininmal settings solver
             $settings_solver = new MinimalSettingsSolver($this->ic, $sql);

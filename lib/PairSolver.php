@@ -26,7 +26,7 @@ abstract class PairSolver extends Solver {
                 $not_solved[] = $pair;
             }
 		}
-    
+        
         return empty($not_solved);
     }
 
