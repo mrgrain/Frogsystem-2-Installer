@@ -9,27 +9,23 @@
  */
 class InstallerFunctions {
 
-    public static function writeDBConnectionFile($h, $u, $pa, $d, $pr) {
+    public static function writeDBConnectionFile($host, $user, $password, $database, $prefix, $type = 'mysql', $charset = 'utf8') {
         // path within installer
-        $file_path = new Path('copy/db_connection.php', 'current');
-
-        // new file
-        $newfile = array(
-            '<?php'.PHP_EOL,
-            '/* database connection type */'.PHP_EOL,
-            '$dbc[\'type\'] = \'mysql\';'.PHP_EOL,
-            '/* database host */'.PHP_EOL,
-            '$dbc[\'host\'] = \''.addcslashes($h, "\'").'\';'.PHP_EOL,
-            '/* database user */'.PHP_EOL,
-            '$dbc[\'user\'] = \''.addcslashes($u, "\'").'\';'.PHP_EOL,
-            '/* database password */'.PHP_EOL,
-            '$dbc[\'pass\'] = \''.addcslashes($pa, "\'").'\';'.PHP_EOL,
-            '/* database name*/'.PHP_EOL,
-            '$dbc[\'data\'] = \''.addcslashes($d, "\'").'\';'.PHP_EOL,
-            '/* table prefix */'.PHP_EOL,
-            '$dbc[\'pref\'] = \''.addcslashes($pr, "\'").'\';'.PHP_EOL,
-            '?>'.PHP_EOL,
+        $file_path = new Path('copy/config/env.cfg.php', 'current');
+        
+        // config
+        $config = array(
+            'DB_TYPE'       => $type,
+            'DB_NAME'       => $database,
+            'DB_USER'       => $user,
+            'DB_PASSWORD'   => $password,
+            'DB_HOST'       => $host,
+            'DB_CHARSET'    => $charset,
+            'DB_PREFIX'     => $prefix,
+            'SPAM_KEY'      => self::getRandomCode(32)
         );
+        // new file
+        $newfile = '<?php'.PHP_EOL.'$config = '.var_export($config, true).';'.PHP_EOL.'?>';
 
         // write to file
         return Files::file_put_contents($file_path, $newfile);
@@ -70,12 +66,21 @@ class InstallerFunctions {
     }
 
     public static function getInstalledFS2Version($path) {
+        // version file
+        $version = new Path('config/version', 'target');
+        $version = trim(@Files::file_get_contents($version));
+        if (!empty($version) && in_array($version, self::getFS2Versions())) {
+            return $version;
+        }
+        
+        // old detection
         $files = array(
             '2.alix6' => array('config/db_connection.php', 'libs/class_StringCutter.php'),
             '2.alix5' => array('index.php', 'login.inc.php', 'imageviewer.php'),
             '2.alix4' => array('editor_css.php', 'index.php', 'login.inc.php', 'showimg.php', 'style_css.php'),
         );
 
+        return Files::file_put_contents($file_path, $newfile);
         $fs2 = false;
         foreach ($files as $key => $list) {
             $fs2 = true;
@@ -153,14 +158,28 @@ class InstallerFunctions {
 					}
                 }
                 break;
+            case '2.alix7':
+				$file = $path.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'env.cfg.php';
+                if (@Files::file_exists($file)) {
+                    try {
+						require $file;
+						return array(
+                            'type' => $config['DB_TYPE'],
+                            'host' => $config['DB_HOST'],
+                            'user' => $config['DB_USER'],
+                            'pass' => $config['DB_PASSWORD'],
+                            'data' => $config['DB_NAME'], 
+                            'pref' => $config['DB_PREFIX'],
+                        );
+					} catch (Exception $e) {
+						return false;
+					}
+                }
+                break;
             default:
                 return false;
         }
 
-        // check if we found any values
-        if ("" != trim(implode($dbc))) {
-            return $dbc;
-        }
         return false;
     }
 
