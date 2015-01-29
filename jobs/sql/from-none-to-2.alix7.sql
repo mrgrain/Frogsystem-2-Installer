@@ -193,7 +193,7 @@ INSERT INTO `{..pref..}admin_inherited` (`group_id`, `pass_to`) VALUES
 
 DROP TABLE IF EXISTS `{..pref..}aliases`;
 CREATE TABLE IF NOT EXISTS `{..pref..}aliases` (
-  `alias_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `alias_id` mediumint(8) NOT NULL,
   `alias_go` varchar(100) NOT NULL,
   `alias_forward_to` varchar(100) NOT NULL,
   `alias_active` tinyint(1) NOT NULL DEFAULT '1'
@@ -216,41 +216,41 @@ INSERT INTO `{..pref..}announcement` (`id`, `announcement_text`, `show_announcem
 
 DROP TABLE IF EXISTS `{..pref..}applets`;
 CREATE TABLE IF NOT EXISTS `{..pref..}applets` (
-  `applet_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `applet_id` mediumint(8) NOT NULL,
   `applet_file` varchar(100) NOT NULL,
   `applet_active` tinyint(1) NOT NULL DEFAULT '1',
   `applet_include` tinyint(1) NOT NULL DEFAULT '1',
   `applet_output` tinyint(1) NOT NULL DEFAULT '1'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}applets` (`applet_file`, `applet_active`, `applet_include`, `applet_output`) VALUES
-('affiliates', 1, 2, 1),
-('user-menu', 1, 2, 1),
-('announcement', 1, 2, 1),
-('mini-statistics', 1, 2, 1),
-('poll-system', 1, 2, 1),
-('preview-image', 1, 2, 1),
-('shop-system', 1, 2, 1),
-('dl-forwarding', 1, 1, 0),
-('mini-search', 1, 1, 1),
-('topdownloads', 1, 2, 1),
-('social-meta-tags', 1, 2, 1);
+INSERT INTO `{..pref..}applets` (`applet_id`, `applet_file`, `applet_active`, `applet_include`, `applet_output`) VALUES
+( 1, 'affiliates', 1, 2, 1),
+( 2, 'user-menu', 1, 2, 1),
+( 3, 'announcement', 1, 2, 1),
+( 4, 'mini-statistics', 1, 2, 1),
+( 5, 'poll-system', 1, 2, 1),
+( 6, 'preview-image', 1, 2, 1),
+( 7, 'shop-system', 1, 2, 1),
+( 8, 'dl-forwarding', 1, 1, 0),
+( 9, 'mini-search', 1, 1, 1),
+(10, 'topdownloads', 1, 2, 1),
+(11, 'social-meta-tags', 1, 2, 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}articles_cat`;
 CREATE TABLE IF NOT EXISTS `{..pref..}articles_cat` (
-  `cat_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `cat_id` smallint(6) NOT NULL,
   `cat_name` varchar(100) DEFAULT NULL,
   `cat_description` text NOT NULL,
   `cat_date` int(11) NOT NULL,
   `cat_user` mediumint(8) NOT NULL DEFAULT '1'
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}articles_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
 (1, 'Artikel', '', UNIX_TIMESTAMP(), 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}articles`;
 CREATE TABLE IF NOT EXISTS `{..pref..}articles` (
-  `article_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `article_id` mediumint(8) NOT NULL,
   `article_url` varchar(100) DEFAULT NULL,
   `article_title` varchar(255) NOT NULL,
   `article_date` int(11) DEFAULT NULL,
@@ -262,9 +262,9 @@ CREATE TABLE IF NOT EXISTS `{..pref..}articles` (
   `article_cat_id` mediumint(8) NOT NULL,
   `article_search_update` int(11) NOT NULL DEFAULT '0'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}articles` (`article_url`, `article_title`, `article_date`, `article_user`, `article_text`, `article_html`, `article_fscode`, `article_para`, `article_cat_id`, `article_search_update`) VALUES
-('fscode', 'FSCode Liste', NULL, NULL, 'Das System dieser Webseite bietet dir die Möglichkeit einfache Codes zur besseren Darstellung deiner Beiträge zu verwenden. Diese sogenannten [b]FSCodes[/b] erlauben dir daher HTML-Formatierungen zu verwenden, ohne dass du dich mit HTML auskennen musst. Mit ihnen hast du die Möglichkeit verschiedene Elemente in deine Beiträge einzubauen bzw. ihren Text zu formatieren.\n\nHier findest du eine [b]Übersicht über alle verfügbaren FSCodes[/b] und ihre Verwendung. Allerdings ist es möglich, dass nicht alle Codes zur Verwendung freigeschaltet sind.\n\n[html fscode]\n<table width="100%" cellpadding="0" cellspacing="10" border="0"><tr><td width="50%">\n[b][u][size=3]FS-Code:[/size][/u][/b]\n</td><td width="50%">\n[b][u][size=3]Beispiel:[/size][/u][/b]\n</td></tr><tr><td>\n[nofscode][b]fetter Text[/b][/nofscode]\n</td><td>\n[b]fetter Text[/b]\n</td></tr><tr><td>\n[nofscode][i]kursiver Text[/i][/nofscode]\n</td><td>\n[i]kursiver Text[/i]\n</td></tr><tr><td>\n[nofscode][u]unterstrichener Text[u][/nofscode]\n</td><td>\n[u]unterstrichener Text[/u]\n</td></tr><tr><td>\n[nofscode][s]durchgestrichener Text[/s][/nofscode]\n</td><td>\n[s]durchgestrichener Text[/s]\n</td></tr><tr><td>\n[nofscode][center]zentrierter Text[/center][/nofscode]\n</td><td>\n[center]zentrierter Text[/center]\n</td></tr><tr><td>\n[nofscode][font=Schriftart]Text in Schriftart[/font][/nofscode]\n</td><td>\n[font=Arial]Text in Arial[/font]</td></tr><tr><td>\n[nofscode][color=Farbcode]Text in Farbe[/color][/nofscode]\n</td><td>\n[color=#FF0000]Text in Rot (Farbcode: #FF0000)[/color]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 0[/size][/nofscode]\n</td><td>\n[size=0]Text in Größe 0[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 1[/size][/nofscode]\n</td><td>\n[size=1]Text in Größe 1[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 2[/size][/nofscode]\n</td><td>\n[size=2]Text in Größe 2[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 3[/size][/nofscode]\n</td><td>\n[size=3]Text in Größe 3[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 4[/size][/nofscode]\n</td><td>\n[size=4]Text in Größe 4[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 5[/size][/nofscode]\n</td><td>\n[size=5]Text in Größe 5[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 6[/size][/nofscode]\n</td><td>\n[size=6]Text in Größe 6[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 7[/size][/nofscode]\n</td><td>\n[size=7]Text in Größe 7[/size]\n</td></tr><tr><td>\n[nofscode][nofscode]Text mit [b]FS[/b]Code[/nofscode][/nofscode]\n</td><td>\n[nofscode]kein [b]fetter[/b] Text[/nofscode]\n</td></tr><tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][url]Linkadresse[/url][/nofscode]\n</td><td>\n[url]http://www.example.com[/url]\n</td></tr><tr><td>\n[nofscode][url=Linkadresse]Linktext[/url][/nofscode]\n</td><td>\n[url=http://www.example.com]Linktext[/url]\n</td></tr><tr><td>\n[nofscode][home]Seitenlink[/home][/nofscode]\n</td><td>\n[home]news[/home]\n</td></tr> <tr><td>\n[nofscode][home=Seitenlink]Linktext[/home][/nofscode]\n</td><td>\n[home=news]Linktext[/home]\n</td></tr><tr><td>\n[nofscode][email]Email-Adresse[/email][/nofscode]</td><td>\n[email]max.mustermann@example.com[/email]\n</td></tr> <tr><td>\n[nofscode][email=Email-Adresse]Beispieltext[/email][/nofscode]\n</td><td>\n[email=max.mustermann@example.com]Beispieltext[/email]\n</td></tr> <tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][list]\n[*]Listenelement\n[*]Listenelement\n[/list][/nofscode]</td><td>[list]\n[*]Listenelement\n[*]Listenelement\n[/list]\n</td></tr> <tr><td>\n[nofscode][numlist]\n[*]Listenelement\n[*]Listenelement\n[/numlist][/nofscode]\n</td><td>\n[numlist]\n[*]Listenelement\n[*]Listenelement\n[/numlist]\n</td></tr> <tr><td>\n[nofscode][quote]Ein Zitat[/quote][/nofscode]\n</td><td>\n[quote]Ein Zitat[/quote]\n</td></tr><tr><td>\n[nofscode][quote=Quelle]Ein Zitat[/quote][/nofscode]\n</td><td>\n[quote=Quelle]Ein Zitat[/quote]\n</td></tr><tr><td>\n[nofscode][code]Schrift mit fester Breite[/code][/nofscode]\n</td><td>\n[code]Schrift mit fester Breite[/code]\n</td></tr><tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][img]Bildadresse[/img][/nofscode]\n</td><td>\n[img]http://placehold.it/150x100[/img]\n</td></tr><tr><td>\n[nofscode][img=right]Bildadresse[/img][/nofscode]\n</td><td>\n[img=right]http://placehold.it/150x100[/img] Das hier ist ein Beispieltext. Die Grafik ist rechts platziert und der Text fließt links um sie herum.\n</td></tr><tr><td>\n[nofscode][img=left]Bildadresse[/img][/nofscode]\n</td><td>\n[img=left]http://placehold.it/150x100[/img] Das hier ist ein Beispieltext. Die Grafik ist links platziert und der Text fließt rechts um sie herum.\n</td></tr></table>\n[/html]', 0, 1, 1, 1, 0),
-('search_help', 'Suchregeln', NULL, NULL, 'Mit der Suchfunktion können die verschiedenen Inhalte dieser Webseite schnell und einfach gefunden werden. Suchbegriffe können beliebig angeben werden, es sollten aber die folgenden Regeln bedacht werden:\n[list]\n[*][b]Ein Suchbegriff muss aus mindestens 3 Zeichen bestehen[/b]\n[*][b]Nach bestimmten, häufig vorkommenden Füllwörtern kann nicht gesucht werden:[/b] \nz.B. "und", "oder", "hallo", etc.\n[*][b]Zahlen & Sonderzeichen werden durch Leerzeichen ersetzt[/b]\n[*][b]Umlaute werden umgewandelt:[/b] ä => ae, ö=>oe, ü => ue\n[/list]\n\n[i]Beispiele:[/i]\n[font=monospace]Ei[/font] => Findet nichts, da der Suchbegriff zu kurz ist\n[font=monospace]und oder oder[/font] => Findet nichts, da nur nach Füllwörtern gesucht wurde\n[font=monospace]Guten8geschichte[/font] => Sucht nach "guten" und "geschichte"\n[font=monospace]mäuse[/font] => Findet Inhalte mit "Mäuse", "mäuse" oder "Maeuse"\n\nDamit die Suchergebnisse immer nachvollziehbar bleiben, wird bei jeder Suche auch die berechnete Suchanfrage mit ausgegeben. So kann die eigene Anfrage leicht überprüft und evtl. korrigiert werden.\n\n\n[b][size=3]Suchfunktionen[/size][/b]\n\nLiefert die Suche nach einfachen Stichwörtern nicht das gewünschte Ergebnis, kann die Suchanfrage verfeinert werden. Dazu stehen einige Operatoren und Funktionen zur Verfügung.\n\n\n[b]Alle Suchbegriffe müssen enthalten sein: AND[/b]\nDie Verknüpfung mit AND ist der Standardoperator. Sie wird auch immer dann angewandt, wenn keine andere Verknüpfung angegeben wurde. Mit der AND-Verknüpfung werden nur Inhalte gefunden, die alle Suchbegriffe enthalten.\n\n[i]Beispiele:[/i]\n[font=monospace]frosch internet[/font] => Findet nur Inhalte mit "frosch" UND "internet"\n[font=monospace]hund AND katze[/font] => Findet nur Inhalte mit "hund" UND "katze"\n\n\n[b]Nur ein Suchbegriffe muss enthalten sein: OR[/b]\nEs kann aber auch nach Inhalten gesucht werden, die möglicherweise nur einen der Suchbegriffe enthalten. Hierzu wird der OR-Operator verwendet.\n\n[i]Beispiele:[/i]\n[font=monospace]papagei OR rabe[/font] => Findet Inhalte mit "papagei" ODER "rabe"\n\n\n[b]Entweder-oder-Suche: XOR[/b]\nEine Verknüpfung mit dem XOR-Operator entspricht im Grundsatz der Suche mir OR. Der Unterschied besteht darin, dass aber nur solche Inhalte gefunden werden die nur einen der beiden Suchbegriffe enthalten, nicht aber beide zusammen.\n\n[i]Beispiele:[/i]\n[font=monospace]frau XOR mann[/font] => Findet Inhalte mit "frau" aber NICHT "mann" und umgekehrt\n\n\n[b]Suche nach Teilwörtern: *[/b]\nWenn nach bestimmten Teilwörtern gesucht wird, kann das Sternchen als Platzhalter verwendet werden. Vorangestellt werden Wörter gefunden, die auf den Suchbegriff enden; an letzter Stelle stehend findet die Suche nur Wörter die damit beginnen. Das Sternchen kann aber auch gleichzeitig vorne und hinten verwendet werden.\n\n[i]Beispiele:[/i]\n[font=monospace]*haus[/font] => Findet "Haus", "Wohnhaus", "Waisenhaus", aber NICHT "Hausboot"\n[font=monospace]tür*[/font] => Findet "Türschloss", "türmen", aber NICHT "Hintertür"\n[font=monospace]*wunder*[/font] => Findet "Wunderheiler", "Wirtschaftswunder" und "Verwunderung"\n\n\n[b]Suchbegriffe ausschließen: ![/b]\nUm bestimmte Begriffe aus den Suchergebnissen auszuschließen, kann ihnen ein Ausrufezeichen vorangestellt werden. So können Inhalte gefunden werden, die bestimmte Begriff nicht enthalten. Die anderen Suchregeln gelten weiterhin, insbesondere können Verknüpfungen verwendet werden.\n\n[i]Beispiele:[/i]\n[font=monospace]kind !junge[/font] => Findet Inhalte mit "kind" aber OHNE "junge"\n[font=monospace]maus katze !hund[/font] => Findet Inhalte mit "maus" UND "katze", aber OHNE "hund"\n[font=monospace]frosch OR !storch[/font] => Findet Inhalte die "frosch" ODER NICHT "Storch" enthalten\n\n\n[b]Phonetische Suche[/b]\nOft ist die genaue Schreibweise eines Wortes nicht bekannt. Dann kann die Phonetische Suche weiterhelfen. Mit dieser Option werden auch ähnlich klingende Begriffe zu einem Suchwort gefunden.\n\n[i]Beispiele:[/i]\n[font=monospace]team[/font] => Findet Inhalte mit "Team", "Tim", "Teen", etc.', 0, 1, 1, 1, 0);
+INSERT INTO `{..pref..}articles` (`article_id`, `article_url`, `article_title`, `article_date`, `article_user`, `article_text`, `article_html`, `article_fscode`, `article_para`, `article_cat_id`, `article_search_update`) VALUES
+(1, 'fscode', 'FSCode Liste', NULL, NULL, 'Das System dieser Webseite bietet dir die Möglichkeit einfache Codes zur besseren Darstellung deiner Beiträge zu verwenden. Diese sogenannten [b]FSCodes[/b] erlauben dir daher HTML-Formatierungen zu verwenden, ohne dass du dich mit HTML auskennen musst. Mit ihnen hast du die Möglichkeit verschiedene Elemente in deine Beiträge einzubauen bzw. ihren Text zu formatieren.\n\nHier findest du eine [b]Übersicht über alle verfügbaren FSCodes[/b] und ihre Verwendung. Allerdings ist es möglich, dass nicht alle Codes zur Verwendung freigeschaltet sind.\n\n[html fscode]\n<table width="100%" cellpadding="0" cellspacing="10" border="0"><tr><td width="50%">\n[b][u][size=3]FS-Code:[/size][/u][/b]\n</td><td width="50%">\n[b][u][size=3]Beispiel:[/size][/u][/b]\n</td></tr><tr><td>\n[nofscode][b]fetter Text[/b][/nofscode]\n</td><td>\n[b]fetter Text[/b]\n</td></tr><tr><td>\n[nofscode][i]kursiver Text[/i][/nofscode]\n</td><td>\n[i]kursiver Text[/i]\n</td></tr><tr><td>\n[nofscode][u]unterstrichener Text[u][/nofscode]\n</td><td>\n[u]unterstrichener Text[/u]\n</td></tr><tr><td>\n[nofscode][s]durchgestrichener Text[/s][/nofscode]\n</td><td>\n[s]durchgestrichener Text[/s]\n</td></tr><tr><td>\n[nofscode][center]zentrierter Text[/center][/nofscode]\n</td><td>\n[center]zentrierter Text[/center]\n</td></tr><tr><td>\n[nofscode][font=Schriftart]Text in Schriftart[/font][/nofscode]\n</td><td>\n[font=Arial]Text in Arial[/font]</td></tr><tr><td>\n[nofscode][color=Farbcode]Text in Farbe[/color][/nofscode]\n</td><td>\n[color=#FF0000]Text in Rot (Farbcode: #FF0000)[/color]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 0[/size][/nofscode]\n</td><td>\n[size=0]Text in Größe 0[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 1[/size][/nofscode]\n</td><td>\n[size=1]Text in Größe 1[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 2[/size][/nofscode]\n</td><td>\n[size=2]Text in Größe 2[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 3[/size][/nofscode]\n</td><td>\n[size=3]Text in Größe 3[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 4[/size][/nofscode]\n</td><td>\n[size=4]Text in Größe 4[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 5[/size][/nofscode]\n</td><td>\n[size=5]Text in Größe 5[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 6[/size][/nofscode]\n</td><td>\n[size=6]Text in Größe 6[/size]\n</td></tr><tr><td>\n[nofscode][size=Größe]Text in Größe 7[/size][/nofscode]\n</td><td>\n[size=7]Text in Größe 7[/size]\n</td></tr><tr><td>\n[nofscode][nofscode]Text mit [b]FS[/b]Code[/nofscode][/nofscode]\n</td><td>\n[nofscode]kein [b]fetter[/b] Text[/nofscode]\n</td></tr><tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][url]Linkadresse[/url][/nofscode]\n</td><td>\n[url]http://www.example.com[/url]\n</td></tr><tr><td>\n[nofscode][url=Linkadresse]Linktext[/url][/nofscode]\n</td><td>\n[url=http://www.example.com]Linktext[/url]\n</td></tr><tr><td>\n[nofscode][home]Seitenlink[/home][/nofscode]\n</td><td>\n[home]news[/home]\n</td></tr> <tr><td>\n[nofscode][home=Seitenlink]Linktext[/home][/nofscode]\n</td><td>\n[home=news]Linktext[/home]\n</td></tr><tr><td>\n[nofscode][email]Email-Adresse[/email][/nofscode]</td><td>\n[email]max.mustermann@example.com[/email]\n</td></tr> <tr><td>\n[nofscode][email=Email-Adresse]Beispieltext[/email][/nofscode]\n</td><td>\n[email=max.mustermann@example.com]Beispieltext[/email]\n</td></tr> <tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][list]\n[*]Listenelement\n[*]Listenelement\n[/list][/nofscode]</td><td>[list]\n[*]Listenelement\n[*]Listenelement\n[/list]\n</td></tr> <tr><td>\n[nofscode][numlist]\n[*]Listenelement\n[*]Listenelement\n[/numlist][/nofscode]\n</td><td>\n[numlist]\n[*]Listenelement\n[*]Listenelement\n[/numlist]\n</td></tr> <tr><td>\n[nofscode][quote]Ein Zitat[/quote][/nofscode]\n</td><td>\n[quote]Ein Zitat[/quote]\n</td></tr><tr><td>\n[nofscode][quote=Quelle]Ein Zitat[/quote][/nofscode]\n</td><td>\n[quote=Quelle]Ein Zitat[/quote]\n</td></tr><tr><td>\n[nofscode][code]Schrift mit fester Breite[/code][/nofscode]\n</td><td>\n[code]Schrift mit fester Breite[/code]\n</td></tr><tr><td colspan="2"><hr></td></tr><tr><td>\n[nofscode][img]Bildadresse[/img][/nofscode]\n</td><td>\n[img]http://placehold.it/150x100[/img]\n</td></tr><tr><td>\n[nofscode][img=right]Bildadresse[/img][/nofscode]\n</td><td>\n[img=right]http://placehold.it/150x100[/img] Das hier ist ein Beispieltext. Die Grafik ist rechts platziert und der Text fließt links um sie herum.\n</td></tr><tr><td>\n[nofscode][img=left]Bildadresse[/img][/nofscode]\n</td><td>\n[img=left]http://placehold.it/150x100[/img] Das hier ist ein Beispieltext. Die Grafik ist links platziert und der Text fließt rechts um sie herum.\n</td></tr></table>\n[/html]', 0, 1, 1, 1, 0),
+(2, 'search_help', 'Suchregeln', NULL, NULL, 'Mit der Suchfunktion können die verschiedenen Inhalte dieser Webseite schnell und einfach gefunden werden. Suchbegriffe können beliebig angeben werden, es sollten aber die folgenden Regeln bedacht werden:\n[list]\n[*][b]Ein Suchbegriff muss aus mindestens 3 Zeichen bestehen[/b]\n[*][b]Nach bestimmten, häufig vorkommenden Füllwörtern kann nicht gesucht werden:[/b] \nz.B. "und", "oder", "hallo", etc.\n[*][b]Zahlen & Sonderzeichen werden durch Leerzeichen ersetzt[/b]\n[*][b]Umlaute werden umgewandelt:[/b] ä => ae, ö=>oe, ü => ue\n[/list]\n\n[i]Beispiele:[/i]\n[font=monospace]Ei[/font] => Findet nichts, da der Suchbegriff zu kurz ist\n[font=monospace]und oder oder[/font] => Findet nichts, da nur nach Füllwörtern gesucht wurde\n[font=monospace]Guten8geschichte[/font] => Sucht nach "guten" und "geschichte"\n[font=monospace]mäuse[/font] => Findet Inhalte mit "Mäuse", "mäuse" oder "Maeuse"\n\nDamit die Suchergebnisse immer nachvollziehbar bleiben, wird bei jeder Suche auch die berechnete Suchanfrage mit ausgegeben. So kann die eigene Anfrage leicht überprüft und evtl. korrigiert werden.\n\n\n[b][size=3]Suchfunktionen[/size][/b]\n\nLiefert die Suche nach einfachen Stichwörtern nicht das gewünschte Ergebnis, kann die Suchanfrage verfeinert werden. Dazu stehen einige Operatoren und Funktionen zur Verfügung.\n\n\n[b]Alle Suchbegriffe müssen enthalten sein: AND[/b]\nDie Verknüpfung mit AND ist der Standardoperator. Sie wird auch immer dann angewandt, wenn keine andere Verknüpfung angegeben wurde. Mit der AND-Verknüpfung werden nur Inhalte gefunden, die alle Suchbegriffe enthalten.\n\n[i]Beispiele:[/i]\n[font=monospace]frosch internet[/font] => Findet nur Inhalte mit "frosch" UND "internet"\n[font=monospace]hund AND katze[/font] => Findet nur Inhalte mit "hund" UND "katze"\n\n\n[b]Nur ein Suchbegriffe muss enthalten sein: OR[/b]\nEs kann aber auch nach Inhalten gesucht werden, die möglicherweise nur einen der Suchbegriffe enthalten. Hierzu wird der OR-Operator verwendet.\n\n[i]Beispiele:[/i]\n[font=monospace]papagei OR rabe[/font] => Findet Inhalte mit "papagei" ODER "rabe"\n\n\n[b]Entweder-oder-Suche: XOR[/b]\nEine Verknüpfung mit dem XOR-Operator entspricht im Grundsatz der Suche mir OR. Der Unterschied besteht darin, dass aber nur solche Inhalte gefunden werden die nur einen der beiden Suchbegriffe enthalten, nicht aber beide zusammen.\n\n[i]Beispiele:[/i]\n[font=monospace]frau XOR mann[/font] => Findet Inhalte mit "frau" aber NICHT "mann" und umgekehrt\n\n\n[b]Suche nach Teilwörtern: *[/b]\nWenn nach bestimmten Teilwörtern gesucht wird, kann das Sternchen als Platzhalter verwendet werden. Vorangestellt werden Wörter gefunden, die auf den Suchbegriff enden; an letzter Stelle stehend findet die Suche nur Wörter die damit beginnen. Das Sternchen kann aber auch gleichzeitig vorne und hinten verwendet werden.\n\n[i]Beispiele:[/i]\n[font=monospace]*haus[/font] => Findet "Haus", "Wohnhaus", "Waisenhaus", aber NICHT "Hausboot"\n[font=monospace]tür*[/font] => Findet "Türschloss", "türmen", aber NICHT "Hintertür"\n[font=monospace]*wunder*[/font] => Findet "Wunderheiler", "Wirtschaftswunder" und "Verwunderung"\n\n\n[b]Suchbegriffe ausschließen: ![/b]\nUm bestimmte Begriffe aus den Suchergebnissen auszuschließen, kann ihnen ein Ausrufezeichen vorangestellt werden. So können Inhalte gefunden werden, die bestimmte Begriff nicht enthalten. Die anderen Suchregeln gelten weiterhin, insbesondere können Verknüpfungen verwendet werden.\n\n[i]Beispiele:[/i]\n[font=monospace]kind !junge[/font] => Findet Inhalte mit "kind" aber OHNE "junge"\n[font=monospace]maus katze !hund[/font] => Findet Inhalte mit "maus" UND "katze", aber OHNE "hund"\n[font=monospace]frosch OR !storch[/font] => Findet Inhalte die "frosch" ODER NICHT "Storch" enthalten\n\n\n[b]Phonetische Suche[/b]\nOft ist die genaue Schreibweise eines Wortes nicht bekannt. Dann kann die Phonetische Suche weiterhelfen. Mit dieser Option werden auch ähnlich klingende Begriffe zu einem Suchwort gefunden.\n\n[i]Beispiele:[/i]\n[font=monospace]team[/font] => Findet Inhalte mit "Team", "Tim", "Teen", etc.', 0, 1, 1, 1, 0);
 
 
 DROP TABLE IF EXISTS `{..pref..}b8_wordlist`;
@@ -280,7 +280,7 @@ INSERT INTO `{..pref..}b8_wordlist` (`token`, `count_ham`, `count_spam`) VALUES
 
 DROP TABLE IF EXISTS `{..pref..}cimg`;
 CREATE TABLE IF NOT EXISTS `{..pref..}cimg` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) NOT NULL,
   `name` varchar(255) NOT NULL,
   `type` varchar(4) NOT NULL,
   `hasthumb` tinyint(1) NOT NULL,
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}cimg` (
 
 DROP TABLE IF EXISTS `{..pref..}cimg_cats`;
 CREATE TABLE IF NOT EXISTS `{..pref..}cimg_cats` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) NOT NULL,
   `name` varchar(25) NOT NULL,
   `description` varchar(100) NOT NULL
 ) DEFAULT CHARSET=utf8;
@@ -298,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}cimg_cats` (
 
 DROP TABLE IF EXISTS `{..pref..}comments`;
 CREATE TABLE IF NOT EXISTS `{..pref..}comments` (
-  `comment_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `comment_id` mediumint(8) NOT NULL,
   `content_id` mediumint(8) NOT NULL,
   `content_type` varchar(32) NOT NULL,
   `comment_poster` varchar(32) DEFAULT NULL,
@@ -317,8 +317,7 @@ DROP TABLE IF EXISTS `{..pref..}config`;
 CREATE TABLE IF NOT EXISTS `{..pref..}config` (
   `config_name` varchar(30) NOT NULL,
   `config_data` text NOT NULL,
-  `config_loadhook` varchar(255) NOT NULL DEFAULT 'none',
-  UNIQUE KEY `config_name` (`config_name`)
+  `config_loadhook` varchar(255) NOT NULL DEFAULT 'none'
 ) DEFAULT CHARSET=utf8;
 
 
@@ -357,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}counter_stat` (
 
 DROP TABLE IF EXISTS `{..pref..}dl`;
 CREATE TABLE IF NOT EXISTS `{..pref..}dl` (
-  `dl_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `dl_id` mediumint(8) NOT NULL,
   `cat_id` mediumint(8) DEFAULT NULL,
   `user_id` mediumint(8) DEFAULT NULL,
   `dl_date` int(11) DEFAULT NULL,
@@ -372,18 +371,18 @@ CREATE TABLE IF NOT EXISTS `{..pref..}dl` (
 
 DROP TABLE IF EXISTS `{..pref..}dl_cat`;
 CREATE TABLE IF NOT EXISTS `{..pref..}dl_cat` (
-  `cat_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `cat_id` mediumint(8) NOT NULL,
   `subcat_id` mediumint(8) NOT NULL DEFAULT '0',
   `cat_name` varchar(100) DEFAULT NULL
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}dl_cat` (`subcat_id`, `cat_name`) VALUES
-(0, 'Downloads');
+INSERT INTO `{..pref..}dl_cat` (`cat_id`, `subcat_id`, `cat_name`) VALUES
+(1, 0, 'Downloads');
 
 
 DROP TABLE IF EXISTS `{..pref..}dl_files`;
 CREATE TABLE IF NOT EXISTS `{..pref..}dl_files` (
   `dl_id` mediumint(8) DEFAULT NULL,
-  `file_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `file_id` mediumint(8) NOT NULL,
   `file_count` mediumint(8) NOT NULL DEFAULT '0',
   `file_name` varchar(100) DEFAULT NULL,
   `file_url` varchar(255) DEFAULT NULL,
@@ -459,7 +458,7 @@ INSERT INTO `{..pref..}email` (`id`, `signup`, `change_password`, `delete_accoun
 
 DROP TABLE IF EXISTS `{..pref..}ftp`;
 CREATE TABLE IF NOT EXISTS `{..pref..}ftp` (
-  `ftp_id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `ftp_id` mediumint(9) NOT NULL,
   `ftp_title` varchar(100) NOT NULL,
   `ftp_type` varchar(10) NOT NULL,
   `ftp_url` varchar(255) NOT NULL,
@@ -472,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}ftp` (
 
 DROP TABLE IF EXISTS `{..pref..}hashes`;
 CREATE TABLE IF NOT EXISTS `{..pref..}hashes` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) NOT NULL,
   `hash` varchar(40) CHARACTER SET utf8 NOT NULL,
   `type` varchar(20) CHARACTER SET utf8 NOT NULL,
   `typeId` mediumint(8) NOT NULL,
@@ -482,19 +481,19 @@ CREATE TABLE IF NOT EXISTS `{..pref..}hashes` (
 
 DROP TABLE IF EXISTS `{..pref..}news_cat`;
 CREATE TABLE IF NOT EXISTS `{..pref..}news_cat` (
-  `cat_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `cat_id` smallint(6) NOT NULL,
   `cat_name` varchar(100) DEFAULT NULL,
   `cat_description` text NOT NULL,
   `cat_date` int(11) NOT NULL,
   `cat_user` mediumint(8) NOT NULL DEFAULT '1'
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}news_cat` (`cat_id`, `cat_name`, `cat_description`, `cat_date`, `cat_user`) VALUES
 (1, 'News', '', UNIX_TIMESTAMP(), 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}news`;
 CREATE TABLE IF NOT EXISTS `{..pref..}news` (
-  `news_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `news_id` mediumint(8) NOT NULL,
   `cat_id` smallint(6) DEFAULT NULL,
   `user_id` mediumint(8) DEFAULT NULL,
   `news_date` int(11) DEFAULT NULL,
@@ -504,27 +503,27 @@ CREATE TABLE IF NOT EXISTS `{..pref..}news` (
   `news_comments_allowed` tinyint(1) NOT NULL DEFAULT '1',
   `news_search_update` int(11) NOT NULL DEFAULT '0'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}news` (`cat_id`, `user_id`, `news_date`, `news_title`, `news_text`, `news_active`, `news_comments_allowed`, `news_search_update`) VALUES
-(1, 1, UNIX_TIMESTAMP(), 'Frogsystem 2.alix7 - Installation erfolgreich', 'Herzlich Willkommen in deinem frisch installierten Frogsystem 2!\nDas Frogsystem 2-Team wünscht viel Spaß und Erfolg mit der Seite.\n\nWeitere Informationen und Hilfe bei Problemen gibt es über die Frogsystem 2-Homepage, das GitHub-Projekt und im Wiki. Die wichtigsten Links haben wir unten zusammengefasst. Einfach mal vorbei schauen!\n\nDein Frogsystem 2-Team', 1, 1, 0);
+INSERT INTO `{..pref..}news` (`news_id`, `cat_id`, `user_id`, `news_date`, `news_title`, `news_text`, `news_active`, `news_comments_allowed`, `news_search_update`) VALUES
+(1, 1, 1, UNIX_TIMESTAMP(), 'Frogsystem 2.alix7 - Installation erfolgreich', 'Herzlich Willkommen in deinem frisch installierten Frogsystem 2!\nDas Frogsystem 2-Team wünscht viel Spaß und Erfolg mit der Seite.\n\nWeitere Informationen und Hilfe bei Problemen gibt es über die Frogsystem 2-Homepage, das GitHub-Projekt und im Wiki. Die wichtigsten Links haben wir unten zusammengefasst. Einfach mal vorbei schauen!\n\nDein Frogsystem 2-Team', 1, 1, 0);
 
 
 DROP TABLE IF EXISTS `{..pref..}news_links`;
 CREATE TABLE IF NOT EXISTS `{..pref..}news_links` (
   `news_id` mediumint(8) DEFAULT NULL,
-  `link_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `link_id` mediumint(8) NOT NULL,
   `link_name` varchar(100) DEFAULT NULL,
   `link_url` varchar(255) DEFAULT NULL,
   `link_target` tinyint(4) DEFAULT NULL
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}news_links` (`news_id`, `link_name`, `link_url`, `link_target`) VALUES
-(1, 'Offizielle Frogsystem 2 Homepage', 'http://www.frogsystem.de', 1),
-(1, 'GitHub Projekt', 'https://github.com/mrgrain/Frogsystem-2', 1),
-(1, 'Frogsystem 2 Wiki', 'https://github.com/mrgrain/Frogsystem-2/wiki', 1);
+INSERT INTO `{..pref..}news_links` (`news_id`, `link_id`, `link_name`, `link_url`, `link_target`) VALUES
+(1, 1, 'Offizielle Frogsystem 2 Homepage', 'http://www.frogsystem.de', 1),
+(1, 2, 'GitHub Projekt', 'https://github.com/mrgrain/Frogsystem-2', 1),
+(1, 3, 'Frogsystem 2 Wiki', 'https://github.com/mrgrain/Frogsystem-2/wiki', 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}partner`;
 CREATE TABLE IF NOT EXISTS `{..pref..}partner` (
-  `partner_id` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `partner_id` smallint(3) unsigned NOT NULL,
   `partner_name` varchar(150) NOT NULL,
   `partner_link` varchar(250) NOT NULL,
   `partner_beschreibung` text NOT NULL,
@@ -534,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}partner` (
 
 DROP TABLE IF EXISTS `{..pref..}player`;
 CREATE TABLE IF NOT EXISTS `{..pref..}player` (
-  `video_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `video_id` mediumint(8) NOT NULL,
   `video_type` tinyint(1) NOT NULL DEFAULT '1',
   `video_x` text NOT NULL,
   `video_title` varchar(100) NOT NULL,
@@ -546,7 +545,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}player` (
 
 DROP TABLE IF EXISTS `{..pref..}poll`;
 CREATE TABLE IF NOT EXISTS `{..pref..}poll` (
-  `poll_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `poll_id` mediumint(8) NOT NULL,
   `poll_quest` varchar(255) DEFAULT NULL,
   `poll_start` int(11) DEFAULT NULL,
   `poll_end` int(11) DEFAULT NULL,
@@ -557,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}poll` (
 DROP TABLE IF EXISTS `{..pref..}poll_answers`;
 CREATE TABLE IF NOT EXISTS `{..pref..}poll_answers` (
   `poll_id` mediumint(8) DEFAULT NULL,
-  `answer_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `answer_id` mediumint(8) NOT NULL,
   `answer` varchar(255) DEFAULT NULL,
   `answer_count` mediumint(8) NOT NULL DEFAULT '0'
 ) DEFAULT CHARSET=utf8;
@@ -565,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}poll_answers` (
 
 DROP TABLE IF EXISTS `{..pref..}poll_voters`;
 CREATE TABLE IF NOT EXISTS `{..pref..}poll_voters` (
-  `voter_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `voter_id` mediumint(8) NOT NULL,
   `poll_id` mediumint(8) NOT NULL DEFAULT '0',
   `ip_address` varchar(15) NOT NULL DEFAULT '0.0.0.0',
   `time` int(32) NOT NULL DEFAULT '0'
@@ -574,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}poll_voters` (
 
 DROP TABLE IF EXISTS `{..pref..}press`;
 CREATE TABLE IF NOT EXISTS `{..pref..}press` (
-  `press_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `press_id` smallint(6) NOT NULL,
   `press_title` varchar(255) NOT NULL,
   `press_url` varchar(255) NOT NULL,
   `press_date` int(12) NOT NULL,
@@ -589,10 +588,10 @@ CREATE TABLE IF NOT EXISTS `{..pref..}press` (
 
 DROP TABLE IF EXISTS `{..pref..}press_admin`;
 CREATE TABLE IF NOT EXISTS `{..pref..}press_admin` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}press_admin` (`id`, `type`, `title`) VALUES
 (1, 1, 'Beispiel-Spiel'),
 (2, 2, 'Preview'),
@@ -604,7 +603,7 @@ INSERT INTO `{..pref..}press_admin` (`id`, `type`, `title`) VALUES
 
 DROP TABLE IF EXISTS `{..pref..}screen`;
 CREATE TABLE IF NOT EXISTS `{..pref..}screen` (
-  `screen_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `screen_id` mediumint(8) NOT NULL,
   `cat_id` smallint(6) unsigned DEFAULT NULL,
   `screen_name` varchar(255) DEFAULT NULL
 ) DEFAULT CHARSET=utf8;
@@ -612,21 +611,21 @@ CREATE TABLE IF NOT EXISTS `{..pref..}screen` (
 
 DROP TABLE IF EXISTS `{..pref..}screen_cat`;
 CREATE TABLE IF NOT EXISTS `{..pref..}screen_cat` (
-  `cat_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `cat_id` smallint(6) NOT NULL,
   `cat_name` varchar(255) DEFAULT NULL,
   `cat_type` tinyint(1) NOT NULL DEFAULT '0',
   `cat_visibility` tinyint(1) NOT NULL DEFAULT '1',
   `cat_date` int(11) NOT NULL DEFAULT '0',
   `randompic` tinyint(1) NOT NULL DEFAULT '0'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}screen_cat` (`cat_name`, `cat_type`, `cat_visibility`, `cat_date`, `randompic`) VALUES
-('Screenshots', 1, 1, UNIX_TIMESTAMP(), 1),
-('Wallpaper', 2, 1, UNIX_TIMESTAMP(), 0);
+INSERT INTO `{..pref..}screen_cat` (`cat_id`, `cat_name`, `cat_type`, `cat_visibility`, `cat_date`, `randompic`) VALUES
+(1, 'Screenshots', 1, 1, UNIX_TIMESTAMP(), 1),
+(2, 'Wallpaper', 2, 1, UNIX_TIMESTAMP(), 0);
 
 
 DROP TABLE IF EXISTS `{..pref..}screen_random`;
 CREATE TABLE IF NOT EXISTS `{..pref..}screen_random` (
-  `random_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `random_id` mediumint(8) NOT NULL,
   `screen_id` mediumint(8) NOT NULL,
   `start` int(11) NOT NULL,
   `end` int(11) NOT NULL
@@ -635,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}screen_random` (
 
 DROP TABLE IF EXISTS `{..pref..}search_index`;
 CREATE TABLE IF NOT EXISTS `{..pref..}search_index` (
-  `search_index_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `search_index_id` mediumint(8) NOT NULL,
   `search_index_word_id` mediumint(8) NOT NULL DEFAULT '0',
   `search_index_type` enum('news','articles','dl') NOT NULL DEFAULT 'news',
   `search_index_document_id` mediumint(8) NOT NULL DEFAULT '0',
@@ -645,7 +644,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}search_index` (
 
 DROP TABLE IF EXISTS `{..pref..}search_time`;
 CREATE TABLE IF NOT EXISTS `{..pref..}search_time` (
-  `search_time_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `search_time_id` mediumint(8) NOT NULL,
   `search_time_type` enum('news','articles','dl') NOT NULL DEFAULT 'news',
   `search_time_document_id` mediumint(8) NOT NULL,
   `search_time_date` int(11) NOT NULL DEFAULT '0'
@@ -654,14 +653,14 @@ CREATE TABLE IF NOT EXISTS `{..pref..}search_time` (
 
 DROP TABLE IF EXISTS `{..pref..}search_words`;
 CREATE TABLE IF NOT EXISTS `{..pref..}search_words` (
-  `search_word_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `search_word_id` mediumint(8) NOT NULL,
   `search_word` varchar(32) NOT NULL DEFAULT ''
 ) DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `{..pref..}shop`;
 CREATE TABLE IF NOT EXISTS `{..pref..}shop` (
-  `artikel_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `artikel_id` mediumint(8) NOT NULL,
   `artikel_name` varchar(100) DEFAULT NULL,
   `artikel_url` varchar(255) DEFAULT NULL,
   `artikel_text` text,
@@ -672,10 +671,10 @@ CREATE TABLE IF NOT EXISTS `{..pref..}shop` (
 
 DROP TABLE IF EXISTS `{..pref..}smilies`;
 CREATE TABLE IF NOT EXISTS `{..pref..}smilies` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) NOT NULL,
   `replace_string` varchar(15) NOT NULL,
   `order` mediumint(8) NOT NULL
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=11;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}smilies` (`id`, `replace_string`, `order`) VALUES
 (1, ':-)', 1),
 (2, ':-(', 2),
@@ -691,28 +690,28 @@ INSERT INTO `{..pref..}smilies` (`id`, `replace_string`, `order`) VALUES
 
 DROP TABLE IF EXISTS `{..pref..}snippets`;
 CREATE TABLE IF NOT EXISTS `{..pref..}snippets` (
-  `snippet_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `snippet_id` mediumint(8) NOT NULL,
   `snippet_tag` varchar(100) NOT NULL,
   `snippet_text` text NOT NULL,
   `snippet_active` tinyint(1) NOT NULL DEFAULT '1'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}snippets` (`snippet_tag`, `snippet_text`, `snippet_active`) VALUES
-('[%feeds%]', '<p>\n  <b>News-Feeds:</b>\n</p>\n<p align="center">\n  <a href="$URL(feed[xml=rss091 true])" target="_self"><img src="$VAR(style_icons)feeds/rss091.gif" alt="RSS 0.91" title="RSS 0.91" border="0"></a><br>\n  <a href="$URL(feed[xml=rss10 true])" target="_self"><img src="$VAR(style_icons)feeds/rss10.gif" alt="RSS 1.0" title="RSS 1.0" border="0"></a><br>\n  <a href="$URL(feed[xml=rss20 true])" target="_self"><img src="$VAR(style_icons)feeds/rss20.gif" alt="RSS 2.0" title="RSS 2.0" border="0"></a><br>\n  <a href="$URL(feed[xml=atom10 true])" target="_self"><img src="$VAR(style_icons)feeds/atom10.gif" alt="Atom 1.0" title="Atom 1.0" border="0"></a>\n</p>', 1);
+INSERT INTO `{..pref..}snippets` (`snippet_id`, `snippet_tag`, `snippet_text`, `snippet_active`) VALUES
+(1, '[%feeds%]', '<p>\n  <b>News-Feeds:</b>\n</p>\n<p align="center">\n  <a href="$URL(feed[xml=rss091 true])" target="_self"><img src="$VAR(style_icons)feeds/rss091.gif" alt="RSS 0.91" title="RSS 0.91" border="0"></a><br>\n  <a href="$URL(feed[xml=rss10 true])" target="_self"><img src="$VAR(style_icons)feeds/rss10.gif" alt="RSS 1.0" title="RSS 1.0" border="0"></a><br>\n  <a href="$URL(feed[xml=rss20 true])" target="_self"><img src="$VAR(style_icons)feeds/rss20.gif" alt="RSS 2.0" title="RSS 2.0" border="0"></a><br>\n  <a href="$URL(feed[xml=atom10 true])" target="_self"><img src="$VAR(style_icons)feeds/atom10.gif" alt="Atom 1.0" title="Atom 1.0" border="0"></a>\n</p>', 1);
 
 
 DROP TABLE IF EXISTS `{..pref..}styles`;
 CREATE TABLE IF NOT EXISTS `{..pref..}styles` (
-  `style_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `style_id` mediumint(8) NOT NULL,
   `style_tag` varchar(30) NOT NULL,
   `style_allow_use` tinyint(1) NOT NULL DEFAULT '1',
   `style_allow_edit` tinyint(1) NOT NULL DEFAULT '1'
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `{..pref..}styles` (`style_tag`, `style_allow_use`, `style_allow_edit`) VALUES
-('lightfrog', 1, 1);
+INSERT INTO `{..pref..}styles` (`style_id`, `style_tag`, `style_allow_use`, `style_allow_edit`) VALUES
+(1, 'lightfrog', 1, 1);
 
 DROP TABLE IF EXISTS `{..pref..}user`;
 CREATE TABLE IF NOT EXISTS `{..pref..}user` (
-  `user_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) NOT NULL,
   `user_name` char(100) DEFAULT NULL,
   `user_password` char(32) DEFAULT NULL,
   `user_salt` varchar(10) NOT NULL,
@@ -740,7 +739,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}useronline` (
 
 DROP TABLE IF EXISTS `{..pref..}user_groups`;
 CREATE TABLE IF NOT EXISTS `{..pref..}user_groups` (
-  `user_group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `user_group_id` mediumint(8) NOT NULL,
   `user_group_name` varchar(50) NOT NULL,
   `user_group_description` text,
   `user_group_title` varchar(50) DEFAULT NULL,
@@ -748,7 +747,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}user_groups` (
   `user_group_highlight` tinyint(1) NOT NULL DEFAULT '0',
   `user_group_date` int(11) NOT NULL,
   `user_group_user` mediumint(8) NOT NULL DEFAULT '1'
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) DEFAULT CHARSET=utf8;
 INSERT INTO `{..pref..}user_groups` (`user_group_id`, `user_group_name`, `user_group_description`, `user_group_title`, `user_group_color`, `user_group_highlight`, `user_group_date`, `user_group_user`) VALUES
 (1, 'Administrator', '', 'Administrator', '008800', 1, UNIX_TIMESTAMP(), 1);
 
@@ -763,7 +762,7 @@ CREATE TABLE IF NOT EXISTS `{..pref..}user_permissions` (
 
 DROP TABLE IF EXISTS `{..pref..}wallpaper`;
 CREATE TABLE IF NOT EXISTS `{..pref..}wallpaper` (
-  `wallpaper_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `wallpaper_id` mediumint(8) NOT NULL,
   `wallpaper_name` varchar(255) NOT NULL,
   `wallpaper_title` varchar(255) NOT NULL,
   `cat_id` mediumint(8) NOT NULL DEFAULT '0'
@@ -772,8 +771,8 @@ CREATE TABLE IF NOT EXISTS `{..pref..}wallpaper` (
 
 DROP TABLE IF EXISTS `{..pref..}wallpaper_sizes`;
 CREATE TABLE IF NOT EXISTS `{..pref..}wallpaper_sizes` (
-  `size_id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `wallpaper_id` mediumint(8) NOT NULL DEFAULT '0'
+  `size_id` mediumint(8) NOT NULL,
+  `wallpaper_id` mediumint(8) NOT NULL DEFAULT '0',
   `size` varchar(255) NOT NULL
 ) DEFAULT CHARSET=utf8;
 
@@ -919,6 +918,115 @@ ALTER TABLE `{..pref..}wallpaper`
 
 ALTER TABLE `{..pref..}wallpaper_sizes`
  ADD PRIMARY KEY (`size_id`);
+
+
+ALTER TABLE `{..pref..}aliases`
+MODIFY `alias_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}applets`
+MODIFY `applet_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}articles`
+MODIFY `article_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}articles_cat`
+MODIFY `cat_id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}cimg`
+MODIFY `id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}cimg_cats`
+MODIFY `id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}comments`
+MODIFY `comment_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}dl`
+MODIFY `dl_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}dl_cat`
+MODIFY `cat_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}dl_files`
+MODIFY `file_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}ftp`
+MODIFY `ftp_id` mediumint(9) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}hashes`
+MODIFY `id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}news`
+MODIFY `news_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}news_cat`
+MODIFY `cat_id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}news_links`
+MODIFY `link_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}partner`
+MODIFY `partner_id` smallint(3) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}player`
+MODIFY `video_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}poll`
+MODIFY `poll_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}poll_answers`
+MODIFY `answer_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}poll_voters`
+MODIFY `voter_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}press`
+MODIFY `press_id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}press_admin`
+MODIFY `id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}screen`
+MODIFY `screen_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}screen_cat`
+MODIFY `cat_id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}screen_random`
+MODIFY `random_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}search_index`
+MODIFY `search_index_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}search_time`
+MODIFY `search_time_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}search_words`
+MODIFY `search_word_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}shop`
+MODIFY `artikel_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}smilies`
+MODIFY `id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}snippets`
+MODIFY `snippet_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}styles`
+MODIFY `style_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}user`
+MODIFY `user_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}user_groups`
+MODIFY `user_group_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}wallpaper`
+MODIFY `wallpaper_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `{..pref..}wallpaper_sizes`
+MODIFY `size_id` mediumint(8) NOT NULL AUTO_INCREMENT;
 
 
 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT;
