@@ -1,7 +1,35 @@
 -----------------------------------------------------------
 Change Log
 -----------------------------------------------------------
-Die Version 2.alix6b beinhaltet folgende Änderungen zur vorherigen Version:
+Die Version 2.alix7 beinhaltet folgende Änderungen zur vorherigen Version:
+
+Features:
+    * Das Frogsystem 2 ist jetzt Multiclient fähig, d.h. eine Quellinstallation kann für mehrere Satelliten-Seiten genutzt werden
+    * Styleauswahl erlaubt den Besuchern den Webseiten-Style selbst zu wählen
+    * Benutzeroberfläche für das Social Meta Tags Plugin
+    * Neue Version für den HTML-Editor (Codemirror 4)
+    * Der HTML-Editor verfügt jetzt über einen Vollbild-Modus, Undo-/Redo-Buttons, zuschaltbare automatische Zeilenumbrüche und über eine verbesserte Darstellung des Original-Templates
+    * Feeds, Bildbetrachter, Captcha und Videoplayer sind unter neuen URLs erreichbar
+    * Styles können ab sofort CSS- und JS-Dateien enthalten, die nicht über die Weboberfläche bearbeitbar sind (gedacht für Bibliotheken)
+    * jQuery ist nicht mehr Bestandteil des Cores und muss ab sofort vom jeweiligen Style mitgeliefert werden
+    * Neues Config-System erlaubt unterschiedliche Konfigurationen für verschiedene Umgebungen (dev, stage, production, etc.)
+    * Alle vom Benutzer veränderbaren (Medien-)Dateien liegen jetzt im Ordner 'media'
+    * Keine Unterstützung mehr für PHP < 5.3.0
+
+Sicherheit:
+    * Config-Dateien (mit sensiblen Zugangsdaten) können jetzt an einem sicheren Ort auf dem Webserver gespeichert werden
+
+Bug-Fixes:
+    * Einige Sprachtexte wurden ergänzt und korrigiert
+    * jQuery aktualisiert 
+
+
+-----------------------------------------------------------
+Änderungen der Vorgänger-Versionen:
+-----------------------------------------------------------
+
+2.alix6b:
+
 	* Improved Social Meta Tags Applet
 	* Fixed Bug with SEO URL redirects (possible infinite loop)
 	* New namespace compatible autoloader
@@ -12,9 +40,6 @@ Die Version 2.alix6b beinhaltet folgende Änderungen zur vorherigen Version:
 	* Fix for Hash URLs
 	* Some fixes for the request new password feature
 
-
------------------------------------------------------------
-Änderungen der Vorgänger-Versionen:
 -----------------------------------------------------------
 
 2.alix6:
@@ -69,6 +94,7 @@ Sicherheit:
     * neuer Datenbank-Treiber
     * viele, viele Sicherheitslöcher gestopft
 
+-----------------------------------------------------------
 
 2.alix5c:
 

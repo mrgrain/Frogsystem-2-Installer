@@ -1,5 +1,5 @@
 
------ Frogsystem 2.alix6b! -----------------------------------------------------------------
+----- Frogsystem 2.alix7! ------------------------------------------------------------------
 ----- Template-Operationen manuell ausführen -----------------------------------------------
 
 Bei einem Update von einer älteren Version bitte die einzelnen Updates hintereinander
@@ -10,6 +10,25 @@ ausführen, wenn keine speziellen Anweisungen existieren.
 Bei einer Neuinstallation sind keine manuellen Änderungen der Templates nötig.
 
 
+----- Update von 2.alix6b auf 2.alix7 ------------------------------------------------------
+
+   1) Änderungen durchführen
+   
+      => Neue Datei "0_style_select.tpl" erstellen. Der Inhalt steht
+         in der Datei "./copy/templates/style_select.tpl".
+   
+   2)  Hinweise beachten
+
+      => Neue Feed-URLs
+         Feeds sind ab sofort unter eine anderen URL erreichbar. Bitte ersetzt die bisherigen
+         URLs durch die entsprechende Template-Funktion: $URL(feed[xml=rss20 true])
+
+      => jQuery nicht mehr verfügbar
+         jQuery ist ab dieser Version nicht mehr standardmäßig für jeden Style verfügbar. 
+         Bitte stelle sicher, dass dein Style jQuery selbst mitliefert (falls benötigt).
+         Aus dem Template 0_main.tpl > MATRIX muss der Tag {..jquery..} gelöscht werden
+         
+         
 ----- Update von 2.alix6 auf 2.alix6b ------------------------------------------------------
 
    1)  Hinweise beachten

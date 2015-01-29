@@ -17,13 +17,24 @@ start_installation: Hurra, lass uns loslegen!
 
 
 changelog_text:<b>Neue Features:</b>
-#/ - ...
+#/ - Das Frogsystem 2 ist jetzt Multiclient fähig, d.h. eine Quellinstallation kann für mehrere Satelliten-Seiten genutzt werden
+#/ - Styleauswahl erlaubt den Besuchern den Webseiten-Style selbst zu wählen
+#/ - Benutzeroberfläche für das Social Meta Tags Plugin
+#/ - Neue Version für den HTML-Editor (Codemirror 4)
+#/ - Der HTML-Editor verfügt jetzt über einen Vollbild-Modus, Undo-/Redo-Buttons, zuschaltbare automatische Zeilenumbrüche und über eine verbesserte Darstellung des Original-Templates
+#/ - Feeds, Bildbetrachter, Captcha und Videoplayer sind unter neuen URLs erreichbar
+#/ - Styles können ab sofort CSS- und JS-Dateien enthalten, die nicht über die Weboberfläche bearbeitbar sind (gedacht für Bibliotheken)
+#/ - jQuery ist nicht mehr Bestandteil des Cores und muss ab sofort vom jeweiligen Style mitgeliefert werden
+#/ - Neues Config-System erlaubt unterschiedliche Konfigurationen für verschiedene Umgebungen (dev, stage, production, etc.)
+#/ - Alle vom Benutzer veränderbaren (Medien-)Dateien liegen jetzt im Ordner 'media'
+#/ - Keine Unterstützung mehr für PHP < 5.3.0
 #/
 #/<b>Sicherheits-Verbesserungen:</b>
-#/ - ...
+#/ - Config-Dateien (mit sensiblen Zugangsdaten) können jetzt an einem sicheren Ort auf dem Webserver gespeichert werden
 #/
 #/<b>Bug-Fixes:</b>
-#/ - ...
+#/ - Einige Sprachtexte wurden ergänzt und korrigiert
+#/ - jQuery aktualisiert 
 
 
 notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/fs2installer</b> von deinem Webspace zu löschen.

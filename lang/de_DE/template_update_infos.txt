@@ -1,6 +1,8 @@
 #2.alix7
-new_feed_urls: Feeds sind ab sofort unter eine anderen URL erreichbar. Bitte ersetzt die bisherigen URLs durch die entsprechende Template-Funktion: $URL(feed[xml=rss20 true])
-jquery_with_style: jQuery ist ab dieser Version nicht mehr standardmäßig für jeden Style verfügbar. Bitte stelle sicher, dass dein Style jQuery selbst mitliefert (falls benötigt).
+new_feed_urls_title: Neue Feed-URLs
+new_feed_urls_text: Feeds sind ab sofort unter eine anderen URL erreichbar. Bitte ersetzt die bisherigen URLs durch die entsprechende Template-Funktion: $URL(feed[xml=rss20 true])
+jquery_with_style_title: jQuery nicht mehr verfügbar
+jquery_with_style_text: jQuery ist ab dieser Version nicht mehr standardmäßig für jeden Style verfügbar. Bitte stelle sicher, dass dein Style jQuery selbst mitliefert (falls benötigt).
 
 # 2.alix6b
 user_reset_password_form: Im mitgelieferte Template der vorherigen Version wurde das <b>form</b>-Tag nicht wieder geschlossen. Bitte überprüfe die Templates und korrigiere den Fehler, falls vorhanden.

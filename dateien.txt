@@ -1,5 +1,5 @@
 
------ Frogsystem 2.alix6b! ------------------------------------------------------------------
+----- Frogsystem 2.alix7! ------------------------------------------------------------------
 ----- Datei-Operationen manuell ausführen --------------------------------------------------
 
 Bei einem Update von einer älteren Version bitte die einzelnen Updates hintereinander
@@ -21,36 +21,79 @@ ausführen, wenn keine speziellen Anweisungen existieren.
       => Der Webserver benötigt Schreib-Zugriff für folgende Dateien und Ordner:
 
             /styles (sowie alle Unterordner und Dateien)
-            /upload
-            /media/content
-            /media/group-images
-            /media/user-images
-            /images/cat
-            /images/downloads
-            /images/partner
-            /images/press
-            /images/screenshots
-            /images/shop
-            /images/smilies
-            /images/wallpaper
-
+            /media  (sowie alle Unterordner und Dateien)
+            /upload 
+            
       !! Weiterführende Informationen gibt es im Frogsystem 2-Wiki unter:
-         http://wiki.frogsystem.de/filesystem-permissions
+         https://github.com/mrgrain/Frogsystem-2/wiki/filesystem-permissions
 
 
    3) Datenbank-Verbindung einrichten
 
-      => In der Datei /fs2installer/copy/db_connection.php die Verbindungsdaten zur
-         Datenbank eingegeben.
-
-      => Kopiere diese Datei den Ordner /config im Zielverzeichnis. Die vorhandene Datei
-         muss überschrieben werden.
+      => Die Datei /config/env-example.cfg.php aus dem Zielverzeichnis umbennen in
+         "env.cfg.php" und die Verbindungsdaten zur Datenbank eingegeben.
 
       !! Diese Datei sollte vor unbefugten Zugriffen geschützt werden und nicht von anderen
          Benutzern außer dem Webserver und dir selbst lesbar sein. Siehe dazu ebenfalls:
-         http://wiki.frogsystem.de/filesystem-permissions
+         https://github.com/mrgrain/Frogsystem-2/wiki/filesystem-permissions
 
 
+----- Update von 2.alix6(b) auf 2.alix7 ----------------------------------------------------
+
+   1) Veraltete Dateien löschen
+
+      => Diese Ordner (inkl. Dateien) aus dem Zielverzeichnis der Installation sind veraltet
+         und sollten vorher gelöscht werden:
+            
+            /admin/
+            /classes/
+            /feeds/
+            /includes/
+            /libs/
+            /resources/
+            /styles/default/
+            /imageviewer.php
+            /login.inc.php
+            /config/db_connection.php
+            
+   2) Neue/Geänderte Dateien kopieren
+
+      => Folgende Dateien aus dem Ordner /fs2installer/copy/source in das Zielverzeichnis der
+         Installation kopieren:
+         
+            /admin/
+            /libs/
+            /applets/
+            /assets/
+            /config/
+            /data/
+            /lang/
+            /media/stopwords/
+            /index.php
+
+   3) Dateien verschieben
+
+      => Diese Ordner (inkl. Dateien) im Zielverzeichnis müssen an einen anderen Ort verschoben
+         bzw. umbenannt werden. ("images" sollte danach leer sein und kann gelöscht werden)
+
+            /images/cat/            =>   /media/cat/
+            /images/downloads/      =>   /media/downloads/
+            /images/partner/        =>   /media/partner/
+            /images/press/          =>   /media/press/
+            /images/screenshots/    =>   /media/gallery/
+            /images/shop/           =>   /media/shop
+            /images/smilies/        =>   /media/smilies
+            /images/wallpaper/      =>   /media/wallpaper
+
+   4) Zugriffsrechte festlegen
+
+      => Der Webserver benötigt Schreib-Zugriff für folgende Dateien und Ordner:
+
+            /styles (sowie alle Unterordner und Dateien)
+            /media  (sowie alle Unterordner und Dateien)
+            /upload
+            
+            
 ----- Update von 2.alix6 auf 2.alix6b ------------------------------------------------------
 
    1) Geänderte Dateien kopieren

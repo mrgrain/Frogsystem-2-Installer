@@ -1,21 +1,21 @@
 
------ Herzlich Willkommen zum Frogsystem 2.alix6b! -----------------------------------------
+----- Herzlich Willkommen zum Frogsystem 2.alix7! ------------------------------------------
 
-Das Frogsystem 2.alix6b ist ein kleines BugFix-Release für die vorherige Version.
-
+Das Frogsystem 2.alix7 macht das FS2 Multiclient fähig. Das Update enthält daher vor allem 
+größere Umstrukturierungen unter der Haube, aber auch einige kleinere neue Features.
 
 ----- Hinweise zu den Paketen --------------------------------------------------------------
 
-Das Frogsystem 2.alix6b wird als kombiniertes Installations- und Update-Paket veröffentlicht.
+Das Frogsystem 2.alix7 wird als kombiniertes Installations- und Update-Paket veröffentlicht.
 
 
 ----- Systemvorraussetzungen ---------------------------------------------------------------
 
-Um das Frogsystem 2.alix6b verwenden zu können, muss der Server bzw. Webspace folgende
+Um das Frogsystem 2.alix7 verwenden zu können, muss der Server bzw. Webspace folgende
 Voraussetzungen erfüllen:
 
-   => PHP 5.1.0 und höher
-   => MySQL Datenbank ab Version 4
+   => PHP 5.3.0 und höher
+   => MySQL Datenbank ab Version 5
 
 
 ----- Installations-Anweisungen ------------------------------------------------------------
@@ -66,7 +66,7 @@ Voraussetzungen erfüllen:
          manipulieren, zu zerstören oder eingebenen Zugangsdaten auszulesen.
 
 
------ Update von 2.alix6 -------------------------------------------------------------------
+----- Update von 2.alix6b und 2.alix6 ------------------------------------------------------
 
    1) Installations-Anweisungen ausführen
 
