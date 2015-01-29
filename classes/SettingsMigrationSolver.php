@@ -15,23 +15,13 @@ class SettingsMigrationSolver extends PairSolver {
 		'affiliatesConfig', 'articlesConfig', 'captchaConfig', 'downloadsConfig', 'galleryConfig', 
 		'groupsConfig', 'mainConfig', 'newsConfig', 'pollsConfig', 'pressConfig', 'previewImagesConfig', 
 		'searchConfig', 'usersConfig', 'videoPlayerConfig',
-        'systemConfig', 'envConfig', 'infoConfig', 'cronjobsConfig'
+        'systemConfig', 'envConfig', 'infoConfig', 'cronjobsConfig', 'socialMetaTagsConfig',
+        'version'
 	);
     
     public function __construct($sql) {
         $this->sql = $sql;
     }
-    
-	// solve only alix5
-    public function solve($version = false, $noop = false) {
-		switch ($version) {
-			case 'none':
-			case '2.alix5':
-				return parent::solve(true, false);
-			default:
-				return $this->solutionUpdateVersion();
-		}
-	}    
     
     /* Default tests & solutions */             
     public function getDefaultPairs() {
@@ -81,7 +71,6 @@ class SettingsMigrationSolver extends PairSolver {
     public function testVideoPlayerConfig() {
 		return $this->genericConfigTester('video_player');
     }
-    
     public function testSystemConfig() {
 		return $this->genericConfigTester('system');
     }
@@ -94,64 +83,40 @@ class SettingsMigrationSolver extends PairSolver {
     public function testCronjobsConfig() {
 		return $this->genericConfigTester('cronjobs');
     }
+    public function testSocialMetaTagsConfig() {
+		return $this->genericConfigTester('social_meta_tags');
+    }
+    
+    // test version
+    public function testVersion() {
+		return false; // always update to new version
+    }
     
     
     // solutions
-    public function solutionUpdateVersion() {
-        $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
-        $main = InstallerFunctions::json_array_decode($main);
-        $main['version'] = UPGRADE_TO;
-        $main = InstallerFunctions::json_array_encode($main);
-        return $this->sql->save('config', array('config_name' => 'main', 'config_data' => $main), 'config_name', false);
-    }
-    
     public function solutionAffiliatesConfig() {
-        $config = array();
-        if ($this->tableExists('partner_config')) {
-            $config = $this->sql->getById('partner_config', '*', 1);
-        }
-        return $this->genericFillConfig('affiliates', $config);
+        return $this->genericMigrateConfig('affiliates', 'none', array(), 'partner_config');
     }
-    
     public function solutionArticlesConfig() {
-        $config = array();
-        if ($this->tableExists('articles_config')) {
-            $config = $this->sql->getById('articles_config', '*', 1);
-        }
-        return $this->genericFillConfig('articles', $config);
+        return $this->genericMigrateConfig('articles', 'none', array(), 'articles_config');
     }
-    
     public function solutionCaptchaConfig() {
-        $config = array();
-        if ($this->tableExists('captcha_config')) {
-            $config = $this->sql->getById('captcha_config', '*', 1);
-        }
-        return $this->genericFillConfig('captcha', $config);
+        return $this->genericMigrateConfig('captcha', 'none', array(), 'captcha_config');
     }
     public function solutionDownloadsConfig() {
-        $config = array();
-        if ($this->tableExists('dl_config')) {
-            $config = $this->sql->getById('dl_config', '*', 1);
-        }
-        return $this->genericFillConfig('downloads', $config);        
+        return $this->genericMigrateConfig('downloads', 'none', array(), 'dl_config');        
     }
     public function solutionGalleryConfig() {
-        $config = array();
-        if ($this->tableExists('screen_config')) {
-            $config = $this->sql->getById('screen_config', '*', 1);
-        }
-        return $this->genericFillConfig('screens', $config); 
+        return $this->genericMigrateConfig('screens', 'none', array(), 'screen_config'); 
     }
     public function solutionGroupsConfig() {
-        $config = array();
-        if ($this->tableExists('user_config')) {
-            $config = $this->sql->getById('user_config', '*', 1);
-        }
-        return $this->genericFillConfig('groups', $config); 
+        return $this->genericMigrateConfig('groups', 'none', array(), 'user_config'); 
     }   
-    public function solutionMainConfig() {
+    public function solutionMainConfig() { //todo
         $config = array();
-        if ($this->tableExists('global_config')) { // alix5 and lower
+        
+        // alix5 and lowe
+        if ($this->tableExists('global_config')) {
             $config = $this->sql->getById('global_config', '*', 1);
             
             // url slash & leading http://
@@ -182,112 +147,134 @@ class SettingsMigrationSolver extends PairSolver {
             
             //update dyn title
             $config['dyn_title_ext'] = str_replace(array('{title}', '{ext}'), array('{..title..}', '{..ext..}'), $config['dyn_title_ext']);      
+        
+            // not possible in property
+            $server_timezone = @date_default_timezone_get();
+            if (false !== $server_timezone && (!isset($config['timezone']) || empty($config['timezone']))) {
+                $config['timezone'] = $server_timezone;
+            }
         }
         
-        // overwrite version
-        $config['version'] = UPGRADE_TO;
-        
-        // not possible in property
-        $server_timezone = @date_default_timezone_get();
-        if (false !== $server_timezone && (!isset($config['timezone']) || empty($config['timezone']))) {
-            $config['timezone'] = $server_timezone;
-        }
-        
-        return $this->genericFillConfig('main', $config, 'startup');         
+        return $this->genericMigrateConfig('main', 'startup', $config, false);         
     }
     public function solutionNewsConfig() {
-        $config = array();
-        if ($this->tableExists('news_config')) {
-            $config = $this->sql->getById('news_config', '*', 1);
-        }
-        return $this->genericFillConfig('news', $config);         
+        return $this->genericMigrateConfig('news', 'none', array(), 'news_config');         
     }
     public function solutionPollsConfig() {
-        $config = array();
-        if ($this->tableExists('poll_config')) {
-            $config = $this->sql->getById('poll_config', '*', 1);
-        }
-        return $this->genericFillConfig('polls', $config);          
+        return $this->genericMigrateConfig('polls', 'none', array(), 'poll_config');          
     }
     public function solutionPressConfig() {
-        $config = array();
-        if ($this->tableExists('press_config')) {
-            $config = $this->sql->getById('press_config', '*', 1);
-        }
-        return $this->genericFillConfig('press', $config);          
+        return $this->genericMigrateConfig('press', 'none', array(), 'press_config');          
     }
     public function solutionPreviewImagesConfig() {
         $config = array();
-        if ($this->tableExists('screen_random_config')) {
-            $config = $this->sql->getById('screen_random_config', '*', 1);
-        }
         if ($this->tableExists('global_config')) {
             $timed_deltime = $this->sql->getFieldById('global_config', 'random_timed_deltime', 1);
             if (!empty($timed_deltime))
                 $config['timed_deltime'] = $timed_deltime;
         }
-        return $this->genericFillConfig('preview_images', $config);              
+
+        return $this->genericMigrateConfig('preview_images', 'none', $config, 'screen_random_config');              
     }
     public function solutionSearchConfig() {
-        $config = array();
-        if ($this->tableExists('search_config')) {
-            $config = $this->sql->getById('search_config', '*', 1);
-        }
-        return $this->genericFillConfig('search', $config);              
+        return $this->genericMigrateConfig('search', 'none', array(), 'search_config');              
     }
     public function solutionUsersConfig() {
-        $config = array();
-        if ($this->tableExists('user_config')) {
-            $config = $this->sql->getById('user_config', '*', 1);
-        }
-        return $this->genericFillConfig('users', $config);          
+        return $this->genericMigrateConfig('users', 'none', array(), 'user_config');          
     }
     public function solutionVideoPlayerConfig() {
-        $config = array();
-        if ($this->tableExists('player_config')) {
-            $config = $this->sql->getById('player_config', '*', 1);
-            
-            // prepend colors with #
+        // prepend colors with #
+        $converter = function(&$value, $key) {
             $colors = array('cfg_buffercolor','cfg_bufferbgcolor','cfg_titlecolor','cfg_playercolor','cfg_loadingcolor','cfg_bgcolor','cfg_bgcolor1','cfg_bgcolor2','cfg_buttoncolor','cfg_buttonovercolor','cfg_slidercolor1','cfg_slidercolor2','cfg_sliderovercolor','cfg_videobgcolor','cfg_iconplaycolor','cfg_iconplaybgcolor');
-            foreach($config as $key => $value) {
-                if (in_array($key, $colors)) {
-                    $config[$key] = '#'.$value;
-                }
+            
+            if (in_array($key, $colors)) {
+                $value = '#'.$value;
             }
-        }
-        return $this->genericFillConfig('video_player', $config);          
+        };
+        
+        return $this->genericMigrateConfig('video_player', 'none', array(), 'player_config', $converter);          
     }
     
     public function solutionSystemConfig() {
-        return $this->genericFillConfig('system', array(), 'startup');
+        return $this->genericMigrateConfig('system', 'startup');
     }
     public function solutionEnvConfig() {
-        return $this->genericFillConfig('env', array(), 'startup');
+        return $this->genericMigrateConfig('env', '');
     }
     public function solutionInfoConfig() {
-        return $this->genericFillConfig('info', array(), 'startup');
+        return $this->genericMigrateConfig('info', 'startup');
     }
     public function solutionCronjobsConfig() {
-        return $this->genericFillConfig('cronjobs', array(), 'startup');
+        return $this->genericMigrateConfig('cronjobs', 'startup');
     }
+    public function solutionSocialMetaTagsConfig() {
+        return $this->genericMigrateConfig('social_meta_tags');
+    }
+    
+    
+    // version solution
+    public function solutionVersion() {
+        $main = $this->sql->getFieldById('config', 'config_data', 'main', 'config_name');
+        $main = InstallerFunctions::json_array_decode($main);
+        $main['version'] = UPGRADE_TO;
+        $main = InstallerFunctions::json_array_encode($main);
+        return $this->sql->save('config', array('config_name' => 'main', 'config_data' => $main), 'config_name', false);
+    }
+    
+    
     
 	// generic config tester
     private function genericConfigTester($name) {
-        $config = $this->sql->getFieldById('config', 'config_name', $name, 'config_name');
+        $config = $this->sql->getFieldById('config', 'config_data', $name, 'config_name');
         if (empty($config))
             return false;
+        
+        $config = json_array_decode($config);
+        $defaultConfig = $name.'Config';
+        if (!empty(array_diff_key($this->$defaultConfig, $config))) // any new default keys not present in current config
+            return false;
+        if (!empty(array_diff_key($config, $this->$defaultConfig))) // any old keys not longer present in current config
+            return false;
+        
         return true;
     }
     
+    // generic migrate config
+    public function genericMigrateConfig($name, $loadhook = 'none', $important = array(), $oldname = false, $converter = false) {
+        // Try to get config array from new table...
+        $config = $this->sql->getFieldById('config', 'config_data', $name, 'config_name');
+        
+        // ... otherwise try to get from an old table (alix5 and lower)
+        if ((empty($config) || !is_array($config)) && false !== $oldname && $this->tableExists($oldname)) {
+            $config = $this->sql->getById($name, '*', 1);
+        }
+        
+        // fallback = empty array
+        if (empty($config) || !is_array($config)) {
+             $config = array();
+        }
+    
+        // specific important data has priority
+        $config = $important + $config;
+        
+        // map conversion function to config
+        if (is_callable($converter)) {
+            array_walk($config, $converter;
+        }
+    
+        return $this->genericFillConfig($name, $config, $loadhook);
+    }
+    
     // generic config filler
+    // Update old data with new defaults and save config
     public function genericFillConfig($name, $old, $loadhook = 'none') {
         //data-array
         $data = $this->getDataArray($name);
         
         // filter and fill with default config value
         $defaultConfig = $name.'Config';
-        $config = array_intersect_key($old, $this->$defaultConfig);
-        $config = $config+$this->$defaultConfig;
+        $config = array_intersect_key($old, $this->$defaultConfig); // remove keys not longer available
+        $config = $config+$this->$defaultConfig; // overwrite only unset keys with new defaults
 
         // write into new config
         $data['config_data'] = InstallerFunctions::json_array_encode($config);
@@ -319,10 +306,10 @@ class SettingsMigrationSolver extends PairSolver {
     
     
     // Default values
-    // `frogsystem_alix5`.`fs2_screen_random_config`
     private $systemConfig = array('var_loop' => '20');    
     private $envConfig = array();    
-    private $infoConfig = array();    
+    private $infoConfig = array();
+    
     private $cronjobsConfig = array(
         'last_cronjob_time' => '0',
         'last_cronjob_time_daily' => '0',
@@ -366,9 +353,9 @@ class SettingsMigrationSolver extends PairSolver {
 
     // `frogsystem_alix5`.`fs2_captcha_config`
     private $captchaConfig = array(
-        'captcha_bg_color' => 'FAFCF1',
-        'captcha_bg_transparent' => '0',
-        'captcha_text_color' => 'AB30AB',
+        'captcha_bg_color' => 'FFFFFF',
+        'captcha_bg_transparent' => '1',
+        'captcha_text_color' => '000000',
         'captcha_first_lower' => '1',
         'captcha_first_upper' => '5',
         'captcha_second_lower' => '1',
@@ -465,6 +452,7 @@ class SettingsMigrationSolver extends PairSolver {
         'date' => 'd.m.Y',
         'time' => 'H:i \U\h\r',
         'datetime' => 'd.m.Y, H:i \U\h\r',
+        'timezone' => null,
         'page' => '<div align="center" style="width:270px;"><div style="width:70px; float:left;">{..prev..}&nbsp;</div>Seite <b>{..page_number..}</b> von <b>{..total_pages..}</b><div style="width:70px; float:right;">&nbsp;{..next..}</div></div>',
         'page_next' => '|&nbsp;<a href="{..url..}">weiter&nbsp»</a>',
         'page_prev' => '<a href="{..url..}">«&nbsp;zurück</a>&nbsp|'
@@ -586,6 +574,23 @@ class SettingsMigrationSolver extends PairSolver {
         'cfg_iconplaybgcolor' => '#000000',
         'cfg_iconplaybgalpha' => '75',
         'cfg_showtitleandstartimage' => '0'
+    );
+    
+    private $social_meta_tagsConfig = array(
+        'use_google_plus' => '',
+        'google_plus_page' => '',
+        'use_schema_org' => '',
+        'use_twitter_card' => '',
+        'twitter_site' => '',
+        'use_open_graph' => '',
+        'fb_admins' => '',
+        'og_section' => '',
+        'site_name' => '',
+        'default_image' => '',
+        'news_cat_prepend' => ': ',
+        'enable_news' => '1',
+        'enable_articles' => '1',
+        'enable_downloads' => '1'
     );
 }
 
