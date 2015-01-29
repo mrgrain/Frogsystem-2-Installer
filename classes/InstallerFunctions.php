@@ -193,13 +193,22 @@ class InstallerFunctions {
         if ($de !== false && $de < $en) {
             return 'de_DE';
         } else {
+            /* Note: Function will return 'de_DE' for English browsers, too,
+               because the installer will break, if it is used with an
+               English browser. To avoid this, and until the installer is
+               ready to provide an English interface, this function will
+               always return 'de_DE', no matter what's the user's language
+               preference.
+            */
             return 'de_DE';
+            //TODO: implement English as another language option,
+            //      without breakage
             return 'en_US';
         }
     }
 
     /*
-     * Accually compares to FS2 versions
+     * Actually compares two FS2 versions
      */
     public static function compareFS2Versions($one, $two) {
         // equal
