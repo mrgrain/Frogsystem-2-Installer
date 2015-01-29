@@ -14,7 +14,7 @@ content:Hallo {..username..}!
 #/Passwort: {..password..}
 #/----------------------------
 #/
-#/Weitere Informationen zum Frogsystem 2, sowie Supportforen und
+#/Weitere Informationen zum Frogsystem 2, Hilfe und
 #/Aktualisierungen gibt es unter http://www.frogsystem.de !
 #/
 #/

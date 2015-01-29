@@ -80,7 +80,6 @@ class InstallerFunctions {
             '2.alix4' => array('editor_css.php', 'index.php', 'login.inc.php', 'showimg.php', 'style_css.php'),
         );
 
-        return Files::file_put_contents($file_path, $newfile);
         $fs2 = false;
         foreach ($files as $key => $list) {
             $fs2 = true;

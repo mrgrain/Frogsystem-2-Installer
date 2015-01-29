@@ -95,11 +95,20 @@ class SQLConnectionSolver extends Solver {
 
     public function solutionDBConnectionFile() {
         // check copy file
-        @include('./copy/db_connection.php');
-        if (isset($dbc) && !empty($dbc['type']) && !empty($dbc['host']) && !empty($dbc['user']) && !empty($dbc['data'])) {
-            $_SESSION['dbc'] = $dbc;
+        @include('./copy/config/env.cfg.php');
+        if (isset($config) && !empty($config['DB_TYPE']) && !empty($config['DB_HOST']) && !empty($config['DB_USER']) && !empty($config['DB_NAME'])) {
+            $_SESSION['dbc'] = array(
+                'type' => $config['DB_TYPE'],
+                'host' => $config['DB_HOST'],
+                'user' => $config['DB_USER'],
+                'pass' => $config['DB_PASSWORD'],
+                'data' => $config['DB_NAME'], 
+                'pref' => $config['DB_PREFIX'],
+            );
+            unset($config);
             return true;
         }
+        unset($config);
         return false;
     }
 

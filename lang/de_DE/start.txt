@@ -10,72 +10,20 @@ copyright: Copyright
 
 
 welcome: Herzlich Willkommen zum Frogsystem 2!
-introduction: <p>Das <b>Frogsystem&nbsp;2.alix6b</b> ist ein kleines Bug Fix-Release für die vorherige Version. Mit dieser wurden weitreichende Änderungen im Hintergrund durchgeführt, die das System für die Zukunft besser aufstellen.</p>
+introduction: <p>Das <b>Frogsystem&nbsp;2.alix7</b> macht das FS2 Multiclient fähig. Das Update enthält daher vor allem größere Umstrukturierungen unter der Haube, aber auch einige kleinere neue Features.</p>
 #/
 #/<p>Dieser <b>Assistent</b> wird dich durch die <b>Installation und Erstkonfiguration</b> führen. Bitte lies dir vorher die <a href="#notes">Installationshinweise</a> und das <a href="#copyright">Copyright</a> durch. Sobald du die Installtion startest, erklärst du dich damit einverstanden.</p>
 start_installation: Hurra, lass uns loslegen!
 
 
-changelog_text:<b>Bug Fixes 2.alix6b:</b>
-#/ - Improved Social Meta Tags Applet
-#/ - Fixed Bug with SEO URL redirects (possible infinite loop)
-#/ - New namespace compatible autoloader
-#/ - Fix for broken Downloads
-#/ - Fix for StringCutter edge cases
-#/ - Updated YouTube embed code
-#/ - Fixed bug with Content Image file endings
-#/ - Fix for Hash URLs
-#/ - Some fixes for the request new password feature
-#/
-#/<b>Neue Features:</b>
-#/ - PHP 5.4 wird unterstützt
-#/ - SEO-URLs
-#/ - Verwendung kanonische URLs
-#/ - Neues Installations- & Update-Tool
-#/ - Bessere Feeds mit vielen Einstellungsmöglichkeiten (via Script)
-#/ - Applets können in Inhalten dargestellt werden (z.B. Umfrage innerhalb einer News)
-#/ - User: Passwort-Vergessen Funktion
-#/ - Downloads: Kommentar-System ist jetzt auch bei Downloads verfügbar
-#/ - Downloads: Applet für Top-Downloads
-#/ - Suche: Bessere Suchergebnisse
-#/ - Suche: Option zur Phonetische Suche
-#/ - FSCodes: [html] zur Verwendung von HTML in Inhalten
-#/ - FSCodes: [nohtml] fügt HTML-Code als normalen Text ein
-#/ - FSCodes: [nofscode] hinzugefügt, entspricht [noparse]
-#/ - FSCodes: [home] erzeugt interne Links entsprechen dem URL-Stil
-#/ - Style: Kleine Anpassungen am lightfrog-Style
-#/ - Style: CSS-Datei die ausschließlich bei deaktiviertem JavaScript eingebunden wird
-#/ - System: Neue bzw. erweiterte Template-Funktionen für Datum, URLs und Applets
-#/ - System: Überflüssige DB-Tabellen entfernt
-#/ - System: Rudimentäres System für Poor Men-Cronjobs
-#/ - System: Zeitzone für die Webseite kann/muss ausgewählt werden
-#/ - System: Konfigurierbarer Ladezeitpunkt für Applets
-#/ - Admin-CP: Verbesserter Style im Admin-CP
-#/ - Admin-CP: Colorpicker zur Farbauswahl (noch nicht überall)
-#/ - Admin-CP: stark erweiterte englische Übersetzung
-#/ - Admin-CP: viele kleine Arbeitserleichterungen
-#/ - News: Mehrere News/Kommentare gleichzeitig löschen
-#/ - News: Einfachere Verwaltung der Links (Javascript basiert)
-#/ - News: Filter/Suche nach Stichwort oder ID
-#/ - News: Autor wählbar durch Eingabe des Namens
-#/ - Kommentare: Liste mit lernender Spam-Erkennung
-#/ - Statistik: Referrer automatisch löschen
-#/ - User/Gruppen-Rechte: alle/keine-Auswahl
-#/ - Video-Player: Einstellung für Standardgröße
-#/ - Inhaltsbilder: Kategorien hinzugefügt
-#/ - Inhaltsbilder: Hinzufügen über Verzeichnis (z.B. FTP-Upload)
-#/ - MySQL: Tabellen-Wartung über Admin-CP
+changelog_text:<b>Neue Features:</b>
+#/ - ...
 #/
 #/<b>Sicherheits-Verbesserungen:</b>
-#/ - Besserer Schutz der Admin-Scripte
-#/ - neuer Datenbank-Treiber
-#/ - viele, viele Sicherheitslöcher gestopft
+#/ - ...
 #/
 #/<b>Bug-Fixes:</b>
-#/ - PHP-Fehlermeldungen deaktiviert
-#/ - sehr viele Notice- und Warning-Meldungen beseitigt
-#/ - jQuery aktualisiert
-#/ - Download-Mirrors werden wieder als Mirrors gespeichert
+#/ - ...
 
 
 notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu gewährleisten, ist es sehr wichtig, sofort nach Abschluss der Installation/des Updates das Installationsverzeichnis <b>/fs2installer</b> von deinem Webspace zu löschen.
@@ -89,11 +37,11 @@ notes_text: Um die Sicherheit Deiner <b>Frogsystem&nbsp;2</b>-Installation zu ge
 #/<b>IN KEINEM FALL SIND DIE AUTOREN UND/ODER COPYRIGHTINHABER DER SOFTWARE FÜR SCHÄDEN UND/ODER RECHTSVERLETZUNGEN JEGLICHER ART VERANTWORTLICH, DIE DURCH DIE NUTZUNG DER SOFTWARE ENTSTEHEN.</b>
 
 
-copyright_text: <b>&copy; 2007 - 2014 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
+copyright_text: <b>&copy; 2007 - 2015 Frogsystem-Team - <a href="http://www.frogsystem.de" target="_blank">http://www.frogsystem.de</a></b>
 #/
 #/-----------------------------------------------------------
 #/
-#/Die Software <b>Frogsystem&nbsp;2.alix6b</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
+#/Die Software <b>Frogsystem&nbsp;2.alix7</b> wird unter folgender Creative Commons Lizenz veröffentlicht:
 #/
 #/<b>Namensnennung-Weitergabe unter gleichen Bedingungen 3.0 Deutschland</b>
 #/Eine <b>Zusammenfassung</b> des Lizenzvertrags <b>in allgemeinverständlicher Sprache</b> kann unter dieser Internet-Adresse abgerufen werden:
@@ -104,67 +52,46 @@ copyright_text: <b>&copy; 2007 - 2014 Frogsystem-Team - <a href="http://www.frog
 #/
 #/-----------------------------------------------------------
 #/
-#/Die Software <b>Frogsystem&nbsp;2.alix6b</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
+#/Die Software <b>Frogsystem&nbsp;2.alix7</b> verwendet Teile anderer Software, die unter anderen Lizenzen veröffentlicht werden müssen. Es folgt daher eine Auflistungen der  verwendeten Fremd-Software und ihrer Lizenzen:
 #/
 #/<b>BBCode-Parserklasse für PHP</b>
 #/Version 0.3.3 | Copyright (c) 2004-2009 Christian Seiler
 #/Homepage: <a href="http://www.christian-seiler.de/projekte/php/bbcode/" target="_blank">http://www.christian-seiler.de/projekte/php/bbcode/</a>
-#/Dateien: /libs/class_stringparser.php, /libs/class_stringparser_bbcode.php
 #/Lizenz: The MIT License
 #/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
 #/
 #/<b>FLV Player Maxi</b>
 #/Version 1.6.0
 #/Homepage: <a href="http://flv-player.net/players/maxi/" target="_blank">http://flv-player.net/players/maxi/</a>
-#/Dateien: /resources/player/player_flv_maxi.swf
 #/Lizenz: Creative Commons Attribution-Share Alike 3.0 Unported
 #/Lizenztext: <a href="http://creativecommons.org/licenses/by-sa/3.0/deed" target="_blank">http://creativecommons.org/licenses/by-sa/3.0/deed</a>
 #/
 #/<b>jQuery</b>
 #/Version 1.10.2 | Copyright (c) 2005, 2013 jQuery Foundation, Inc.
 #/Homepage: <a href="http://jquery.com" target="_blank">https://jquery.org</a>
-#/Dateien: /resources/jquery/jquery.min.js
 #/Lizenz: The MIT License
 #/Lizenztext: <a href="https://jquery.org/license/" target="_blank">https://jquery.org/license/</a>
 #/
 #/<b>jQuery UI</b>
 #/Version 1.10.3 | Copyright (c) 2013 jQuery Foundation and other contributors
 #/Homepage: <a href="http://jqueryui.com" target="_blank">http://jqueryui.com</a>
-#/Dateien: /resources/jquery/jquery-ui.min.js
 #/Lizenz: The MIT License
 #/Lizenztext: <a href="https://jquery.org/license/" target="_blank">https://jquery.org/license/</a>
 #/
 #/<b>codemirror</b>
-#/Version 1.0 | Copyright (c) 2007-2010 Marijn Haverbeke
-#/Homepage: <a href="http://codemirror.net/1/" target="_blank">http://codemirror.net/1/</a>
-#/Dateien: /resources/codemirror/* (ausgenommen /resources/codemirror/contrib/*)
-#/Lizenztext: <a href="http://codemirror.net/1/LICENSE" target="_blank">http://codemirror.net/1/LICENSE</a>
+#/Version 4.12.0 | Copyright (c) 2014 by Marijn Haverbeke
+#/Homepage: <a href="http://codemirror.net/" target="_blank">http://codemirror.net/</a>
+#/Lizenz: The MIT License
+#/Lizenztext: <a href="http://codemirror.net/LICENSE" target="_blank">http://codemirror.net/LICENSE</a>
 #/
-#/<b>codemirror PHP Parser</b> (als Teil von codemirror)
-#/Copyright (c) 2008-2009, Yahoo! Inc.
-#/Homepage: <a href="http://codemirror.net/1/contrib/php/" target="_blank">http://codemirror.net/1/contrib/php/</a>
-#/Dateien: /resources/codemirror/contrib/php/*
-#/Lizenz: New BSD License
-#/Lizenztext: <a href="http://codemirror.net/1/contrib/php/LICENSE" target="_blank">http://codemirror.net/1/contrib/php/LICENSE</a>
-#/
-#/<b>Color Picker - jQuery plugin</b>
-#/Copyright (c) Stefan Petre
-#/Homepage: <a href="http://www.eyecon.ro/colorpicker/" target="_blank">http://www.eyecon.ro/colorpicker/</a>
-#/Dateien: /resources/colorpicker/*
+#/<b>colpick Color Picker</b>
+#/Copyright 2013 Jose Vargas, Copyright 2015 Moritz Kornher
+#/Homepage: <a href="https://github.com/mrgrain/colpick-jQuery-Color-Pic" target="_blank">https://github.com/mrgrain/colpick-jQuery-Color-Pic</a>
 #/Lizenz: The MIT License
 #/Lizenztext: <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">http://www.opensource.org/licenses/mit-license.php</a>
-#/
-#/<b>Services_JSON & jsonwrapper</b>
-#/Copyright (c) 2005 Michal Migurski & thelinuxlich
-#/Homepage (Services_JSON): <a href="hhttp://pear.php.net/pepr/pepr-proposal-show.php?id=198" target="_blank">http://pear.php.net/pepr/pepr-proposal-show.php?id=198</a>
-#/Homepage (jsonwrapper): <a href="https://github.com/thelinuxlich/phpdao/tree/master/jsonwrapper" target="_blank">https://github.com/thelinuxlich/phpdao/tree/master/jsonwrapper</a>
-#/Dateien: /resources/jsonwrapper/*
-#/Lizenz: The BSD 2-Clause License
-#/Lizenztext: <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">http://www.opensource.org/licenses/bsd-license.php</a>
 #/
 #/<b>b8</b>
 #/Version 0.6.1 | Copyright (c) 2006-2013 Tobias Leupold <tobias.leupold@web.de>
 #/Homepage: <a href="http://nasauber.de/opensource/b8/" target="_blank">http://nasauber.de/opensource/b8/</a>
-#/Dateien: /resources/spamdetector/*
 #/Lizenz: GNU Lesser General Public License (LGPL), Version 2.1
 #/Lizenztext: <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" target="_blank">http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</a>

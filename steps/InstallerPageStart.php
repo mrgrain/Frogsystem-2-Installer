@@ -26,7 +26,7 @@ class InstallerPageStart extends InstallerPage {
 
 
         // session and reset?
-        $good_keys = array('installer_path', 'upgrade_to');
+        $good_keys = array('installer_path', 'upgrade_to', 'url');
         if (is_array($_SESSION) && count(array_diff_key($_SESSION, array_flip($good_keys))) > 0) {
             $ic->addCond('session', true);
         }
