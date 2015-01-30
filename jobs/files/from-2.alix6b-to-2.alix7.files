@@ -1,7 +1,7 @@
 DELETE      -R  ~/admin/
 COPY        -R ./copy/source/admin/         ~/
 
-COPY        -RO "./copy/source/applets/*"   ~/
+COPY        -RO "./copy/source/applets/*"   ~/applets/
 
 COPY        -RO ./copy/source/assets/       ~/
 
@@ -13,7 +13,7 @@ COPY        -RO "./copy/source/data/*"      ~/data/
 COPY        -RO "./copy/source/lang/*"      ~/lang/
 
 DELETE      -R  ~/libs/
-COPY        -R ./copy/source/libs/          ~/libs/
+COPY        -R ./copy/source/libs/          ~/
 
 MOVE        -O  ~/images/cat/               ~/media/cat/
 MOVE        -O  ~/images/downloads/         ~/media/downloads/

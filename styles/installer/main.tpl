@@ -6,7 +6,7 @@
         {..title_tag..}
         <link rel="stylesheet" type="text/css" href="styles/installer/installer.css">
         <link rel="stylesheet" type="text/css" href="styles/installer/simple_web_buttons.css">
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <!--{..base_tag..}
