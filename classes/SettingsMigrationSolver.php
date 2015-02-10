@@ -428,7 +428,7 @@ class SettingsMigrationSolver extends PairSolver {
 
     // `frogsystem_alix5`.`fs2_global_config`
     private $mainConfig = array(
-        'version' => '2.alix6',
+        'version' => '2.alix7',
         'protocol' => 'http://',
         'url' => '',
         'other_protocol' => '1',
